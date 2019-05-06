@@ -72,4 +72,20 @@ public class TestJPQL {
 //		}
 		
 	}
+	
+	@Test
+	@Transactional(value= TransactionMode.ROLLBACK)
+	@UsingDataSet({"persona.json"})
+	public void buscarAdministradorByIdTest() {
+		TypedQuery<Administrador> query= entityManager.createNamedQuery(Administrador.BUSCAR_POR_ID, Administrador.class);
+		Administrador listaAdministradores= query.getSingleResult();
+		Assert.assertEquals(listaAdministradores.getNombre(), "nombre");
+	
+		System.out.println(listaAdministradores.getNombre());
+//		Iterator iterator= listaPersona.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next());
+//		}
+		
+	}
 }
