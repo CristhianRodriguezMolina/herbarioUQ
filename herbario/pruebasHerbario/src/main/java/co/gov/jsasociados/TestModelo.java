@@ -62,14 +62,15 @@ public class TestModelo {
 		cuenta.setUsuario("123");
 		administrador.setCuenta(cuenta);
 		
+		
 		entityManager.persist(administrador);
 		Administrador a= entityManager.find(Administrador.class, administrador.getCedula());
 		
-		//para actualizar se le pasa otro
-		entityManager.merge(administrador);
-		
-		//para elimianr
-		entityManager.remove(administrador);
+//		//para actualizar se le pasa otro
+//		entityManager.merge(administrador);
+//		
+//		//para elimianr
+//		entityManager.remove(administrador);
 		
 		Assert.assertNotNull(a);
 	}
