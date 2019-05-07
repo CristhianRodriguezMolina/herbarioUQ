@@ -1,0 +1,58 @@
+{
+	"PERSONA": [
+		{
+			"cedula": "123",
+			"dtype": "Administrador",
+			"apellidos": "apellido",
+			"nombre": "nombre",
+			"correo": "apellido@gmail.com",
+			"direccion": "apellido direccion",
+			"telefono": "3103888888"
+		},
+		{
+			"cedula": "124",
+			"dtype": "Recolector",
+			"apellidos": "apellido2",
+			"nombre": "nombre2",
+			"correo": "apellido2@gmail.com",
+			"direccion": "apellido direccion22",
+			"telefono": "310399999"
+		},
+		{
+			"cedula": "125",
+			"dtype": "Empleado",
+			"apellidos": "apellido3",
+			"nombre": "nombre3",
+			"correo": "apellido3@gmail.com",
+			"direccion": "apellido direccion23332",
+			"telefono": "1313196169"
+		},
+		{
+			"cedula": "126",
+			"dtype": "Administrador",
+			"apellidos": "apellido4",
+			"nombre": "nombre4",
+			"correo": "apellido@gmail.com",
+			"direccion": "apellido direccion",
+			"telefono": "3103888888"
+		},
+		{
+			"cedula": "127",
+			"dtype": "Recolector",
+			"apellidos": "apellido5",
+			"nombre": "nombre2",
+			"correo": "apellido2@gmail.com",
+			"direccion": "apellido direccion22",
+			"telefono": "310399999"
+		},
+		{
+			"cedula": "128",
+			"dtype": "Empleado",
+			"apellidos": "apellido6",
+			"nombre": "nombre6",
+			"correo": "apellido3@gmail.com",
+			"direccion": "apellido direccion23332",
+			"telefono": "1313196169"
+		}
+	]
+}

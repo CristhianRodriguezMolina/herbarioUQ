@@ -1,0 +1,19 @@
+{
+	"FAMILIA" :[
+	
+		{
+			"IdFamilia": "familia1",
+			"familia": "xnoramos"
+		},
+		{
+			"IdFamilia": "familia2",
+			"familia": "telepiatos"
+		},
+		{
+			"IdFamilia": "familia3",
+			"familia": "toxocodarmus"
+		}
+	
+	]
+
+}

@@ -1,0 +1,25 @@
+{
+	"PLANTA":[
+	
+	{
+		"nombre":"Buganvilla",
+		"idPlanta": "851",
+		"genero_idGenero": "genero1"
+		
+	},
+	{
+		"nombre":"Jazmin",
+		"idPlanta": "546",
+		"genero_idGenero": "genero2"
+		
+	},
+		{
+		"nombre":"Glicinia",
+		"idPlanta": "846",
+		"genero_idGenero": "genero3"
+		
+	}
+	
+	]
+
+}
