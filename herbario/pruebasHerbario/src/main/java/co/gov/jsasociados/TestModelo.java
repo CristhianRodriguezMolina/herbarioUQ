@@ -65,7 +65,7 @@ public class TestModelo {
 		
 		entityManager.persist(administrador);
 		Administrador a= entityManager.find(Administrador.class, administrador.getCedula());
-		
+		//sd
 //		//para actualizar se le pasa otro
 //		entityManager.merge(administrador);
 //		
