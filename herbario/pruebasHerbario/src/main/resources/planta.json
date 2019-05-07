@@ -18,6 +18,12 @@
 		"idPlanta": "846",
 		"genero_idGenero": "genero3"
 		
+	},
+		{
+		"nombre":"Guaninina",
+		"idPlanta": "333",
+		"genero_idGenero": "genero3"
+		
 	}
 	
 	]
