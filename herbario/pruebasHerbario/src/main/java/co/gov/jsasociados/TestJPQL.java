@@ -47,27 +47,26 @@ public class TestJPQL {
 	/*
 	 * Test para listar todas las personas
 	 */
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
-//		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
-	@UsingDataSet({ "persona.json", "registro.json"})
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPersonaTest() {
 		Query query = entityManager.createQuery("select p1 from Persona p1");
 		List listaPersona = query.getResultList();
-		Assert.assertEquals(listaPersona.size(), 6);
+		//Assert.assertEquals(listaPersona.size(), 6);
 		
-//		Iterator iterator= listaPersona.iterator();
-//		
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next());
-//		}
+		Iterator iterator= listaPersona.iterator();
+		
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
 	}
 
 	/*
 	 * Test para listar todas las personas
 	 */
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 //	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 //		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -88,7 +87,7 @@ public class TestJPQL {
 	/*
 	 * Test para listar todos los daministradores
 	 */
-	@Test
+//	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 //	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 //		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -109,7 +108,7 @@ public class TestJPQL {
 	/*
 	 * Test para buscar un administrador dada su Id
 	 */
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 //	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 //		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -128,7 +127,7 @@ public class TestJPQL {
 	/*
 	 * Test para listar todas las plantas de un administrador
 	 */
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 //	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 //		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -146,5 +145,24 @@ public class TestJPQL {
 		}
 	}
 	
+	
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void listarPlantasTest() {
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_APROVACION,
+				Planta.class);
+		query.setParameter("aprovacion", 1);
+		List<Planta> listaPlantas = query.getResultList();
+		
+	//	Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
+
+		Iterator<Planta> iterator = listaPlantas.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().getNombre());
+		}
+	}
 	
 }

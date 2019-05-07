@@ -19,7 +19,7 @@ import javax.persistence.metamodel.ListAttribute;
 @Inheritance(strategy=InheritanceType.JOINED ) 
 @NamedQueries({@NamedQuery(name= Persona.LISTAR_TODOS, query= "select p from Persona p")})
 public class Persona implements Serializable {
-	static final String LISTAR_TODOS= "listar Clientes";
+	static final String LISTAR_TODOS= "listar personas";
 	/**
 	 * cedula de la persona
 	 */
