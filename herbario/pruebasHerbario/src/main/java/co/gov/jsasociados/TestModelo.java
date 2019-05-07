@@ -1,7 +1,11 @@
 package co.gov.jsasociados;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -47,32 +51,42 @@ public class TestModelo {
 	}
 
 	@Test
-	@Transactional(value= TransactionMode.ROLLBACK)
-	@UsingDataSet({"persona.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void insetarPersonaTest() {
+		
 		Administrador administrador= new Administrador();
-		administrador.setCedula("123");
+		administrador.setCedula("12354");
 		administrador.setApellidos("Franco");
 		administrador.setNombre("Carlos");
 		administrador.setCorreo("ad@correo.com");
 		administrador.setDireccion("dire");
 		administrador.setTelefono("1298834");
+		
 		Cuenta cuenta = new Cuenta();
 		cuenta.setContrasenia("123");
 		cuenta.setUsuario("123");
+		
+		cuenta.setPersona(administrador);
 		administrador.setCuenta(cuenta);
 		
-		
+		entityManager.persist(cuenta);
 		entityManager.persist(administrador);
 		Administrador a= entityManager.find(Administrador.class, administrador.getCedula());
-		//sd
+		
 //		//para actualizar se le pasa otro
 //		entityManager.merge(administrador);
 //		
 //		//para elimianr
 //		entityManager.remove(administrador);
 		
-		Assert.assertNotNull(a);
+		Query query = entityManager.createQuery("select p1 from Persona p1");
+		List listaPersona = query.getResultList();
+		//System.out.println(a.getCedula());
+		Assert.assertEquals(listaPersona.size(), 7);
+	//	Assert.assertNotNull(a);
+		
 	}
 
 }

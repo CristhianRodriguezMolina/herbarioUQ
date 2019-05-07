@@ -16,32 +16,39 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-
+@NamedQueries({
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS, query = "select comentario from Comentario comentario"),
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_FECHAPUBLICACION, query = "select comentario.comentario from Comentario comentario where comentario.fechaPublicacion=:fechaPublicacion"),
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PERSONA, query = "select comentario.comentario from Comentario comentario where comentario.persona=:persona"),
+})
 public class Comentario implements Serializable {
-
+	public static final String LISTAR_COMENTARIOS= "listar comentarios";
+	public static final String LISTAR_COMENTARIOS_FECHAPUBLICACION= "listar comentarios";
+	public static final String LISTAR_COMENTARIOS_PERSONA= "listar comentarios realizados por una persona";
 	/**
-	 * numero de registron de un comentario   
+	 * numero de registron de un comentario
 	 */
 	@Id
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private Integer numeroRegistro;
 	/**
 	 * comentaria realizado
 	 */
-	@Column(length=250)
+	@Column(length = 250)
 	private String comentario;
 	/**
 	 * fecha de publicacion de un comentario
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaPublicacion;
-	
+
 	/**
 	 * persona asociada a un comentario
 	 */
 	@ManyToOne
 	private Persona persona;
 	
+	//aca hace falta mirar que esta clase debe de tener un arrayList de comentarios
 	private static final long serialVersionUID = 1L;
 
 	public Comentario() {
@@ -90,7 +97,9 @@ public class Comentario implements Serializable {
 		this.fechaPublicacion = fechaPublicacion;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -102,7 +111,9 @@ public class Comentario implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -141,6 +152,4 @@ public class Comentario implements Serializable {
 		this.persona = persona;
 	}
 
-	
-	
 }

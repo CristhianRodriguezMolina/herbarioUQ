@@ -47,19 +47,39 @@ public class TestJPQL {
 	/*
 	 * Test para listar todas las personas
 	 */
-	//@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPersonaTest() {
+		
+		Administrador administrador= new Administrador();
+		administrador.setCedula("12354");
+		administrador.setApellidos("Franco");
+		administrador.setNombre("Carlos");
+		administrador.setCorreo("ad@correo.com");
+		administrador.setDireccion("dire");
+		administrador.setTelefono("1298834");
+		
+		Cuenta cuenta = new Cuenta();
+		cuenta.setContrasenia("123");
+		cuenta.setUsuario("123");
+		
+		cuenta.setPersona(administrador);
+		administrador.setCuenta(cuenta);
+		
+		entityManager.persist(cuenta);
+		entityManager.persist(administrador);
+		//Administrador a= entityManager.find(Administrador.class, administrador.getCedula());
+		
 		Query query = entityManager.createQuery("select p1 from Persona p1");
 		List listaPersona = query.getResultList();
-		//Assert.assertEquals(listaPersona.size(), 6);
+		Assert.assertEquals(listaPersona.size(), 7);
 		
 		Iterator iterator= listaPersona.iterator();
 		
 		while (iterator.hasNext()) {
-			System.out.println(iterator.next());
+			System.out.println(((Persona)iterator.next()).getCedula());
 		}
 	}
 
@@ -147,7 +167,7 @@ public class TestJPQL {
 	
 	
 	
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })

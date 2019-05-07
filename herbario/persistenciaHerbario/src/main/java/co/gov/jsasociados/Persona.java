@@ -5,7 +5,6 @@ import java.lang.String;
 import java.util.ArrayList;
 
 import javax.persistence.*;
-import javax.persistence.metamodel.ListAttribute;
 
 /**
  * Informacion basica de cada una de las personas
