@@ -18,9 +18,9 @@ import javax.persistence.*;
 		@NamedQuery(name = Administrador.LISTAR_EMPLEADOS, query = "select empleado from Empleado empleado"),
 		@NamedQuery(name = Administrador.LISTAR_RECOLECTORES, query = "select recolector from Recolector recolector"),
 		@NamedQuery(name = Administrador.LISTAR_PLANTAS, query = "select planta from Planta planta"),
-		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_APROVACION, query = "select registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
-		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.familia=:familia"),
-		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero=:genero"), })
+		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_APROVACION, query = "select DISTINCT registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
+		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.idFamilia=:familia"),
+		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero.idGenero=:genero"), })
 public class Administrador extends Persona implements Serializable {
 
 	// NOMBRES DE LOS QUERYS DE ESTA CLASE

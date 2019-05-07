@@ -30,7 +30,7 @@
 		},
 			{
 			"numeroRegistro": 498,
-			"aprovacion": 3,
+			"aprovacion": -1,
 			"departamento": "Quindio",
 			"determinacion": "hfg",
 			"fechaRecoleccion": "1999-03-20",
@@ -43,7 +43,7 @@
 			"planta_idplanta": "333"
 		},	{
 			"numeroRegistro": 12898,
-			"aprovacion": 2,
+			"aprovacion": 0,
 			"departamento": "Quindio",
 			"determinacion": "hfg",
 			"fechaRecoleccion": "1999-03-20",
