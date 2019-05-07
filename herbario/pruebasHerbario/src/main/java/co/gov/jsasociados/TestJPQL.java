@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.persistence.ApplyScriptBefore;
 import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
@@ -42,50 +43,97 @@ public class TestJPQL {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
-	
 
+	/*
+	 * Test para listar todas las personas
+	 */
 	@Test
-	@Transactional(value= TransactionMode.ROLLBACK)
-	@UsingDataSet({"persona.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
 	public void listarPersonaTest() {
-		Query query= entityManager.createQuery("select p1 from Persona p1");
-		List listaPersona= query.getResultList();
+		Query query = entityManager.createQuery("select p1 from Persona p1");
+		List listaPersona = query.getResultList();
 		Assert.assertEquals(listaPersona.size(), 3);
+		
 //		Iterator iterator= listaPersona.iterator();
 //		
 //		while (iterator.hasNext()) {
 //			System.out.println(iterator.next());
 //		}
 	}
-	
+
+	/*
+	 * Test para listar todas las personas
+	 */
 	@Test
-	@Transactional(value= TransactionMode.ROLLBACK)
-	@UsingDataSet({"persona.json"})
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
 	public void listarPersonaNameTest() {
-		TypedQuery<Persona> query= entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
-		List<Persona> listaPersona= query.getResultList();
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
+		List<Persona> listaPersona = query.getResultList();
+		
 		Assert.assertEquals(listaPersona.get(2).getNombre(), "nombre3");
-		
+
 //		Iterator iterator= listaPersona.iterator();
 //		while (iterator.hasNext()) {
 //			System.out.println(iterator.next());
 //		}
-		
 	}
-	
+
+	/*
+	 * Test para listar todos los daministradores
+	 */
 	@Test
-	@Transactional(value= TransactionMode.ROLLBACK)
-	@UsingDataSet({"persona.json"})
-	public void buscarAdministradorByIdTest() {
-		TypedQuery<Administrador> query= entityManager.createNamedQuery(Administrador.BUSCAR_POR_ID, Administrador.class);
-		Administrador listaAdministradores= query.getSingleResult();
-		Assert.assertEquals(listaAdministradores.getNombre(), "nombre");
-	
-		System.out.println(listaAdministradores.getNombre());
-//		Iterator iterator= listaPersona.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next());
-//		}
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void listarAdministradoresTest() {
+		TypedQuery<Administrador> query = entityManager.createNamedQuery(Administrador.LISTAR_ADMINISTRADORES,
+				Administrador.class);
+		List<Administrador> listaAdministradores = query.getResultList();
+
+		Assert.assertEquals(listaAdministradores.get(0).getNombre(), "nombre");
 		
+//		Iterator<Administrador> iterator = listaAdministradores.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
+
+	/*
+	 * Test para buscar un administrador dada su Id
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json" })
+	public void buscarAdministradorByIdTest() {
+		TypedQuery<Administrador> query = entityManager.createNamedQuery(Administrador.BUSCAR_POR_ID,
+				Administrador.class);
+		query.setParameter("cedula", "123");
+		List<Administrador> listaAdministradores = query.getResultList();
+		
+		Assert.assertEquals(listaAdministradores.get(0).getNombre(), "nombre");
+
+//		System.out.println("\n"+listaAdministradores.get(0).getNombre()+"\n");
+	}
+	
+	/*
+	 * Test para listar todas las plantas de un administrador
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json" })
+	public void listarPlantasAdministradorTest() {
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS,
+				Planta.class);
+		List<Planta> listaPlantas = query.getResultList();
+		
+		Assert.assertEquals(listaPlantas.get(0).getNombre(), "planta1");
+
+		Iterator<Planta> iterator = listaPlantas.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().getNombre());
+		}
+	}
+	
+	
 }

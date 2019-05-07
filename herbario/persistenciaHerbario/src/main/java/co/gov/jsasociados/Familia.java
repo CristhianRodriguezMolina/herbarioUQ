@@ -24,7 +24,7 @@ public class Familia implements Serializable {
 	 */
 	@Id
 	@Column(unique=true, nullable=false)
-	private String IdFamilia;
+	private String idFamilia;
 	/**
 	 * nombre de una familia 
 	 */
@@ -47,14 +47,14 @@ public class Familia implements Serializable {
 	 * @return the idFamilia
 	 */
 	public String getIdFamilia() {
-		return IdFamilia;
+		return idFamilia;
 	}
 
 	/**
 	 * @param idFamilia the idFamilia to set
 	 */
 	public void setIdFamilia(String idFamilia) {
-		IdFamilia = idFamilia;
+		idFamilia = idFamilia;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Familia implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((IdFamilia == null) ? 0 : IdFamilia.hashCode());
+		result = prime * result + ((idFamilia == null) ? 0 : idFamilia.hashCode());
 		return result;
 	}
 
@@ -94,10 +94,10 @@ public class Familia implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Familia other = (Familia) obj;
-		if (IdFamilia == null) {
-			if (other.IdFamilia != null)
+		if (idFamilia == null) {
+			if (other.idFamilia != null)
 				return false;
-		} else if (!IdFamilia.equals(other.IdFamilia))
+		} else if (!idFamilia.equals(other.idFamilia))
 			return false;
 		return true;
 	}

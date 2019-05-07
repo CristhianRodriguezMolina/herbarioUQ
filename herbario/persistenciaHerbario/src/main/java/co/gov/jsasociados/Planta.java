@@ -16,15 +16,26 @@ import javax.persistence.*;
 
 public class Planta implements Serializable {
 
+	/*
+	 * id unico de la Planta
+	 */	
 	@Column(unique=true, nullable=false)
 	@Id
 	private String idPlanta;
+	/*
+	 * nombre de la Planta
+	 */	
 	@Column(length=30, unique=true, nullable=false)
-	private String nombre;   
+	private String nombre;
+	/*
+	 * genero de la Planta
+	 */	
 	@ManyToOne
 	private Genero genero;
 //	imagen imagen
-	
+	/*
+	 * Registro de la Planta
+	 */	
 	@OneToOne(mappedBy="planta")
 	private Registro registro;
 	private static final long serialVersionUID = 1L;
