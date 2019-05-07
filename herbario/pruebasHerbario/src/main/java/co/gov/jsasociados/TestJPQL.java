@@ -172,9 +172,9 @@ public class TestJPQL {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_APROVACION,
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_FAMILIA,
 				Planta.class);
-		query.setParameter("aprovacion", 1);
+		query.setParameter("familia", "toxocodarmus");
 		List<Planta> listaPlantas = query.getResultList();
 		
 	//	Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");

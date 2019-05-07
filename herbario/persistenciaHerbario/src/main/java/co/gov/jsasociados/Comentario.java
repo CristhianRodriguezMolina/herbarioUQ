@@ -23,7 +23,7 @@ import javax.persistence.*;
 })
 public class Comentario implements Serializable {
 	public static final String LISTAR_COMENTARIOS= "listar comentarios";
-	public static final String LISTAR_COMENTARIOS_FECHAPUBLICACION= "listar comentarios";
+	public static final String LISTAR_COMENTARIOS_FECHAPUBLICACION= "listar comentarios por fecha de publicacion";
 	public static final String LISTAR_COMENTARIOS_PERSONA= "listar comentarios realizados por una persona";
 	/**
 	 * numero de registron de un comentario
