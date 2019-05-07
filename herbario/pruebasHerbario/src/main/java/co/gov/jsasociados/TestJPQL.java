@@ -49,11 +49,13 @@ public class TestJPQL {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+//		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+	@UsingDataSet({ "persona.json", "registro.json"})
 	public void listarPersonaTest() {
 		Query query = entityManager.createQuery("select p1 from Persona p1");
 		List listaPersona = query.getResultList();
-		Assert.assertEquals(listaPersona.size(), 3);
+		Assert.assertEquals(listaPersona.size(), 6);
 		
 //		Iterator iterator= listaPersona.iterator();
 //		
@@ -67,11 +69,14 @@ public class TestJPQL {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+//		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+	@UsingDataSet({ "persona.json", "registro.json"})
 	public void listarPersonaNameTest() {
 		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.LISTAR_TODOS, Persona.class);
 		List<Persona> listaPersona = query.getResultList();
 		
+		System.out.println(listaPersona.get(2).getCedula());
 		Assert.assertEquals(listaPersona.get(2).getNombre(), "nombre3");
 
 //		Iterator iterator= listaPersona.iterator();
@@ -85,7 +90,9 @@ public class TestJPQL {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+//		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+	@UsingDataSet({ "persona.json", "registro.json"})
 	public void listarAdministradoresTest() {
 		TypedQuery<Administrador> query = entityManager.createNamedQuery(Administrador.LISTAR_ADMINISTRADORES,
 				Administrador.class);
@@ -104,7 +111,9 @@ public class TestJPQL {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json" })
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+//		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+	@UsingDataSet({ "persona.json", "registro.json"})
 	public void buscarAdministradorByIdTest() {
 		TypedQuery<Administrador> query = entityManager.createNamedQuery(Administrador.BUSCAR_POR_ID,
 				Administrador.class);
@@ -121,13 +130,15 @@ public class TestJPQL {
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json", "registro.json" })
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+//		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+	@UsingDataSet({ "persona.json", "registro.json"})
 	public void listarPlantasAdministradorTest() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS,
 				Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
 		
-		Assert.assertEquals(listaPlantas.get(0).getNombre(), "planta1");
+		Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
 
 		Iterator<Planta> iterator = listaPlantas.iterator();
 		while (iterator.hasNext()) {

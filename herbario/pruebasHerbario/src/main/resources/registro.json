@@ -9,23 +9,23 @@
 		{
 			"idGenero": "111",
 			"genero": "genero1",
-			"familia": "11"
+			"familia_idfamilia": "11"
 		}
 	],	
 	"PLANTA":[
 		{
 			"idPlanta": "1111",
-			"genero": "111",
+			"genero_idgenero": "111",
 			"nombre": "planta1"
 		},	
 		{
 			"idPlanta": "1112",
-			"genero": "111",
+			"genero_idgenero": "111",
 			"nombre": "planta2"
 		},	
 		{
 			"idPlanta": "1117",
-			"genero": "111",
+			"genero_idgenero": "111",
 			"nombre": "planta3"
 		}	
 	],	
@@ -33,29 +33,44 @@
 		{
 			"numeroRegistro": 1,
 			"aprovacion": 1,
-			"planta": "1111",
+			"planta_idplanta": "1111",
 			"lugar": "alla",
 			"municipio": "ese mismo",
 			"pais": "colombia",
-			"departamento": "ya tu sabe"
+			"departamento": "ya tu sabe",
+			"determinacion": "abc",
+			"persona_cedula": "123",
+			"fechaenvio": "04-25-2000",
+			"fecharecoleccion": "04-25-2000",
+			"fecharegistro": "04-25-2000"
 		},
 		{
 			"numeroRegistro": 2,
 			"aprovacion": 0,
-			"planta": "1112",
+			"planta_idplanta": "1112",
 			"lugar": "este",
 			"municipio": "si aja",
 			"pais": "colombia",
-			"departamento": "ya tu sabe"
+			"departamento": "ya tu sabe",
+			"determinacion": "abc",
+			"persona_cedula": "1235",
+			"fechaenvio": "04-25-2000",
+			"fecharecoleccion": "04-25-2000",
+			"fecharegistro": "04-25-2000"
 		},
 		{ 
 			"numeroRegistro": 3,
 			"aprovacion": -1,
-			"planta": "1117",
+			"planta_idplanta": "1117",
 			"lugar": "por ahi",
 			"municipio": "hmmmm",
 			"pais": "colombia",
-			"departamento": "ya tu sabe"
+			"departamento": "ya tu sabe",
+			"determinacion": "abc",
+			"persona_cedula": "1236",
+			"fechaenvio": "04-25-2000",
+			"fecharecoleccion": "04-25-2000",
+			"fecharegistro": "04-25-2000"
 		}
 	]
 
