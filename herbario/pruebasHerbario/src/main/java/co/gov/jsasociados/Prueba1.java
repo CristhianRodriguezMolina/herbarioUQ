@@ -280,10 +280,11 @@ public class Prueba1 {
 			System.out.println(iterator.next().getNombre());
 		}
 	}
+
 	/**
 	 * lista todas las plantas aceptadas
 	 */
-	//@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -296,11 +297,12 @@ public class Prueba1 {
 			System.out.println(iterator.next().getNombre());
 		}
 	}
-	
+
 	/**
-	 * lista todas las plantas teniendo en cuenta la cedula del que registro la planta y el estado del registro
+	 * lista todas las plantas teniendo en cuenta la cedula del que registro la
+	 * planta y el estado del registro
 	 */
-	//@Test
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -308,30 +310,51 @@ public class Prueba1 {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ENVIADAS, Planta.class);
 		query.setParameter("cedula", "127");
 		query.setParameter("aprovacion", 1);
-		
+
 		List<Planta> listaPlantas = query.getResultList();
-		System.out.println("tamanio de la lista"+listaPlantas.size());
+		System.out.println("tamanio de la lista" + listaPlantas.size());
 		Iterator<Planta> iterator = listaPlantas.iterator();
 		while (iterator.hasNext()) {
 			System.out.println(iterator.next().getNombre());
 		}
 	}
-	
-	
+
+	/**
+	 * lista todas las plantas aceptadas por una cierta familia
+	 */
+	// @Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void listarPlantasAceptadasPorFamilia() {
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA,
+				Planta.class);
+		query.setParameter("familia", "toxocodarmus");
+
+		List<Planta> listaPlantas = query.getResultList();
+		System.out.println("tamanio de la lista" + listaPlantas.size());
+		Iterator<Planta> iterator = listaPlantas.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().getNombre());
+		}
+	}
+	/**
+	 * lista todas las plantas aceptadas por ciero genero
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
-	public void listarPlantasPorFamilia() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
-		query.setParameter("cedula", "127");
-		query.setParameter("aprovacion", 1);
-		
+	public void listarPlantasAceptadasPorGenero() {
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_POR_GENERO, Planta.class);
+		query.setParameter("genero", "carnivoras");
+
 		List<Planta> listaPlantas = query.getResultList();
-		System.out.println("tamanio de la lista"+listaPlantas.size());
+		System.out.println("tamanio de la lista" + listaPlantas.size());
 		Iterator<Planta> iterator = listaPlantas.iterator();
 		while (iterator.hasNext()) {
 			System.out.println(iterator.next().getNombre());
 		}
 	}
+
 }
