@@ -32,7 +32,12 @@ public class Planta implements Serializable {
 	 */	
 	@ManyToOne
 	private Genero genero;
-//	imagen imagen
+	/*
+	 * Imagen relacionada a la planta
+	 */
+	@Lob
+	@Column(name = "Imagen")
+	private byte[] imagen;
 	/*
 	 * Registro de la Planta
 	 */	
@@ -61,15 +66,30 @@ public class Planta implements Serializable {
 	/**
 	 * @return the nombre
 	 */
+	@Column()
 	public String getNombre() {
 		return nombre;
 	}
-
+		
 	/**
 	 * @param nombre the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the imagen
+	 */
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 	/* (non-Javadoc)
@@ -108,6 +128,16 @@ public class Planta implements Serializable {
 		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
+	}
+	
+	public String toString()
+	{
+		String s = "Id: "+idPlanta+"\n";
+		s+= "Nombre: "+nombre+"\n";
+		s+= "Genero: "+genero.getGenero()+"\n";
+		s+= "Familia: "+genero.getFamilia().getFamilia()+"\n";
+		
+		return s;
 	}
 
 	/**

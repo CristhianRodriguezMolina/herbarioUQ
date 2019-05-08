@@ -41,6 +41,7 @@ public class Familia implements Serializable {
 
 	public Familia() {
 		super();
+		generos = new ArrayList<>();
 	}
 
 	/**
@@ -54,7 +55,7 @@ public class Familia implements Serializable {
 	 * @param idFamilia the idFamilia to set
 	 */
 	public void setIdFamilia(String idFamilia) {
-		idFamilia = idFamilia;
+		this.idFamilia = idFamilia;
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class Familia implements Serializable {
 	public void setFamilia(String familia) {
 		this.familia = familia;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -116,5 +117,7 @@ public class Familia implements Serializable {
 		this.generos = generos;
 	}   
 	
-   
+	public void addGenero(Genero g) {
+		generos.add(g);
+	}
 }

@@ -1,5 +1,10 @@
 package co.gov.jsasociados;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +25,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.ctc.wstx.evt.WNotationDeclaration;
 
 /**
  * Clase de pruebas dedicada para la pruebas de las entidades
@@ -82,7 +89,7 @@ public class pruebaCristhian {
 		}
 	}
 	
-	@Test
+//	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -99,7 +106,7 @@ public class pruebaCristhian {
 		}
 	}
 	
-	@Test
+//	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -114,5 +121,110 @@ public class pruebaCristhian {
 		while (iterator.hasNext()) {
 			System.out.println(iterator.next().getNombre());
 		}
+	}
+	
+//	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void persistirFamiliaAndGeneroTest() {
+
+		Familia familia = new Familia();
+		familia.setIdFamilia("familia4");
+		familia.setFamilia("Rubiaceae");
+		
+		entityManager.persist(familia);
+		
+		Genero genero = new Genero();
+		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
+		genero.setIdGenero("genero4");
+		genero.setGenero("Naucleaceae");
+		familia.addGenero(genero);
+		
+		entityManager.persist(familia);
+		
+		Familia a = entityManager.find(Familia.class, "familia4");
+		Assert.assertEquals("Naucleaceae", a.getGeneros().get(0).getGenero());
+	}
+	
+//	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void persistirFamiliaTest() {
+
+		Familia familia = new Familia();
+		familia.setIdFamilia("familia4");
+		familia.setFamilia("Rubiaceae");
+		
+		entityManager.persist(familia);
+		
+		Genero genero = new Genero();
+		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
+		genero.setIdGenero("genero4");
+		genero.setGenero("Naucleaceae");
+		familia.addGenero(genero);
+		
+		entityManager.persist(familia);
+		
+		Familia a = entityManager.find(Familia.class, "familia4");
+		Assert.assertEquals("Naucleaceae", a.getGeneros().get(0).getGenero());
+	}
+	
+//	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void mostrarInformacionPlantaTest() {
+
+		Planta p = entityManager.find(Planta.class, "846");
+	
+		Assert.assertEquals("846", p.getIdPlanta());
+		
+		System.out.println(p.toString());
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void persistirPlantaTest() {
+
+		Familia familia = new Familia();
+		familia.setIdFamilia("familia4");
+		familia.setFamilia("Rubiaceae");
+		
+		entityManager.persist(familia);
+		
+		Genero genero = new Genero();
+		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
+		genero.setIdGenero("genero4");
+		genero.setGenero("Naucleaceae");
+		familia.addGenero(genero);
+		
+		entityManager.persist(familia);
+		
+		Planta planta = new Planta();
+			
+		try {
+			planta.setGenero(genero);
+			planta.setIdPlanta("666");
+			planta.setNombre("Rubia peregrina");
+			File f = new File("C:\\Users\\Rodriguez\\Documents\\GitHub\\herbarioUQ\\herbario\\pruebasHerbario\\src\\main\\resources\\imagenes\\YoSoyIronMan.png"); //asociamos el archivo fisico
+			InputStream is = new FileInputStream(f);
+			byte[] buffer = new byte[(int) f.length()]; //creamos el buffer
+			int readers = is.read(buffer); //leemos el archivo al buffer
+			planta.setImagen(buffer); //lo guardamos en la entidad
+			entityManager.persist(planta); //y lo colocamos en el EntityManager
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {		
+			e.printStackTrace();
+		}
+		
+		entityManager.persist(planta);
+		
+		Planta a = entityManager.find(Planta.class, "666");
+		Assert.assertEquals("Naucleaceae", a.getGenero().getGenero());
 	}
 }
