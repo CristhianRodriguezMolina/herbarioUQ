@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -226,7 +228,7 @@ public class pruebaCristhian {
 		Assert.assertEquals("Naucleaceae", a.getGenero().getGenero());
 	}
 	
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -242,6 +244,50 @@ public class pruebaCristhian {
 		
 		System.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
 
-		Assert.assertEquals("846", p.getIdPlanta());
+		p = entityManager.find(Planta.class, "846");
+		
+		Assert.assertEquals("genero2", p.getGenero().getIdGenero());
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarInformacionGeneroTest() {
+
+		Genero p = entityManager.find(Genero.class, "genero3");
+		
+		System.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
+		
+		p.setFamilia(entityManager.find(Familia.class, "familia2"));
+	
+		entityManager.merge(p);
+		
+		System.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
+		
+		p = entityManager.find(Genero.class, "genero3");
+
+		Assert.assertEquals("familia2", p.getFamilia().getIdFamilia());
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarInformacionFamiliaTest() {
+
+		Familia p = entityManager.find(Familia.class, "familia1");
+		
+		System.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
+		
+		p.setFamilia("prueba");
+	
+		entityManager.merge(p);
+		
+		System.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
+		
+		p = entityManager.find(Familia.class, "familia1");
+
+		Assert.assertEquals("prueba", p.getFamilia());
 	}
 }
