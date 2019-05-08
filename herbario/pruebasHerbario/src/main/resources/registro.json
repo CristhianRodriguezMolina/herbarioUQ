@@ -16,7 +16,7 @@
 		},
 			{
 			"numeroRegistro": 7123,
-			"aprovacion": 1,
+			"aprovacion": -1,
 			"departamento": "Quindio",
 			"determinacion": "hfg",
 			"fechaRecoleccion": "1999-03-20",
@@ -30,7 +30,7 @@
 		},
 			{
 			"numeroRegistro": 498,
-			"aprovacion": -1,
+			"aprovacion": 1,
 			"departamento": "Quindio",
 			"determinacion": "hfg",
 			"fechaRecoleccion": "1999-03-20",

@@ -53,6 +53,15 @@
 			"correo": "apellido3@gmail.com",
 			"direccion": "apellido direccion23332",
 			"telefono": "1313196169"
+		},
+		{
+			"cedula": "129",
+			"dtype": "Recolector",
+			"apellidos": "apellido7",
+			"nombre": "nombre7",
+			"correo": "apellido3@gmail.com",
+			"direccion": "apellido direccion25456",
+			"telefono": "3132314244"
 		}
 	]
 }
