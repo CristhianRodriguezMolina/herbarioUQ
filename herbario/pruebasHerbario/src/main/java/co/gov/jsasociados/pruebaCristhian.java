@@ -56,7 +56,7 @@ public class pruebaCristhian {
 
 	}
 
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -72,7 +72,7 @@ public class pruebaCristhian {
 		}
 	}
 	
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -89,30 +89,13 @@ public class pruebaCristhian {
 		}
 	}
 	
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasPorGeneroFromEmpleadoTest() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_GENERO, Planta.class);
 		query.setParameter("genero", "genero2");
-		List<Planta> listaPlantas = query.getResultList();
-
-		Assert.assertEquals(listaPlantas.size(), 1);
-
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
-	}
-	
-//	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
-			"familia.json", "genero.json", "recolector.json", "planta.json" })
-	public void listarPlantasPorFamiliaFromEmpleadoTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
-		query.setParameter("familia", "familia3");
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 2);
@@ -123,7 +106,24 @@ public class pruebaCristhian {
 		}
 	}
 	
-//	@Test
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void listarPlantasPorFamiliaFromEmpleadoTest() {
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
+		query.setParameter("familia", "familia3");
+		List<Planta> listaPlantas = query.getResultList();
+
+		Assert.assertEquals(listaPlantas.size(), 1);
+
+		Iterator<Planta> iterator = listaPlantas.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().getNombre());
+		}
+	}
+	
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -147,7 +147,7 @@ public class pruebaCristhian {
 		Assert.assertEquals("Naucleaceae", a.getGeneros().get(0).getGenero());
 	}
 	
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -171,7 +171,7 @@ public class pruebaCristhian {
 		Assert.assertEquals("Naucleaceae", a.getGeneros().get(0).getGenero());
 	}
 	
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -184,7 +184,7 @@ public class pruebaCristhian {
 		System.out.println(p.toString());
 	}
 	
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -289,5 +289,44 @@ public class pruebaCristhian {
 		p = entityManager.find(Familia.class, "familia1");
 
 		Assert.assertEquals("prueba", p.getFamilia());
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarPlantaTest() {
+
+		Planta p = entityManager.find(Planta.class, "846");
+		
+		entityManager.remove(p);
+		
+		Assert.assertNull("La planta "+p.getNombre()+" no existe", entityManager.find(Planta.class, "846"));
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarGeneroTest() {
+
+		Genero g = entityManager.find(Genero.class, "genero1");
+		
+		entityManager.remove(g);
+		
+		Assert.assertNull("El genero "+g.getGenero()+" no existe", entityManager.find(Genero.class, "genero1"));
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarFamiliaTest() {
+
+		Familia f = entityManager.find(Familia.class, "familia1");
+		
+		entityManager.remove(f);
+		
+		Assert.assertNull("La familia "+f.getFamilia()+" no existe", entityManager.find(Familia.class, "familia1"));
 	}
 }
