@@ -18,8 +18,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS, query = "select comentario from Comentario comentario"),
-		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_FECHAPUBLICACION, query = "select comentario.comentario from Comentario comentario where comentario.fechaPublicacion=:fechaPublicacion"),
-		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PERSONA, query = "select comentario.comentario from Comentario comentario where comentario.persona=:persona"),
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_FECHAPUBLICACION, query = "select comentario from Comentario comentario where comentario.fechaPublicacion=:fechaPublicacion"),
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PERSONA, query = "select comentario from Comentario comentario where comentario.persona.cedula=:cedula"),
 })
 public class Comentario implements Serializable {
 	public static final String LISTAR_COMENTARIOS= "listar comentarios";
@@ -41,7 +41,7 @@ public class Comentario implements Serializable {
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaPublicacion;
-
+	
 	/**
 	 * persona asociada a un comentario
 	 */
