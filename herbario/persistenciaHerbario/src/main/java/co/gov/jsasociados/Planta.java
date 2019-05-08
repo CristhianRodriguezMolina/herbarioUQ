@@ -35,14 +35,15 @@ public class Planta implements Serializable {
 	/*
 	 * Imagen relacionada a la planta
 	 */
-	@Lob
-	@Column(name = "Imagen")
-	private byte[] imagen;
+//	@Lob
+//	@Column(name = "imagen")
+//	private byte[] imagen;
 	/*
 	 * Registro de la Planta
 	 */	
 	@OneToOne(mappedBy="planta")
 	private Registro registro;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Planta() {
@@ -81,16 +82,16 @@ public class Planta implements Serializable {
 	/**
 	 * @return the imagen
 	 */
-	public byte[] getImagen() {
-		return imagen;
-	}
-
-	/**
-	 * @param imagen the imagen to set
-	 */
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
-	}
+//	public byte[] getImagen() {
+//		return imagen;
+//	}
+//
+//	/**
+//	 * @param imagen the imagen to set
+//	 */
+//	public void setImagen(byte[] imagen) {
+//		this.imagen = imagen;
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

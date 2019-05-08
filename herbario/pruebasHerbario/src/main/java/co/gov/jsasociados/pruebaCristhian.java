@@ -10,9 +10,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.apache.derby.tools.sysinfo;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
@@ -25,8 +25,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.ctc.wstx.evt.WNotationDeclaration;
 
 /**
  * Clase de pruebas dedicada para la pruebas de las entidades
@@ -184,7 +182,7 @@ public class pruebaCristhian {
 		System.out.println(p.toString());
 	}
 	
-	@Test
+//	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -214,7 +212,7 @@ public class pruebaCristhian {
 			InputStream is = new FileInputStream(f);
 			byte[] buffer = new byte[(int) f.length()]; //creamos el buffer
 			int readers = is.read(buffer); //leemos el archivo al buffer
-			planta.setImagen(buffer); //lo guardamos en la entidad
+//			planta.setImagen(buffer); //lo guardamos en la entidad
 			entityManager.persist(planta); //y lo colocamos en el EntityManager
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -226,5 +224,24 @@ public class pruebaCristhian {
 		
 		Planta a = entityManager.find(Planta.class, "666");
 		Assert.assertEquals("Naucleaceae", a.getGenero().getGenero());
+	}
+	
+//	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarInformacionPlantaTest() {
+
+		Planta p = entityManager.find(Planta.class, "846");
+		
+		System.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
+		
+		p.setGenero(entityManager.find(Genero.class, "genero2"));
+	
+		entityManager.merge(p);
+		
+		System.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
+
+		Assert.assertEquals("846", p.getIdPlanta());
 	}
 }
