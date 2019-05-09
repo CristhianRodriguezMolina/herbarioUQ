@@ -212,6 +212,43 @@ public class pruebaPlanta {
 		Assert.assertEquals("prueba", p.getFamilia());
 	}
 	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarPlantaTest() {
+
+		Planta p = entityManager.find(Planta.class, "846");
+		
+		entityManager.remove(p);
+		
+		Assert.assertNull("La planta "+p.getNombre()+" no existe", entityManager.find(Planta.class, "846"));
+	}
 	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarGeneroTest() {
+
+		Genero g = entityManager.find(Genero.class, "genero1");
+		
+		entityManager.remove(g);
+		
+		Assert.assertNull("El genero "+g.getGenero()+" no existe", entityManager.find(Genero.class, "genero1"));
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarFamiliaTest() {
+
+		Familia f = entityManager.find(Familia.class, "familia1");
+		
+		entityManager.remove(f);
+		
+		Assert.assertNull("La familia "+f.getFamilia()+" no existe", entityManager.find(Familia.class, "familia1"));
+	}
 	
 }
