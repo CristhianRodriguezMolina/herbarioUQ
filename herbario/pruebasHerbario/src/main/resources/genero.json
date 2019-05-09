@@ -1,25 +1,19 @@
 {
-	"GENERO":[
-		
+	"GENERO": [
 		{
-			"genero":"toxicas",
-			"idGenero":"genero1",
-			"familia_idfamilia":"familia1"
-		
+			"genero": "toxicas",
+			"idGenero": "genero1",
+			"familia_idfamilia": "familia1"
 		},
-			{
-			"genero":"carnivoras",
-			"idGenero":"genero2",
-			"familia_idfamilia":"familia2"
-		
+		{
+			"genero": "carnivoras",
+			"idGenero": "genero2",
+			"familia_idfamilia": "familia2"
 		},
-			{
-			"genero":"curativas",
-			"idGenero":"genero3",
-			"familia_idfamilia":"familia3"
-		
+		{
+			"genero": "curativas",
+			"idGenero": "genero3",
+			"familia_idfamilia": "familia3"
 		}
-	
 	]
-	
 }

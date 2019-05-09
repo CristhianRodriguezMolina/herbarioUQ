@@ -2,7 +2,6 @@ package co.gov.jsasociados;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +17,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,19 +42,20 @@ public class pruebaComentario {
 	/**
 	 * lista todos los comentarios hechos
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json", "comentario.json" })
-	public void listarComentarios() {
+	public void listarComentariosTest() {
 		TypedQuery<Comentario> query = entityManager.createNamedQuery(Comentario.LISTAR_COMENTARIOS, Comentario.class);
 
 		List<Comentario> comentarios = query.getResultList();
-		System.out.println("tamanio de la lista" + comentarios.size());
-		Iterator<Comentario> iterator = comentarios.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getComentario());
-		}
+		Assert.assertEquals(comentarios.size(), 5);
+		// System.out.println("tamanio de la lista" + comentarios.size());
+//		Iterator<Comentario> iterator = comentarios.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getComentario());
+//		}
 	}
 
 	/**
@@ -64,17 +65,18 @@ public class pruebaComentario {
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json", "comentario.json" })
-	public void listarComentariosPorFecha() {
+	public void listarComentariosPorFechaTest() {
 		TypedQuery<Comentario> query = entityManager.createNamedQuery(Comentario.LISTAR_COMENTARIOS_FECHAPUBLICACION,
 				Comentario.class);
 		try {
 			query.setParameter("fechaPublicacion", new SimpleDateFormat("yyyy-MM-dd").parse("2019-08-12"));
 			List<Comentario> comentarios = query.getResultList();
-			System.out.println("tamanio de la lista" + comentarios.size());
-			Iterator<Comentario> iterator = comentarios.iterator();
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next().getComentario());
-			}
+			Assert.assertEquals(comentarios.size(), 2);
+//			System.out.println("tamanio de la lista" + comentarios.size());
+//			Iterator<Comentario> iterator = comentarios.iterator();
+//			while (iterator.hasNext()) {
+//				System.out.println(iterator.next().getComentario());
+//			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,19 +87,20 @@ public class pruebaComentario {
 	/**
 	 * lista los comentarios de una persona por su cedula
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json", "comentario.json" })
-	public void listar() {
+	public void listarComentariosCedulaTest() {
 		TypedQuery<Comentario> query = entityManager.createNamedQuery(Comentario.LISTAR_COMENTARIOS_PERSONA,
 				Comentario.class);
 		query.setParameter("cedula", "123");
 		List<Comentario> comentarios = query.getResultList();
-		System.out.println("tamanio de la lista" + comentarios.size());
-		Iterator<Comentario> iterator = comentarios.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getComentario());
-		}
+		Assert.assertEquals(comentarios.size(), 2);
+//		System.out.println("tamanio de la lista" + comentarios.size());
+//		Iterator<Comentario> iterator = comentarios.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getComentario());
+//		}
 	}
 }

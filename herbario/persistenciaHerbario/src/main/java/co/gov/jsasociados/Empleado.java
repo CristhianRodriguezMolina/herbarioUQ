@@ -18,20 +18,20 @@ import javax.persistence.*;
 	@NamedQuery(name = Empleado.LISTAR_RECOLECTORES, query = "select recolector from Recolector recolector"),
 	@NamedQuery(name = Empleado.LISTAR_PLANTAS, query = "select planta from Planta planta"),
 	@NamedQuery(name = Empleado.LISTAR_PLANTAS_POR_APROVACION, query = "select DISTINCT registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
-	@NamedQuery(name = Empleado.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.idFamilia=:familia"),
-	@NamedQuery(name = Empleado.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero.idGenero=:genero"), })
+	@NamedQuery(name = Empleado.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.familia=:familia"),
+	@NamedQuery(name = Empleado.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero.genero=:genero"), })
 public class Empleado extends Persona implements Serializable {
 	
 	// querys de emleado
 	public static final String BUSCAR_POR_ID= "buscar Empleado por id"; 
-	static final String LISTAR_EMPLEADOS = "listar Empleados";
-	static final String LISTAR_RECOLECTORES = "listar Recolectores";
+	public static final String LISTAR_EMPLEADOS = "listar Empleados";
+	public static final String LISTAR_RECOLECTORES = "listar Recolectores";
 
 	// QUERYS DE PLANTAS
-	static final String LISTAR_PLANTAS = "listar Plantas";
-	static final String LISTAR_PLANTAS_POR_APROVACION = "listar Plantas por aprovacion";
-	static final String LISTAR_PLANTAS_POR_FAMILIA = "listar Plantas por familia";
-	static final String LISTAR_PLANTAS_POR_GENERO = "listar Plantas por genero";
+	public static final String LISTAR_PLANTAS = "listar Plantas";
+	public static final String LISTAR_PLANTAS_POR_APROVACION = "listar Plantas por aprovacion";
+	public static final String LISTAR_PLANTAS_POR_FAMILIA = "listar Plantas por familia desde empleado";
+	public static final String LISTAR_PLANTAS_POR_GENERO = "listar Plantas por genero desde empleado";
 	
 	private static final long serialVersionUID = 1L;
 

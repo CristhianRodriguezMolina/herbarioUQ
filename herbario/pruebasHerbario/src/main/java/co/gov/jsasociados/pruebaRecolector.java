@@ -1,6 +1,5 @@
 package co.gov.jsasociados;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,7 +15,10 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+
 
 @RunWith(Arquillian.class)
 public class pruebaRecolector {
@@ -39,64 +41,57 @@ public class pruebaRecolector {
 	/**
 	 * busca a un recolector por su id
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void buscarRecolectorPorId() {
-		System.out.println("Entra al metodo");
-		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.BUSCAR_POR_ID, Recolector.class);
-		query.setParameter("cedula", "123");
-		List<Recolector> listaRecolectores = query.getResultList();
-		System.out.println("Tamanio de la lista" + listaRecolectores.size());
-		Iterator<Recolector> iterator = listaRecolectores.iterator();
-		while (iterator.hasNext()) {
-			System.out.println("Se encontro " + iterator.next().getNombre());
-
-		}
+		Recolector recolector= entityManager.find(Recolector.class, "127");
+		Assert.assertNotNull(recolector);
 	}
 
 	/**
 	 * lista todos los recolectores
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarRecolectores() {
 		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.LISTAR_RECOLECTORES, Recolector.class);
 		List<Recolector> listarecolectores = query.getResultList();
-		System.out.println("tamanio de recolectores totales" + listarecolectores.size());
-//		Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
-
-		Iterator<Recolector> iterator = listarecolectores.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+		Assert.assertEquals(listarecolectores.size(), 3);
+			
+		
+//		Iterator<Recolector> iterator = listarecolectores.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 
 	/**
 	 * lista todas las plantas aceptadas
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAceptadas() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ACEPTADAS, Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
-
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+		Assert.assertEquals(listaPlantas.size(), 2);
+		
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 
 	/**
 	 * lista todas las plantas teniendo en cuenta la cedula del que registro la
 	 * planta y el estado del registro
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -104,19 +99,19 @@ public class pruebaRecolector {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ENVIADAS, Planta.class);
 		query.setParameter("cedula", "127");
 		query.setParameter("aprovacion", 1);
-
 		List<Planta> listaPlantas = query.getResultList();
-		System.out.println("tamanio de la lista" + listaPlantas.size());
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+		Assert.assertEquals(listaPlantas.size(), 1);
+		
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 
 	/**
 	 * lista todas las plantas aceptadas por una cierta familia
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -124,32 +119,91 @@ public class pruebaRecolector {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA,
 				Planta.class);
 		query.setParameter("familia", "toxocodarmus");
-
 		List<Planta> listaPlantas = query.getResultList();
-		System.out.println("tamanio de la lista" + listaPlantas.size());
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+		Assert.assertEquals(listaPlantas.size(), 1);
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 
 	/**
 	 * lista todas las plantas aceptadas por ciero genero
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAceptadasPorGenero() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_POR_GENERO, Planta.class);
 		query.setParameter("genero", "carnivoras");
-
 		List<Planta> listaPlantas = query.getResultList();
-		System.out.println("tamanio de la lista" + listaPlantas.size());
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+		Assert.assertEquals(listaPlantas.size(), 1);
+		
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
+	}
+	
+	/**
+	 * test para agregar un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void agregarRecolectorTest() {
+
+		Recolector recolector = new Recolector();
+		recolector.setCedula("12354");
+		recolector.setApellidos("Franco");
+		recolector.setNombre("Carlos");
+		recolector.setCorreo("ad@correo.com");
+		recolector.setDireccion("dire");
+		recolector.setTelefono("1298834");
+
+		Cuenta cuenta = new Cuenta();
+		cuenta.setContrasenia("123");
+		cuenta.setUsuario("123");
+
+		cuenta.setPersona(recolector);
+		recolector.setCuenta(cuenta);
+
+		entityManager.persist(cuenta);
+		entityManager.persist(recolector);
+
+		entityManager.find(recolector.getClass(), recolector.getCedula());
 	}
 
+	/**
+	 * test para eliminar un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarRecolectorTest() {
+		Recolector ad = entityManager.find(Recolector.class, "129");
+		Assert.assertNotNull(ad);
+		entityManager.remove(ad);
+		Assert.assertNull("No se ha eliminado", entityManager.find(Administrador.class, "129"));
+	}
+
+	/**
+	 * test para eliminar un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarRecolectorTest() {
+		Recolector ad = entityManager.find(Recolector.class, "129");
+		Assert.assertNotNull(ad);
+		ad.setNombre("Alfredo");
+		entityManager.merge(ad);
+		ad = null;
+		ad = entityManager.find(Recolector.class, "129");
+		Assert.assertEquals("Alfredo", ad.getNombre());
+	}
 }

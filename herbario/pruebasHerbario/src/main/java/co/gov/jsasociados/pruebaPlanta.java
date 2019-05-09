@@ -97,7 +97,7 @@ public class pruebaPlanta {
 	
 		Assert.assertEquals("846", p.getIdPlanta());
 		
-		System.out.println(p.toString());
+		//system.out.println(p.toString());
 	}
 	
 	@Test
@@ -108,13 +108,13 @@ public class pruebaPlanta {
 
 		Planta p = entityManager.find(Planta.class, "846");
 		
-		System.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
+		//system.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
 		
 		p.setGenero(entityManager.find(Genero.class, "genero2"));
 	
 		entityManager.merge(p);
 		
-		System.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
+		//system.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
 
 		p = entityManager.find(Planta.class, "846");
 		
@@ -178,13 +178,13 @@ public class pruebaPlanta {
 
 		Genero p = entityManager.find(Genero.class, "genero3");
 
-		System.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
+		//system.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
 
 		p.setFamilia(entityManager.find(Familia.class, "familia2"));
 
 		entityManager.merge(p);
 
-		System.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
+		//system.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
 
 		p = entityManager.find(Genero.class, "genero3");
 
@@ -199,13 +199,13 @@ public class pruebaPlanta {
 
 		Familia p = entityManager.find(Familia.class, "familia1");
 
-		System.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
+		//system.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
 
 		p.setFamilia("prueba");
 
 		entityManager.merge(p);
 
-		System.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
+		//system.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
 
 		p = entityManager.find(Familia.class, "familia1");
 

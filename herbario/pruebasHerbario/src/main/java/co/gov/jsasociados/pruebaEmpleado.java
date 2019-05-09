@@ -1,6 +1,5 @@
 package co.gov.jsasociados;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -51,14 +50,14 @@ public class pruebaEmpleado {
 
 		Assert.assertEquals(listaEmpleados.size(), 2);
 
-		Iterator<Empleado> iterator = listaEmpleados.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+//		Iterator<Empleado> iterator = listaEmpleados.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 	
 	/**
-	 * lista todas las plantas aprovadas
+	 * lista todas las plantas por aprovacion
 	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
@@ -66,15 +65,15 @@ public class pruebaEmpleado {
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAprovadasFromEmpleadoTest() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_APROVACION, Planta.class);
-		query.setParameter("aprovacion", -1);
+		query.setParameter("aprovacion", 1);
 		List<Planta> listaPlantas = query.getResultList();
 
-		Assert.assertEquals(listaPlantas.size(), 1);
+		Assert.assertEquals(listaPlantas.size(), 2);
 
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 
 	/**
@@ -86,36 +85,106 @@ public class pruebaEmpleado {
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasPorFamiliaFromEmpleadoTest() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
-		query.setParameter("familia", "familia3");
+		query.setParameter("familia", "telepiatos");
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 2);
 
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
 	}
 
-	
-	
-	
-	
+	/**
+	 * listar plantas por genero
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasPorGeneroFromEmpleadoTest() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_GENERO, Planta.class);
-		query.setParameter("genero", "genero2");
+		query.setParameter("genero", "carnivoras");
 		List<Planta> listaPlantas = query.getResultList();
 
-		Assert.assertEquals(listaPlantas.size(), 1);
+		Assert.assertEquals(listaPlantas.size(), 2);
 
-		Iterator<Planta> iterator = listaPlantas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getNombre());
-		}
+//		Iterator<Planta> iterator = listaPlantas.iterator();
+//		while (iterator.hasNext()) {
+//			System.out.println(iterator.next().getNombre());
+//		}
+	}
+	
+	/**
+	 * buscar empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void buscarEmpleadoTest() {
+		Empleado empleado= entityManager.find(Empleado.class, "128");
+		Assert.assertNotNull(empleado);
+	}
+	
+	/**
+	 * agregar empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void agregarEmpleadoTest() {
+		Empleado emplado = new Empleado();
+		emplado.setCedula("12354");
+		emplado.setApellidos("Franco");
+		emplado.setNombre("Carlos");
+		emplado.setCorreo("ad@correo.com");
+		emplado.setDireccion("dire");
+		emplado.setTelefono("1298834");
+
+		Cuenta cuenta = new Cuenta();
+		cuenta.setContrasenia("123");
+		cuenta.setUsuario("123");
+
+		cuenta.setPersona(emplado);
+		emplado.setCuenta(cuenta);
+
+		entityManager.persist(cuenta);
+		entityManager.persist(emplado);
+
+		entityManager.find(emplado.getClass(), emplado.getCedula());
+	}
+	
+	/**
+	 * test para eliminar un empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarEmpladoTest() {
+		Empleado ad = entityManager.find(Empleado.class, "125");
+		Assert.assertNotNull(ad);
+		entityManager.remove(ad);
+		Assert.assertNull("No se ha eliminado", entityManager.find(Administrador.class, "125"));
 	}
 
+	/**
+	 * test para eliminar un empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarEmpleadoTest() {
+		Empleado ad = entityManager.find(Empleado.class, "125");
+		Assert.assertNotNull(ad);
+		ad.setNombre("Alfredo");
+		entityManager.merge(ad);
+		ad = null;
+		ad = entityManager.find(Empleado.class, "125");
+		Assert.assertEquals("Alfredo", ad.getNombre());
+	}
 }
