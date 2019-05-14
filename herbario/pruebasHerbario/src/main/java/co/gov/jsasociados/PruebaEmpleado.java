@@ -19,8 +19,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Clase que permite relizar los test de Empleado
+ * 
+ * @author Sergio Osorio
+ * @author Cristian Rodriguez
+ * @author Jhonatan Hidalgo
+ *
+ */
 @RunWith(Arquillian.class)
-public class pruebaEmpleado {
+public class PruebaEmpleado {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -49,13 +57,8 @@ public class pruebaEmpleado {
 		List<Empleado> listaEmpleados = query.getResultList();
 
 		Assert.assertEquals(listaEmpleados.size(), 2);
-
-//		Iterator<Empleado> iterator = listaEmpleados.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
-	
+
 	/**
 	 * lista todas las plantas por aprovacion
 	 */
@@ -69,11 +72,6 @@ public class pruebaEmpleado {
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 2);
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -89,11 +87,6 @@ public class pruebaEmpleado {
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 2);
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -109,13 +102,8 @@ public class pruebaEmpleado {
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 2);
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
-	
+
 	/**
 	 * buscar empleado
 	 */
@@ -124,10 +112,10 @@ public class pruebaEmpleado {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void buscarEmpleadoTest() {
-		Empleado empleado= entityManager.find(Empleado.class, "128");
+		Empleado empleado = entityManager.find(Empleado.class, "128");
 		Assert.assertNotNull(empleado);
 	}
-	
+
 	/**
 	 * agregar empleado
 	 */
@@ -156,7 +144,7 @@ public class pruebaEmpleado {
 
 		entityManager.find(emplado.getClass(), emplado.getCedula());
 	}
-	
+
 	/**
 	 * test para eliminar un empleado
 	 */

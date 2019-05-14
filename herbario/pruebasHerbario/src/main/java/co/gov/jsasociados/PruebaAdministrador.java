@@ -1,6 +1,5 @@
 package co.gov.jsasociados;
 
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,8 +19,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Clase que permite relizar los test de administrador
+ * 
+ * @author Sergio Osorio
+ * @author Cristian Rodriguez
+ * @author Jhonatan Hidalgo
+ *
+ */
 @RunWith(Arquillian.class)
-public class pruebaAdministrador {
+public class PruebaAdministrador {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -51,15 +58,6 @@ public class pruebaAdministrador {
 		List<Administrador> listaAdministradores = query.getResultList();
 
 		Assert.assertEquals(listaAdministradores.size(), 2);
-
-		// System.out.println("Cantidad de administradores " +
-		// listaAdministradores.size());
-
-//		Iterator<Administrador> iterator = listaAdministradores.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
-
 	}
 
 	/**
@@ -74,7 +72,6 @@ public class pruebaAdministrador {
 				Administrador.class);
 		query.setParameter("cedula", "123");
 		Administrador administrador = query.getSingleResult();
-		// Assert.assertEquals(listaAdministradores.get(0).getNombre(), "nombre");
 		Assert.assertNotNull(administrador);
 	}
 
@@ -91,11 +88,6 @@ public class pruebaAdministrador {
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 4);
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -111,14 +103,6 @@ public class pruebaAdministrador {
 		query.setParameter("familia", "xnoramos");
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 1);
-		// System.out.println("La familia toxocodarmus tiene " + listaPlantas.size() + "
-		// plantas");
-		// Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -135,12 +119,6 @@ public class pruebaAdministrador {
 		query.setParameter("aprovacion", 1);
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 2);
-		// Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -156,12 +134,6 @@ public class pruebaAdministrador {
 		List<Recolector> listarecolectores = query.getResultList();
 
 		Assert.assertEquals(listarecolectores.size(), 3);
-		// Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
-
-//		Iterator<Recolector> iterator = listarecolectores.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -177,28 +149,22 @@ public class pruebaAdministrador {
 
 		Assert.assertEquals(listaempleados.size(), 2);
 
-//		Iterator<Empleado> iterator = listaempleados.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
+	/**
+	 * listar plantas por genero desde administrador
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
-	public void listarPlantasPorGeneroFromEmpleadoTest() {
+	public void listarPlantasPorGeneroTest() {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_GENERO,
 				Planta.class);
 		query.setParameter("genero", "curativas");
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 1);
-
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**

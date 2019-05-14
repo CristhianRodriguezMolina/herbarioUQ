@@ -22,8 +22,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Clase que permite relizar los test de planta
+ * 
+ * @author Sergio Osorio
+ * @author Cristian Rodriguez
+ * @author Jhonatan Hidalgo
+ *
+ */
 @RunWith(Arquillian.class)
-public class pruebaPlanta {
+public class PruebaPlanta {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -39,8 +47,11 @@ public class pruebaPlanta {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
-	
-//	@Test
+
+	/**
+	 * test para persistir una planta (mirar bien esto)
+	 */
+	// @Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -49,57 +60,63 @@ public class pruebaPlanta {
 		Familia familia = new Familia();
 		familia.setIdFamilia("familia4");
 		familia.setFamilia("Rubiaceae");
-		
+
 		entityManager.persist(familia);
-		
+
 		Genero genero = new Genero();
 		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
 		genero.setIdGenero("genero4");
 		genero.setGenero("Naucleaceae");
 		familia.addGenero(genero);
-		
+
 		entityManager.persist(familia);
-		
+
 		Planta planta = new Planta();
-			
+
 		try {
 			planta.setGenero(genero);
 			planta.setIdPlanta("666");
 			planta.setNombre("Rubia peregrina");
-			File f = new File("C:\\Users\\Rodriguez\\Documents\\GitHub\\herbarioUQ\\herbario\\pruebasHerbario\\src\\main\\resources\\imagenes\\YoSoyIronMan.png"); //asociamos el archivo fisico
+			File f = new File(
+					"C:\\Users\\Rodriguez\\Documents\\GitHub\\herbarioUQ\\herbario\\pruebasHerbario\\src\\main\\resources\\imagenes\\YoSoyIronMan.png"); // asociamos
+																																							// el
+																																							// archivo
+																																							// fisico
 			InputStream is = new FileInputStream(f);
-			byte[] buffer = new byte[(int) f.length()]; //creamos el buffer
-			int readers = is.read(buffer); //leemos el archivo al buffer
+			byte[] buffer = new byte[(int) f.length()]; // creamos el buffer
+			int readers = is.read(buffer); // leemos el archivo al buffer
 //			planta.setImagen(buffer); //lo guardamos en la entidad
-			entityManager.persist(planta); //y lo colocamos en el EntityManager
+			entityManager.persist(planta); // y lo colocamos en el EntityManager
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}catch (IOException e) {		
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		entityManager.persist(planta);
-		
+
 		Planta a = entityManager.find(Planta.class, "666");
 		Assert.assertEquals("Naucleaceae", a.getGenero().getGenero());
 	}
-	
+
 	/**
 	 * muestra toda la informacion de una planta, por su id
 	 */
-//	@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void mostrarInformacionPlantaTest() {
 
 		Planta p = entityManager.find(Planta.class, "846");
-	
+
 		Assert.assertEquals("846", p.getIdPlanta());
-		
-		//system.out.println(p.toString());
+
 	}
-	
+
+	/**
+	 * test para modificar informcion de una planta
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -107,21 +124,21 @@ public class pruebaPlanta {
 	public void modificarInformacionPlantaTest() {
 
 		Planta p = entityManager.find(Planta.class, "846");
-		
-		//system.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
-		
+
 		p.setGenero(entityManager.find(Genero.class, "genero2"));
-	
+
 		entityManager.merge(p);
-		
-		//system.out.println(entityManager.find(Planta.class, "846").getGenero().getGenero());
 
 		p = entityManager.find(Planta.class, "846");
-		
+
 		Assert.assertEquals("genero2", p.getGenero().getIdGenero());
 	}
-	
-	//pruebas para familia y genero
+
+	// pruebas para familia y genero
+
+	/**
+	 * test para persistir una familia y un genero(mirar este metodo)
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -146,6 +163,9 @@ public class pruebaPlanta {
 		Assert.assertEquals("Naucleaceae", a.getGeneros().get(0).getGenero());
 	}
 
+	/**
+	 * test de persistir familia(mirar esto)
+	 */
 //	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -170,6 +190,9 @@ public class pruebaPlanta {
 		Assert.assertEquals("Naucleaceae", a.getGeneros().get(0).getGenero());
 	}
 
+	/**
+	 * test para modificar informacion de un genero
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -178,19 +201,18 @@ public class pruebaPlanta {
 
 		Genero p = entityManager.find(Genero.class, "genero3");
 
-		//system.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
-
 		p.setFamilia(entityManager.find(Familia.class, "familia2"));
 
 		entityManager.merge(p);
-
-		//system.out.println(entityManager.find(Genero.class, "genero3").getFamilia().getFamilia());
 
 		p = entityManager.find(Genero.class, "genero3");
 
 		Assert.assertEquals("familia2", p.getFamilia().getIdFamilia());
 	}
 
+	/**
+	 * test para modificar la informacion de una familia
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -199,19 +221,18 @@ public class pruebaPlanta {
 
 		Familia p = entityManager.find(Familia.class, "familia1");
 
-		//system.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
-
 		p.setFamilia("prueba");
 
 		entityManager.merge(p);
-
-		//system.out.println(entityManager.find(Familia.class, "familia1").getFamilia());
 
 		p = entityManager.find(Familia.class, "familia1");
 
 		Assert.assertEquals("prueba", p.getFamilia());
 	}
-	
+
+	/**
+	 * test para eliminar una planta
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -219,12 +240,15 @@ public class pruebaPlanta {
 	public void eliminarPlantaTest() {
 
 		Planta p = entityManager.find(Planta.class, "846");
-		
+
 		entityManager.remove(p);
-		
-		Assert.assertNull("La planta "+p.getNombre()+" no existe", entityManager.find(Planta.class, "846"));
+
+		Assert.assertNull("La planta " + p.getNombre() + " no existe", entityManager.find(Planta.class, "846"));
 	}
-	
+
+	/**
+	 * test para eliminar un genero
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -232,12 +256,15 @@ public class pruebaPlanta {
 	public void eliminarGeneroTest() {
 
 		Genero g = entityManager.find(Genero.class, "genero1");
-		
+
 		entityManager.remove(g);
-		
-		Assert.assertNull("El genero "+g.getGenero()+" no existe", entityManager.find(Genero.class, "genero1"));
+
+		Assert.assertNull("El genero " + g.getGenero() + " no existe", entityManager.find(Genero.class, "genero1"));
 	}
-	
+
+	/**
+	 * test para eliminar una familia
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -245,10 +272,10 @@ public class pruebaPlanta {
 	public void eliminarFamiliaTest() {
 
 		Familia f = entityManager.find(Familia.class, "familia1");
-		
+
 		entityManager.remove(f);
-		
-		Assert.assertNull("La familia "+f.getFamilia()+" no existe", entityManager.find(Familia.class, "familia1"));
+
+		Assert.assertNull("La familia " + f.getFamilia() + " no existe", entityManager.find(Familia.class, "familia1"));
 	}
-	
+
 }

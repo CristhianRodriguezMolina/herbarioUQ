@@ -19,9 +19,17 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Clase que permite relizar los test de planta
+ * 
+ * @author Sergio Osorio
+ * @author Cristian Rodriguez
+ * @author Jhonatan Hidalgo
+ *
+ */
 
 @RunWith(Arquillian.class)
-public class pruebaRecolector {
+public class PruebaRecolector {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -46,7 +54,7 @@ public class pruebaRecolector {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void buscarRecolectorPorId() {
-		Recolector recolector= entityManager.find(Recolector.class, "127");
+		Recolector recolector = entityManager.find(Recolector.class, "127");
 		Assert.assertNotNull(recolector);
 	}
 
@@ -61,12 +69,6 @@ public class pruebaRecolector {
 		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.LISTAR_RECOLECTORES, Recolector.class);
 		List<Recolector> listarecolectores = query.getResultList();
 		Assert.assertEquals(listarecolectores.size(), 3);
-			
-		
-//		Iterator<Recolector> iterator = listarecolectores.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -80,11 +82,6 @@ public class pruebaRecolector {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ACEPTADAS, Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 2);
-		
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -101,11 +98,6 @@ public class pruebaRecolector {
 		query.setParameter("aprovacion", 1);
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 1);
-		
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -121,10 +113,6 @@ public class pruebaRecolector {
 		query.setParameter("familia", "toxocodarmus");
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 1);
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
 	}
 
 	/**
@@ -139,13 +127,9 @@ public class pruebaRecolector {
 		query.setParameter("genero", "carnivoras");
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 1);
-		
-//		Iterator<Planta> iterator = listaPlantas.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getNombre());
-//		}
+
 	}
-	
+
 	/**
 	 * test para agregar un recolector
 	 */

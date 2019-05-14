@@ -21,8 +21,17 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Clase que permite relizar los test de comentarios
+ * 
+ * @author Sergio Osorio
+ * @author Cristian Rodriguez
+ * @author Jhonatan Hidalgo
+ *
+ */
+
 @RunWith(Arquillian.class)
-public class pruebaComentario {
+public class PruebaComentario {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -51,11 +60,6 @@ public class pruebaComentario {
 
 		List<Comentario> comentarios = query.getResultList();
 		Assert.assertEquals(comentarios.size(), 5);
-		// System.out.println("tamanio de la lista" + comentarios.size());
-//		Iterator<Comentario> iterator = comentarios.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getComentario());
-//		}
 	}
 
 	/**
@@ -72,11 +76,6 @@ public class pruebaComentario {
 			query.setParameter("fechaPublicacion", new SimpleDateFormat("yyyy-MM-dd").parse("2019-08-12"));
 			List<Comentario> comentarios = query.getResultList();
 			Assert.assertEquals(comentarios.size(), 2);
-//			System.out.println("tamanio de la lista" + comentarios.size());
-//			Iterator<Comentario> iterator = comentarios.iterator();
-//			while (iterator.hasNext()) {
-//				System.out.println(iterator.next().getComentario());
-//			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,10 +96,5 @@ public class pruebaComentario {
 		query.setParameter("cedula", "123");
 		List<Comentario> comentarios = query.getResultList();
 		Assert.assertEquals(comentarios.size(), 2);
-//		System.out.println("tamanio de la lista" + comentarios.size());
-//		Iterator<Comentario> iterator = comentarios.iterator();
-//		while (iterator.hasNext()) {
-//			System.out.println(iterator.next().getComentario());
-//		}
 	}
 }
