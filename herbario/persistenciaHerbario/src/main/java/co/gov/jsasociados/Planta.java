@@ -13,9 +13,12 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name = Planta.OBTENER_FAMILIA_PLANTA, query="select planta.genero.familia from Planta planta where planta.idPlanta=:idPlanta")
+})
 public class Planta implements Serializable {
-
+	
+	public static final String OBTENER_FAMILIA_PLANTA="obnter familia planta";
 	/*
 	 * id unico de la Planta
 	 */	

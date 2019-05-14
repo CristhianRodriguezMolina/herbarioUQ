@@ -16,8 +16,15 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-
+@NamedQueries(
+		{
+			
+			@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO,query = "select registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo from Registro registro INNER JOIN registro.planta.genero.plantas plantas where registro.fechaRegistro=:fechaRegistro")
+		}
+		)
+	
 public class Registro implements Serializable {
+	public static final String OBTENER_DATOS_REGISTRO=" obtener datos registro";
 	
 	/**
 	 * numero de registro de una planta

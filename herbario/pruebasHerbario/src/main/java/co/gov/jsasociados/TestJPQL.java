@@ -43,6 +43,16 @@ public class TestJPQL {
 
 	}
 
+		//@Test
+		@Transactional(value = TransactionMode.ROLLBACK)
+		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+		public <E> void guia9() {
+			TypedQuery<E> query = (TypedQuery<E>) entityManager.createNamedQuery(Registro.OBTENER_DATOS_REGISTRO);
+			List<E>list=query.getResultList();
+			System.out.println("a");
+		}
+	
 	/*
 	 * Test para listar todas las personas
 	 */
@@ -166,7 +176,7 @@ public class TestJPQL {
 	
 	
 	
-	//@Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })

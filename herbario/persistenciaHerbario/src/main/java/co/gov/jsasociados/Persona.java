@@ -15,59 +15,62 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED ) 
-@NamedQueries({@NamedQuery(name= Persona.LISTAR_TODOS, query= "select p from Persona p")})
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
+
+		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registros registro where persona.cedula =:cedula") })
 public class Persona implements Serializable {
-	static final String LISTAR_TODOS= "listar personas";
+	static final String LISTAR_TODOS = "listar personas";
+	static final String OBTENER_CEDULA_Y_REGISTROS = "obtener cedula y registro";
 	/**
 	 * cedula de la persona
 	 */
 	@Id
-	@Column(length=11, unique=true, nullable=false)
+	@Column(length = 11, unique = true, nullable = false)
 	private String cedula;
 	/**
 	 * nombre de la persona
 	 */
-	@Column(length=50, nullable=false)
+	@Column(length = 50, nullable = false)
 	private String nombre;
 	/**
 	 * apellidos de la persona
 	 */
-	@Column(length=50, nullable=false)
+	@Column(length = 50, nullable = false)
 	private String apellidos;
 	/**
 	 * telefono de la persona
 	 */
-	@Column(length=10)
+	@Column(length = 10)
 	private String telefono;
 	/**
 	 * correo de la persona
 	 */
-	@Column(length=50, nullable=false)
+	@Column(length = 50, nullable = false)
 	private String correo;
 	/**
 	 * direccion de la persona
 	 */
-	@Column(length=50)
+	@Column(length = 50)
 	private String direccion;
 	/**
 	 * cuenta de una persona
 	 */
-	@OneToOne(mappedBy="persona")
+	@OneToOne(mappedBy = "persona")
 	private Cuenta cuenta;
 	/**
 	 * registro de una persona
 	 */
-	@OneToMany(mappedBy="persona")
+	@OneToMany(mappedBy = "persona")
 	private ArrayList<Registro> registro;
 	/**
 	 * comentarios relizados por una persona
 	 */
-	@OneToMany(mappedBy="persona")
+	@OneToMany(mappedBy = "persona")
 	private ArrayList<Comentario> comentarios;
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * constructor de la clase persona
 	 */
@@ -159,7 +162,9 @@ public class Persona implements Serializable {
 		this.direccion = direccion;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -170,7 +175,9 @@ public class Persona implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -232,7 +239,4 @@ public class Persona implements Serializable {
 		this.comentarios = comentarios;
 	}
 
-	
-	
-   
 }

@@ -15,8 +15,15 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
+@NamedQueries({
 
+@NamedQuery(name = Genero.OBTENER_PLANTAS, query="select planta from Genero genero INNER JOIN genero.plantas planta where genero.idGenero=:idGenero")
+}
+)
 public class Genero implements Serializable {
+	
+	public static final String OBTENER_PLANTAS= "obtener plantas";
+	
 	/**
 	 * identificador unico de un genero
 	 */
