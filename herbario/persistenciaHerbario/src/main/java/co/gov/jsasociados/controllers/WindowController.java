@@ -72,7 +72,7 @@ public class WindowController {
 					pbCarga.setProgress(pbCarga.getProgress()+0.05);				
 				}else {
 					timer.stop();
-					JOptionPane.showMessageDialog(null, "Pues a mi mas puto >:v");
+					JOptionPane.showMessageDialog(null, "Pues a mi mas topu >:v");
 				}				
 			}
 		};

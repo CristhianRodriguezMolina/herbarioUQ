@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
 
-		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registros registro where persona.cedula =:cedula") })
+		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registro registro where persona.cedula =:cedula") })
 public class Persona implements Serializable {
 	static final String LISTAR_TODOS = "listar personas";
 	static final String OBTENER_CEDULA_Y_REGISTROS = "obtener cedula y registro";

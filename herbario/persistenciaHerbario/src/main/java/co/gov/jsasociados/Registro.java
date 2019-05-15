@@ -16,22 +16,19 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-@NamedQueries(
-		{
-			
-			@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO,query = "select registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo from Registro registro INNER JOIN registro.planta.genero.plantas plantas where registro.fechaRegistro=:fechaRegistro")
-		}
-		)
-	
+@NamedQueries({@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO, query = "select registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo from Registro registro, IN(registro.planta.genero.plantas) plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro"),
+		@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO_DTO, query = "select new DTO(registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo) from Registro registro INNER JOIN registro.planta.genero.plantas plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro")})
+
 public class Registro implements Serializable {
-	public static final String OBTENER_DATOS_REGISTRO=" obtener datos registro";
-	
+	public static final String OBTENER_DATOS_REGISTRO = " obtener datos registro";
+	public static final String OBTENER_DATOS_REGISTRO_DTO = " obtener datos registro DTO";
+
 	/**
 	 * numero de registro de una planta
 	 */
-	@Column(unique=true, nullable=false)   
+	@Column(unique = true, nullable = false)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer numeroRegistro;
 	/**
 	 * fecha de recoleccion de una planta
@@ -51,22 +48,22 @@ public class Registro implements Serializable {
 	/**
 	 * pais de recoleccion de una planta
 	 */
-	@Column(length=30, nullable=false)
+	@Column(length = 30, nullable = false)
 	private String pais;
 	/**
 	 * departamento de recoleccion de una planta
 	 */
-	@Column(length=30, nullable=false)
+	@Column(length = 30, nullable = false)
 	private String departamento;
 	/**
 	 * municiopio de recoleccion de una planta
 	 */
-	@Column(length=30, nullable=false)
+	@Column(length = 30, nullable = false)
 	private String municipio;
 	/**
 	 * lugar de recoleccion de una planta
 	 */
-	@Column(length=30, nullable=false)
+	@Column(length = 30, nullable = false)
 	private String lugar;
 	/**
 	 * estado de un envio, aprovado=1, en espera=0; no aprovado=-1
@@ -76,7 +73,7 @@ public class Registro implements Serializable {
 	 * determirminacion dada a un aplanta
 	 *
 	 */
-	@Column(length=250)
+	@Column(length = 250)
 	private String determinacion;
 	/**
 	 * persona asociada a un registro
@@ -234,7 +231,9 @@ public class Registro implements Serializable {
 		this.determinacion = determinacion;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -244,9 +243,10 @@ public class Registro implements Serializable {
 		result = prime * result + ((numeroRegistro == null) ? 0 : numeroRegistro.hashCode());
 		return result;
 	}
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -292,6 +292,6 @@ public class Registro implements Serializable {
 	 */
 	public void setPlanta(Planta planta) {
 		this.planta = planta;
-	}   
-	
+	}
+
 }
