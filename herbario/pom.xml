@@ -106,6 +106,8 @@
   <modules>
     <module>persistenciaHerbario</module>
     <module>pruebasHerbario</module>
+    <module>ear-herbario</module>
+    <module>negocioHerbario</module>
   </modules>
 
 </project>

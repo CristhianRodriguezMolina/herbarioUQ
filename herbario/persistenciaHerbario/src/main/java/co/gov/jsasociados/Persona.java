@@ -16,7 +16,9 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
+@NamedQueries({
+	@NamedQuery(name = Persona.OBTENER_POR_USUARIO, query = "select persona from Persona persona where persona.cuenta.usuario=:usuario"),
+	@NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
 
 		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registro registro where persona.cedula =:cedula"),
 		@NamedQuery(name = Persona.PERSONA_SIN_REGISTRO, query = "select persona from Persona persona where persona.registro IS EMPTY"),
@@ -24,10 +26,13 @@ import javax.persistence.*;
 
 })
 public class Persona implements Serializable {
-	static final String LISTAR_TODOS = "listar personas";
-	static final String OBTENER_CEDULA_Y_REGISTROS = "obtener cedula y registro";
-	static final String PERSONA_SIN_REGISTRO= "personas que no han realizado ningun registro";
-	static final String DTO= "DTPpersonas que no han realizado ningun registro";
+	//este es el del ejb
+	public static final String OBTENER_POR_USUARIO="Obtener una persona por su usuario registrado";
+	
+	public static final String LISTAR_TODOS = "listar personas";
+	public static final String OBTENER_CEDULA_Y_REGISTROS = "obtener cedula y registro";
+	public static final String PERSONA_SIN_REGISTRO= "personas que no han realizado ningun registro";
+	public static final String DTO= "DTPpersonas que no han realizado ningun registro";
 	/**
 	 * cedula de la persona
 	 */
