@@ -18,10 +18,16 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
 
-		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registro registro where persona.cedula =:cedula") })
+		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registro registro where persona.cedula =:cedula"),
+		@NamedQuery(name = Persona.PERSONA_SIN_REGISTRO, query = "select persona from Persona persona where persona.registro IS EMPTY"),
+		//@NamedQuery(name = Persona.DTO, query = "select new co.gov.jsasociados.DtoRegistroPersno(persona.cedula, INNER JOIN persona.registro) from Persona persona where persona.resgistro is NOT EMPTY")	
+
+})
 public class Persona implements Serializable {
 	static final String LISTAR_TODOS = "listar personas";
 	static final String OBTENER_CEDULA_Y_REGISTROS = "obtener cedula y registro";
+	static final String PERSONA_SIN_REGISTRO= "personas que no han realizado ningun registro";
+	static final String DTO= "DTPpersonas que no han realizado ningun registro";
 	/**
 	 * cedula de la persona
 	 */
@@ -237,6 +243,14 @@ public class Persona implements Serializable {
 	 */
 	public void setComentarios(ArrayList<Comentario> comentarios) {
 		this.comentarios = comentarios;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Persona [cedula=" + cedula + ", nombre=" + nombre + "]";
 	}
 
 }

@@ -20,9 +20,10 @@ import javax.persistence.*;
 		@NamedQuery(name = Administrador.LISTAR_PLANTAS, query = "select planta from Planta planta"),
 		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_APROVACION, query = "select DISTINCT registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
 		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.familia=:familia"),
-		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero.genero=:genero"), })
+		@NamedQuery(name = Administrador.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero.genero=:genero"), 
+		@NamedQuery(name = Administrador.DECIR_CANTIDAD_FAMILIA, query = "select count(familia) from Familia familia")})
 public class Administrador extends Persona implements Serializable {
-
+	static final String DECIR_CANTIDAD_FAMILIA="Dice la cantidad de familias registradas";
 	// NOMBRES DE LOS QUERYS DE ESTA CLASE
 
 	// QUERYS DE PERSONAS

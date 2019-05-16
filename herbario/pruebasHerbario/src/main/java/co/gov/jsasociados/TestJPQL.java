@@ -46,7 +46,7 @@ public class TestJPQL {
 
 	}
 
-	 @Test
+	 //@Test
 		@Transactional(value = TransactionMode.ROLLBACK)
 		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
 			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -60,6 +60,48 @@ public class TestJPQL {
 				System.out.println(iterator.next().toString());
 			}
 		}
+	 
+	// @Test
+		@Transactional(value = TransactionMode.ROLLBACK)
+		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+		public void Test103() {
+			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_SIN_REGISTRO, Persona.class);
+			List<Persona> listaPersonas = query.getResultList();
+
+
+			Iterator<Persona> iterator= listaPersonas.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next());
+			}
+		}
+		//1 del 10
+		@Test
+		@Transactional(value = TransactionMode.ROLLBACK)
+		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+				"familia.json", "genero.json", "recolector.json", "planta.json" })
+		public void devolverCantidadDeFamilias() {
+			TypedQuery<Integer> query = entityManager.createNamedQuery(Administrador.DECIR_CANTIDAD_FAMILIA,
+					Integer.class);
+			
+			System.out.println("Existen la cantidad de familias "+query.getSingleResult());
+		}
+	 
+//	 //@Test
+//		//no funciona
+//		@Transactional(value = TransactionMode.ROLLBACK)
+//		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+//			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+//		public void Test104() {
+//			TypedQuery<DtoRegistroPersno> query = entityManager.createNamedQuery(Persona.DTO, DtoRegistroPersno.class);
+//			List<DtoRegistroPersno> listaPersonas = query.getResultList();
+//
+//
+//			Iterator<DtoRegistroPersno> iterator= listaPersonas.iterator();
+//			while (iterator.hasNext()) {
+//				System.out.println(iterator.next());
+//			}
+//		}
 	
 //	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
@@ -86,17 +128,17 @@ public class TestJPQL {
 	}
 	
 //	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
-			"familia.json", "genero.json", "recolector.json", "planta.json" })
-	public void consultaDTOTest()
-	{
-		TypedQuery<DTO> query = entityManager.createNamedQuery(Registro.OBTENER_DATOS_REGISTRO_DTO, DTO.class);
-		query.setParameter("fechaRegistro", "1999-03-30");
-		List<DTO> list = query.getResultList();
-		
-		Assert.assertEquals(list.get(0).getGenero().getGenero(), "curativas");
-	}
+//	@Transactional(value = TransactionMode.ROLLBACK)
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+//			"familia.json", "genero.json", "recolector.json", "planta.json" })
+//	public void consultaDTOTest()
+//	{
+//		TypedQuery<DTO> query = entityManager.createNamedQuery(Registro.OBTENER_DATOS_REGISTRO_DTO, DTO.class);
+//		query.setParameter("fechaRegistro", "1999-03-30");
+//		List<DTO> list = query.getResultList();
+//		
+//		Assert.assertEquals(list.get(0).getGenero().getGenero(), "curativas");
+//	}
 
 	/*
 	 * Test para listar todas las personas
