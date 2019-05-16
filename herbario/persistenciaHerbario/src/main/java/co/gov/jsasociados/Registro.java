@@ -17,7 +17,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO, query = "select registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo from Registro registro, IN(registro.planta.genero.plantas) plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro"),
-		@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO_DTO, query = "select new DTO(registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo) from Registro registro INNER JOIN registro.planta.genero.plantas plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro")})
+		@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO_DTO, query = "select new co.gov.jsasociados.DTO(registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo) from Registro registro, IN(registro.planta.genero.plantas) plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro")})
 
 public class Registro implements Serializable {
 	public static final String OBTENER_DATOS_REGISTRO = " obtener datos registro";

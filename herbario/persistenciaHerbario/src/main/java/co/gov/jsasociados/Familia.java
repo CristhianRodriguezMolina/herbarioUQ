@@ -14,10 +14,14 @@ import javax.persistence.*;
  * @author Sergio Osorio
  * @version 1.0 16/04/2019
  */
+@NamedQueries(
+		{@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES, query="select MAX(select COUNT(genero.plantas) from Genero genero where genero.familia.idFamilia=familia.idFamilia) from Familia familia")})
 @Entity
 
 public class Familia implements Serializable {
 
+	public static final String FAMILIA_CON_MAS_ESPECIES = "Familia con mas especies";
+	
 	/**
 	 * clave unica de una familia   
 	 */

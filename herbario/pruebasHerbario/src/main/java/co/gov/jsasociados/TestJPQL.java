@@ -46,6 +46,21 @@ public class TestJPQL {
 
 	}
 
+	 @Test
+		@Transactional(value = TransactionMode.ROLLBACK)
+		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
+			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
+		public void Test() {
+			TypedQuery<Integer> query = entityManager.createNamedQuery(Familia.FAMILIA_CON_MAS_ESPECIES, Integer.class);
+			List<Integer> listaPersona = query.getResultList();
+
+
+			Iterator iterator= listaPersona.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next().toString());
+			}
+		}
+	
 //	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -70,14 +85,14 @@ public class TestJPQL {
 		}
 	}
 	
-	@Test
+//	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void consultaDTOTest()
 	{
 		TypedQuery<DTO> query = entityManager.createNamedQuery(Registro.OBTENER_DATOS_REGISTRO_DTO, DTO.class);
-		query.setParameter("fechaRe34gistro", "1999-03-30 00:00:00.000");
+		query.setParameter("fechaRegistro", "1999-03-30");
 		List<DTO> list = query.getResultList();
 		
 		Assert.assertEquals(list.get(0).getGenero().getGenero(), "curativas");

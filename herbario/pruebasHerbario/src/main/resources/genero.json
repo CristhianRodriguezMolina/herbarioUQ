@@ -14,6 +14,11 @@
 			"genero": "curativas",
 			"idGenero": "genero3",
 			"familia_idfamilia": "familia3"
+		},
+		{
+			"genero": "acuaticas",
+			"idGenero": "genero4",
+			"familia_idfamilia": "familia2"
 		}
 	]
 }

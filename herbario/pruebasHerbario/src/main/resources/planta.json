@@ -24,6 +24,12 @@
 		"idPlanta": "333",
 		"genero_idGenero": "genero3"
 		
+	},
+		{
+		"nombre":"Nenufar",
+		"idPlanta": "686",
+		"genero_idGenero": "genero4"
+		
 	}
 	
 	]
