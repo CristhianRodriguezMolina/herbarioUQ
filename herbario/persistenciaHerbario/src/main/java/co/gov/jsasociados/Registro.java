@@ -16,11 +16,14 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-@NamedQueries({@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO, query = "select registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo from Registro registro, IN(registro.planta.genero.plantas) plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro"),
+@NamedQueries(
+		{@NamedQuery(name = Registro.REGISTRO_FECHA, query = "select registro.numeroRegistro,registro.planta.nombre, registro.planta.genero.genero, registro.persona.correo, registro.persona.cedula from Registro registro where registro.fechaRegistro=:fechaRegistro"),
+		@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO, query = "select registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo from Registro registro, IN(registro.planta.genero.plantas) plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro"),
 		//@NamedQuery(name = Registro.OBTENER_DATOS_REGISTRO_DTO, query = "select new co.gov.jsasociados.DTO(registro.numeroRegistro, registro.planta.genero, plantas, registro.persona.cedula, registro.persona.correo) from Registro registro, IN(registro.planta.genero.plantas) plantas where cast(registro.fechaRegistro as DATETIME)=:fechaRegistro")
 	})
 
 public class Registro implements Serializable {
+	public static final String REGISTRO_FECHA = "obtener datos fecha";
 	public static final String OBTENER_DATOS_REGISTRO = " obtener datos registro";
 	//public static final String OBTENER_DATOS_REGISTRO_DTO = " obtener datos registro DTO";
 

@@ -79,7 +79,7 @@ public class PruebaRecolector {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAceptadas() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ACEPTADAS, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_ACEPTADAS, Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 2);
 	}
@@ -93,7 +93,7 @@ public class PruebaRecolector {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasEnviadas() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ENVIADAS, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_ENVIADAS, Planta.class);
 		query.setParameter("cedula", "127");
 		query.setParameter("aprovacion", 1);
 		List<Planta> listaPlantas = query.getResultList();
@@ -108,7 +108,7 @@ public class PruebaRecolector {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAceptadasPorFamilia() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA,
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA,
 				Planta.class);
 		query.setParameter("familia", "toxocodarmus");
 		List<Planta> listaPlantas = query.getResultList();
@@ -123,7 +123,7 @@ public class PruebaRecolector {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAceptadasPorGenero() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Recolector.LISTAR_PLANTAS_POR_GENERO, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO, Planta.class);
 		query.setParameter("genero", "carnivoras");
 		List<Planta> listaPlantas = query.getResultList();
 		Assert.assertEquals(listaPlantas.size(), 1);

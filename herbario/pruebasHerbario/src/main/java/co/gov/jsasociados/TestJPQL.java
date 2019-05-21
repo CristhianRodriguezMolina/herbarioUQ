@@ -111,7 +111,7 @@ public class TestJPQL {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void devolverCantidadDeFamilias() {
-		TypedQuery<Integer> query = entityManager.createNamedQuery(Administrador.DECIR_CANTIDAD_FAMILIA, Integer.class);
+		TypedQuery<Integer> query = entityManager.createNamedQuery(Familia.DECIR_CANTIDAD_FAMILIA, Integer.class);
 
 		System.out.println("Existen la cantidad de familias " + query.getSingleResult());
 	}
@@ -279,7 +279,7 @@ public class TestJPQL {
 //		"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
 	@UsingDataSet({ "persona.json", "registro.json" })
 	public void listarPlantasAdministradorTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS, Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.get(2).getNombre(), "Buganvilla");
@@ -295,7 +295,7 @@ public class TestJPQL {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_FAMILIA,
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_FAMILIA,
 				Planta.class);
 		query.setParameter("familia", "toxocodarmus");
 		List<Planta> listaPlantas = query.getResultList();

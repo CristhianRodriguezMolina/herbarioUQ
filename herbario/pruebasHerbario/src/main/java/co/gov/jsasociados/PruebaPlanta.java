@@ -5,9 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -75,7 +78,7 @@ public class PruebaPlanta {
 		planta.setGenero(genero);
 		planta.setIdPlanta("666");
 		planta.setNombre("Rubia peregrina");
-		
+
 		entityManager.persist(planta);
 
 		Planta a = entityManager.find(Planta.class, "666");
@@ -261,4 +264,62 @@ public class PruebaPlanta {
 		Assert.assertNull("La familia " + f.getFamilia() + " no existe", entityManager.find(Familia.class, "familia1"));
 	}
 
+	/**
+	 * test para obtener una familia de una planta
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void obtenerFamiliaPlantaTest() {
+
+		TypedQuery<Familia> query = entityManager.createNamedQuery(Planta.OBTENER_FAMILIA_PLANTA, Familia.class);
+		query.setParameter("idPlanta", "851");
+		List<Familia> lista = query.getResultList();
+
+		Assert.assertEquals("familia1", ((Familia) lista.get(0)).getIdFamilia());
+
+		Familia f = ((Familia) lista.get(0));
+	}
+
+	/**
+	 * test para obtener una familia de una planta
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void obtenerPlantasPorGeneroTest() {
+
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Genero.OBTENER_PLANTAS, Planta.class);
+		query.setParameter("idGenero", "genero1");
+		List<Planta> lista = query.getResultList();
+
+		Assert.assertEquals("familia1", lista.get(0).getGenero().getFamilia().getIdFamilia());
+
+		Iterator it = lista.iterator();
+
+		while (it.hasNext()) {
+
+			Object o = it.next();
+
+			System.out.println(o.toString());
+		}
+	}
+
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void FamiliaConMasEspeciesTest() {
+		TypedQuery<Object> query = entityManager.createNamedQuery(Familia.FAMILIA_CON_MAS_ESPECIES_2, Object.class);
+		List<Object> listaFamilia = query.getResultList();
+
+		Assert.assertEquals("familia2", ((Familia) (((Object[]) listaFamilia.get(0))[0])).getIdFamilia());
+		
+		Iterator iterator = listaFamilia.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(((Familia) (((Object[]) iterator.next())[0])).getFamilia());
+		}
+	}
 }

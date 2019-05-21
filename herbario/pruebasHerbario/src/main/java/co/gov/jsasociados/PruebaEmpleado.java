@@ -67,7 +67,7 @@ public class PruebaEmpleado {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAprovadasFromEmpleadoTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_APROVACION, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_APROVACION, Planta.class);
 		query.setParameter("aprovacion", 1);
 		List<Planta> listaPlantas = query.getResultList();
 
@@ -82,7 +82,7 @@ public class PruebaEmpleado {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasPorFamiliaFromEmpleadoTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
 		query.setParameter("familia", "telepiatos");
 		List<Planta> listaPlantas = query.getResultList();
 
@@ -97,7 +97,7 @@ public class PruebaEmpleado {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasPorGeneroFromEmpleadoTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Empleado.LISTAR_PLANTAS_POR_GENERO, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO, Planta.class);
 		query.setParameter("genero", "carnivoras");
 		List<Planta> listaPlantas = query.getResultList();
 

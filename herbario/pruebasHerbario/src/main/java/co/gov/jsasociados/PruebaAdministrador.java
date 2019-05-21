@@ -84,7 +84,7 @@ public class PruebaAdministrador {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasAdministradorTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS, Planta.class);
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS, Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
 
 		Assert.assertEquals(listaPlantas.size(), 4);
@@ -98,7 +98,7 @@ public class PruebaAdministrador {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasFamiliaTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_FAMILIA,
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_FAMILIA,
 				Planta.class);
 		query.setParameter("familia", "xnoramos");
 		List<Planta> listaPlantas = query.getResultList();
@@ -114,7 +114,7 @@ public class PruebaAdministrador {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void ListarplantasPorAprobacion() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_APROVACION,
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_APROVACION,
 				Planta.class);
 		query.setParameter("aprovacion", 1);
 		List<Planta> listaPlantas = query.getResultList();
@@ -129,7 +129,7 @@ public class PruebaAdministrador {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void LisatarRecolectores() {
-		TypedQuery<Recolector> query = entityManager.createNamedQuery(Administrador.LISTAR_RECOLECTORES,
+		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.LISTAR_RECOLECTORES,
 				Recolector.class);
 		List<Recolector> listarecolectores = query.getResultList();
 
@@ -144,7 +144,7 @@ public class PruebaAdministrador {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void ListarEmpleados() {
-		TypedQuery<Empleado> query = entityManager.createNamedQuery(Administrador.LISTAR_EMPLEADOS, Empleado.class);
+		TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.LISTAR_EMPLEADOS, Empleado.class);
 		List<Empleado> listaempleados = query.getResultList();
 
 		Assert.assertEquals(listaempleados.size(), 2);
@@ -159,7 +159,7 @@ public class PruebaAdministrador {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void listarPlantasPorGeneroTest() {
-		TypedQuery<Planta> query = entityManager.createNamedQuery(Administrador.LISTAR_PLANTAS_POR_GENERO,
+		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO,
 				Planta.class);
 		query.setParameter("genero", "curativas");
 		List<Planta> listaPlantas = query.getResultList();
@@ -227,4 +227,6 @@ public class PruebaAdministrador {
 		ad = entityManager.find(Administrador.class, "126");
 		Assert.assertEquals("Alfredo", ad.getNombre());
 	}
+	
+	
 }
