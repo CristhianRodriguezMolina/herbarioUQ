@@ -104,7 +104,7 @@ public class PruebaAdministrador {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS, Planta.class);
 		List<Planta> listaPlantas = query.getResultList();
 
-		Assert.assertEquals(listaPlantas.size(), 4);
+		Assert.assertEquals(listaPlantas.size(), 5);
 	}
 
 	/**
