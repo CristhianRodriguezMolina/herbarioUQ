@@ -75,6 +75,18 @@ public class PruebaRegistro {
 		}
 	}
 	
+//	@Test
+//	@Transactional(value = TransactionMode.ROLLBACK)
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+//			"familia.json", "genero.json", "recolector.json", "planta.json" })
+//	public void obtenerDatosRegistroDTOTest() throws ParseException {
+//		TypedQuery<DTORegistroPersona> query = entityManager.createNamedQuery(Persona.NUMERO_REGISTROS_PERSONA, DTORegistroPersona.class);
+//		List<DTORegistroPersona> list = query.getResultList();
+//
+////		Assert.assertEquals("888", list.get(0).getCedula());
+//		
+//	}
+	
 	/**
 	 * test para obtener datos de registro con DTO
 	 */

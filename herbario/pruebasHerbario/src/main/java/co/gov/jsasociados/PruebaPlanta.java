@@ -50,11 +50,23 @@ public class PruebaPlanta {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
+	/**
+	 * metodo test que permiet saber la cantidad de familias registradas
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void devolverCantidadDeFamilias() {
+		TypedQuery<Integer> query = entityManager.createNamedQuery(Familia.DECIR_CANTIDAD_FAMILIA, Integer.class);
+		System.out.println("Existen la cantidad de familias " + query.getSingleResult());
+	}
+
 
 	/**
 	 * test para persistir una planta (mirar bien esto)
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })

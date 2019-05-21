@@ -17,6 +17,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
+//	@NamedQuery(name = Persona.NUMERO_REGISTROS_PERSONA, query="select new co.gov.jsasociados.DTORegistroPersona(p.cedula, COUNT(r)) from Persona p INNER JOIN p.registro r"),
 	@NamedQuery(name = Persona.OBTENER_POR_USUARIO, query = "select persona from Persona persona where persona.cuenta.usuario=:usuario"),
 	@NamedQuery(name = Persona.LISTAR_TODOS, query = "select p from Persona p"),
 
@@ -29,6 +30,7 @@ public class Persona implements Serializable {
 	//este es el del ejb
 	public static final String OBTENER_POR_USUARIO="Obtener una persona por su usuario registrado";
 	
+//	public static final String NUMERO_REGISTROS_PERSONA = "Numero de registros por persona";
 	public static final String LISTAR_TODOS = "listar personas";
 	public static final String OBTENER_CEDULA_Y_REGISTROS = "obtener cedula y registro";
 	public static final String PERSONA_SIN_REGISTRO= "personas que no han realizado ningun registro";

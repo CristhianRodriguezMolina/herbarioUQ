@@ -91,22 +91,7 @@ public class TestJPQL {
 			}
 	}
 
-	/**
-	 * metodo test para saber que personas no han realizado registros de plantas
-	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
-			"familia.json", "genero.json", "recolector.json", "planta.json" })
-	public void obtenerPersonaSinRegistro() {
-		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_SIN_REGISTRO, Persona.class);
-		List<Persona> listaPersonas = query.getResultList();
-
-		Iterator<Persona> iterator = listaPersonas.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next());
-		}
-	}
+	
 	
 	/**
 	 * metodo test para obtener un DTO con numero de cedula u numero de regostros de una persona y su cantidad de registros relaizados
@@ -125,8 +110,8 @@ public class TestJPQL {
 //		while (iterator.hasNext()) {
 //			System.out.println(iterator.next()+" la qeuda");
 //		}
-		 TypedQuery<DtoRegistroPersona> query = entityManager.createNamedQuery(Persona.DTOREGISTROS, DtoRegistroPersona.class);
-		 List<DtoRegistroPersona> listaPersonas= query.getResultList();
+		 TypedQuery<DTORegistroPersona> query = entityManager.createNamedQuery(Persona.DTOREGISTROS, DTORegistroPersona.class);
+		 List<DTORegistroPersona> listaPersonas= query.getResultList();
 		 System.out.println();
 	}
 	// 1 del 10

@@ -1,5 +1,6 @@
 package co.gov.jsasociados;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,7 +45,23 @@ public class PruebaAdministrador {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
+	/**
+	 * metodo test para saber que personas no han realizado registros de plantas
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void obtenerPersonaSinRegistro() {
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_SIN_REGISTRO, Persona.class);
+		List<Persona> listaPersonas = query.getResultList();
 
+		Iterator<Persona> iterator = listaPersonas.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+	}
+	
 	/**
 	 * Test para listar todos los administradores
 	 */

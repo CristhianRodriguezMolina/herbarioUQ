@@ -4,12 +4,12 @@ package co.gov.jsasociados;
  * DTO que devuelve la cedula y los numero de registros
  *
  */
-public class DtoRegistroPersona {
+public class DTORegistroPersona {
 	
 	private String cedula;
-	private Long numeroRegistros;
+	private int numeroRegistros;
 	
-	public DtoRegistroPersona(String cedula,Long numeroRegistros) {
+	public DTORegistroPersona(String cedula,int numeroRegistros) {
 		super();
 		this.cedula = cedula;
 		this.numeroRegistros = numeroRegistros;
@@ -29,13 +29,13 @@ public class DtoRegistroPersona {
 	/**
 	 * @return the numeroRegistro
 	 */
-	public Long getNumeroRegistro() {
+	public int getNumeroRegistro() {
 		return numeroRegistros;
 	}
 	/**
 	 * @param numeroRegistro the numeroRegistro to set
 	 */
-	public void setNumeroRegistro(Long numeroRegistros) {
+	public void setNumeroRegistro(int numeroRegistros) {
 		this.numeroRegistros = numeroRegistros;
 	}
 	/* (non-Javadoc)
