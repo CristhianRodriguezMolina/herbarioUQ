@@ -78,22 +78,22 @@ public class PruebaRegistro {
 	/**
 	 * test para obtener datos de registro con DTO
 	 */
-	@Test
-	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
-			"familia.json", "genero.json", "recolector.json", "planta.json" })
-	public void obtenerDatosRegistroDTOTest() throws ParseException {
-		TypedQuery<DTODatosFechaRegistro> query = entityManager.createNamedQuery(Registro.DATOS_REGISTRO_FECHA_DTO, DTODatosFechaRegistro.class);
-		query.setParameter("fechaRegistro", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse("1999-03-30 00:00:00.0"));
-		List<DTODatosFechaRegistro> list = query.getResultList();
-
-		Assert.assertEquals("888", list.get(0).getIdRegistro());
-		
-		Iterator it = list.iterator();
-
-		while (it.hasNext()) {
-			
-			System.out.println(list.get(0).toString());
-		}
-	}
+//	@Test
+//	@Transactional(value = TransactionMode.ROLLBACK)
+//	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+//			"familia.json", "genero.json", "recolector.json", "planta.json" })
+//	public void obtenerDatosRegistroDTOTest() throws ParseException {
+//		TypedQuery<DTODatosFechaRegistro> query = entityManager.createNamedQuery(Registro.DATOS_REGISTRO_FECHA_DTO, DTODatosFechaRegistro.class);
+//		query.setParameter("fechaRegistro", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse("1999-03-30 00:00:00.0"));
+//		List<DTODatosFechaRegistro> list = query.getResultList();
+//
+//		Assert.assertEquals("888", list.get(0).getIdRegistro());
+//		
+//		Iterator it = list.iterator();
+//
+//		while (it.hasNext()) {
+//			
+//			System.out.println(list.get(0).toString());
+//		}
+//	}
 }

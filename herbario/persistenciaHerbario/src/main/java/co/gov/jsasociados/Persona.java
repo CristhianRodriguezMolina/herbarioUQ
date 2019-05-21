@@ -23,7 +23,7 @@ import javax.persistence.*;
 		@NamedQuery(name = Persona.OBTENER_CEDULA_Y_REGISTROS, query = "select persona.cedula, registro from Persona persona LEFT JOIN persona.registro registro where persona.cedula =:cedula"),
 		@NamedQuery(name = Persona.PERSONA_SIN_REGISTRO, query = "select persona from Persona persona where persona.registro IS EMPTY"),
 		//@NamedQuery(name = Persona.DTOREGISTROS, query = "select new co.gov.jsasociados.DtoRegistroPersona(persona.cedula, COUNT(registros) ) from JOIN persona.registro resgistros Persona persona where persona.resgistro NOT NULL"),	
-		@NamedQuery(name = Persona.DTOREGISTROS, query = "select new co.gov.jsasociados.DtoRegistroPersona(persona.cedula, COUNT(persona.registro)) from Persona persona ")
+		//@NamedQuery(name = Persona.DTOREGISTROS, query = "select new co.gov.jsasociados.DtoRegistroPersona(persona.cedula, COUNT(persona.registro)) from Persona persona ")
 })
 public class Persona implements Serializable {
 	//este es el del ejb

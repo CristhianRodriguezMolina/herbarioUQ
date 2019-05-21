@@ -76,7 +76,7 @@ public class TestJPQL {
 			}
 	}
 	
-	@Test
+	//@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
@@ -94,7 +94,7 @@ public class TestJPQL {
 	/**
 	 * metodo test para saber que personas no han realizado registros de plantas
 	 */
-	// @Test
+	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })

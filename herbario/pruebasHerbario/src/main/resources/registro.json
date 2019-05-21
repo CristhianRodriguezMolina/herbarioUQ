@@ -14,7 +14,7 @@
 			"persona_cedula": "123",
 			"planta_idplanta": "846"
 		},
-			{
+		{
 			"numeroRegistro": 7123,
 			"aprovacion": -1,
 			"departamento": "Quindio",
@@ -28,7 +28,7 @@
 			"persona_cedula": "125",
 			"planta_idplanta": "851"
 		},
-			{
+		{
 			"numeroRegistro": 498,
 			"aprovacion": 1,
 			"departamento": "Quindio",
@@ -41,7 +41,8 @@
 			"pais": "Colomobia",
 			"persona_cedula": "127",
 			"planta_idplanta": "333"
-		},	{
+		},
+		{
 			"numeroRegistro": 12898,
 			"aprovacion": 0,
 			"departamento": "Quindio",
@@ -52,10 +53,9 @@
 			"lugar": "El rio donde cago yair",
 			"municipio": "Armenia",
 			"pais": "Colomobia",
-			"persona_cedula": "129",
+			"persona_cedula": "128",
 			"planta_idplanta": "546"
 		}
-		
 	]
 }
 
