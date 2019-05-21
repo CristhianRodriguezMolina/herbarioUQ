@@ -1,16 +1,18 @@
 package co.gov.jsasociados;
 
-import java.util.ArrayList;
-
-public class DtoRegistroPersno {
+/**
+ * DTO que devuelve la cedula y los numero de registros
+ *
+ */
+public class DtoRegistroPersona {
 	
 	private String cedula;
-	private ArrayList<Integer> numeroRegistro;
+	private Long numeroRegistros;
 	
-	public DtoRegistroPersno(String cedula, ArrayList<Integer> numeroRegistro) {
+	public DtoRegistroPersona(String cedula,Long numeroRegistros) {
 		super();
 		this.cedula = cedula;
-		this.numeroRegistro = numeroRegistro;
+		this.numeroRegistros = numeroRegistros;
 	}
 	/**
 	 * @return the cedula
@@ -27,21 +29,21 @@ public class DtoRegistroPersno {
 	/**
 	 * @return the numeroRegistro
 	 */
-	public ArrayList<Integer> getNumeroRegistro() {
-		return numeroRegistro;
+	public Long getNumeroRegistro() {
+		return numeroRegistros;
 	}
 	/**
 	 * @param numeroRegistro the numeroRegistro to set
 	 */
-	public void setNumeroRegistro(ArrayList<Integer> numeroRegistro) {
-		this.numeroRegistro = numeroRegistro;
+	public void setNumeroRegistro(Long numeroRegistros) {
+		this.numeroRegistros = numeroRegistros;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "DtoRegistroPersno [cedula=" + cedula + ", numeroRegistro=" + numeroRegistro + "]";
+		return "DtoRegistroPersno [cedula=" + cedula + ", numeroRegistros=" + numeroRegistros + "]";
 	}
 	
 	
