@@ -46,47 +46,76 @@ public class TestJPQL {
 
 	}
 
-	 //@Test
-		@Transactional(value = TransactionMode.ROLLBACK)
-		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
-			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
-		public void Test() {
-			TypedQuery<Integer> query = entityManager.createNamedQuery(Familia.FAMILIA_CON_MAS_ESPECIES, Integer.class);
-			List<Integer> listaPersona = query.getResultList();
+//	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void FamiliaConMasEspecies2Test() {
+		TypedQuery<Object> query = entityManager.createNamedQuery(Familia.FAMILIA_CON_MAS_ESPECIES_2,
+				Object.class);
+		List<Object> listaFamilia = query.getResultList();
 
-
-			Iterator iterator= listaPersona.iterator();
+			Iterator iterator= listaFamilia.iterator();
 			while (iterator.hasNext()) {
-				System.out.println(iterator.next().toString());
+				System.out.println( ( (Familia)( ( (Object[])iterator.next() )[0] ) ).getFamilia() );
 			}
-		}
-	 
+	}
+	
+//	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void FamiliaConMasEspeciesTest() {
+		TypedQuery<Object> query = entityManager.createNamedQuery(Familia.FAMILIA_CON_MAS_ESPECIES,
+				Object.class);
+		List<Object> listaFamilia = query.getResultList();
+
+			Iterator iterator= listaFamilia.iterator();
+			while (iterator.hasNext()) {
+				System.out.println( ( (Familia)( ( (Object[])iterator.next() )[0] ) ).getFamilia() );
+			}
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void Test() {
+		TypedQuery<Object> query = entityManager.createNamedQuery(Familia.TEST,
+				Object.class);
+		List<Object> listaFamilia = query.getResultList();
+
+			Iterator iterator= listaFamilia.iterator();
+			while (iterator.hasNext()) {
+				System.out.println( ( (Object[])iterator.next() )[0].toString() );
+			}
+	}
+
 	// @Test
-		@Transactional(value = TransactionMode.ROLLBACK)
-		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", 
-			"empleado.json", "familia.json", "genero.json", "recolector.json", "planta.json" })
-		public void Test103() {
-			TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_SIN_REGISTRO, Persona.class);
-			List<Persona> listaPersonas = query.getResultList();
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void Test103() {
+		TypedQuery<Persona> query = entityManager.createNamedQuery(Persona.PERSONA_SIN_REGISTRO, Persona.class);
+		List<Persona> listaPersonas = query.getResultList();
 
+		Iterator<Persona> iterator = listaPersonas.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+	}
 
-			Iterator<Persona> iterator= listaPersonas.iterator();
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next());
-			}
-		}
-		//1 del 10
-		@Test
-		@Transactional(value = TransactionMode.ROLLBACK)
-		@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
-				"familia.json", "genero.json", "recolector.json", "planta.json" })
-		public void devolverCantidadDeFamilias() {
-			TypedQuery<Integer> query = entityManager.createNamedQuery(Administrador.DECIR_CANTIDAD_FAMILIA,
-					Integer.class);
-			
-			System.out.println("Existen la cantidad de familias "+query.getSingleResult());
-		}
-	 
+	// 1 del 10
+//		@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void devolverCantidadDeFamilias() {
+		TypedQuery<Integer> query = entityManager.createNamedQuery(Administrador.DECIR_CANTIDAD_FAMILIA, Integer.class);
+
+		System.out.println("Existen la cantidad de familias " + query.getSingleResult());
+	}
+
 //	 //@Test
 //		//no funciona
 //		@Transactional(value = TransactionMode.ROLLBACK)
@@ -102,31 +131,31 @@ public class TestJPQL {
 //				System.out.println(iterator.next());
 //			}
 //		}
-	
+
 //	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public <E> void guia9() {
 		TypedQuery<E> query = (TypedQuery<E>) entityManager.createNamedQuery(Registro.OBTENER_DATOS_REGISTRO);
-			query.setParameter("fechaRegistro", "1999-03-30 00:00:00.000");
+		query.setParameter("fechaRegistro", "1999-03-30 00:00:00.000");
 		List<E> list = query.getResultList();
-				
+
 //		for(Planta p: ((ArrayList<Planta>)list.get(2)))
 //		{
 //			System.out.println(p.toString());
 //		}
-		
+
 		Iterator it = list.iterator();
-		
-		while(it.hasNext()) {
-			
+
+		while (it.hasNext()) {
+
 			Object o = it.next();
-			
+
 			System.out.println(o.toString());
 		}
 	}
-	
+
 //	@Test
 //	@Transactional(value = TransactionMode.ROLLBACK)
 //	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",

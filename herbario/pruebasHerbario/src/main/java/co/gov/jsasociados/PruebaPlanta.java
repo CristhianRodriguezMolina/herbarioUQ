@@ -69,30 +69,13 @@ public class PruebaPlanta {
 		genero.setGenero("Naucleaceae");
 		familia.addGenero(genero);
 
-		entityManager.persist(familia);
+		entityManager.persist(genero);
 
 		Planta planta = new Planta();
-
-		try {
-			planta.setGenero(genero);
-			planta.setIdPlanta("666");
-			planta.setNombre("Rubia peregrina");
-			File f = new File(
-					"C:\\Users\\Rodriguez\\Documents\\GitHub\\herbarioUQ\\herbario\\pruebasHerbario\\src\\main\\resources\\imagenes\\YoSoyIronMan.png"); // asociamos
-																																							// el
-																																							// archivo
-																																							// fisico
-			InputStream is = new FileInputStream(f);
-			byte[] buffer = new byte[(int) f.length()]; // creamos el buffer
-			int readers = is.read(buffer); // leemos el archivo al buffer
-//			planta.setImagen(buffer); //lo guardamos en la entidad
-			entityManager.persist(planta); // y lo colocamos en el EntityManager
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		planta.setGenero(genero);
+		planta.setIdPlanta("666");
+		planta.setNombre("Rubia peregrina");
+		
 		entityManager.persist(planta);
 
 		Planta a = entityManager.find(Planta.class, "666");

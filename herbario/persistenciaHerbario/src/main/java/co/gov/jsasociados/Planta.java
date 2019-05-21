@@ -14,11 +14,25 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-	@NamedQuery(name = Planta.OBTENER_FAMILIA_PLANTA, query="select planta.genero.familia from Planta planta where planta.idPlanta=:idPlanta")
+	@NamedQuery(name = Planta.OBTENER_FAMILIA_PLANTA, query="select planta.genero.familia from Planta planta where planta.idPlanta=:idPlanta"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS, query = "select planta from Planta planta"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS_POR_APROVACION, query = "select DISTINCT registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.familia=:familia"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS_POR_GENERO, query = "select planta from Planta planta where planta.genero.genero=:genero"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS_ACEPTADAS, query = "select registro.planta from Registro registro where registro.aprovacion= 1"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS_ENVIADAS, query = "select registro.planta from Registro registro where registro.persona.cedula=:cedula and registro.aprovacion=:aprovacion"),
+	@NamedQuery(name = Planta.LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.familia=:familia and planta.registro.aprovacion= 1")
 })
 public class Planta implements Serializable {
 	
 	public static final String OBTENER_FAMILIA_PLANTA="obnter familia planta";
+	public static final String LISTAR_PLANTAS = "listar Plantas";
+	public static final String LISTAR_PLANTAS_POR_APROVACION = "listar Plantas por aprovacion";
+	public static final String LISTAR_PLANTAS_POR_FAMILIA = "listar Plantas por familia desde administrador";
+	public static final String LISTAR_PLANTAS_POR_GENERO = "listar Plantas por genero desde administrador";
+	public static final String LISTAR_PLANTAS_ACEPTADAS = "listar plantas aceptadas";
+	public static final String LISTAR_PLANTAS_ENVIADAS = "listar plantas enviadas";
+	public static final String LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA = "listar plantas aceptadas por familia";
 	/*
 	 * id unico de la Planta
 	 */	

@@ -15,12 +15,18 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @NamedQueries(
-		{@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES, query="select MAX(select COUNT(genero.plantas) from Genero genero where genero.familia.idFamilia=familia.idFamilia) from Familia familia")})
+		{@NamedQuery(name=Familia.TEST, query="select AVG(COUNT(g)), COUNT(g) from Familia f INNER JOIN f.generos g"),
+		@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES, query="select familia, COUNT(p) from Familia Familia, Genero g INNER JOIN g.plantas p where g.familia.idFamilia = familia.idFamilia"),
+		@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES_2, query="select familia, MAX(select COUNT(genero.plantas) from Genero genero where genero.familia.idFamilia=familia.idFamilia) from Familia familia"),		 
+		@NamedQuery(name = Familia.DECIR_CANTIDAD_FAMILIA, query = "select count(familia) from Familia familia")})
 @Entity
 
 public class Familia implements Serializable {
 
+	static final String DECIR_CANTIDAD_FAMILIA="Dice la cantidad de familias registradas";
+	public static final String FAMILIA_CON_MAS_ESPECIES_2 = "Familia con mas especies 2";
 	public static final String FAMILIA_CON_MAS_ESPECIES = "Familia con mas especies";
+	public static final String TEST = "Test";
 	
 	/**
 	 * clave unica de una familia   
