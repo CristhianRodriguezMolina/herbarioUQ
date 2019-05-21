@@ -7,9 +7,9 @@ package co.gov.jsasociados;
 public class DTORegistroPersona {
 	
 	private String cedula;
-	private int numeroRegistros;
+	private String numeroRegistros;
 	
-	public DTORegistroPersona(String cedula,int numeroRegistros) {
+	public DTORegistroPersona(String cedula,String numeroRegistros) {
 		super();
 		this.cedula = cedula;
 		this.numeroRegistros = numeroRegistros;
@@ -29,13 +29,13 @@ public class DTORegistroPersona {
 	/**
 	 * @return the numeroRegistro
 	 */
-	public int getNumeroRegistro() {
+	public String getNumeroRegistro() {
 		return numeroRegistros;
 	}
 	/**
 	 * @param numeroRegistro the numeroRegistro to set
 	 */
-	public void setNumeroRegistro(int numeroRegistros) {
+	public void setNumeroRegistro(String numeroRegistros) {
 		this.numeroRegistros = numeroRegistros;
 	}
 	/* (non-Javadoc)
