@@ -190,4 +190,16 @@ public class PruebaRecolector {
 		ad = entityManager.find(Recolector.class, "129");
 		Assert.assertEquals("Alfredo", ad.getNombre());
 	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void obtenerRecolectoresConRegistroTest() {
+
+		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.LISTAR_RECOLECTORES_CON_REGISTROS, Recolector.class);
+		List<Recolector> lista = query.getResultList();
+
+		Assert.assertEquals("129", lista.get(0).getCedula());
+	}
 }

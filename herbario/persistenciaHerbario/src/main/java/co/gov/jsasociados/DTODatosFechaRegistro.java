@@ -2,18 +2,18 @@ package co.gov.jsasociados;
 
 import java.util.ArrayList;
 
-public class DTO  {
+public class DTODatosFechaRegistro  {
 	
 	private Integer idRegistro;
 	private Genero genero;
-	private ArrayList<Planta> plantas;
+	private Planta planta;
 	private String cedulaPersona, correoPersona;
 	
-	public DTO(Integer idRegistro, Genero genero, ArrayList<Planta> plantas, String cedulaPersona, String correoPersona)
+	public DTODatosFechaRegistro(Integer idRegistro, Genero genero, Planta planta, String cedulaPersona, String correoPersona)
 	{
 		this.idRegistro = idRegistro;
 		this.genero = genero;
-		this.plantas = plantas;
+		this.planta = planta;
 		this.cedulaPersona = cedulaPersona;
 		this.correoPersona = correoPersona;
 	}
@@ -34,12 +34,12 @@ public class DTO  {
 		this.genero = genero;
 	}
 
-	public ArrayList<Planta> getPlantas() {
-		return plantas;
+	public Planta getPlanta() {
+		return planta;
 	}
 
-	public void setPlantas(ArrayList<Planta> plantas) {
-		this.plantas = plantas;
+	public void setPlanta(Planta planta) {
+		this.planta = planta;
 	}
 
 	public String getCedulaPersona() {

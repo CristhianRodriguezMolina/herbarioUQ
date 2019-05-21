@@ -137,7 +137,7 @@ public class TestJPQL {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public <E> void guia9() {
-		TypedQuery<E> query = (TypedQuery<E>) entityManager.createNamedQuery(Registro.OBTENER_DATOS_REGISTRO);
+		TypedQuery<E> query = (TypedQuery<E>) entityManager.createNamedQuery(Registro.DATOS_REGISTRO_FECHA);
 		query.setParameter("fechaRegistro", "1999-03-30 00:00:00.000");
 		List<E> list = query.getResultList();
 

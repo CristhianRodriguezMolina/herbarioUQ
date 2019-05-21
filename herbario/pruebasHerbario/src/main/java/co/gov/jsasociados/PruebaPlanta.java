@@ -307,6 +307,9 @@ public class PruebaPlanta {
 		}
 	}
 
+	/**
+	 * test para obtener la familia con mas plantas
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
