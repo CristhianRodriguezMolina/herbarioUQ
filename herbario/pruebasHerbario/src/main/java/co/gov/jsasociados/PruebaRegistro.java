@@ -83,7 +83,7 @@ public class PruebaRegistro {
 //		TypedQuery<DTORegistroPersona> query = entityManager.createNamedQuery(Persona.NUMERO_REGISTROS_PERSONA, DTORegistroPersona.class);
 //		List<DTORegistroPersona> list = query.getResultList();
 //
-////		Assert.assertEquals("888", list.get(0).getCedula());
+//		Assert.assertEquals("888", list.get(0).getCedula());
 //		
 //	}
 	
