@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = Recolector.BUSCAR_POR_ID, query = "select recolector from Recolector recolector where recolector.cedula=:cedula"),
 		@NamedQuery(name = Recolector.LISTAR_RECOLECTORES, query = "select recolector from Recolector recolector"),
-		@NamedQuery(name = Recolector.LISTAR_RECOLECTORES_CON_REGISTROS, query = "select DISTINCT registro.persona from Registro registro")})
+		@NamedQuery(name = Recolector.LISTAR_RECOLECTORES_CON_REGISTROS, query = "select DISTINCT recolector from Recolector recolector, Registro registro INNER JOIN recolector.registro registros group by recolector having COUNT(registros)>0")})
 public class Recolector extends Persona implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,5 +27,4 @@ public class Recolector extends Persona implements Serializable {
 	public Recolector() {
 		super();
 	}
-
 }

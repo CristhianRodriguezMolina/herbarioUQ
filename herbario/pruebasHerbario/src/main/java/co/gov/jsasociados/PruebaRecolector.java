@@ -126,7 +126,7 @@ public class PruebaRecolector {
 		TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO, Planta.class);
 		query.setParameter("genero", "carnivoras");
 		List<Planta> listaPlantas = query.getResultList();
-		Assert.assertEquals(listaPlantas.size(), 1);
+		Assert.assertEquals(listaPlantas.size(), 2);
 
 	}
 
@@ -200,6 +200,6 @@ public class PruebaRecolector {
 		TypedQuery<Recolector> query = entityManager.createNamedQuery(Recolector.LISTAR_RECOLECTORES_CON_REGISTROS, Recolector.class);
 		List<Recolector> lista = query.getResultList();
 
-		Assert.assertEquals("129", lista.get(0).getCedula());
+		Assert.assertEquals(1, lista.size());
 	}
 }

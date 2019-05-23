@@ -103,7 +103,7 @@ public class PruebaEmpleado {
 		query.setParameter("familia", "telepiatos");
 		List<Planta> listaPlantas = query.getResultList();
 
-		Assert.assertEquals(listaPlantas.size(), 2);
+		Assert.assertEquals(listaPlantas.size(), 3);
 	}
 
 	/**
