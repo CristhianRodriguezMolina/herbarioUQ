@@ -11,19 +11,20 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.gov.jsasociados.ejb.AdminEJB;
+import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
+import co.gov.jsasocioados.exeption.TipoClaseException;
 
 @RunWith(Arquillian.class)
 public class TestAdminEJB {
 	/**
 	 * instancia para realizar ejecutar las operaciones de negocio para admin
 	 */
-	// @EJB
+	@EJB
 	private AdminEJB adminEJB;
 
 	/**
@@ -39,6 +40,9 @@ public class TestAdminEJB {
 
 	}
 
+	/**
+	 * metodo test para agregar un empleado
+	 */
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
@@ -46,7 +50,7 @@ public class TestAdminEJB {
 	public void insertarEmpleadoTest() {
 		Empleado empleado = new Empleado();
 		empleado.setApellidos("Mariskos");
-		empleado.setCedula("123");
+		empleado.setCedula("12355");
 		empleado.setNombre("Mayoneso");
 		empleado.setTelefono("31131312");
 		empleado.setCorreo("sodmadaodja");
@@ -63,5 +67,170 @@ public class TestAdminEJB {
 			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
 		}
 
+	}
+
+	/**
+	 * metodo test para eliminar un empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarEmpladoTest() {
+		try {
+			adminEJB.eliminarEmpleado("126");
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	/**
+	 * metodo test para modificar los datos de un empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarEmpleadoTest() {
+
+		try {
+			adminEJB.modificarEmpleado("Carlos Antonio", "Agudelo", "310255545", "caa@mail.com", "por ahi", "125");
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	/**
+	 * metodo test para listar los empleados
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void listarEmpleadoTest() {
+
+		try {
+			adminEJB.listarEmpleados();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	/**
+	 * metodo test para buscar en empleado
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void buscarEmpleadoTest() {
+
+		try {
+			adminEJB.buscarEmpleado("128");
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	// test para recolectores
+
+	/**
+	 * metodo test para agregar un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void insertarRecolecotorTest() {
+		Recolector recolector = new Recolector();
+		recolector.setApellidos("Mariskos");
+		recolector.setCedula("123455");
+		recolector.setNombre("Mayoneso");
+		recolector.setTelefono("31131312");
+		recolector.setCorreo("sodmadaodja");
+
+		Cuenta cuenta = new Cuenta();
+		cuenta.setContrasenia("123");
+		cuenta.setUsuario("123");
+
+		cuenta.setPersona(recolector);
+		recolector.setCuenta(cuenta);
+		try {
+			adminEJB.insertarRecolector(recolector);
+		} catch (Exception e) {
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+
+	}
+
+	/**
+	 * metodo test para eliminar un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void eliminarRecolectorTest() {
+		try {
+			adminEJB.eliminarRecolector("129");
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	/**
+	 * metodo test para modificar los datos de un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void modificarRecolectorTest() {
+
+		try {
+			adminEJB.modificarRecolector("Carlos Antonio", "Agudelo", "310255545", "caa@mail.com", "por ahi", "129");
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	/**
+	 * metodo test para listar los recolectores
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void listarRecolectoresTest() {
+
+		try {
+			adminEJB.listarRecolectores();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
+	}
+
+	/**
+	 * metodo test para buscar un recolector
+	 */
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
+			"familia.json", "genero.json", "recolector.json", "planta.json" })
+	public void buscarRecolectorTest() {
+
+		try {
+			adminEJB.buscarRecolector("129");
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+		}
 	}
 }
