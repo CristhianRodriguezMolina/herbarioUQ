@@ -28,7 +28,7 @@ public class TestAdminEJB {
 	private AdminEJB adminEJB;
 
 	/**
-	 * general el archivo de depliegue de pruebas
+	 * general el archivo de depliegue de pruebas is
 	 * 
 	 * @return genera un archivo de configuracion web
 	 */
