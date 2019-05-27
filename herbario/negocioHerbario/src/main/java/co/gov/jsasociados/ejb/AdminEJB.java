@@ -1,7 +1,5 @@
 package co.gov.jsasociados.ejb;
 
-import java.security.Permissions;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
