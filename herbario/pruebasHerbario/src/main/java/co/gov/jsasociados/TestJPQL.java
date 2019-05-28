@@ -81,7 +81,7 @@ public class TestJPQL {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void Test() {
-		TypedQuery<Object> query = entityManager.createNamedQuery(Familia.TEST,
+		TypedQuery<Object> query = entityManager.createNamedQuery(Familia.OBTENER_POR_ID,
 				Object.class);
 		List<Object> listaFamilia = query.getResultList();
 

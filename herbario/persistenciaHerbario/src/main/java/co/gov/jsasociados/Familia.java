@@ -15,7 +15,9 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @NamedQueries(
-		{@NamedQuery(name=Familia.TEST, query="select AVG(COUNT(g)), COUNT(g) from Familia f INNER JOIN f.generos g"),
+		{@NamedQuery(name=Familia.LISTAR_FAMILIAS, query="select f from Familia f"),
+		@NamedQuery(name=Familia.OBTENER_POR_NOMBRE, query="select f from Familia f where f.idFamilia=:familia"),
+		@NamedQuery(name=Familia.OBTENER_POR_ID, query="select f from Familia f where f.familia=:nombre"),
 		@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES, query="select familia, COUNT(p) from Familia Familia, Genero g INNER JOIN g.plantas p where g.familia.idFamilia = familia.idFamilia"),
 		@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES_2, query="select familia, MAX(select COUNT(genero.plantas) from Genero genero where genero.familia.idFamilia=familia.idFamilia) from Familia familia"),		 
 		@NamedQuery(name = Familia.DECIR_CANTIDAD_FAMILIA, query = "select count(familia) from Familia familia")})
@@ -26,7 +28,9 @@ public class Familia implements Serializable {
 	static final String DECIR_CANTIDAD_FAMILIA="Dice la cantidad de familias registradas";
 	public static final String FAMILIA_CON_MAS_ESPECIES_2 = "Familia con mas especies 2";
 	public static final String FAMILIA_CON_MAS_ESPECIES = "Familia con mas especies";
-	public static final String TEST = "Test";
+	public static final String OBTENER_POR_ID = "Obtener familia por id";
+	public static final String OBTENER_POR_NOMBRE = "Obtener familia por nombre";
+	public static final String LISTAR_FAMILIAS = "Listar familias";
 	
 	/**
 	 * clave unica de una familia   

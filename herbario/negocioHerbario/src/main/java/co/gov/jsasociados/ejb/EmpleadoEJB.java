@@ -10,9 +10,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
+import co.gov.jsasocioados.exeption.FamiliaYaRegistrada;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -36,6 +38,95 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
     	
     }
 
+    /*
+     * (non-Javadoc)
+     * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#insertarFamilia(co.gov.jsasociados.Familia)
+     */
+    public Familia insertarFamilia(Familia familia)
+			throws ElementoRepetidoException, FamiliaYaRegistrada {
+		if (entityManager.find(Familia.class, familia.getIdFamilia()) != null) {
+			throw new FamiliaYaRegistrada("La familia con ese id ya se encuentra agregada");
+		} else if (buscarFamiliaPorNombre(familia.getFamilia()) != null) {
+			throw new ElementoRepetidoException("La familia con ese nombre ya esta registrada");
+		}
+		try {
+			entityManager.persist(familia);
+			return familia;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+    
+    /*
+     * (non-Javadoc)
+     * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#eliminarFamilia(java.lang.String)
+     */
+    public boolean eliminarFamilia(String idFamilia) throws FamiliaYaRegistrada {
+		if ((entityManager.find(Familia.class, idFamilia)) == null){
+			throw new FamiliaYaRegistrada("La familia a eliminiar no se encuentra registrada");
+		}
+		try {
+			entityManager.remove(entityManager.find(Familia.class, idFamilia));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+    
+    /*
+     * (non-Javadoc)
+     * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#modificarFamilia(java.lang.String, java.lang.String)
+     */
+    public Familia modificarFamilia(String nombre, String idFamilia) throws FamiliaYaRegistrada {
+		Familia familia = entityManager.find(Familia.class, idFamilia);
+		if (familia == null) {
+			throw new FamiliaYaRegistrada("La familia a la que quiere modificar los datos no esta registrada");
+		}
+
+		// Esto previamente por interfaz debe de estar validado para que no este vacio
+		familia.setFamilia(nombre == ""? familia.getFamilia():nombre);
+		familia.setIdFamilia(idFamilia == ""? familia.getIdFamilia():idFamilia);
+
+		try {
+			entityManager.merge(familia);
+			return (Familia) familia;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+    
+    /*
+     * (non-Javadoc)
+     * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#listarFamilias()
+     */
+    public List<Familia> listarFamilias() throws Exception {
+		try {
+			TypedQuery<Familia> query = entityManager.createNamedQuery(Familia.LISTAR_FAMILIAS,
+					Familia.class);
+			List<Familia> familias = query.getResultList();
+			return familias;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+    
+    /**
+     * Metodo para buscar una familia por su nombre 
+     * @param nombreFamilia nombre de la familia a buscar
+     * @return la familia si se encontro o null de lo contrario
+     */
+    private Familia buscarFamiliaPorNombre(String nombreFamilia) {
+		try {
+			TypedQuery<Familia> familia = entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
+			familia.setParameter("nombre", nombreFamilia);
+			return (Familia) familia.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+
+	}
    
     /*
      * (non-Javadoc)

@@ -4,14 +4,47 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
+import co.gov.jsasocioados.exeption.FamiliaYaRegistrada;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
 @Remote
 public interface EmpleadoEJBRemote {
 
+	/**
+	 * Metodo para insertar una familia a la base de datos
+	 * @param familia
+	 * @return la familia si se inserto o null de lo contrario
+	 */
+	public Familia insertarFamilia(Familia familia)throws ElementoRepetidoException, FamiliaYaRegistrada;	
+
+	/**
+	 * Metodo para eliminar una familia por id
+	 * @param idFamilia
+	 * @return True si se elimino correctamente la familia y False de lo contrario
+	 * @throws FamiliaYaRegistrada
+	 */
+    public boolean eliminarFamilia(String idFamilia) throws FamiliaYaRegistrada;
+    
+    /**
+     * metodo para modificar una familia
+     * @param nombre
+     * @param idFamilia
+     * @return la familia modificada o null si no encontro familia
+     * @throws FamiliaYaRegistrada
+     */
+    public Familia modificarFamilia(String nombre, String idFamilia) throws FamiliaYaRegistrada;
+    
+    /**
+     * metodo para listar las familias
+     * @return la lista de familias
+     * @throws Exception
+     */
+    public List<Familia> listarFamilias() throws Exception;
+    
 	 /**
      * Metodo para insertar un recolector a la base de datos
      * @param empleado
@@ -30,7 +63,7 @@ public interface EmpleadoEJBRemote {
      * @throws TipoClaseException
      */
     public boolean eliminarRecolector(String cedula) throws PersonaNoRegistradaException, TipoClaseException;
-    
+        
     /**
      * metodo para modificar un recolector
      * @param nombre
