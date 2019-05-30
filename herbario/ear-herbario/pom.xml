@@ -20,5 +20,11 @@
   		<artifactId>persistenciaHerbario</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>co.gov.jsasociados</groupId>
+  		<artifactId>webHerbario</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<type>war</type>
+  	</dependency>
   </dependencies>
 </project>

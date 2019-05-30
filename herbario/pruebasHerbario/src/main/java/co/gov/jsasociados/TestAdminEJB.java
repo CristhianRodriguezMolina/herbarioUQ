@@ -24,7 +24,7 @@ public class TestAdminEJB {
 	/**
 	 * instancia para realizar ejecutar las operaciones de negocio para admin
 	 */
-	//@EJB
+	@EJB
 	private AdminEJB adminEJB;
 
 	/**
