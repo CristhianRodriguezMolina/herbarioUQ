@@ -1,4 +1,4 @@
-package co.gov.jsasociados;
+package co.gov.jsasociados.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;

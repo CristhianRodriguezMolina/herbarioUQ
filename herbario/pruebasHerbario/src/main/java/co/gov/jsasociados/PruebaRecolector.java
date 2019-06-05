@@ -19,6 +19,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.gov.jsasociados.entidades.Administrador;
+import co.gov.jsasociados.entidades.Cuenta;
+import co.gov.jsasociados.entidades.Persona;
+import co.gov.jsasociados.entidades.Planta;
+import co.gov.jsasociados.entidades.Recolector;
+
 /**
  * Clase que permite relizar los test de planta
  * 

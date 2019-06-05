@@ -27,6 +27,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.gov.jsasociados.entidades.Persona;
+import co.gov.jsasociados.entidades.Registro;
+
 /**
  * Clase que permite relizar los test de planta
  * 

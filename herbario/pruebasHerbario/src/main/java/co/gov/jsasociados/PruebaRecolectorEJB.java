@@ -18,6 +18,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.gov.jsasociados.ejb.RecolectorEJB;
+import co.gov.jsasociados.entidades.Cuenta;
+import co.gov.jsasociados.entidades.Familia;
+import co.gov.jsasociados.entidades.Genero;
+import co.gov.jsasociados.entidades.Persona;
+import co.gov.jsasociados.entidades.Planta;
+import co.gov.jsasociados.entidades.Recolector;
+import co.gov.jsasociados.entidades.Registro;
 import co.gov.jsasocioados.exeption.ElementoNoExiste;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;

@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import co.gov.jsasociados.Planta;
-import co.gov.jsasociados.Recolector;
-import co.gov.jsasociados.Registro;
+import co.gov.jsasociados.entidades.Planta;
+import co.gov.jsasociados.entidades.Recolector;
+import co.gov.jsasociados.entidades.Registro;
 import co.gov.jsasocioados.exeption.ElementoNoExiste;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;

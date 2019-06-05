@@ -10,8 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import co.gov.jsasociados.Administrador;
-import co.gov.jsasociados.Cuenta;
+import co.gov.jsasociados.entidades.Administrador;
+import co.gov.jsasociados.entidades.Cuenta;
 
 /**
  * Se encarga de verificar la configuracion por defecto

@@ -1,4 +1,4 @@
-package co.gov.jsasociados;
+package co.gov.jsasociados.entidades;
 
 /**
  * DTO que devuelve la cedula y los numero de registros
