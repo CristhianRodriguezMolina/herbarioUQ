@@ -25,10 +25,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.gov.jsasociados.entidades.Familia;
-import co.gov.jsasociados.entidades.Genero;
-import co.gov.jsasociados.entidades.Persona;
-import co.gov.jsasociados.entidades.Planta;
+import co.gov.jsasociados.Familia;
+import co.gov.jsasociados.Genero;
+import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.Planta;
 
 /**
  * Clase que permite relizar los test de planta

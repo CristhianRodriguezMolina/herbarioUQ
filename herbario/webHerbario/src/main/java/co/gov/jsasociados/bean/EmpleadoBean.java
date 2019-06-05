@@ -7,9 +7,9 @@ import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
 import javax.inject.Named;
 
+import co.gov.jsasociados.Cuenta;
+import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.ejb.AdminEJB;
-import co.gov.jsasociados.entidades.Cuenta;
-import co.gov.jsasociados.entidades.Empleado;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.util.Util;

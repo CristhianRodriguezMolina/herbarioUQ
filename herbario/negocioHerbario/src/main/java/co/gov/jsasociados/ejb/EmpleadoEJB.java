@@ -9,10 +9,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import co.gov.jsasociados.entidades.Empleado;
-import co.gov.jsasociados.entidades.Familia;
-import co.gov.jsasociados.entidades.Persona;
-import co.gov.jsasociados.entidades.Recolector;
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Familia;
+import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistrada;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;

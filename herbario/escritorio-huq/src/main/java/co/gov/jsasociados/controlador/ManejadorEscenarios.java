@@ -2,9 +2,9 @@ package co.gov.jsasociados.controlador;
 
 import java.io.IOException;
 
-import co.gov.jsasociados.Main;
-import co.gov.jsasociados.entidades.Empleado;
-import co.gov.jsasociados.entidades.Persona;
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.main.Main;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
 import co.gov.jsasociados.modelo.EmpleadoObservable;
 import javafx.collections.FXCollections;

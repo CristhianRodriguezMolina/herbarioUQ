@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import co.gov.jsasociados.entidades.Empleado;
-import co.gov.jsasociados.entidades.Recolector;
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;

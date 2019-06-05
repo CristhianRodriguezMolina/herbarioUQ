@@ -1,7 +1,7 @@
 /**
  * 
  */
-package co.edu.uniquindio.grid.excesiones;
+package co.gov.jsasocioados.exeption;
 
 /**
  * Se lanza cuando no se encuentra algun elemento en la basa de datos

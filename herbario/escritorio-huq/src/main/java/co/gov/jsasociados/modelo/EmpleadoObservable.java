@@ -2,8 +2,8 @@ package co.gov.jsasociados.modelo;
 
 import java.util.Date;
 
-import co.gov.jsasociados.entidades.Empleado;
-import co.gov.jsasociados.entidades.Persona;
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Persona;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

@@ -1,4 +1,4 @@
-package co.gov.jsasociados;
+package co.gov.jsasociados.main;
 
 import co.gov.jsasociados.controlador.ManejadorEscenarios;
 import javafx.application.Application;

@@ -21,8 +21,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import co.gov.jsasociados.entidades.Comentario;
-import co.gov.jsasociados.entidades.Persona;
+import co.gov.jsasociados.Comentario;
+import co.gov.jsasociados.Persona;
 
 /**
  * Clase que permite relizar los test de comentarios

@@ -5,10 +5,10 @@
         <dependent-module archiveName="negocioHerbario.jar" deploy-path="/" handle="module:/resource/negocioHerbario/negocioHerbario">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="persistenciaHerbario.jar" deploy-path="/lib" handle="module:/resource/persistenciaHerbario/persistenciaHerbario">
+        <dependent-module archiveName="webHerbario.war" deploy-path="/" handle="module:/resource/webHerbario/webHerbario">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="webHerbario.war" deploy-path="/" handle="module:/resource/webHerbario/webHerbario">
+        <dependent-module archiveName="persistenciaHerbario.jar" deploy-path="/lib" handle="module:/resource/persistenciaHerbario/persistenciaHerbario">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>

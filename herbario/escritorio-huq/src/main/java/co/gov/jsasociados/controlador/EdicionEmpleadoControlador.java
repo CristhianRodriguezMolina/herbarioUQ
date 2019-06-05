@@ -1,6 +1,6 @@
 package co.gov.jsasociados.controlador;
 
-import co.gov.jsasociados.entidades.Empleado;
+import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.modelo.EmpleadoObservable;
 import co.gov.jsasociados.util.Utilidades;
 import javafx.fxml.FXML;

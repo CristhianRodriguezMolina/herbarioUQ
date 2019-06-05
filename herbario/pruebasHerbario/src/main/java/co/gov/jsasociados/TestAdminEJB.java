@@ -15,11 +15,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import co.gov.jsasociados.Cuenta;
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.Recolector;
 import co.gov.jsasociados.ejb.AdminEJB;
-import co.gov.jsasociados.entidades.Cuenta;
-import co.gov.jsasociados.entidades.Empleado;
-import co.gov.jsasociados.entidades.Persona;
-import co.gov.jsasociados.entidades.Recolector;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 

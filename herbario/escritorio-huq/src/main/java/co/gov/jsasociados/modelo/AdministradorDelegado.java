@@ -8,9 +8,9 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.ejb.AdminEJBRemote;
-import co.gov.jsasociados.entidades.Empleado;
-import co.gov.jsasociados.entidades.Persona;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
