@@ -1,4 +1,4 @@
-package co.gov.jsasociados;
+package co.gov.jsasociados.bean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;

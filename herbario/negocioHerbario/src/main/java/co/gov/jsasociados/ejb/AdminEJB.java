@@ -50,10 +50,12 @@ public class AdminEJB implements AdminEJBRemote {
 			throw new ElementoRepetidoException("La persona con el usuario ya esta registrada");
 		}
 		try {
+			entityManager.persist(empleado.getCuenta());
 			entityManager.persist(empleado);
 			return empleado;
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("TEfadasfafas");
 			return null;
 		}
 	}
