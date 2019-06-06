@@ -3,12 +3,13 @@ package co.gov.jsasociados.controlador;
 import java.io.IOException;
 
 import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Main;
 import co.gov.jsasociados.Persona;
-import co.gov.jsasociados.main.Main;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
 import co.gov.jsasociados.modelo.EmpleadoObservable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -30,6 +31,7 @@ public class ManejadorEscenarios {
 	/**
 	 * tipo de panel inicial
 	 */
+	@FXML
 	private BorderPane bordePanel;
 	/**
 	 * para almacenar empleados observables
@@ -49,16 +51,16 @@ public class ManejadorEscenarios {
 
 		this.escenario = escenario;
 
-		administradorDelegado = AdministradorDelegado.administradorDelegado;
-		empleadosObservables = FXCollections.observableArrayList();
+//		administradorDelegado = AdministradorDelegado.administradorDelegado;
+//		empleadosObservables = FXCollections.observableArrayList();
 
 		try {
 			// se inicializa el escenario
-			escenario.setTitle("Balotera");
+			escenario.setTitle("Herbario");
 
 			// se carga la vista
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/inicio.fxml"));
+			loader.setLocation(Main.class.getResource("./vista/principal.fxml"));
 
 			bordePanel = (BorderPane) loader.load();
 
@@ -67,13 +69,14 @@ public class ManejadorEscenarios {
 			escenario.setScene(scene);
 			escenario.show();
 
-			cargarEscena();
+//			cargarEscena();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+	
 
 	/**
 	 * carga una escena en el centro del escenario
@@ -86,7 +89,7 @@ public class ManejadorEscenarios {
 			empleadosObservables = administradorDelegado.listarEmpleadosObservables();
 
 			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(Main.class.getResource("vista/detalle_empleado.fxml"));
+			loader2.setLocation(Main.class.getResource("./vista/detalle_empleado.fxml"));
 			AnchorPane panelAncho = (AnchorPane) loader2.load();
 			bordePanel.setCenter(panelAncho);
 
@@ -108,7 +111,7 @@ public class ManejadorEscenarios {
 
 			// se carga la interfaz
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("./vista/editar_empleado.fxml"));
+			loader.setLocation(Main.class.getResource("/vista/editar_empleado.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// se crea el escenario

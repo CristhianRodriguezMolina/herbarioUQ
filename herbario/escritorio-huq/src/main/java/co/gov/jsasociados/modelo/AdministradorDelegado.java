@@ -3,6 +3,7 @@
  */
 package co.gov.jsasociados.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -12,6 +13,8 @@ import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.ejb.AdminEJBRemote;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
+import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
+import co.gov.jsasocioados.exeption.TipoClaseException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -40,7 +43,7 @@ public class AdministradorDelegado {
 			adminEJB = (AdminEJBRemote) new InitialContext().lookup(AdminEJBRemote.JNDI);
 		} catch (NamingException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 
 	/**
@@ -83,7 +86,7 @@ public class AdministradorDelegado {
 			return adminEJB.listarEmpleados();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return new ArrayList<Empleado>();
 		}
 	}
 
@@ -94,9 +97,12 @@ public class AdministradorDelegado {
 	 */
 	public boolean eliminarEmpleado(Empleado empleado) {
 		try {
-			return adminEJB.eliminarEmpleado(empleado.getCedula()) != null;
-		} catch (ElementoNoEncontradoException e) {
+			return adminEJB.eliminarEmpleado(empleado.getCedula());
+		} catch (PersonaNoRegistradaException e) {
 			e.printStackTrace();
+			return false;
+		}catch (TipoClaseException e1) {
+			e1.printStackTrace();
 			return false;
 		}
 	}

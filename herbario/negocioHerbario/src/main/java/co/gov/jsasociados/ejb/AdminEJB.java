@@ -1,5 +1,6 @@
 package co.gov.jsasociados.ejb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -206,9 +207,8 @@ public class AdminEJB implements AdminEJBRemote {
 			TypedQuery<Empleado> query = entityManager.createNamedQuery(Empleado.LISTAR_EMPLEADOS, Empleado.class);
 			List<Empleado> empleados = query.getResultList();
 			return empleados;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
+		} catch (NullPointerException e) {
+			return new ArrayList<Empleado>();
 		}
 
 	}
