@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.principalControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.principalControlador">
    <top>
       <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="728.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,7 +21,7 @@
                   </ContextMenu>
                </contextMenu>
             </Button>
-            <TextField opacity="0.0" prefHeight="30.0" prefWidth="268.0" />
+            <TextField prefHeight="30.0" prefWidth="268.0" />
          </children></HBox>
    </top>
    <left>

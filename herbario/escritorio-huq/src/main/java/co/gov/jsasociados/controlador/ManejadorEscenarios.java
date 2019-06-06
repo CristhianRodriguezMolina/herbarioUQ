@@ -48,11 +48,9 @@ public class ManejadorEscenarios {
 	 * @param escenario inicial
 	 */
 	public ManejadorEscenarios(Stage escenario) {
-
+		
+		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
-
-//		administradorDelegado = AdministradorDelegado.administradorDelegado;
-//		empleadosObservables = FXCollections.observableArrayList();
 
 		try {
 			// se inicializa el escenario
@@ -62,14 +60,16 @@ public class ManejadorEscenarios {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/principal.fxml"));
 
-			bordePanel = (BorderPane) loader.load();
-
+			
+			bordePanel = ((BorderPane) loader.load());
+			bordePanel.setPrefSize(1100, 600);
+			
 			// se carga la escena
 			Scene scene = new Scene(bordePanel);
 			escenario.setScene(scene);
 			escenario.show();
 
-//			cargarEscena();
+			cargarEscena();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -85,15 +85,13 @@ public class ManejadorEscenarios {
 
 		try {
 
-			
-			empleadosObservables = administradorDelegado.listarEmpleadosObservables();
 
 			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(Main.class.getResource("./vista/detalle_empleado.fxml"));
-			AnchorPane panelAncho = (AnchorPane) loader2.load();
+			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
+			BorderPane panelAncho = (BorderPane) loader2.load();
 			bordePanel.setCenter(panelAncho);
 
-			EmpleadoControlador controlador = loader2.getController();
+			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
