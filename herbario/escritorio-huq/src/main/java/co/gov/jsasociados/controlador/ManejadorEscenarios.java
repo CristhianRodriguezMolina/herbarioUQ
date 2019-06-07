@@ -48,7 +48,7 @@ public class ManejadorEscenarios {
 	 * @param escenario inicial
 	 */
 	public ManejadorEscenarios(Stage escenario) {
-		
+		//ESTO FUE LO QUE FALTABA 
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
 
