@@ -45,7 +45,7 @@ public class ManejadorEscenarios {
 	/**
 	 * recibe el escenario principla de la aplicacion
 	 * 
-	 * @param escenario inicial
+	 * @param escenario inicial	
 	 */
 	public ManejadorEscenarios(Stage escenario) {
 		//ESTO FUE LO QUE FALTABA 
