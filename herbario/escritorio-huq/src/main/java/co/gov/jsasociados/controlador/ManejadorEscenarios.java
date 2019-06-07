@@ -50,7 +50,7 @@ public class ManejadorEscenarios {
 	 * @param escenario inicial
 	 */
 	public ManejadorEscenarios(Stage escenario) {
-		//ESTO FUE LO QUE FALTABA 
+
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
 
@@ -117,13 +117,13 @@ public class ManejadorEscenarios {
 
 			// se crea el escenario
 			Stage escenarioCrear = new Stage();
-			escenarioCrear.setTitle("Crear");
+			escenarioCrear.setTitle("Crear"); 
 			Scene scene = new Scene(page);
 			escenarioCrear.setScene(scene);
 
 			// se carga el controlador
 			EdicionEmpleadoControlador empleadoControlador = loader.getController();
-			empleadoControlador.setEscenarioEditar(escenarioCrear);
+			empleadoControlador.setEscenarioEditar(escenarioCrear); 
 			empleadoControlador.setManejador(this);
 
 			// se crea el escenario
