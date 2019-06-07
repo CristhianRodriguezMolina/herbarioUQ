@@ -27,8 +27,9 @@
    <left>
       <TableView prefHeight="363.0" prefWidth="368.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="140.0" text="C1" />
-          <TableColumn minWidth="0.0" prefWidth="227.0" text="C2" />
+          <TableColumn prefWidth="123.0" text="C1" />
+          <TableColumn minWidth="0.0" prefWidth="127.0" text="C2" />
+            <TableColumn minWidth="0.0" prefWidth="117.0" text="C2" />
         </columns>
       </TableView>
    </left>
