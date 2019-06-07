@@ -96,7 +96,7 @@ public class RegistroEmpleadoControlador {
 			Cuenta c = new Cuenta();
 			c.setUsuario(txtUsuario.getText());
 			c.setContrasenia(txtContrasenia.getText());
-			c.setPersona(e);
+//			c.setPersona(e);
 			e.setCuenta(c);
 			
 			System.out.println(e.toString());

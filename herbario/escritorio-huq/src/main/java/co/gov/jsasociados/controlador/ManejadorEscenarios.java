@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -64,12 +66,14 @@ public class ManejadorEscenarios {
 			bordePanel = ((BorderPane) loader.load());
 			bordePanel.setPrefSize(1100, 600);
 			
+			cargarEscena();
+			
 			// se carga la escena
 			Scene scene = new Scene(bordePanel);
 			escenario.setScene(scene);
 			escenario.show();
 
-			cargarEscena();
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -85,12 +89,11 @@ public class ManejadorEscenarios {
 
 		try {
 
-
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
-			BorderPane panelAncho = (BorderPane) loader2.load();
-			bordePanel.setCenter(panelAncho);
-
+			BorderPane panel = (BorderPane) loader2.load();
+			bordePanel.setCenter(panel);
+			
 			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
