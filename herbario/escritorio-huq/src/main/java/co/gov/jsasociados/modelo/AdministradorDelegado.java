@@ -70,7 +70,7 @@ public class AdministradorDelegado {
 		try {
 			return adminEJB.insertarEmpleado(empleado) != null;
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 			return false;
 		}
 	}

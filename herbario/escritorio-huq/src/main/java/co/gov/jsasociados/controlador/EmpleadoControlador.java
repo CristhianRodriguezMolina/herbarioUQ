@@ -79,8 +79,8 @@ public class EmpleadoControlador {
 	private void initialize() {
 
 		cedulaColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
-		nombreColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombre());
-
+		nombreColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombre()); 
+ 
 		mostrarDetalleEmpleado(null);
 
 		tablaEmpleados.getSelectionModel().selectedItemProperty()

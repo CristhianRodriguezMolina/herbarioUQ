@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.RegistroEmpleadoControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.RegistroEmpleadoControlador">
    <top>
       <BorderPane prefHeight="64.0" prefWidth="738.0" BorderPane.alignment="CENTER">
          <center>
@@ -27,8 +27,9 @@
    <left>
       <TableView prefHeight="363.0" prefWidth="368.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="123.0" text="C1" />
+          <TableColumn minWidth="0.0" prefWidth="127.0" text="C2" />
+            <TableColumn minWidth="0.0" prefWidth="117.0" text="C2" />
         </columns>
       </TableView>
    </left>
@@ -102,15 +103,15 @@
                   <Font size="22.0" />
                </font>
             </Label>
+            <TextField id="txtCedula" fx:id="txtCedula" prefHeight="41.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField id="txtNombre" fx:id="txtNombre" prefHeight="41.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField id="txtApellidos" fx:id="txtApellidos" prefHeight="46.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField id="txtCorreo" fx:id="txtCorreo" prefHeight="54.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField id="txtTelefono" fx:id="txtTelefono" prefHeight="61.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField id="txtDireccion" fx:id="txtDireccion" prefHeight="59.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="64.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <Button id="btnAceptar" fx:id="btnAceptar" mnemonicParsing="false" onAction="#insertarEmpleado" prefHeight="57.0" prefWidth="185.0" text="Aceptar" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <TextField id="txtCedula" fx:id="txtCedula" prefHeight="41.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="txtContrasenia" prefHeight="48.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Button id="btnAceptar" fx:id="btnAceptar" mnemonicParsing="false" onAction="#insertarEmpleado" prefHeight="57.0" prefWidth="185.0" text="Aceptar" GridPane.columnIndex="1" GridPane.rowIndex="10" />
          </children>
       </GridPane>
    </center>
