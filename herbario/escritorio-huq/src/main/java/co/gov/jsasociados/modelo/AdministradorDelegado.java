@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 
  */
 package co.gov.jsasociados.modelo;
