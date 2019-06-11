@@ -9,9 +9,9 @@ package co.gov.jsasocioados.exeption;
  * @author Jhontan Hidalgo
  *
  */
-public class FamiliaYaRegistrada extends Exception{
+public class FamiliaYaRegistradaExeption extends Exception{
 
-	public FamiliaYaRegistrada(String mensaje)
+	public FamiliaYaRegistradaExeption(String mensaje)
 	{
 		super(mensaje);
 	}

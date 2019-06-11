@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.RegistroEmpleadoControlador">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.RegistroEmpleadoControlador">
    <top>
       <BorderPane prefHeight="64.0" prefWidth="738.0" BorderPane.alignment="CENTER">
          <center>
@@ -25,11 +25,11 @@
       </BorderPane>
    </top>
    <left>
-      <TableView prefHeight="363.0" prefWidth="368.0" BorderPane.alignment="CENTER">
+      <TableView prefHeight="363.0" prefWidth="345.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn prefWidth="123.0" text="C1" />
-          <TableColumn minWidth="0.0" prefWidth="127.0" text="C2" />
-            <TableColumn minWidth="0.0" prefWidth="117.0" text="C2" />
+          <TableColumn minWidth="0.0" prefWidth="114.0" text="C2" />
+            <TableColumn minWidth="0.0" prefWidth="130.0" text="C2" />
         </columns>
       </TableView>
    </left>
@@ -73,7 +73,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label prefHeight="43.0" prefWidth="281.0" text="Telefono:" GridPane.rowIndex="5">
+            <Label text="Telefono:" GridPane.rowIndex="5">
                <font>
                   <Font size="22.0" />
                </font>

@@ -14,8 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -93,7 +97,6 @@ public class ManejadorEscenarios {
 			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
 			BorderPane panel = (BorderPane) loader2.load();
 			bordePanel.setCenter(panel);
-			
 			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
@@ -102,7 +105,26 @@ public class ManejadorEscenarios {
 		}
 
 	}
+	/**
+	 * carga una escena en el centro del escenario
+	 */
+	public void cargarEscenaPlanta() {
 
+		try {
+
+			FXMLLoader loader2 = new FXMLLoader();
+			loader2.setLocation(Main.class.getResource("./vista/gestion_plantas_generos_familias.fxml"));
+			ScrollPane panel = (ScrollPane) loader2.load();
+			bordePanel.setCenter(panel);
+			
+//			RegistroEmpleadoControlador controlador = loader2.getController();
+//			controlador.setEscenarioInicial(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 	/**
 	 * muestra el escenario para crear un empleado nuevo
 	 */
@@ -167,13 +189,12 @@ public class ManejadorEscenarios {
 	 * @param empleado a registrar
 	 * @return true si quedo registrado
 	 */
-	public boolean registrarEmpleado(Empleado empleado) {
-		try {
+	public boolean registrarEmpleado(Empleado empleado) throws Exception{
+		//try {
 			return administradorDelegado.registrarEmpleado(empleado);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
+		//} catch (Exception e) {
+			//e.printStackTrace();
+		//}
 	}
 
 	/**

@@ -28,7 +28,7 @@
       <VBox prefHeight="489.0" prefWidth="168.0" BorderPane.alignment="CENTER">
          <children>
             <Button id="btnGestionarEmpleado" mnemonicParsing="false" prefHeight="59.0" prefWidth="177.0" text="Gestionar empleado" />
-            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="177.0" text="Button" />
+            <Button fx:id="btnGestionarEspecies" mnemonicParsing="false" prefHeight="59.0" prefWidth="177.0" text="Gestionar especies" />
             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="177.0" text="Button" />
             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="177.0" text="Button" />
             <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="177.0" text="Button" />

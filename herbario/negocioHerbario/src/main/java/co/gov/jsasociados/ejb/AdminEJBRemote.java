@@ -5,8 +5,10 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
+import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -125,4 +127,12 @@ public interface AdminEJBRemote {
 	 * @throws TipoClaseException
 	 */
 	Recolector buscarRecolector(String cedula) throws PersonaNoRegistradaException, TipoClaseException;
+	
+	/**
+	 * metodo que permite agregar una familia desde el perfil de administrador
+	 * @param familia
+	 * @return
+	 * @throws FamiliaYaRegistradaExeption
+	 */
+	Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption;
 }

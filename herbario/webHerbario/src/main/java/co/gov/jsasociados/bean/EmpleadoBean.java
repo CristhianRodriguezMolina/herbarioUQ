@@ -12,7 +12,7 @@ import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
-import co.gov.jsasocioados.util.Util;
+import co.gov.jsasociados.util.Util;
 
 /**
  * 
