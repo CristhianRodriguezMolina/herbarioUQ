@@ -11,9 +11,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Recolector;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
+import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -261,7 +264,40 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 		return (Recolector) recolector;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#insertarFamilia(co.gov.jsasociados.Familia)
+	 */
+	public Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption {
+		if (buscarFamilia(familia.getFamilia())!=null) {
+			throw new FamiliaYaRegistradaExeption("La familia ya se encuentra registrada");
+		}else {
+			try {
+				entityManager.persist(familia);
+				return	buscarFamilia(familia.getFamilia());
+			} catch (Exception e) {
+				// TODO: handle exception
+				return null;
+			}
+		}
+		
+	}
+	/**
+	 * metodo que permite buscar una familia por su nombre
+	 * @param famila
+	 * @return
+	 */
+	private Familia buscarFamilia(String famila) {
+		try {
+			TypedQuery<Familia> query= entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
+			query.setParameter("familia", famila);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
 	/**
 	 * metodo que permite buscar un empleado por su usuario
 	 * 

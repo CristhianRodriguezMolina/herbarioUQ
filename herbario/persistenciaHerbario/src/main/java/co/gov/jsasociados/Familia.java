@@ -16,8 +16,8 @@ import javax.persistence.*;
  */
 @NamedQueries(
 		{@NamedQuery(name=Familia.LISTAR_FAMILIAS, query="select f from Familia f"),
-		@NamedQuery(name=Familia.OBTENER_POR_NOMBRE, query="select f from Familia f where f.idFamilia=:familia"),
-		@NamedQuery(name=Familia.OBTENER_POR_ID, query="select f from Familia f where f.familia=:nombre"),
+		@NamedQuery(name=Familia.OBTENER_POR_NOMBRE, query="select f from Familia f where f.familia=:familia"),
+		@NamedQuery(name=Familia.OBTENER_POR_ID, query="select f from Familia f where f.idFamilia=:idFamilia"),
 		@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES, query="select familia, COUNT(p) from Familia Familia, Genero g INNER JOIN g.plantas p where g.familia.idFamilia = familia.idFamilia"),
 		@NamedQuery(name=Familia.FAMILIA_CON_MAS_ESPECIES_2, query="select familia, MAX(select COUNT(genero.plantas) from Genero genero where genero.familia.idFamilia=familia.idFamilia) from Familia familia"),		 
 		@NamedQuery(name = Familia.DECIR_CANTIDAD_FAMILIA, query = "select count(familia) from Familia familia")})
@@ -36,7 +36,9 @@ public class Familia implements Serializable {
 	 * clave unica de una familia   
 	 */
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(unique=true, nullable=false)
+	
 	private String idFamilia;
 	/**
 	 * nombre de una familia 

@@ -7,7 +7,7 @@ import javax.ejb.Remote;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
-import co.gov.jsasocioados.exeption.FamiliaYaRegistrada;
+import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -19,24 +19,24 @@ public interface EmpleadoEJBRemote {
 	 * @param familia
 	 * @return la familia si se inserto o null de lo contrario
 	 */
-	public Familia insertarFamilia(Familia familia)throws ElementoRepetidoException, FamiliaYaRegistrada;	
+	public Familia insertarFamilia(Familia familia)throws ElementoRepetidoException, FamiliaYaRegistradaExeption;	
 
 	/**
 	 * Metodo para eliminar una familia por id
 	 * @param idFamilia
 	 * @return True si se elimino correctamente la familia y False de lo contrario
-	 * @throws FamiliaYaRegistrada
+	 * @throws FamiliaYaRegistradaExeption
 	 */
-    public boolean eliminarFamilia(String idFamilia) throws FamiliaYaRegistrada;
+    public boolean eliminarFamilia(String idFamilia) throws FamiliaYaRegistradaExeption;
     
     /**
      * metodo para modificar una familia
      * @param nombre
      * @param idFamilia
      * @return la familia modificada o null si no encontro familia
-     * @throws FamiliaYaRegistrada
+     * @throws FamiliaYaRegistradaExeption
      */
-    public Familia modificarFamilia(String nombre, String idFamilia) throws FamiliaYaRegistrada;
+    public Familia modificarFamilia(String nombre, String idFamilia) throws FamiliaYaRegistradaExeption;
     
     /**
      * metodo para listar las familias

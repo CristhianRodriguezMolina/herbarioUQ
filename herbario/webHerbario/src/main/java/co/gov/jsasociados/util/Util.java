@@ -1,4 +1,4 @@
-package co.gov.jsasocioados.util;
+package co.gov.jsasociados.util;
 
 import java.util.ResourceBundle;
 

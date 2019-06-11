@@ -95,10 +95,15 @@ public class RegistroEmpleadoControlador {
 			cuenta.setPersona(empleado);
 			empleado.setCuenta(cuenta);
 
-			if (escenarioInicial.registrarEmpleado(empleado)) {
-				Utilidades.mostrarMensaje("Registro exitoso", "Se ha registrado de forma exitosa.");
-			}else {
-				Utilidades.mostrarMensaje("Registro", "Error en registro!!");
+			try {
+				if (escenarioInicial.registrarEmpleado(empleado)) {
+					Utilidades.mostrarMensaje("Registro exitoso", "Se ha registrado de forma exitosa.");
+				}else {
+					Utilidades.mostrarMensaje("Registro", "Error en registro!!");
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}
