@@ -58,7 +58,7 @@ public class ManejadorEscenarios {
 	 */
 	public ManejadorEscenarios(Stage escenario) {
 
-		administradorDelegado = AdministradorDelegado.administradorDelegado;
+		administradorDelegado = AdministradorDelegado.instancia();
 		this.escenario = escenario;
 
 		try {

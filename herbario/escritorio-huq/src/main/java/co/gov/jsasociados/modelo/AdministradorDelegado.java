@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasociados.ejb.AdminEJBRemote;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
@@ -28,7 +29,7 @@ public class AdministradorDelegado {
 	/**
 	 * instancia que representa el ejb remoto de administrador
 	 */
-	private AdminEJBRemote adminEJB;
+	private AdminEJB adminEJB;
 	/**
 	 * permite manejar una unica instancia para le manejo de delegados
 	 */
@@ -39,7 +40,7 @@ public class AdministradorDelegado {
 	 */
 	private AdministradorDelegado() {
 		try {
-			adminEJB = (AdminEJBRemote) new InitialContext().lookup(AdminEJBRemote.JNDI);
+			adminEJB = (AdminEJB) new InitialContext().lookup(AdminEJBRemote.JNDI);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} 
@@ -50,7 +51,7 @@ public class AdministradorDelegado {
 	 * 
 	 * @return instancia unica del delegado
 	 */
-	private static AdministradorDelegado instancia() {
+	public static AdministradorDelegado instancia() {
 
 		if (administradorDelegado == null) {
 			administradorDelegado = new AdministradorDelegado();
