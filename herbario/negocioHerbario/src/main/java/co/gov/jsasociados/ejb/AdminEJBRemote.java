@@ -18,7 +18,7 @@ import co.gov.jsasocioados.exeption.TipoClaseException;
 @Remote
 public interface AdminEJBRemote {
 
-	public static final String JNDI = "java:global/ear-herbario/negocioHerbario/AdminEJB!co.gov.jsasociados.ejb.AdminEJB";
+	String JNDI = "java:global/ear-herbario/negocioHerbario/AdminEJB!co.gov.jsasociados.ejb.AdminEJBRemote";
 	
 	/**
 	 * metodo que permiete agregar un empleado
