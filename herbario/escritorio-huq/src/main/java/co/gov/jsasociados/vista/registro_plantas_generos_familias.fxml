@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToWidth="true" prefHeight="457.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <BorderPane prefHeight="747.0" prefWidth="785.0">
          <top>
@@ -31,7 +31,7 @@
          <center>
             <BorderPane prefHeight="582.0" prefWidth="935.0" BorderPane.alignment="CENTER">
                <top>
-                  <BorderPane prefHeight="189.0" prefWidth="935.0" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="209.0" prefWidth="772.0" BorderPane.alignment="CENTER">
                      <top>
                         <Label prefHeight="42.0" prefWidth="865.0" text="Gestion de familias" BorderPane.alignment="CENTER">
                            <font>
@@ -47,20 +47,10 @@
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                 <center>
-                                    <Label prefHeight="38.0" prefWidth="232.0" text="Id de la familia:" BorderPane.alignment="CENTER">
-                                       <font>
-                                          <Font name="Arial" size="23.0" />
-                                       </font>
-                                    </Label>
-                                 </center>
-                              </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <center>
                                     <Label prefHeight="38.0" prefWidth="231.0" text="Nombre de la familia:" BorderPane.alignment="CENTER">
                                        <font>
@@ -71,20 +61,15 @@
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <center>
-                                    <TextField fx:id="txtIdFamilia" prefHeight="35.0" prefWidth="445.0" BorderPane.alignment="CENTER" />
+                                    <TextField fx:id="txtNombreFamilia" prefHeight="35.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <center>
-                                    <TextField fx:id="txtNombreFamilia" prefHeight="35.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
-                                 </center>
-                              </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <center>
                                     <Button fx:id="btnRegistrarFamilia" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" text="Registrar" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <center>
                                     <Button fx:id="btnEliminarFamilia" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" text="Eliminar" BorderPane.alignment="CENTER" />
                                  </center>
@@ -103,7 +88,7 @@
                   </BorderPane>
                </top>
                <bottom>
-                  <BorderPane prefHeight="233.0" prefWidth="935.0" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="223.0" prefWidth="772.0" BorderPane.alignment="CENTER">
                      <top>
                         <Label prefHeight="42.0" prefWidth="865.0" text="Gestion de especies" BorderPane.alignment="CENTER">
                            <font>
@@ -120,7 +105,6 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
@@ -134,15 +118,6 @@
                                  </center>
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <center>
-                                    <Label prefHeight="38.0" prefWidth="329.0" text="Id de la especie:" BorderPane.alignment="CENTER">
-                                       <font>
-                                          <Font name="Arial" size="23.0" />
-                                       </font>
-                                    </Label>
-                                 </center>
-                              </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <center>
                                     <Label prefHeight="38.0" prefWidth="329.0" text="Nombre de la especie:" BorderPane.alignment="CENTER">
                                        <font>
@@ -166,20 +141,15 @@
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <center>
-                                    <TextField fx:id="txtIdEspecie" prefHeight="35.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
-                                 </center>
-                              </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <center>
                                     <TextField fx:id="txtNombreEspecie" prefHeight="35.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <center>
                                     <Button fx:id="btnEliminarPlanta" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" text="Eliminar" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <center>
                                     <Button fx:id="btnRegistrarPlanta" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" text="Registrar" BorderPane.alignment="CENTER" />
                                  </center>
@@ -215,7 +185,6 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
@@ -229,15 +198,6 @@
                                  </center>
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <center>
-                                    <Label prefHeight="38.0" prefWidth="222.0" text="Id del genero:" BorderPane.alignment="CENTER">
-                                       <font>
-                                          <Font name="Arial" size="23.0" />
-                                       </font>
-                                    </Label>
-                                 </center>
-                              </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <center>
                                     <Label prefHeight="38.0" prefWidth="225.0" text="Nombre del genero:" BorderPane.alignment="CENTER">
                                        <font>
@@ -261,20 +221,15 @@
                               </BorderPane>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <center>
-                                    <TextField fx:id="txtIdGenero" prefHeight="35.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
-                                 </center>
-                              </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <center>
                                     <TextField fx:id="txtNombreGenero" prefHeight="35.0" prefWidth="450.0" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                  <center>
                                     <Button fx:id="btnEliminarGenero" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" text="Eliminar" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <center>
                                     <Button fx:id="btnRegistrarGenero" mnemonicParsing="false" prefHeight="33.0" prefWidth="175.0" text="Registrar" BorderPane.alignment="CENTER" />
                                  </center>

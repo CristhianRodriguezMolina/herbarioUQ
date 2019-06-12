@@ -12,7 +12,6 @@ import javax.naming.NamingException;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.ejb.AdminEJBRemote;
-import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 import javafx.collections.FXCollections;

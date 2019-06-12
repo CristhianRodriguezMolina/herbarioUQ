@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
@@ -34,11 +35,13 @@ public class ManejadorEscenarios {
 	 * contenedor prinpipal de la aplicacion
 	 */
 	private Stage escenario;
+	
 	/**
 	 * tipo de panel inicial
 	 */
 	@FXML
-	private BorderPane bordePanel;
+	private ScrollPane scrollPanel;
+	
 	/**
 	 * para almacenar empleados observables
 	 */
@@ -66,19 +69,22 @@ public class ManejadorEscenarios {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/principal.fxml"));
 
+			scrollPanel = ((ScrollPane) loader.load());
+
+			PrincipalControlador pc = loader.getController();
+			pc.setEscenarioInicial(this);
 			
-			bordePanel = ((BorderPane) loader.load());
-			bordePanel.setPrefSize(1100, 600);
-			
-			cargarEscena();
+			cargarEscenaEmpleado();
+			cargarEscenaPlanta();
+			cargarEscenaNavegacion();
 			
 			// se carga la escena
-			Scene scene = new Scene(bordePanel);
+			Scene scene = new Scene(scrollPanel);
 			escenario.setScene(scene);
 			escenario.show();
 
 			
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -89,14 +95,14 @@ public class ManejadorEscenarios {
 	/**
 	 * carga una escena en el centro del escenario
 	 */
-	public void cargarEscena() {
+	public void cargarEscenaEmpleado() {
 
 		try {
 
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
 			BorderPane panel = (BorderPane) loader2.load();
-			bordePanel.setCenter(panel);
+			((BorderPane)scrollPanel.getContent()).setCenter(panel);
 			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
@@ -105,17 +111,18 @@ public class ManejadorEscenarios {
 		}
 
 	}
+	
 	/**
 	 * carga una escena en el centro del escenario
 	 */
-	public void cargarEscenaPlanta() {
+	public void cargarEscenaNavegacion() {
 
 		try {
 
-			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(Main.class.getResource("./vista/gestion_plantas_generos_familias.fxml"));
-			ScrollPane panel = (ScrollPane) loader2.load();
-			bordePanel.setCenter(panel);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/navegacion_y_busquedas.fxml"));
+			BorderPane panel = (BorderPane) loader.load();
+			((BorderPane)scrollPanel.getContent()).setCenter(panel);
 			
 //			RegistroEmpleadoControlador controlador = loader2.getController();
 //			controlador.setEscenarioInicial(this);
@@ -125,6 +132,28 @@ public class ManejadorEscenarios {
 		}
 
 	}
+	
+	/**
+	 * carga una escena en el centro del escenario
+	 */
+	public void cargarEscenaPlanta() {
+
+		try {
+
+			FXMLLoader loader2 = new FXMLLoader();
+			loader2.setLocation(Main.class.getResource("./vista/registro_plantas_generos_familias.fxml"));
+			ScrollPane panel = (ScrollPane) loader2.load();
+			((BorderPane)scrollPanel.getContent()).setCenter(panel);
+			
+//			RegistroEmpleadoControlador controlador = loader2.getController();
+//			controlador.setEscenarioInicial(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	/**
 	 * muestra el escenario para crear un empleado nuevo
 	 */

@@ -18,44 +18,67 @@ import javafx.scene.control.TextField;
 
 public class RegistroEmpleadoControlador {
 
-	@FXML // ResourceBundle that was given to the FXMLLoader
+	/**
+	 * 
+	 */
+	@FXML 
 	private ResourceBundle resources;
-
-	@FXML // URL location of the FXML file that was given to the FXMLLoader
+	/**
+	 * 
+	 */
+	@FXML
 	private URL location;
-
-	@FXML // fx:id="txtNombre"
-	private TextField txtNombre; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtApellidos"
-	private TextField txtApellidos; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtCorreo"
-	private TextField txtCorreo; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtTelefono"
-	private TextField txtTelefono; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtDireccion"
-	private TextField txtDireccion; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtUsuario"
-	private TextField txtUsuario; // Value injected by FXMLLoader
-
-	@FXML // fx:id="btnAceptar"
-	private Button btnAceptar; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtCedula"
-	private TextField txtCedula; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtContrasenia"
-	private PasswordField txtContrasenia; // Value injected by FXMLLoader
+	/**
+	 * 
+	 */
+	@FXML
+	private TextField txtNombre; 
+	/**
+	 * 
+	 */
+	@FXML 
+	private TextField txtApellidos;
+	/**
+	 * 
+	 */
+	@FXML 
+	private TextField txtCorreo;
+	/**
+	 * 
+	 */
+	@FXML 
+	private TextField txtTelefono;
+	/**
+	 * 
+	 */
+	@FXML
+	private TextField txtDireccion; 
+	/**
+	 * 
+	 */
+	@FXML
+	private TextField txtUsuario; 
+	/**
+	 * 
+	 */
+	@FXML 
+	private Button btnAceptar;
+	/**
+	 * 
+	 */
+	@FXML 
+	private TextField txtCedula; 
+	/**
+	 * 
+	 */
+	@FXML 
+	private PasswordField txtContrasenia; 
 	/**
 	 * instancia del manejador de escenario
 	 */
 	private ManejadorEscenarios escenarioInicial;
 
-	@FXML // This method is called by the FXMLLoader when initialization is complete
+	@FXML
 	void initialize() {
 		assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'registro_empleado.fxml'.";
 		assert txtApellidos != null : "fx:id=\"txtApellidos\" was not injected: check your FXML file 'registro_empleado.fxml'.";
@@ -78,6 +101,10 @@ public class RegistroEmpleadoControlador {
 		this.escenarioInicial = escenarioInicial;
 	}
 
+	/**
+	 * Metodo para insertar un empleado a la base de datos por medio de un botón
+	 * @param e1
+	 */
 	@FXML
 	void insertarEmpleado(ActionEvent e1) {
 		if (e1.getSource().equals(btnAceptar)) {

@@ -38,7 +38,6 @@ public class FamiliaBean {
 			fa=adminEJB.insertarFamilia(familia);
 			return "/detalle_familia";
 		} catch (FamiliaYaRegistradaExeption e) {
-			// TODO Auto-generated catch block
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
 			return null;
 		}
