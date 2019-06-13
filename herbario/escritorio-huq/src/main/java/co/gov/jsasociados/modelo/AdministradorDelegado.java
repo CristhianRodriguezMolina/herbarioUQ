@@ -29,7 +29,7 @@ public class AdministradorDelegado {
 	/**
 	 * instancia que representa el ejb remoto de administrador
 	 */
-	private AdminEJBRemote adminEJB;
+	private AdminEJB adminEJB;
 	/**
 	 * permite manejar una unica instancia para le manejo de delegados
 	 */
@@ -40,7 +40,7 @@ public class AdministradorDelegado {
 	 */
 	private AdministradorDelegado() {
 		try {
-			adminEJB = (AdminEJBRemote) new InitialContext().lookup(AdminEJBRemote.JNDI);
+			adminEJB = (AdminEJB) new InitialContext().lookup(AdminEJBRemote.JNDI);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} 
