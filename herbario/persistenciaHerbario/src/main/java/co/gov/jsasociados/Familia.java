@@ -36,7 +36,7 @@ public class Familia implements Serializable {
 	 * clave unica de una familia   
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	
 	private String idFamilia;

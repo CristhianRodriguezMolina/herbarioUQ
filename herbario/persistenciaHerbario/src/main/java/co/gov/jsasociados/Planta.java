@@ -35,18 +35,19 @@ public class Planta implements Serializable {
 	public static final String LISTAR_PLANTAS_ENVIADAS = "listar plantas enviadas";
 	public static final String LISTAR_PLANTAS_ACEPTADAS_POR_FAMILIA = "listar plantas aceptadas por familia";
 	public static final String LISTAR_PLANTAS_ACEPTADAS_POR_GENERO="listar plantas aceptadas por genero";
-	/*
+	
+	/**
 	 * id unico de la Planta
 	 */	
 	@Column(unique=true, nullable=false)
 	@Id
 	private String idPlanta;
-	/*
+	/**
 	 * nombre de la Planta
 	 */	
 	@Column(length=30, unique=true, nullable=false)
 	private String nombre;
-	/*
+	/**
 	 * genero de la Planta
 	 */	
 	@ManyToOne
@@ -54,10 +55,10 @@ public class Planta implements Serializable {
 	/*
 	 * Imagen relacionada a la planta
 	 */
-//	@Lob
+	@Lob
 //	@Column(name = "imagen")
-//	private byte[] imagen;
-	/*
+	private byte[] imagen;
+	/**
 	 * Registro de la Planta
 	 */	
 	@OneToOne(mappedBy="planta")

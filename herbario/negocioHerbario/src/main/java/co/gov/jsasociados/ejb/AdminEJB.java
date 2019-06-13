@@ -56,7 +56,6 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 		
 		try {
-			entityManager.persist(empleado.getCuenta());
 			entityManager.persist(empleado);
 			return empleado;
 		} catch (Exception e) {

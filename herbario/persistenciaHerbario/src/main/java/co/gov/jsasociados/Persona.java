@@ -69,7 +69,7 @@ public class Persona implements Serializable {
 	/**
 	 * cuenta de una persona
 	 */
-	@OneToOne(mappedBy = "persona")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "persona")
 	private Cuenta cuenta;
 	/**
 	 * registro de una persona
@@ -79,7 +79,7 @@ public class Persona implements Serializable {
 	/**
 	 * comentarios relizados por una persona
 	 */
-	@OneToMany(mappedBy = "persona")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
 	private ArrayList<Comentario> comentarios;
 
 	private static final long serialVersionUID = 1L;

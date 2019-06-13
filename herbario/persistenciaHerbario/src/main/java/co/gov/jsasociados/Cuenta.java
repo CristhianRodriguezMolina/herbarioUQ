@@ -13,7 +13,6 @@ import javax.persistence.*;
  * @version 1.0 16/04/2019
  */
 @Entity
-
 public class Cuenta implements Serializable {
 
 	/**
