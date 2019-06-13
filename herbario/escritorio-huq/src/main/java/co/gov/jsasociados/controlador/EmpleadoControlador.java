@@ -93,10 +93,10 @@ public class EmpleadoControlador {
 	 * 
 	 * @param escenarioInicial
 	 */
-	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial) {
-		this.escenarioInicial = escenarioInicial;
-		tablaEmpleados.setItems(escenarioInicial.getEmpleadosObservables());
-	}
+//	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial) {
+//		this.escenarioInicial = escenarioInicial;
+//		tablaEmpleados.setItems(escenarioInicial.getEmpleadosObservables());
+//	}
 
 	/**
 	 * permite mostrar la informacion del empleado seleccionado
@@ -136,22 +136,22 @@ public class EmpleadoControlador {
 	/**
 	 * permite eliminar un empleado seleccionado
 	 */
-	@FXML
-	public void elimiarEmpleado() {
-
-		int indice = tablaEmpleados.getSelectionModel().getSelectedIndex();
-
-		System.out.println(tablaEmpleados.getItems().size());
-
-		Empleado empleado = tablaEmpleados.getItems().get(indice).getEmpleado();
-
-		if (escenarioInicial.eliminarEmpleado(empleado)) {
-			tablaEmpleados.getItems().remove(indice);
-			Utilidades.mostrarMensaje("Borrar", "El empleado ha sido eliminado con exito");
-		} else {
-			Utilidades.mostrarMensaje("Error", "El empleado no pudo ser eliminado");
-		}
-
-	}
+//	@FXML
+//	public void elimiarEmpleado() {
+//
+//		int indice = tablaEmpleados.getSelectionModel().getSelectedIndex();
+//
+//		System.out.println(tablaEmpleados.getItems().size());
+//
+//		Empleado empleado = tablaEmpleados.getItems().get(indice).getEmpleado();
+//
+//		if (escenarioInicial.eliminarEmpleado(empleado)) {
+//			tablaEmpleados.getItems().remove(indice);
+//			Utilidades.mostrarMensaje("Borrar", "El empleado ha sido eliminado con exito");
+//		} else {
+//			Utilidades.mostrarMensaje("Error", "El empleado no pudo ser eliminado");
+//		}
+//
+//	}
 
 }

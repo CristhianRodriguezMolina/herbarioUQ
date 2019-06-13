@@ -40,8 +40,9 @@ public class Planta implements Serializable {
 	 * id unico de la Planta
 	 */	
 	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	private String idPlanta;
+	private Long idPlanta;
 	/**
 	 * nombre de la Planta
 	 */	
@@ -73,15 +74,8 @@ public class Planta implements Serializable {
 	/**
 	 * @return the idPlanta
 	 */
-	public String getIdPlanta() {
+	public Long getIdPlanta() {
 		return idPlanta;
-	}
-
-	/**
-	 * @param idPlanta the idPlanta to set
-	 */
-	public void setIdPlanta(String idPlanta) {
-		this.idPlanta = idPlanta;
 	}
 
 	/**

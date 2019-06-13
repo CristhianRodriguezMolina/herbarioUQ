@@ -9,7 +9,10 @@ import java.util.ResourceBundle;
 
 import co.gov.jsasociados.Cuenta;
 import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.modelo.AdministradorDelegado;
 import co.gov.jsasociados.util.Utilidades;
+import co.gov.jsasocioados.exeption.ElementoRepetidoException;
+import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -91,6 +94,11 @@ public class RegistroEmpleadoControlador {
 		assert txtContrasenia != null : "fx:id=\"txtContrasenia\" was not injected: check your FXML file 'registro_empleado.fxml'.";
 
 	}
+	
+	/**
+	 * conexion con la capade negocio
+	 */
+	private AdministradorDelegado administradorDelegado;
 
 	/**
 	 * permite obtener una instancia del escenario general
@@ -98,6 +106,7 @@ public class RegistroEmpleadoControlador {
 	 * @param escenarioInicial
 	 */
 	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial) {
+		administradorDelegado=AdministradorDelegado.administradorDelegado;
 		this.escenarioInicial = escenarioInicial;
 	}
 
@@ -108,31 +117,86 @@ public class RegistroEmpleadoControlador {
 	@FXML
 	void insertarEmpleado(ActionEvent e1) {
 		if (e1.getSource().equals(btnAceptar)) {
-			Empleado empleado = new Empleado();
-			empleado.setCedula(txtCedula.getText());
-			empleado.setNombre(txtNombre.getText());
-			empleado.setApellidos(txtApellidos.getText());
-			empleado.setCorreo(txtCorreo.getText());
-			empleado.setDireccion(txtDireccion.getText());
-			empleado.setTelefono(txtTelefono.getText());
+			if (validarCampos()) {
+				Empleado empleado = new Empleado();
+				empleado.setCedula(txtCedula.getText().trim());
+				empleado.setNombre(txtNombre.getText().trim());
+				empleado.setApellidos(txtApellidos.getText().trim());
+				empleado.setCorreo(txtCorreo.getText().trim());
+				empleado.setDireccion(txtDireccion.getText().trim());
+				empleado.setTelefono(txtTelefono.getText().trim());
 
-			Cuenta cuenta = new Cuenta();
-			cuenta.setUsuario(txtUsuario.getText());
-			cuenta.setContrasenia(txtContrasenia.getText());
-			cuenta.setPersona(empleado);
-			empleado.setCuenta(cuenta);
-
-			try {
-				if (escenarioInicial.registrarEmpleado(empleado)) {
-					Utilidades.mostrarMensaje("Registro exitoso", "Se ha registrado de forma exitosa.");
-				}else {
-					Utilidades.mostrarMensaje("Registro", "Error en registro!!");
+				Cuenta cuenta = new Cuenta();
+				cuenta.setUsuario(txtUsuario.getText().trim());
+				cuenta.setContrasenia(txtContrasenia.getText().trim());
+				cuenta.setPersona(empleado);
+				empleado.setCuenta(cuenta);
+				
+				try {
+					empleado = administradorDelegado.registrarEmpleado(empleado);
+					if (empleado!=null) {
+						Utilidades.mostrarMensaje("Registro con exito", "Se ha registrado al empleado "+empleado.getNombre()+" con exito.");
+					}
+					
+				} catch (ElementoRepetidoException | PersonaNoRegistradaException e) {
+					// TODO Auto-generated catch block
+					Utilidades.mostrarMensaje("Error", e.getMessage());
 				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			
+			//ESTO HAY QUE OBTENER EL DELEGADO DESDE ACA
+//			try {
+//				if (escenarioInicial.registrarEmpleado(empleado)) {
+//					Utilidades.mostrarMensaje("Registro exitoso", "Se ha registrado de forma exitosa.");
+//				}else {
+//					Utilidades.mostrarMensaje("Registro", "Error en registro!!");
+//				}
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
 		}
+	}
+	
+	/**
+	 * metodo que permite verificar que todos los campos esten completos
+	 * @return
+	 */
+	private boolean validarCampos() {
+		// TODO Auto-generated method stub
+		if (txtCedula.getText().trim().equals("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese un numero de cedula");
+			return false;
+		}
+		if (txtNombre.getText().trim().endsWith("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese un nombre");
+			return false;
+		}
+		if (txtApellidos.getText().trim().endsWith("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese los apellidos");
+			return false;
+		}
+		if (txtCorreo.getText().trim().equals("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese el correo");
+			return false;
+		}
+		if (txtDireccion.getText().trim().equals("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese la direccion");
+			return false;
+		}
+		if (txtTelefono.getText().trim().equals("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese el numero de telefono");
+			return false;
+		}
+		if (txtUsuario.getText().trim().equals("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese el nombre de usuario");
+			return false;
+		}
+		if (txtContrasenia.getText().trim().equals("")) {
+			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese una contraseña");
+			return false;
+		}
+		return true;
 	}
 }

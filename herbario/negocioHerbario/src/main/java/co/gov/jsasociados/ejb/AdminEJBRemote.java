@@ -6,7 +6,9 @@ import javax.ejb.Remote;
 
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
+import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Recolector;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
@@ -17,8 +19,8 @@ import co.gov.jsasocioados.exeption.TipoClaseException;
  */
 @Remote
 public interface AdminEJBRemote {
-					
-	public static final String JNDI = "java:global/ear-herbario/negocioHerbario/AdminEJB!co.gov.jsasociados.ejb.AdminEJBRemote";
+
+	String JNDI = "java:global/ear-herbario/negocioHerbario/AdminEJB!co.gov.jsasociados.ejb.AdminEJBRemote";
 	
 	/**
 	 * metodo que permiete agregar un empleado
@@ -135,4 +137,72 @@ public interface AdminEJBRemote {
 	 * @throws FamiliaYaRegistradaExeption
 	 */
 	Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption;
+	
+	/**
+	 * metodo que permite buscar una familia por su nombre
+	 * @param famila - nombre de  la familia
+	 * @return
+	 */
+	Familia buscarFamilia(String famila);
+	
+	/**
+	 * metodo que permite eliminar una familia
+	 * @param idFamilia
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 */
+	boolean eliminarFamilia(String idFamilia) throws ElementoNoEncontradoException;
+	
+	/**
+	 * metodo que permite modificar el nombre de una familia
+	 * @param nombre - nombre de la familia
+	 * @param idFamilia
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 */
+	Familia modificarFamilia(String nombre, String idFamilia) throws ElementoNoEncontradoException;
+	
+	/**
+	 * metodo que obtiene la lista de las familias registradas
+	 * @return
+	 * @throws Exception
+	 */
+	List<Familia> listarFamilias() throws Exception;
+	
+	/**
+	 * metodo que permite buscar un genero por su nombre
+	 * @param genero
+	 * @return
+	 */
+	Genero buscarGenero(String genero);
+	
+	/**
+	 * metodo que permite agregar un genero
+	 * @param genero
+	 * @return
+	 * @throws ElementoRepetidoException
+	 */
+	Genero registrarGenero(Genero genero) throws ElementoRepetidoException;
+	
+	/**
+	 * metodo que permite eliminar un genero
+	 * @param idGenero
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 */
+	boolean elimiarGenero(String idGenero) throws ElementoNoEncontradoException;
+	/**
+	 * metodo que permite modificar el nombre de un genero
+	 * @param genero - nombre del genero
+	 * @param idGenero
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 */
+	Genero modificarGenero(String genero, String idGenero) throws ElementoNoEncontradoException;
+	/**
+	 * metodo que lista todos los generos
+	 * @return
+	 * @throws Exception
+	 */
+	 List<Genero> listarGenero() throws Exception;
 }

@@ -42,14 +42,14 @@ public class ManejadorEscenarios {
 	@FXML
 	private ScrollPane scrollPanel;
 	
-	/**
-	 * para almacenar empleados observables
-	 */
-	private ObservableList<EmpleadoObservable> empleadosObservables;
-	/**
-	 * conexion con capa de negocio
-	 */
-	private AdministradorDelegado administradorDelegado;
+//	/**
+//	 * para almacenar empleados observables
+//	 */
+//	private ObservableList<EmpleadoObservable> empleadosObservables;
+//	/**
+//	 * conexion con capa de negocio
+//	 */
+//	private AdministradorDelegado administradorDelegado;
 
 	/**
 	 * recibe el escenario principla de la aplicacion
@@ -58,7 +58,7 @@ public class ManejadorEscenarios {
 	 */
 	public ManejadorEscenarios(Stage escenario) {
 
-		administradorDelegado = AdministradorDelegado.administradorDelegado;
+		//administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
 
 		try {
@@ -75,8 +75,8 @@ public class ManejadorEscenarios {
 			pc.setEscenarioInicial(this);
 			
 			cargarEscenaEmpleado();
-			cargarEscenaPlanta();
-			cargarEscenaNavegacion();
+//			cargarEscenaPlanta();
+//			cargarEscenaNavegacion();
 			
 			// se carga la escena
 			Scene scene = new Scene(scrollPanel);
@@ -98,14 +98,13 @@ public class ManejadorEscenarios {
 	public void cargarEscenaEmpleado() {
 
 		try {
-
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
 			BorderPane panel = (BorderPane) loader2.load();
 			((BorderPane)scrollPanel.getContent()).setCenter(panel);
 			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -185,23 +184,23 @@ public class ManejadorEscenarios {
 		}
 
 	}
-
-	/**
-	 * 
-	 * @return empleados observables
-	 */
-	public ObservableList<EmpleadoObservable> getEmpleadosObservables() {
-		return empleadosObservables;
-	}
-
-	/**
-	 * permite agrega una liente a la lista obsevable
-	 * 
-	 * @param empleado
-	 */
-	public void agregarALista(Persona empleado) {
-		empleadosObservables.add(new EmpleadoObservable(empleado));
-	}
+//
+//	/**
+//	 * 
+//	 * @return empleados observables
+//	 */
+//	public ObservableList<EmpleadoObservable> getEmpleadosObservables() {
+//		return empleadosObservables;
+//	}
+//
+//	/**
+//	 * permite agrega una liente a la lista obsevable
+//	 * 
+//	 * @param empleado
+//	 */
+//	public void agregarALista(Persona empleado) {
+//		empleadosObservables.add(new EmpleadoObservable(empleado));
+//	}
 
 	/**
 	 * deveulve una instancia del escenario
@@ -212,28 +211,28 @@ public class ManejadorEscenarios {
 		return escenario;
 	}
 
-	/**
-	 * permite registrar una persona en la base de datos
-	 * 
-	 * @param empleado a registrar
-	 * @return true si quedo registrado
-	 */
-	public boolean registrarEmpleado(Empleado empleado) throws Exception{
-		//try {
-			return administradorDelegado.registrarEmpleado(empleado);
-		//} catch (Exception e) {
-			//e.printStackTrace();
-		//}
-	}
-
-	/**
-	 * permite eliminar un empleado
-	 * 
-	 * @param empleado a ser eliminado
-	 * @return true si fue eliminado false si no
-	 */
-	public boolean eliminarEmpleado(Empleado empleado) {
-		return administradorDelegado.eliminarEmpleado(empleado);
-	}
+//	/**
+//	 * permite registrar una persona en la base de datos
+//	 * 
+//	 * @param empleado a registrar
+//	 * @return true si quedo registrado
+//	 */
+//	public boolean registrarEmpleado(Empleado empleado) throws Exception{
+//		//try {
+//			return administradorDelegado.registrarEmpleado(empleado)!=null;
+//		//} catch (Exception e) {
+//			//e.printStackTrace();
+//		//}
+//	}
+//
+//	/**
+//	 * permite eliminar un empleado
+//	 * 
+//	 * @param empleado a ser eliminado
+//	 * @return true si fue eliminado false si no
+//	 */
+//	public boolean eliminarEmpleado(Empleado empleado) {
+//		return administradorDelegado.eliminarEmpleado(empleado);
+//	}
 
 }

@@ -78,14 +78,12 @@ public class PruebaPlanta {
 	public void persistirPlantaTest() {
 
 		Familia familia = new Familia();
-		familia.setIdFamilia("familia4");
 		familia.setFamilia("Rubiaceae");
 
 		entityManager.persist(familia);
 
 		Genero genero = new Genero();
 		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
-		genero.setIdGenero("genero4");
 		genero.setGenero("Naucleaceae");
 		familia.addGenero(genero);
 
@@ -93,7 +91,6 @@ public class PruebaPlanta {
 
 		Planta planta = new Planta();
 		planta.setGenero(genero);
-		planta.setIdPlanta("666");
 		planta.setNombre("Rubia peregrina");
 
 		entityManager.persist(planta);
@@ -149,14 +146,12 @@ public class PruebaPlanta {
 	public void persistirFamiliaAndGeneroTest() {
 
 		Familia familia = new Familia();
-		familia.setIdFamilia("familia4");
 		familia.setFamilia("Rubiaceae");
 
 		entityManager.persist(familia);
 
 		Genero genero = new Genero();
 		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
-		genero.setIdGenero("genero4");
 		genero.setGenero("Naucleaceae");
 		familia.addGenero(genero);
 
@@ -176,14 +171,12 @@ public class PruebaPlanta {
 	public void persistirFamiliaTest() {
 
 		Familia familia = new Familia();
-		familia.setIdFamilia("familia4");
 		familia.setFamilia("Rubiaceae");
 
 		entityManager.persist(familia);
 
 		Genero genero = new Genero();
 		genero.setFamilia(entityManager.find(Familia.class, "familia4"));
-		genero.setIdGenero("genero4");
 		genero.setGenero("Naucleaceae");
 		familia.addGenero(genero);
 

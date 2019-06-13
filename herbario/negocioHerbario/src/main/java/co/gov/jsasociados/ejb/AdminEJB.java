@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
-import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
+import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
@@ -54,10 +54,11 @@ public class AdminEJB implements AdminEJBRemote {
 		} else if (buscarPorUsuario(empleado.getCuenta().getUsuario()) != null) {
 			throw new ElementoRepetidoException("La persona con el usuario ya esta registrada");
 		}
-		
+
 		try {
+			entityManager.persist(empleado.getCuenta());
 			entityManager.persist(empleado);
-			return empleado;
+			return buscarEmpleado(empleado.getCedula());
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(String.format("Error al insertar un empleado %", empleado.toString()));
@@ -80,8 +81,9 @@ public class AdminEJB implements AdminEJBRemote {
 			throw new ElementoRepetidoException("La persona con el usuario ya esta registrada");
 		}
 		try {
+			entityManager.persist(recolector.getCuenta());
 			entityManager.persist(recolector);
-			return recolector;
+			return buscarRecolector(recolector.getCedula());
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
@@ -159,7 +161,7 @@ public class AdminEJB implements AdminEJBRemote {
 
 		try {
 			entityManager.merge(empleado);
-			return (Empleado) empleado;
+			return buscarEmpleado(cedula);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
@@ -193,7 +195,7 @@ public class AdminEJB implements AdminEJBRemote {
 
 		try {
 			entityManager.merge(recolector);
-			return (Recolector) recolector;
+			return buscarRecolector(cedula);
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
@@ -243,7 +245,7 @@ public class AdminEJB implements AdminEJBRemote {
 	public Empleado buscarEmpleado(String cedula) throws PersonaNoRegistradaException, TipoClaseException {
 		Persona empleado = entityManager.find(Persona.class, cedula);
 		if (empleado == null) {
-			throw new PersonaNoRegistradaException("La persona a la que quiere buscar esta registrada");
+			throw new PersonaNoRegistradaException("La persona a la que quiere buscar no esta registrada");
 		} else if (!(empleado.getClass().equals(Empleado.class))) {
 			throw new TipoClaseException("La persona a la que busca no es un empleado");
 		}
@@ -258,46 +260,225 @@ public class AdminEJB implements AdminEJBRemote {
 	public Recolector buscarRecolector(String cedula) throws PersonaNoRegistradaException, TipoClaseException {
 		Persona recolector = entityManager.find(Persona.class, cedula);
 		if (recolector == null) {
-			throw new PersonaNoRegistradaException("La persona a la que quiere buscar esta registrada");
+			throw new PersonaNoRegistradaException("La persona a la que quiere buscar no esta registrada");
 		} else if (!(recolector.getClass().equals(Recolector.class))) {
 			throw new TipoClaseException("La persona a la que busca no es un recolector");
 		}
 		return (Recolector) recolector;
 	}
+
 	/*
 	 * (non-Javadoc)
-	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#insertarFamilia(co.gov.jsasociados.Familia)
+	 * 
+	 * @see
+	 * co.gov.jsasociados.ejb.AdminEJBRemote#insertarFamilia(co.gov.jsasociados.
+	 * Familia)
 	 */
 	public Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption {
-		if (buscarFamilia(familia.getFamilia())!=null) {
+		if (buscarFamilia(familia.getFamilia()) != null) {
 			throw new FamiliaYaRegistradaExeption("La familia ya se encuentra registrada");
-		}else {
+		} else {
 			try {
 				entityManager.persist(familia);
-				return	buscarFamilia(familia.getFamilia());
+				return buscarFamilia(familia.getFamilia());
 			} catch (Exception e) {
 				// TODO: handle exception
 				return null;
 			}
 		}
-		
+
 	}
-	/**
-	 * metodo que permite buscar una familia por su nombre
-	 * @param famila
-	 * @return
+
+	//// parte para agregar en empleadoEJB
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#eliminarFamilia(java.lang.String)
 	 */
-	private Familia buscarFamilia(String famila) {
+	public boolean eliminarFamilia(String idFamilia) throws ElementoNoEncontradoException {
+		Familia familia = entityManager.find(Familia.class, idFamilia);
+		if (familia == null) {
+			throw new ElementoNoEncontradoException("La familia a eliminiar no se encuentra registrada");
+		}
 		try {
-			TypedQuery<Familia> query= entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
+			entityManager.remove(familia);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarFamilia(java.lang.String,
+	 * java.lang.String)
+	 */
+	public Familia modificarFamilia(String nombre, String idFamilia) throws ElementoNoEncontradoException {
+		Familia familia = entityManager.find(Familia.class, idFamilia);
+		if (familia == null) {
+			throw new ElementoNoEncontradoException(
+					"La familia a la que quiere modificar los datos no esta registrada");
+		}
+
+		// Esto previamente por interfaz debe de estar validado para que no este vacio
+//			familia.setFamilia(nombre == ""? familia.getFamilia():nombre);
+//			familia.setIdFamilia(idFamilia == ""? familia.getIdFamilia():idFamilia);
+		familia.setFamilia(nombre);
+		try {
+			entityManager.merge(familia);
+			return buscarFamilia(familia.getFamilia());
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarFamilias()
+	 */
+	public List<Familia> listarFamilias() throws Exception {
+		try {
+			TypedQuery<Familia> query = entityManager.createNamedQuery(Familia.LISTAR_FAMILIAS, Familia.class);
+			List<Familia> familias = query.getResultList();
+			return familias;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarFamilia(java.lang.String)
+	 */
+	public Familia buscarFamilia(String famila) {
+		try {
+			TypedQuery<Familia> query = entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
 			query.setParameter("familia", famila);
 			return query.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 			return null;
 		}
-		
+
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * co.gov.jsasociados.ejb.AdminEJBRemote#registrarGenero(co.gov.jsasociados.
+	 * Genero)
+	 */
+	public Genero registrarGenero(Genero genero) throws ElementoRepetidoException {
+		if (buscarGenero(genero.getGenero()) != null) {
+			throw new ElementoRepetidoException("El genero ya se encuentra registrado");
+		} else {
+			try {
+				entityManager.persist(genero);
+				return buscarGeneroId(genero.getIdGenero());
+			} catch (Exception e) {
+				// TODO: handle exception
+				return null;
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#elimiarGenero(java.lang.String)
+	 */
+	public boolean elimiarGenero(String idGenero) throws ElementoNoEncontradoException {
+		Genero genero = entityManager.find(Genero.class, idGenero);
+		if (genero == null) {
+			throw new ElementoNoEncontradoException("El genero a eliminar no se encuentra registrado");
+		}
+		try {
+			entityManager.remove(genero);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarGenero(java.lang.String,
+	 * java.lang.String)
+	 */
+	public Genero modificarGenero(String genero, String idGenero) throws ElementoNoEncontradoException {
+		Genero gen = entityManager.find(Genero.class, idGenero);
+		if (gen == null) {
+			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");
+		}
+
+		// Esto previamente por interfaz debe de estar validado para que no este vacio
+//				familia.setFamilia(nombre == ""? familia.getFamilia():nombre);
+//				familia.setIdFamilia(idFamilia == ""? familia.getIdFamilia():idFamilia);
+		gen.setGenero(genero);
+		try {
+			entityManager.merge(gen);
+			return buscarGeneroId(gen.getIdGenero());
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarGenero()
+	 */
+	public List<Genero> listarGenero() throws Exception {
+		try {
+			TypedQuery<Genero> query = entityManager.createNamedQuery(Genero.OBTENER_GENEROS, Genero.class);
+			List<Genero> generos = query.getResultList();
+			return generos;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarGenero(java.lang.String)
+	 */
+	public Genero buscarGenero(String genero) {
+		try {
+			TypedQuery<Genero> gen = entityManager.createNamedQuery(Genero.OBTENER_GENERO, Genero.class);
+			gen.setParameter("genero", genero);
+			return gen.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
+	/**
+	 * metodo que permite buscar un genenero pos su id
+	 * 
+	 * @param idGenero
+	 * @return
+	 */
+	private Genero buscarGeneroId(Long idGenero) {
+		try {
+
+			return entityManager.find(Genero.class, idGenero);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+
 	/**
 	 * metodo que permite buscar un empleado por su usuario
 	 * 

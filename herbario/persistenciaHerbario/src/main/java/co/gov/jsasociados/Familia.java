@@ -39,7 +39,7 @@ public class Familia implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	
-	private String idFamilia;
+	private Long idFamilia;
 	/**
 	 * nombre de una familia 
 	 */
@@ -62,16 +62,10 @@ public class Familia implements Serializable {
 	/**
 	 * @return the idFamilia
 	 */
-	public String getIdFamilia() {
+	public Long getIdFamilia() {
 		return idFamilia;
 	}
 
-	/**
-	 * @param idFamilia the idFamilia to set
-	 */
-	public void setIdFamilia(String idFamilia) {
-		this.idFamilia = idFamilia;
-	}
 
 	/**
 	 * @return the familia
