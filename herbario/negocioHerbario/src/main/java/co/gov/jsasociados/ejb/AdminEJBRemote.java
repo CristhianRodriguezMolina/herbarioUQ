@@ -151,7 +151,7 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	boolean eliminarFamilia(String idFamilia) throws ElementoNoEncontradoException;
+	boolean eliminarFamilia(Long idFamilia) throws ElementoNoEncontradoException;
 	
 	/**
 	 * metodo que permite modificar el nombre de una familia
@@ -160,7 +160,7 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	Familia modificarFamilia(String nombre, String idFamilia) throws ElementoNoEncontradoException;
+	Familia modificarFamilia(String nombre, Long idFamilia) throws ElementoNoEncontradoException;
 	
 	/**
 	 * metodo que obtiene la lista de las familias registradas
@@ -190,7 +190,7 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	boolean elimiarGenero(String idGenero) throws ElementoNoEncontradoException;
+	boolean elimiarGenero(Long idGenero) throws ElementoNoEncontradoException;
 	/**
 	 * metodo que permite modificar el nombre de un genero
 	 * @param genero - nombre del genero
@@ -198,7 +198,7 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	Genero modificarGenero(String genero, String idGenero) throws ElementoNoEncontradoException;
+	Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException;
 	/**
 	 * metodo que lista todos los generos
 	 * @return

@@ -43,11 +43,11 @@ public class ConfiguracionEJB {
 			Administrador administrador = new Administrador();
 
 			administrador.setCedula("1004915534");
-			administrador.setNombre("Carlos Antonio");
+			administrador.setNombre("Alfonso");
 			administrador.setApellidos("Osorio Rodriguez");
 			administrador.setCorreo("correo@mail.com");
 			administrador.setDireccion("por ahi");
-
+			administrador.setTelefono("21454");
 			Cuenta cuenta = new Cuenta();
 			cuenta.setUsuario("Admin");
 			cuenta.setContrasenia("admin321");

@@ -295,7 +295,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#eliminarFamilia(java.lang.String)
 	 */
-	public boolean eliminarFamilia(String idFamilia) throws ElementoNoEncontradoException {
+	public boolean eliminarFamilia(Long idFamilia) throws ElementoNoEncontradoException {
 		Familia familia = entityManager.find(Familia.class, idFamilia);
 		if (familia == null) {
 			throw new ElementoNoEncontradoException("La familia a eliminiar no se encuentra registrada");
@@ -314,7 +314,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarFamilia(java.lang.String,
 	 * java.lang.String)
 	 */
-	public Familia modificarFamilia(String nombre, String idFamilia) throws ElementoNoEncontradoException {
+	public Familia modificarFamilia(String nombre, Long idFamilia) throws ElementoNoEncontradoException {
 		Familia familia = entityManager.find(Familia.class, idFamilia);
 		if (familia == null) {
 			throw new ElementoNoEncontradoException(
@@ -393,7 +393,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#elimiarGenero(java.lang.String)
 	 */
-	public boolean elimiarGenero(String idGenero) throws ElementoNoEncontradoException {
+	public boolean elimiarGenero(Long idGenero) throws ElementoNoEncontradoException {
 		Genero genero = entityManager.find(Genero.class, idGenero);
 		if (genero == null) {
 			throw new ElementoNoEncontradoException("El genero a eliminar no se encuentra registrado");
@@ -412,7 +412,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarGenero(java.lang.String,
 	 * java.lang.String)
 	 */
-	public Genero modificarGenero(String genero, String idGenero) throws ElementoNoEncontradoException {
+	public Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException {
 		Genero gen = entityManager.find(Genero.class, idGenero);
 		if (gen == null) {
 			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");

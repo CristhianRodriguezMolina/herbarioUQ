@@ -38,7 +38,6 @@ public class Familia implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	
 	private Long idFamilia;
 	/**
 	 * nombre de una familia 
