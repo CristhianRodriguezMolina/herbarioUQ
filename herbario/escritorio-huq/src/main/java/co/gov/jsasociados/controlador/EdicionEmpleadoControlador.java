@@ -81,30 +81,30 @@ public class EdicionEmpleadoControlador {
 	/**
 	 * permite registrar una persona en la base de datos
 	 */
-	@FXML
-	public void registrarPersona() {
-
-		Empleado persona = new Empleado();
-		persona.setCedula(cmpCedula.getText());
-		persona.setNombre(cmpNombre.getText());
-		persona.setApellidos(cmpApellido.getText());
-//		persona.setClave(cmpClave.getText());
-		persona.setCorreo(cmpEmail.getText());
-//		persona.setFechaNacimiento(Utilidades.pasarADate(cmpFechaNacimiento.getValue()));
-
-		try {
-			if (manejador.registrarEmpleado(persona)) {
-				manejador.agregarALista(persona);
-				Utilidades.mostrarMensaje("Registro", "Registro exitoso!!");
-				escenarioEditar.close();
-			} else {
-				Utilidades.mostrarMensaje("Registro", "Error en registro!!");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	@FXML
+//	public void registrarPersona() {
+//
+//		Empleado persona = new Empleado();
+//		persona.setCedula(cmpCedula.getText());
+//		persona.setNombre(cmpNombre.getText());
+//		persona.setApellidos(cmpApellido.getText());
+////		persona.setClave(cmpClave.getText());
+//		persona.setCorreo(cmpEmail.getText());
+////		persona.setFechaNacimiento(Utilidades.pasarADate(cmpFechaNacimiento.getValue()));
+//
+//		try {
+//			if (manejador.registrarEmpleado(persona)) {
+//				manejador.agregarALista(persona);
+//				Utilidades.mostrarMensaje("Registro", "Registro exitoso!!");
+//				escenarioEditar.close();
+//			} else {
+//				Utilidades.mostrarMensaje("Registro", "Error en registro!!");
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * permite editar la informacion de una persona

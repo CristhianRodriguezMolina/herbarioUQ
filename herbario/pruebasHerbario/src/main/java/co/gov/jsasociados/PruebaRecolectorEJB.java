@@ -106,15 +106,12 @@ public class PruebaRecolectorEJB {
 
 		Familia familia=new Familia();
 		familia.setFamilia("abc");
-		familia.setIdFamilia("familia2");
 		
 		Genero genero=new Genero();
-		genero.setIdGenero("genero3");
 		genero.setFamilia(familia);
 		genero.setGenero("gen1");
 		
 		Planta planta=new Planta();
-		planta.setIdPlanta("222");
 		planta.setGenero(genero);
 				
 		try {

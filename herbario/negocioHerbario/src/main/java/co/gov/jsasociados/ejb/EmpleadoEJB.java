@@ -86,7 +86,7 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 
 		// Esto previamente por interfaz debe de estar validado para que no este vacio
 		familia.setFamilia(nombre == ""? familia.getFamilia():nombre);
-		familia.setIdFamilia(idFamilia == ""? familia.getIdFamilia():idFamilia);
+		//familia.setIdFamilia(idFamilia == ""? familia.getIdFamilia():idFamilia);
 
 		try {
 			entityManager.merge(familia);

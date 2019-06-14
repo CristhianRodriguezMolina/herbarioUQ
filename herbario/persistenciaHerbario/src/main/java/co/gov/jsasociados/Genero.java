@@ -17,21 +17,26 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 
-@NamedQuery(name = Genero.OBTENER_PLANTAS, query="select planta from Genero genero INNER JOIN genero.plantas planta where genero.idGenero=:idGenero")
+@NamedQuery(name = Genero.OBTENER_PLANTAS, query="select planta from Genero genero INNER JOIN genero.plantas planta where genero.idGenero=:idGenero"),
+@NamedQuery(name = Genero.OBTENER_GENERO, query="select genero from Genero genero where genero.genero=:genero"),
+@NamedQuery(name = Genero.OBTENER_GENEROS, query="select genero from Genero genero")
 }
 )
 public class Genero implements Serializable {
 	
 	public static final String OBTENER_PLANTAS= "obtener plantas";
+	public static final String OBTENER_GENERO= "obtener un genero por su nombre";
+	public static final String OBTENER_GENEROS= "obtener el listado de generos";
 	
 	/**
 	 * identificador unico de un genero
 	 */
 	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	private String idGenero;
+	private Long idGenero;
 	/**
-	 * genero
+	 * nombre del genero
 	 */
 	@Column(length=30, unique=true, nullable=false)
 	private String genero;
@@ -52,16 +57,10 @@ public class Genero implements Serializable {
 	/**
 	 * @return the idGenero
 	 */
-	public String getIdGenero() {
+	public Long getIdGenero() {
 		return idGenero;
 	}
 
-	/**
-	 * @param idGenero the idGenero to set
-	 */
-	public void setIdGenero(String idGenero) {
-		this.idGenero = idGenero;
-	}
 
 	/**
 	 * @return the genero
