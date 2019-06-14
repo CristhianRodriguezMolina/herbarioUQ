@@ -13,7 +13,9 @@ import javax.persistence.TypedQuery;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
@@ -240,6 +242,106 @@ public class EmpleadoEJB implements EmpleadoEJBRemote {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+    
+    /*
+     * (non-Javadoc)
+     * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#registrarEspecie(co.gov.jsasociados.Planta)
+     */
+	public Planta registrarEspecie(Planta planta) throws ElementoRepetidoException {
+		if (buscarPlanta(planta.getNombre()) != null) {
+			throw new ElementoRepetidoException("La planta ya se encuentra registrada");
+		} else {
+			try {
+				entityManager.persist(planta);
+				return buscarPlantaId(planta.getIdPlanta());
+			} catch (Exception e) {
+				// TODO: handle exception
+				return null;
+			}
+		}
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#elimiarEspecie(java.lang.Long)
+	 */
+	public boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException {
+		Planta planta = entityManager.find(Planta.class, idPlanta);
+		if (planta == null) {
+			throw new ElementoNoEncontradoException("La planta a eliminar no se encuentra registrada");
+		}
+		try {
+			entityManager.remove(planta);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#modificarEspecie(java.lang.String, java.lang.Long)
+	 */
+	public Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException {
+		Planta plant = entityManager.find(Planta.class, idPlanta);
+		if (plant == null) {
+			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");
+		}
+
+		// Esto previamente por interfaz debe de estar validado para que no este vacio
+		plant.setNombre(planta);
+		try {
+			entityManager.merge(plant);
+			return buscarPlantaId(plant.getIdPlanta());
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#listarPlanta()
+	 */
+	public List<Planta> listarPlanta() throws Exception {
+		try {
+			TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS, Planta.class);
+			List<Planta> plantas = query.getResultList();
+			return plantas;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.EmpleadoEJBRemote#buscarPlanta(java.lang.String)
+	 */
+	public Planta buscarPlanta(String nombrePlanta) {
+		try {
+			TypedQuery<Planta> query = entityManager.createNamedQuery(Planta.OBTENER_PLANTA_POR_NOMBRE, Planta.class);
+			query.setParameter("nombre", nombrePlanta);
+			return query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+	
+	/**
+	 * metodo que permite buscar una planta por su id
+	 * 
+	 * @param idPlanta
+	 * @return
+	 */
+	private Planta buscarPlantaId(Long idPlanta) {
+		try {
+			return entityManager.find(Planta.class, idPlanta);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 }

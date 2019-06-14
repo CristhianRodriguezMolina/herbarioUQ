@@ -5,7 +5,9 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import co.gov.jsasociados.Familia;
+import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
@@ -95,5 +97,42 @@ public interface EmpleadoEJBRemote {
      */
     public Recolector buscarRecolector(String cedula) throws PersonaNoRegistradaException, TipoClaseException;
     
-    
+    /**
+	  * Metodo para registrar una especie
+	  * @param planta
+	  * @return
+	  * @throws ElementoRepetidoException
+	  */
+	 Planta registrarEspecie(Planta planta) throws ElementoRepetidoException;
+	 
+	 /**
+	  * metodo para eliminar una especie
+	  * @param idPlanta
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  */
+	 boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException;
+	 
+	 /**
+	  * Metodo para modificar una especie
+	  * @param planta
+	  * @param idPlanta
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  */
+	 Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException;
+	 
+	 /**
+	  * metodo para listar las plantas registradas
+	  * @return
+	  * @throws Exception
+	  */
+	 List<Planta> listarPlanta() throws Exception;
+	 
+	 /**
+	  * Metodo para buscar una planta
+	  * @param nombrePlanta
+	  * @return
+	  */
+	 Planta buscarPlanta(String nombrePlanta);
 }
