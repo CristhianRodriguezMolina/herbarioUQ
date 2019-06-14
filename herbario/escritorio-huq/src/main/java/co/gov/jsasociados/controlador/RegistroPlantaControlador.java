@@ -1,9 +1,14 @@
 package co.gov.jsasociados.controlador;
 
 import java.io.File;
+import java.io.IOException;
 
+import co.gov.jsasociados.Planta;
+import co.gov.jsasociados.modelo.AdministradorDelegado;
+import co.gov.jsasociados.util.Utilidades;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -53,14 +58,48 @@ public class RegistroPlantaControlador {
     @FXML
     private Button btnBuscar;
     /**
+     * 
+     */
+    @FXML
+    private Button btnRegistrarPlanta;
+    
+    @FXML
+    private TableColumn<?, ?> idColumna;
+
+    @FXML
+    private TableColumn<?, ?> nombreColumna;
+
+    @FXML
+    private TableColumn<?, ?> imagenColumna;
+    
+    
+    //VARIABLES NECESARIAS
+    /**
+     * Ruta de la imagen de la planta
+     */
+    private String rutaImagen;
+    /**
 	 * instancia del manejador de escenario
 	 */
 	private ManejadorEscenarios escenarioInicial;
+	/**
+	 * Instancia del administrador delegado
+	 */
+	private AdministradorDelegado administradorDelegado;
 	
 	@FXML
 	void iniatilize()
 	{
 		
+	}
+	
+	@FXML
+	void registrarEspecie() throws Exception {
+		
+		Planta p = new Planta();
+		p.setNombre(txtNombreEspecie.getText());
+		p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
+		administradorDelegado.registrarEspecie(p);
 	}
 	
 	/**
@@ -69,6 +108,7 @@ public class RegistroPlantaControlador {
 	 * @param escenarioInicial
 	 */
 	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial) {
+		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenarioInicial = escenarioInicial;
 	}
     

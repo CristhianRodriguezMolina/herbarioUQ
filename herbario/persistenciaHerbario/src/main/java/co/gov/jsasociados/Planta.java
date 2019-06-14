@@ -14,6 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
+	@NamedQuery(name = Planta.OBTENER_PLANTA_POR_NOMBRE, query="select planta from Planta planta where planta.nombre=:nombre"),
 	@NamedQuery(name = Planta.OBTENER_FAMILIA_PLANTA, query="select planta.genero.familia from Planta planta where planta.idPlanta=:idPlanta"),
 	@NamedQuery(name = Planta.LISTAR_PLANTAS, query = "select planta from Planta planta"),
 	@NamedQuery(name = Planta.LISTAR_PLANTAS_POR_APROVACION, query = "select DISTINCT registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
@@ -26,6 +27,7 @@ import javax.persistence.*;
 })
 public class Planta implements Serializable {
 	
+	public static final String OBTENER_PLANTA_POR_NOMBRE = "Obtener planta por nombre";
 	public static final String OBTENER_FAMILIA_PLANTA="obnter familia planta";
 	public static final String LISTAR_PLANTAS = "listar Plantas";
 	public static final String LISTAR_PLANTAS_POR_APROVACION = "listar Plantas por aprovacion";
@@ -39,8 +41,8 @@ public class Planta implements Serializable {
 	/**
 	 * id unico de la Planta
 	 */	
-	@Column(unique=true, nullable=false)
 	@Id
+	@Column(unique=true, nullable=false)	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPlanta;
 	/**
@@ -57,7 +59,7 @@ public class Planta implements Serializable {
 	 * Imagen relacionada a la planta
 	 */
 	@Lob
-//	@Column(name = "imagen")
+	@Column(name = "imagen")
 	private byte[] imagen;
 	/**
 	 * Registro de la Planta
@@ -96,16 +98,16 @@ public class Planta implements Serializable {
 	/**
 	 * @return the imagen
 	 */
-//	public byte[] getImagen() {
-//		return imagen;
-//	}
-//
-//	/**
-//	 * @param imagen the imagen to set
-//	 */
-//	public void setImagen(byte[] imagen) {
-//		this.imagen = imagen;
-//	}
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

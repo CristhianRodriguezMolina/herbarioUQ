@@ -1,7 +1,7 @@
 package co.gov.jsasociados.controlador;
 
 import co.gov.jsasociados.Empleado;
-import co.gov.jsasociados.modelo.EmpleadoObservable;
+//import co.gov.jsasociados.modelo.EmpleadoObservable;
 import co.gov.jsasociados.util.Utilidades;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -67,16 +67,16 @@ public class EdicionEmpleadoControlador {
 	 * 
 	 * @param empleado empleado a editar
 	 */
-	public void cargarPersona(EmpleadoObservable empleado) {
-		
-		cmpCedula.setText(empleado.getCedula().getValue());
-		cmpNombre.setText(empleado.getNombre().getValue());
-		cmpApellido.setText(empleado.getApellido().getValue());
-		cmpEmail.setText(empleado.getEmail().getValue());
-		cmpClave.setText(empleado.getClave().getValue());
-		cmpFechaNacimiento.setValue(Utilidades.pasarALocalDate(empleado.getFechaNacimiento().getValue()));
-
-	}
+//	public void cargarPersona(EmpleadoObservable empleado) {
+//		
+//		cmpCedula.setText(empleado.getCedula().getValue());
+//		cmpNombre.setText(empleado.getNombre().getValue());
+//		cmpApellido.setText(empleado.getApellido().getValue());
+//		cmpEmail.setText(empleado.getEmail().getValue());
+//		cmpClave.setText(empleado.getClave().getValue());
+//		cmpFechaNacimiento.setValue(Utilidades.pasarALocalDate(empleado.getFechaNacimiento().getValue()));
+//
+//	}
 
 	/**
 	 * permite registrar una persona en la base de datos

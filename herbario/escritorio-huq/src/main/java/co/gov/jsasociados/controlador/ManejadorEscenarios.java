@@ -58,7 +58,7 @@ public class ManejadorEscenarios {
 	 */
 	public ManejadorEscenarios(Stage escenario) {
 
-		//administradorDelegado = AdministradorDelegado.administradorDelegado;
+//		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
 
 		try {
@@ -266,13 +266,13 @@ public class ManejadorEscenarios {
 //		return administradorDelegado.eliminarEmpleado(empleado);
 //	}
 
-	/**
-	 * permite registrar una planta en la base de datos
-	 * 
-	 * @param planta a registrar
-	 * @return true si quedo registrado
-	 */
+//	/**
+//	 * permite registrar una planta en la base de datos
+//	 * 
+//	 * @param planta a registrar
+//	 * @return true si quedo registrado
+//	 */
 //	public boolean registrarPlanta(Planta planta) throws Exception{
-//			return administradorDelegado.(planta);
+//			return administradorDelegado.registrarEspecie(planta) != null;
 //	}
 }

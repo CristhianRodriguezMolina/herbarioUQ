@@ -1,9 +1,18 @@
 package co.gov.jsasociados.util;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+
+import javax.imageio.ImageIO;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,7 +34,7 @@ public final class Utilidades {
 		alert.setHeaderText(titulo);
 		alert.setContentText(mensaje);
 		alert.showAndWait();	
-	}
+	}	
 	
 	/**
 	 * permite hacer un casting de localDate a Date
@@ -44,6 +53,17 @@ public final class Utilidades {
 	public static LocalDate pasarALocalDate(Date date) {
 		 return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 	}
+	
+	public static byte[] convertirImagenABytes(String ruta) throws IOException {
+		
+		BufferedImage bufferedImage = ImageIO.read(new File(ruta));
+
+        WritableRaster raster = bufferedImage.getRaster();
+        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
+
+        return (data.getData());
+	}
+	
 	
 	
 }

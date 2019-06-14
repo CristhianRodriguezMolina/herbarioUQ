@@ -12,6 +12,7 @@ import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasociados.ejb.AdminEJBRemote;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
@@ -289,6 +290,40 @@ public class AdministradorDelegado {
 	 */
 	public Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException {
 		return adminEJB.modificarGenero(genero, idGenero);
+	}
+	
+	/**
+	 * metodo que permite agregar una especie
+	 * 
+	 * @param planta
+	 * @return
+	 * @throws ElementoRepetidoException
+	 */
+	public Planta registrarEspecie(Planta planta) throws ElementoRepetidoException {
+		return adminEJB.registrarEspecie(planta);
+	}
+
+	/**
+	 * metodo que permite eliminar un genero
+	 * 
+	 * @param idPlanta
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 */
+	public boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException {
+		return adminEJB.elimiarEspecie(idPlanta);
+	}
+
+	/**
+	 * metodo que permite modificar el nombre de un genero
+	 * 
+	 * @param nombrePlanta   - nombre del genero
+	 * @param idPlanta
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 */
+	public Planta modificarEspecie(String nombrePlanta, Long idPlanta) throws ElementoNoEncontradoException {
+		return adminEJB.modificarEspecie(nombrePlanta, idPlanta);
 	}
 
 	/**

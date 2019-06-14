@@ -4,7 +4,7 @@
 package co.gov.jsasociados.controlador;
 
 import co.gov.jsasociados.Empleado;
-import co.gov.jsasociados.modelo.EmpleadoObservable;
+//import co.gov.jsasociados.modelo.EmpleadoObservable;
 import co.gov.jsasociados.util.Utilidades;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,18 +19,18 @@ public class EmpleadoControlador {
 	/**
 	 * table donde se almacena la informacion de los empleados
 	 */
-	@FXML
-	private TableView<EmpleadoObservable> tablaEmpleados;
+//	@FXML
+//	private TableView<EmpleadoObservable> tablaEmpleados;
 	/**
 	 * hace referencia a la columna con las cedulas
 	 */
-	@FXML
-	private TableColumn<EmpleadoObservable, String> cedulaColumna;
+//	@FXML
+//	private TableColumn<EmpleadoObservable, String> cedulaColumna;
 	/**
 	 * hace referencia a la columna de los nombres de los empleados
 	 */
-	@FXML
-	private TableColumn<EmpleadoObservable, String> nombreColumna;
+//	@FXML
+//	private TableColumn<EmpleadoObservable, String> nombreColumna;
 	/**
 	 * etiqueta de cedula
 	 */
@@ -66,7 +66,7 @@ public class EmpleadoControlador {
 	 */
 	private ManejadorEscenarios escenarioInicial;
 
-	private EmpleadoObservable empleadoObservable;
+//	private EmpleadoObservable empleadoObservable;
 
 	public EmpleadoControlador() {
 	}
@@ -78,13 +78,13 @@ public class EmpleadoControlador {
 	@FXML
 	private void initialize() {
 
-		cedulaColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
-		nombreColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombre()); 
- 
-		mostrarDetalleEmpleado(null);
-
-		tablaEmpleados.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> mostrarDetalleEmpleado(newValue));
+//		cedulaColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
+//		nombreColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombre()); 
+// 
+//		mostrarDetalleEmpleado(null);
+//
+//		tablaEmpleados.getSelectionModel().selectedItemProperty()
+//				.addListener((observable, oldValue, newValue) -> mostrarDetalleEmpleado(newValue));
 
 	}
 
@@ -103,35 +103,35 @@ public class EmpleadoControlador {
 	 * 
 	 * @param empleado empleado al que se le desea mostrar el detalle
 	 */
-	public void mostrarDetalleEmpleado(EmpleadoObservable empleado) {
-
-		if (empleado != null) {
-			empleadoObservable = empleado;
-			txtCedula.setText(empleado.getCedula().getValue());
-			txtNombre.setText(empleado.getNombre().getValue());
-			txtApellido.setText(empleado.getApellido().getValue());
-			txtEmail.setText(empleado.getEmail().getValue());
-			txtClave.setText(empleado.getClave().getValue());
-			txtFechaNacimiento.setText(empleado.getFechaNacimiento().getValue().toString());
-		} else {
-			txtCedula.setText("");
-			txtNombre.setText("");
-			txtApellido.setText("");
-			txtEmail.setText("");
-			txtClave.setText("");
-			txtFechaNacimiento.setText("");
-		}
-
-	}
+//	public void mostrarDetalleEmpleado(EmpleadoObservable empleado) {
+//
+//		if (empleado != null) {
+//			empleadoObservable = empleado;
+//			txtCedula.setText(empleado.getCedula().getValue());
+//			txtNombre.setText(empleado.getNombre().getValue());
+//			txtApellido.setText(empleado.getApellido().getValue());
+//			txtEmail.setText(empleado.getEmail().getValue());
+//			txtClave.setText(empleado.getClave().getValue());
+//			txtFechaNacimiento.setText(empleado.getFechaNacimiento().getValue().toString());
+//		} else {
+//			txtCedula.setText("");
+//			txtNombre.setText("");
+//			txtApellido.setText("");
+//			txtEmail.setText("");
+//			txtClave.setText("");
+//			txtFechaNacimiento.setText("");
+//		}
+//		
+//	}
 
 	/**
 	 * permite mostrar la ventana de agregar empleado
 	 */
-	@FXML
-	public void agregarEmpleado() {
-		escenarioInicial.cargarEscenarioCrearEmpleado();
-		tablaEmpleados.refresh();
-	}
+//	@FXML
+//	public void agregarEmpleado() {
+//		escenarioInicial.cargarEscenarioCrearEmpleado();
+//		tablaEmpleados.refresh();
+//	}
 
 	/**
 	 * permite eliminar un empleado seleccionado

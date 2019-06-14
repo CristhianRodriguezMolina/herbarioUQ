@@ -36,17 +36,18 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="231.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="124.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
-                      <RowConstraints fillHeight="false" maxHeight="109.0" minHeight="10.0" prefHeight="92.0" valignment="TOP" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="41.0" minHeight="2.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                      <RowConstraints fillHeight="false" maxHeight="109.0" minHeight="10.0" prefHeight="90.0" valignment="TOP" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <BorderPane prefHeight="117.0" prefWidth="200.0" style="-fx-background-color: black;" GridPane.columnIndex="1">
                            <center>
-                              <ImageView fx:id="imgImagen" fitHeight="106.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                              <ImageView fx:id="imgImagen" fitHeight="119.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
@@ -109,7 +110,7 @@
                            <center>
                               <ScrollPane vbarPolicy="NEVER" BorderPane.alignment="CENTER">
                                  <content>
-                                    <TextArea fx:id="txtaDescriptcionEspecie" prefHeight="93.0" prefWidth="231.0" wrapText="true" />
+                                    <TextArea fx:id="txtaDescripcionEspecie" prefHeight="93.0" prefWidth="231.0" wrapText="true" />
                                  </content>
                               </ScrollPane>
                            </center>
@@ -130,16 +131,22 @@
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <BorderPane prefHeight="51.0" prefWidth="186.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                           <center>
+                              <Button fx:id="btnRegistrarPlanta" mnemonicParsing="false" onAction="#registrarEspecie" prefHeight="33.0" prefWidth="157.0" text="Registrar" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
                      </children>
                   </GridPane>
                </center>
             </BorderPane>
          </center>
          <bottom>
-            <TableView prefHeight="185.0" prefWidth="787.0" BorderPane.alignment="CENTER">
+            <TableView prefHeight="176.0" prefWidth="762.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="392.0" text="C1" />
-                <TableColumn prefWidth="394.0" text="C2" />
+                <TableColumn fx:id="idColumna" editable="false" minWidth="0.0" prefWidth="254.0" text="ID" />
+                  <TableColumn fx:id="nombreColumna" editable="false" minWidth="0.0" prefWidth="254.0" text="Nombre" />
+                  <TableColumn fx:id="imagenColumna" editable="false" minWidth="0.0" prefWidth="259.0" text="Referencia" />
               </columns>
             </TableView>
          </bottom>

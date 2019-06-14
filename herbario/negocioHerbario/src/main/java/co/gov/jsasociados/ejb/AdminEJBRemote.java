@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
+import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
@@ -205,4 +206,43 @@ public interface AdminEJBRemote {
 	 * @throws Exception
 	 */
 	 List<Genero> listarGenero() throws Exception;
+	 
+	 /**
+	  * Metodo para registrar una especie
+	  * @param planta
+	  * @return
+	  * @throws ElementoRepetidoException
+	  */
+	 Planta registrarEspecie(Planta planta) throws ElementoRepetidoException;
+	 
+	 /**
+	  * metodo para eliminar una especie
+	  * @param idPlanta
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  */
+	 boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException;
+	 
+	 /**
+	  * Metodo para modificar una especie
+	  * @param planta
+	  * @param idPlanta
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  */
+	 Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException;
+	 
+	 /**
+	  * metodo para listar las plantas registradas
+	  * @return
+	  * @throws Exception
+	  */
+	 List<Planta> listarPlanta() throws Exception;
+	 
+	 /**
+	  * Metodo para buscar una planta
+	  * @param nombrePlanta
+	  * @return
+	  */
+	 Planta buscarPlanta(String nombrePlanta);
 }
