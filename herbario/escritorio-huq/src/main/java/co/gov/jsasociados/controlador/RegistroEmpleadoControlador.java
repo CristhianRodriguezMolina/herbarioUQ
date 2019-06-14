@@ -169,11 +169,11 @@ public class RegistroEmpleadoControlador {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese un numero de cedula");
 			return false;
 		}
-		if (txtNombre.getText().trim().endsWith("")) {
+		if (txtNombre.getText().trim().equals("")) {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese un nombre");
 			return false;
 		}
-		if (txtApellidos.getText().trim().endsWith("")) {
+		if (txtApellidos.getText().trim().equals("")) {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese los apellidos");
 			return false;
 		}

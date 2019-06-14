@@ -3,7 +3,6 @@
  */
 package co.gov.jsasociados.modelo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -222,7 +221,7 @@ public class AdministradorDelegado {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	public boolean eliminarFamilia(String idFamilia) throws ElementoNoEncontradoException {
+	public boolean eliminarFamilia(Long idFamilia) throws ElementoNoEncontradoException {
 		return adminEJB.eliminarFamilia(idFamilia);
 	}
 
@@ -234,7 +233,7 @@ public class AdministradorDelegado {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	public Familia modificarFamilia(String nombre, String idFamilia) throws ElementoNoEncontradoException {
+	public Familia modificarFamilia(String nombre, Long idFamilia) throws ElementoNoEncontradoException {
 		return adminEJB.modificarFamilia(nombre, idFamilia);
 	}
 
@@ -276,7 +275,7 @@ public class AdministradorDelegado {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	public boolean elimiarGenero(String idGenero) throws ElementoNoEncontradoException {
+	public boolean elimiarGenero(Long idGenero) throws ElementoNoEncontradoException {
 		return adminEJB.elimiarGenero(idGenero);
 	}
 
@@ -288,7 +287,7 @@ public class AdministradorDelegado {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	public Genero modificarGenero(String genero, String idGenero) throws ElementoNoEncontradoException {
+	public Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException {
 		return adminEJB.modificarGenero(genero, idGenero);
 	}
 
@@ -308,13 +307,27 @@ public class AdministradorDelegado {
 	 * @return todos los empleados obsevables
 	 * @throws Exception
 	 */
-	public ObservableList<EmpleadoObservable> listarEmpleadosObservables() throws Exception {
+	public ObservableList<PersonaObservable> listarEmpleadosObservables() throws Exception {
 		List<Empleado> empleados = listarEmpleado();
-		ObservableList<EmpleadoObservable> empleadosObservables = FXCollections.observableArrayList();
+		ObservableList<PersonaObservable> empleadosObservables = FXCollections.observableArrayList();
 		for (Persona persona : empleados) {
-			empleadosObservables.add(new EmpleadoObservable(persona));
+			empleadosObservables.add(new PersonaObservable(persona));
 		}
 		return empleadosObservables;
 	}
-
+	
+	/**
+	 * genera una lista de recolectores observables
+	 * 
+	 * @return todos los recolectores obsevables
+	 * @throws Exception
+	 */
+	public ObservableList<PersonaObservable> listarRecolectoresObservables() throws Exception {
+		List<Recolector> recolectores = listarRecolectores();
+		ObservableList<PersonaObservable> recolectoresObservables = FXCollections.observableArrayList();
+		for (Persona persona : recolectores) {
+			recolectoresObservables.add(new PersonaObservable(persona));
+		}
+		return recolectoresObservables;
+	}
 }
