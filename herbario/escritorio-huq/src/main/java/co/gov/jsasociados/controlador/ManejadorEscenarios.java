@@ -5,6 +5,7 @@ import java.io.IOException;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Main;
 import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
 import co.gov.jsasociados.modelo.EmpleadoObservable;
 import javafx.collections.FXCollections;
@@ -75,8 +76,9 @@ public class ManejadorEscenarios {
 			pc.setEscenarioInicial(this);
 			
 			cargarEscenaEmpleado();
-			cargarEscenaPlanta();
+			cargarEscenaRegistroGenerosFamilias();
 			cargarEscenaNavegacion();
+			cargarEscenaRegistrarPlantas();
 			
 			// se carga la escena
 			Scene scene = new Scene(scrollPanel);
@@ -91,6 +93,26 @@ public class ManejadorEscenarios {
 
 	}
 	
+	/**
+	 * carga una escena en el centro del escenario
+	 */
+	public void cargarEscenaRegistrarPlantas() {
+
+		try {
+
+			FXMLLoader loader2 = new FXMLLoader();
+			loader2.setLocation(Main.class.getResource("./vista/registro_planta.fxml"));
+			ScrollPane panel = (ScrollPane) loader2.load();
+			((BorderPane)scrollPanel.getContent()).setCenter(panel);
+			
+			RegistroPlantaControlador controlador = loader2.getController();
+			controlador.setEscenarioInicial(this);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	/**
 	 * carga una escena en el centro del escenario
@@ -103,6 +125,7 @@ public class ManejadorEscenarios {
 			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
 			BorderPane panel = (BorderPane) loader2.load();
 			((BorderPane)scrollPanel.getContent()).setCenter(panel);
+			
 			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
@@ -136,7 +159,7 @@ public class ManejadorEscenarios {
 	/**
 	 * carga una escena en el centro del escenario
 	 */
-	public void cargarEscenaPlanta() {
+	public void cargarEscenaRegistroGenerosFamilias() {
 
 		try {
 
@@ -185,6 +208,15 @@ public class ManejadorEscenarios {
 		}
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//METODOS DE ENTIDADES OBSERVABLES Y DELEGADOS
 
 	/**
 	 * 
@@ -219,11 +251,7 @@ public class ManejadorEscenarios {
 	 * @return true si quedo registrado
 	 */
 	public boolean registrarEmpleado(Empleado empleado) throws Exception{
-		//try {
 			return administradorDelegado.registrarEmpleado(empleado);
-		//} catch (Exception e) {
-			//e.printStackTrace();
-		//}
 	}
 
 	/**
@@ -236,4 +264,13 @@ public class ManejadorEscenarios {
 		return administradorDelegado.eliminarEmpleado(empleado);
 	}
 
+	/**
+	 * permite registrar una planta en la base de datos
+	 * 
+	 * @param planta a registrar
+	 * @return true si quedo registrado
+	 */
+//	public boolean registrarPlanta(Planta planta) throws Exception{
+//			return administradorDelegado.(planta);
+//	}
 }

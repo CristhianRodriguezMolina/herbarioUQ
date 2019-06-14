@@ -41,6 +41,7 @@ public class Planta implements Serializable {
 	 */	
 	@Column(unique=true, nullable=false)
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String idPlanta;
 	/**
 	 * nombre de la Planta

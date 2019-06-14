@@ -68,7 +68,7 @@ public class EdicionEmpleadoControlador {
 	 * @param empleado empleado a editar
 	 */
 	public void cargarPersona(EmpleadoObservable empleado) {
-
+		
 		cmpCedula.setText(empleado.getCedula().getValue());
 		cmpNombre.setText(empleado.getNombre().getValue());
 		cmpApellido.setText(empleado.getApellido().getValue());

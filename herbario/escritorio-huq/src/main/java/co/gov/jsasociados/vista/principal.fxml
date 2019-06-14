@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <ScrollPane fitToHeight="true" fitToWidth="true" minViewportHeight="600.0" minViewportWidth="1100.0" prefViewportHeight="600.0" prefViewportWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.PrincipalControlador">
    <content>
       <BorderPane minHeight="600.0" minWidth="1100.0" prefHeight="600.0" prefWidth="1100.0">
          <top>
-            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="1100.0" style="-fx-background-color: aquamarine;" BorderPane.alignment="CENTER">
+            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="1100.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
                <children>
                   <Button id="btnMenu" mnemonicParsing="false" prefHeight="36.0" prefWidth="141.0" text="Menú">
                      <contextMenu>
@@ -34,12 +33,12 @@
             </HBox>
          </top>
          <left>
-            <VBox alignment="TOP_CENTER" prefHeight="570.0" prefWidth="231.0" style="-fx-background-color: aquamarine;" BorderPane.alignment="CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="570.0" prefWidth="231.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
                <children>
+                  <Button fx:id="btnNavegacion" mnemonicParsing="false" onAction="#cargarEscenaNavegacion" prefHeight="59.0" prefWidth="1100.0" text="Buscar plantas" textAlignment="CENTER" wrapText="true" />
+                  <Button fx:id="btnRegistrarExpecies" mnemonicParsing="false" onAction="#cargarEscenaRegistroPlantas" prefHeight="59.0" prefWidth="349.0" text="Registrar pespecies" />
                   <Button id="btnGestionarEmpleado" fx:id="btnGestionarEmpleados" mnemonicParsing="false" onAction="#cargarEscenaEmpleado" prefHeight="59.0" prefWidth="309.0" text="Gestionar empleados" />
-                  <Button fx:id="btnGestionarEspecies" mnemonicParsing="false" onAction="#cargarEscenaPlanta" prefHeight="59.0" prefWidth="280.0" text="Gestionar especies" />
-                  <Button fx:id="btnNavegacion" mnemonicParsing="false" onAction="#cargarEscenaNavegacion" prefHeight="59.0" prefWidth="1100.0" text="Plantas, generos y especies" textAlignment="CENTER" wrapText="true" />
-                  <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="349.0" text="Button" />
+                  <Button fx:id="btnGestionarGenerosPlantas" mnemonicParsing="false" onAction="#cargarEscenaRegistroGenerosFamilias" prefHeight="59.0" prefWidth="280.0" text="Gestionar generos y familias" />
                   <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="443.0" text="Button" />
                   <Label prefHeight="233.0" prefWidth="223.0" />
                   <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="152.0" text="Salir" />

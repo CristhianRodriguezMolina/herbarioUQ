@@ -16,12 +16,17 @@ public class PrincipalControlador {
 	 * boton de gestion de plantas, generos y familias
 	 */
     @FXML
-    private Button btnGestionarEspecies;
+    private Button btnGestionarGenerosPlantas;
     /**
      * boton de navegacion
      */
     @FXML
     private Button btnNavegacion;
+    /**
+     * boton de registro de especies
+     */
+    @FXML
+    private Button btnRegistrarExpecies;
     /**
 	 * instancia del manejador de escenario
 	 */
@@ -65,8 +70,13 @@ public class PrincipalControlador {
 	 * @param event
 	 */
     @FXML
-    void cargarEscenaPlanta(ActionEvent event) {
-    	escenarioInicial.cargarEscenaPlanta();
+    void cargarEscenaRegistroGenerosFamilias(ActionEvent event) {
+    	escenarioInicial.cargarEscenaRegistroGenerosFamilias();
+    }
+    
+    @FXML
+    void cargarEscenaRegistroPlantas(ActionEvent event) {
+    	escenarioInicial.cargarEscenaRegistrarPlantas();
     }
 	
 }

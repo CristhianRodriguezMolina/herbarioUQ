@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -25,11 +26,11 @@
       </BorderPane>
    </top>
    <left>
-      <TableView prefHeight="363.0" prefWidth="345.0" BorderPane.alignment="CENTER">
+      <TableView prefHeight="393.0" prefWidth="370.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="123.0" text="C1" />
-          <TableColumn minWidth="0.0" prefWidth="114.0" text="C2" />
-            <TableColumn minWidth="0.0" prefWidth="130.0" text="C2" />
+          <TableColumn prefWidth="112.0" text="C1" />
+          <TableColumn minWidth="0.0" prefWidth="122.0" text="C2" />
+            <TableColumn minWidth="0.0" prefWidth="133.0" text="C2" />
         </columns>
       </TableView>
    </left>
@@ -50,7 +51,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="43.0" prefWidth="281.0" text="Cedula:" GridPane.rowIndex="1">
@@ -103,16 +107,70 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <TextField id="txtCedula" fx:id="txtCedula" prefHeight="41.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField id="txtNombre" fx:id="txtNombre" prefHeight="41.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField id="txtApellidos" fx:id="txtApellidos" prefHeight="46.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField id="txtCorreo" fx:id="txtCorreo" prefHeight="54.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField id="txtTelefono" fx:id="txtTelefono" prefHeight="61.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField id="txtDireccion" fx:id="txtDireccion" prefHeight="59.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="64.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <PasswordField fx:id="txtContrasenia" prefHeight="48.0" prefWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <Button id="btnAceptar" fx:id="btnAceptar" mnemonicParsing="false" onAction="#insertarEmpleado" prefHeight="57.0" prefWidth="185.0" text="Aceptar" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <BorderPane prefHeight="63.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <center>
+                  <TextField id="txtCedula" fx:id="txtCedula" prefHeight="41.0" prefWidth="102.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <center>
+                  <TextField id="txtNombre" fx:id="txtNombre" prefHeight="57.0" prefWidth="221.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <center>
+                  <TextField id="txtApellidos" fx:id="txtApellidos" prefHeight="46.0" prefWidth="185.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <center>
+                  <TextField id="txtCorreo" fx:id="txtCorreo" prefHeight="54.0" prefWidth="185.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <center>
+                  <TextField id="txtTelefono" fx:id="txtTelefono" prefHeight="61.0" prefWidth="185.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <center>
+                  <TextField id="txtDireccion" fx:id="txtDireccion" prefHeight="59.0" prefWidth="185.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <center>
+                  <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="64.0" prefWidth="185.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <center>
+                  <PasswordField fx:id="txtContrasenia" prefHeight="48.0" prefWidth="185.0" />
+               </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <center>
+                  <Button id="btnAceptar" fx:id="btnAceptar" mnemonicParsing="false" onAction="#insertarEmpleado" prefHeight="30.0" prefWidth="185.0" text="Aceptar" />
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="13">
+               <center>
+                  <TextField BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <center>
+                  <Button id="btnAceptar" fx:id="btnBuscar" mnemonicParsing="false" prefHeight="36.0" prefWidth="185.0" text="Buscar">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </Button>
+               </center>
+            </BorderPane>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" right="5.0" />
+         </BorderPane.margin>
       </GridPane>
    </center>
 </BorderPane>

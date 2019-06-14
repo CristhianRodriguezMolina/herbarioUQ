@@ -72,7 +72,7 @@ public class AdministradorDelegado {
 			e.printStackTrace(); 
 			return false;
 		}
-	}
+	}	
 
 	/**
 	 * devuvel la lista de empleado que estan en la base de datos
