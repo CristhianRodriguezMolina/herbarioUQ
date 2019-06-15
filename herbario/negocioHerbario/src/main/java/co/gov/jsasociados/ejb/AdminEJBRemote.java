@@ -245,4 +245,19 @@ public interface AdminEJBRemote {
 	  * @return
 	  */
 	 Planta buscarPlanta(String nombrePlanta);
+	 
+	 /**
+	  * Metodo para listar los nombres de las plantas
+	  * @return
+	  * @throws Exception
+	  */
+	 List<String> listarNombresPlanta() throws Exception;
+	 
+	 /**
+	  * Metodo para listar los nombres de los generos
+	  * @return
+	  * @throws Exception
+	  */
+	 List<String> listarNombresGenero() throws Exception;
+	 
 }

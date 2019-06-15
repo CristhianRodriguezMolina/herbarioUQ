@@ -335,7 +335,25 @@ public class AdministradorDelegado {
 	public List<Genero> listarGenero() throws Exception {
 		return adminEJB.listarGenero();
 	}
+	
+	/**
+	 * Metodo para listar los nombres de las plantas
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> listarNombresPlanta() throws Exception{
+		return adminEJB.listarNombresPlanta();
+	}
 
+	/**
+	 * Metodo para listar los nombres de los generos
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> listarNombresGenero() throws Exception{
+		return adminEJB.listarNombresGenero();
+	}
+	
 	/**
 	 * genera una lista de empleados observables
 	 * 

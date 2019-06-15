@@ -109,27 +109,27 @@
             </Label>
             <BorderPane prefHeight="63.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <center>
-                  <TextField id="txtCedula" fx:id="txtCedula" prefHeight="41.0" prefWidth="102.0" />
+                  <TextField id="txtCedula" fx:id="txtCedula" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                <center>
-                  <TextField id="txtNombre" fx:id="txtNombre" prefHeight="57.0" prefWidth="221.0" />
+                  <TextField id="txtNombre" fx:id="txtNombre" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                <center>
-                  <TextField id="txtApellidos" fx:id="txtApellidos" prefHeight="46.0" prefWidth="185.0" />
+                  <TextField id="txtApellidos" fx:id="txtApellidos" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                <center>
-                  <TextField id="txtCorreo" fx:id="txtCorreo" prefHeight="54.0" prefWidth="185.0" />
+                  <TextField id="txtCorreo" fx:id="txtCorreo" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                <center>
-                  <TextField id="txtTelefono" fx:id="txtTelefono" prefHeight="61.0" prefWidth="185.0" />
+                  <TextField id="txtTelefono" fx:id="txtTelefono" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -139,12 +139,12 @@
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="8">
                <center>
-                  <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="64.0" prefWidth="185.0" />
+                  <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="9">
                <center>
-                  <PasswordField fx:id="txtContrasenia" prefHeight="48.0" prefWidth="185.0" />
+                  <PasswordField fx:id="txtContrasenia" prefHeight="59.0" prefWidth="185.0" />
                </center>
             </BorderPane>
             <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="10">

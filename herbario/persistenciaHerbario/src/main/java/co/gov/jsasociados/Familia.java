@@ -48,7 +48,7 @@ public class Familia implements Serializable {
 	/**
 	 * generos de una familia
 	 */
-	@OneToMany(mappedBy="familia")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="familia")
 	private ArrayList<Genero> generos;
 	
 	private static final long serialVersionUID = 1L;

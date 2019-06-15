@@ -532,7 +532,35 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresPlanta()
+	 */
+	public List<String> listarNombresPlanta() throws Exception {
+		try {
+			TypedQuery<String> query = entityManager.createNamedQuery(Planta.LISTAR_NOMBRES_PLANTAS, String.class);
+			List<String> plantas = query.getResultList();
+			return plantas;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresGenero()
+	 */
+	public List<String> listarNombresGenero() throws Exception {
+		try {
+			TypedQuery<String> query = entityManager.createNamedQuery(Genero.LISTAR_NOMBRES_GENEROS, String.class);
+			List<String> generos = query.getResultList();
+			return generos;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarPlanta(java.lang.String)
