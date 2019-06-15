@@ -260,4 +260,10 @@ public interface AdminEJBRemote {
 	  */
 	 List<String> listarNombresGenero() throws Exception;
 	 
+	 /**
+	  * Metodo para listar los nombres de las familias
+	  * @return
+	  * @throws Exception
+	  */
+	 List<String> listarNombresFamilia() throws Exception;
 }

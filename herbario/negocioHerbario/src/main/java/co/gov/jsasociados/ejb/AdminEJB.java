@@ -563,6 +563,20 @@ public class AdminEJB implements AdminEJBRemote {
 	
 	/*
 	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresFamilia()
+	 */
+	public List<String> listarNombresFamilia() throws Exception {
+		try {
+			TypedQuery<String> query = entityManager.createNamedQuery(Familia.LISTAR_NOMBRES_FAMILIAS, String.class);
+			List<String> familias = query.getResultList();
+			return familias;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarPlanta(java.lang.String)
 	 */
 	public Planta buscarPlanta(String nombrePlanta) {

@@ -1,9 +1,6 @@
 package co.gov.jsasociados.controlador;
 
-import java.awt.List;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
@@ -56,6 +53,7 @@ public class RegistroPlantaControlador {
 	 * 
 	 */
     @FXML
+//    private TextField txtGeneroEspecie;
     private AutoCompleteTextField txtGeneroEspecie;
     /**
 	 * 
@@ -66,6 +64,7 @@ public class RegistroPlantaControlador {
 	 * 
 	 */
     @FXML
+//    private TextField txtBuscar;
     private AutoCompleteTextField txtBuscar;
    
     @FXML
@@ -128,10 +127,17 @@ public class RegistroPlantaControlador {
 	@FXML
 	void registrarEspecie() throws Exception {
 		
-		Planta p = new Planta();
-		p.setNombre(txtNombreEspecie.getText());
-		p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
-		administradorDelegado.registrarEspecie(p);
+		if(validarCamposRegistro()) {
+			Planta p = new Planta();
+			p.setNombre(txtNombreEspecie.getText().trim());
+			p.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
+			p.setDescripcion(txtaDescripcionEspecie.getText().trim());
+			p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
+			administradorDelegado.registrarEspecie(p);
+		}else {
+			Utilidades.mostrarMensaje("Error", "Error al registrar la especie");
+		}
+		
 	}
 	
 	/**
@@ -144,7 +150,7 @@ public class RegistroPlantaControlador {
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenarioInicial = escenarioInicial;
 		try {
-			txtBuscar.getEntries().addAll(administradorDelegado.listarNombresGenero());
+			txtBuscar.getEntries().addAll(administradorDelegado.listarNombresFamilia());
 			txtGeneroEspecie.getEntries().addAll(administradorDelegado.listarNombresGenero());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,6 +171,10 @@ public class RegistroPlantaControlador {
 	{		
 		if (txtGeneroEspecie.getText().trim().equals("")) {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese el genero de la especie");
+			return false;
+		}
+		if(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()) == null) {
+			Utilidades.mostrarMensaje("Complete invalido", "Por favor ingrese un genero valido");
 			return false;
 		}
 		if (txtNombreEspecie.getText().trim().equals("")) {

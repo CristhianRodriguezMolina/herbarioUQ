@@ -355,6 +355,15 @@ public class AdministradorDelegado {
 	}
 	
 	/**
+	 * Metodo para listar los nombres de las familias
+	 * @return
+	 * @throws Exception
+	 */
+	public List<String> listarNombresFamilia() throws Exception{
+		return adminEJB.listarNombresFamilia();
+	}
+	
+	/**
 	 * genera una lista de empleados observables
 	 * 
 	 * @return todos los empleados obsevables
