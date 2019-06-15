@@ -18,6 +18,7 @@ import co.gov.jsasociados.ejb.AdminEJBRemote;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
+import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 import javafx.collections.FXCollections;
@@ -264,9 +265,10 @@ public class AdministradorDelegado {
 	 * @param genero
 	 * @return
 	 * @throws ElementoRepetidoException
+	 * @throws GeneroYaRegistradoExcepcion 
 	 */
-	public Genero registrarGenero(Genero genero) throws ElementoRepetidoException {
-		return adminEJB.registrarGenero(genero);
+	public Genero registrarGenero(Genero genero) throws ElementoRepetidoException, GeneroYaRegistradoExcepcion {
+		return adminEJB.insertarGenero(genero);
 	}
 
 	/**
@@ -300,7 +302,7 @@ public class AdministradorDelegado {
 	 * @throws ElementoRepetidoException
 	 */
 	public Planta registrarEspecie(Planta planta) throws ElementoRepetidoException {
-		return adminEJB.registrarEspecie(planta);
+		return adminEJB.insertarEspecie(planta);
 	}
 
 	/**
@@ -313,17 +315,30 @@ public class AdministradorDelegado {
 	public boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException {
 		return adminEJB.elimiarEspecie(idPlanta);
 	}
+	
+	/**
+	 * Metodo para buscar una planta por su nombre
+	 * 
+	 * @param nombrePlanta
+	 * @return
+	 */
+	public Planta buscarPlanta(String nombrePlanta) {
+		return adminEJB.buscarPlanta(nombrePlanta);
+	}
 
 	/**
 	 * metodo que permite modificar el nombre de un genero
-	 * 
-	 * @param nombrePlanta   - nombre del genero
 	 * @param idPlanta
+	 * @param nombrePlanta
+	 * @param genero
+	 * @param descripcion
+	 * @param imagen
 	 * @return
 	 * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException 
 	 */
-	public Planta modificarEspecie(String nombrePlanta, Long idPlanta) throws ElementoNoEncontradoException {
-		return adminEJB.modificarEspecie(nombrePlanta, idPlanta);
+	public Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen) throws ElementoNoEncontradoException, ElementoRepetidoException {
+		return adminEJB.modificarEspecie(idPlanta, nombrePlanta, genero, descripcion, imagen);
 	}
 
 	/**

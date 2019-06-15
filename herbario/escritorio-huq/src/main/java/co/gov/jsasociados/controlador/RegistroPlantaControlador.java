@@ -1,12 +1,15 @@
 package co.gov.jsasociados.controlador;
 
 import java.io.File;
+import java.io.IOException;
 
 import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
 import co.gov.jsasociados.modelo.PlantaObservable;
 import co.gov.jsasociados.util.Utilidades;
 import co.gov.jsasociados.vista.AutoCompleteTextField;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
+import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -125,6 +128,17 @@ public class RegistroPlantaControlador {
 	}
 	
 	@FXML
+	void modificarEspecie() throws ElementoNoEncontradoException, ElementoRepetidoException, IOException {
+		if(validarCampoBusqueda()) {
+			administradorDelegado.modificarEspecie(administradorDelegado.buscarPlanta(txtNombreEspecie.getText().trim()).getIdPlanta(),
+					txtNombreEspecie.getText().trim(), administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()), 
+					txtaDescripcionEspecie.getText().trim(), Utilidades.convertirImagenABytes(rutaImagen));
+		}else {
+			Utilidades.mostrarMensaje("Error", "Error al modificar la especie");
+		}
+	}
+	
+	@FXML
 	void registrarEspecie() throws Exception {
 		
 		if(validarCamposRegistro()) {
@@ -150,7 +164,7 @@ public class RegistroPlantaControlador {
 		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenarioInicial = escenarioInicial;
 		try {
-			txtBuscar.getEntries().addAll(administradorDelegado.listarNombresFamilia());
+			txtBuscar.getEntries().addAll(administradorDelegado.listarNombresPlanta());
 			txtGeneroEspecie.getEntries().addAll(administradorDelegado.listarNombresGenero());
 		} catch (Exception e) {
 			e.printStackTrace();

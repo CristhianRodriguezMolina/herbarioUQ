@@ -12,6 +12,7 @@ import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
+import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -136,6 +137,7 @@ public interface AdminEJBRemote {
 	 * @param familia
 	 * @return
 	 * @throws FamiliaYaRegistradaExeption
+	 * @throws ElementoNoEncontradoException 
 	 */
 	Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption;
 	
@@ -182,8 +184,9 @@ public interface AdminEJBRemote {
 	 * @param genero
 	 * @return
 	 * @throws ElementoRepetidoException
+	 * @throws GeneroYaRegistradoExcepcion 
 	 */
-	Genero registrarGenero(Genero genero) throws ElementoRepetidoException;
+	Genero insertarGenero(Genero genero) throws ElementoRepetidoException, GeneroYaRegistradoExcepcion;
 	
 	/**
 	 * metodo que permite eliminar un genero
@@ -213,7 +216,7 @@ public interface AdminEJBRemote {
 	  * @return
 	  * @throws ElementoRepetidoException
 	  */
-	 Planta registrarEspecie(Planta planta) throws ElementoRepetidoException;
+	 Planta insertarEspecie(Planta planta) throws ElementoRepetidoException;
 	 
 	 /**
 	  * metodo para eliminar una especie
@@ -225,12 +228,16 @@ public interface AdminEJBRemote {
 	 
 	 /**
 	  * Metodo para modificar una especie
-	  * @param planta
 	  * @param idPlanta
+	  * @param nombrePlanta
+	  * @param genero
+	  * @param descripcion
+	  * @param imagen
 	  * @return
 	  * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException 
 	  */
-	 Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException;
+	 Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen) throws ElementoNoEncontradoException, ElementoRepetidoException;
 	 
 	 /**
 	  * metodo para listar las plantas registradas

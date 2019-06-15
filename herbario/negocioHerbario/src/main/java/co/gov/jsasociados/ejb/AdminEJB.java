@@ -19,6 +19,7 @@ import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
+import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -361,10 +362,10 @@ public class AdminEJB implements AdminEJBRemote {
 			TypedQuery<Familia> query = entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
 			query.setParameter("familia", famila);
 			return query.getSingleResult();
-		} catch (Exception e) {
-			// TODO: handle exception
+		}catch(Exception e1) {
 			return null;
 		}
+		
 
 	}
 
@@ -375,15 +376,14 @@ public class AdminEJB implements AdminEJBRemote {
 	 * co.gov.jsasociados.ejb.AdminEJBRemote#registrarGenero(co.gov.jsasociados.
 	 * Genero)
 	 */
-	public Genero registrarGenero(Genero genero) throws ElementoRepetidoException {
+	public Genero insertarGenero(Genero genero) throws GeneroYaRegistradoExcepcion {
 		if (buscarGenero(genero.getGenero()) != null) {
-			throw new ElementoRepetidoException("El genero ya se encuentra registrado");
+			throw new GeneroYaRegistradoExcepcion("El genero ya se encuentra registrado");
 		} else {
 			try {
 				entityManager.persist(genero);
 				return buscarGeneroId(genero.getIdGenero());
 			} catch (Exception e) {
-				// TODO: handle exception
 				return null;
 			}
 		}
@@ -466,7 +466,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 * (non-Javadoc)
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#registrarEspecie(co.gov.jsasociados.Planta)
 	 */
-	public Planta registrarEspecie(Planta planta) throws ElementoRepetidoException {
+	public Planta insertarEspecie(Planta planta) throws ElementoRepetidoException {
 		if (buscarPlanta(planta.getNombre()) != null) {
 			throw new ElementoRepetidoException("La planta ya se encuentra registrada");
 		} else {
@@ -501,17 +501,23 @@ public class AdminEJB implements AdminEJBRemote {
 	 * (non-Javadoc)
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarEspecie(java.lang.String, java.lang.Long)
 	 */
-	public Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException {
-		Planta plant = entityManager.find(Planta.class, idPlanta);
-		if (plant == null) {
+	public Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen) throws ElementoNoEncontradoException, ElementoRepetidoException {
+		Planta planta = entityManager.find(Planta.class, idPlanta);
+		if (planta == null) {
 			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");
+		}
+		if(planta.getNombre().equals(nombrePlanta)) {
+			throw new ElementoRepetidoException("El nombre de la especie a modificar le pertenece a otra planta");
 		}
 
 		// Esto previamente por interfaz debe de estar validado para que no este vacio
-		plant.setNombre(planta);
+		planta.setNombre(nombrePlanta);
+		planta.setGenero(genero);
+		planta.setDescripcion(descripcion);
+		planta.setImagen(imagen);		
 		try {
-			entityManager.merge(plant);
-			return buscarPlantaId(plant.getIdPlanta());
+			entityManager.merge(planta);
+			return buscarPlantaId(planta.getIdPlanta());
 		} catch (Exception e) {
 			return null;
 		}

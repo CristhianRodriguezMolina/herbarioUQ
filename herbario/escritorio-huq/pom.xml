@@ -16,7 +16,6 @@
 			<version>5.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>co.gov.jsasociados</groupId>
 			<artifactId>persistenciaHerbario</artifactId>
@@ -29,6 +28,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 			<type>ejb</type>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jfoenix</groupId>
+			<artifactId>jfoenix</artifactId>
+			<version>9.0.1</version>
 		</dependency>
 	</dependencies>
 </project>

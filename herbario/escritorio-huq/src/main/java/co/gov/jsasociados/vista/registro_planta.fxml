@@ -59,7 +59,7 @@
                         <BorderPane prefHeight="86.0" prefWidth="193.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                         <BorderPane prefHeight="36.0" prefWidth="254.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <center>
-                              <Button fx:id="btnModificarPlanta" mnemonicParsing="false" onAction="#registrarEspecie" prefHeight="33.0" prefWidth="147.0" text="Modificar" BorderPane.alignment="CENTER" />
+                              <Button fx:id="btnModificarPlanta" mnemonicParsing="false" onAction="#modificarEspecie" prefHeight="33.0" prefWidth="147.0" text="Modificar" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
