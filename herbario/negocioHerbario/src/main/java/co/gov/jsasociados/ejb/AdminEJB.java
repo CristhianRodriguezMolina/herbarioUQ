@@ -476,20 +476,19 @@ public class AdminEJB implements AdminEJBRemote {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#insertarEspecie(co.gov.jsasociados.Planta)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#registrarPlanta(co.gov.jsasociados.Planta)
 	 */
-	public Planta insertarEspecie(Planta planta) throws ElementoRepetidoException {
-		if (buscarPlanta(planta.getNombre()) != null) {
-			throw new ElementoRepetidoException("La planta ya se encuentra registrada");
-		} else {
-			try {
-				entityManager.persist(planta);
-				System.out.println(buscarPlantaId(planta.getIdPlanta()));
-				return buscarPlantaId(planta.getIdPlanta());
-			} catch (Exception e) {
-				// TODO: handle exception
-				return null;
-			}
+	public Planta registrarPlanta(Planta planta) throws ElementoRepetidoException {
+		System.out.println("entre con "+planta.getNombre());
+		if (buscarPlanta(planta.getNombre())!=null) {
+			throw new ElementoRepetidoException("La planta ya se encuentra registrada.");
+		}
+		try {
+			entityManager.persist(planta);
+			return buscarPlanta(planta.getNombre());
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
 		}
 	}
 

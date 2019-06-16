@@ -295,17 +295,9 @@ public class AdministradorDelegado {
 		return adminEJB.modificarGenero(genero, idGenero);
 	}
 	
-	/**
-	 * metodo que permite agregar una especie
-	 * 
-	 * @param planta
-	 * @return
-	 * @throws ElementoRepetidoException
-	 */
-	public Planta insertarEspecie(Planta planta) throws ElementoRepetidoException {
-		return adminEJB.insertarEspecie(planta);
+	public Planta registrarPlanta(Planta planta) throws ElementoRepetidoException {
+		return adminEJB.registrarPlanta(planta);
 	}
-
 	/**
 	 * metodo que permite eliminar un genero
 	 * 
