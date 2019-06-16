@@ -235,12 +235,12 @@ public interface AdminEJBRemote {
 	 List<Genero> listarGenero() throws Exception;
 	 
 	 /**
-	  * Metodo para registrar una especie
+	  * metodo que permite registrar una especie
 	  * @param planta
 	  * @return
 	  * @throws ElementoRepetidoException
 	  */
-	 Planta insertarEspecie(Planta planta) throws ElementoRepetidoException;
+	 Planta registrarPlanta(Planta planta) throws ElementoRepetidoException;
 	 
 	 /**
 	  * metodo para eliminar una especie

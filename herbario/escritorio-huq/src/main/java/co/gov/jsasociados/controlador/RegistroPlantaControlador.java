@@ -140,11 +140,16 @@ public class RegistroPlantaControlador {
 	}
 	
 	@FXML
-	void modificarEspecie() throws ElementoNoEncontradoException, ElementoRepetidoException, IOException {
+	void modificarEspecie() {
 		if(validarCampoBusqueda()) {
-			administradorDelegado.modificarEspecie(administradorDelegado.buscarPlanta(txtNombreEspecie.getText().trim()).getIdPlanta(),
-					txtNombreEspecie.getText().trim(), administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()), 
-					txtaDescripcionEspecie.getText().trim(), Utilidades.convertirImagenABytes(rutaImagen));
+			try {
+				administradorDelegado.modificarEspecie(administradorDelegado.buscarPlanta(txtNombreEspecie.getText().trim()).getIdPlanta(),
+						txtNombreEspecie.getText().trim(), administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()), 
+						txtaDescripcionEspecie.getText().trim(), Utilidades.convertirImagenABytes(rutaImagen));
+			} catch (ElementoNoEncontradoException | ElementoRepetidoException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}else {
 			Utilidades.mostrarMensaje("Error", "Error al modificar la especie");
 		}
@@ -155,31 +160,53 @@ public class RegistroPlantaControlador {
 		
 		if(validarCamposRegistro()) {
 			
-			Planta p = new Planta();
-			p.setNombre(txtNombreEspecie.getText().trim());
-			System.out.println(p.getNombre());
+//			Planta p = new Planta();
+//			p.setNombre(txtNombreEspecie.getText().trim());
+//			System.out.println(p.getNombre());
+//			try {
+//				p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
+//				System.out.println(p.getImagen());
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//			p.setDescripcion(txtaDescripcionEspecie.getText().trim());
+//			System.out.println(p.getDescripcion());
+//			p.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
+//			System.out.println(p.getGenero());
+//					
+//			try {				
+//				p = administradorDelegado.insertarEspecie(p);
+//			} catch (ElementoRepetidoException e) {
+//				e.printStackTrace();
+//			} 
+//			
+//			if(p != null) {
+//				Utilidades.mostrarMensaje("Registro exitoso", "La especie quedo registrada exitosamente");
+//				tblTablaEspecies.refresh();
+//			}else {
+//				Utilidades.mostrarMensaje("Registro fallido", "La especie no se pudo registrar");
+//			}
+			Planta planta= new Planta();
+			planta.setNombre(txtNombreEspecie.getText().trim());
+			planta.setDescripcion(txtaDescripcionEspecie.getText().trim());
+			planta.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
 			try {
-				p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
-				System.out.println(p.getImagen());
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				planta.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Utilidades.mostrarMensaje("Error", "No se pudo asignar la imagen a la especie.");
 			}
-			p.setDescripcion(txtaDescripcionEspecie.getText().trim());
-			System.out.println(p.getDescripcion());
-			p.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
-			System.out.println(p.getGenero());
-					
-			try {				
-				p = administradorDelegado.insertarEspecie(p);
+			try {
+				planta= administradorDelegado.registrarPlanta(planta);
+				if (planta!=null) {
+					Utilidades.mostrarMensaje("Exito", "Se registro la planta exitosamente "+planta.getIdPlanta());
+				}
+				else {
+					Utilidades.mostrarMensaje("Error", "No se pudo registra la planta");
+				}
 			} catch (ElementoRepetidoException e) {
-				e.printStackTrace();
-			} 
-			
-			if(p != null) {
-				Utilidades.mostrarMensaje("Registro exitoso", "La especie quedo registrada exitosamente");
-				tblTablaEspecies.refresh();
-			}else {
-				Utilidades.mostrarMensaje("Registro fallido", "La especie no se pudo registrar");
+				// TODO Auto-generated catch block
+				Utilidades.mostrarMensaje("Error", e.getMessage());
 			}
 		}
 		

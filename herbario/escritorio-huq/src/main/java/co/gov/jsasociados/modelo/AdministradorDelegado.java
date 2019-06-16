@@ -302,11 +302,9 @@ public class AdministradorDelegado {
 	 * @return
 	 * @throws ElementoRepetidoException
 	 */
-	public Planta insertarEspecie(Planta planta) throws ElementoRepetidoException {
-		Planta p = adminEJB.insertarEspecie(planta); 
-		return p;
+	public Planta registrarPlanta(Planta planta) throws ElementoRepetidoException {
+		return adminEJB.registrarPlanta(planta);
 	}
-
 	/**
 	 * metodo que permite eliminar un genero
 	 * 

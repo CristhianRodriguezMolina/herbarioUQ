@@ -67,7 +67,7 @@ public class Planta implements Serializable {
 	/**
 	 * Imagen relacionada a la planta
 	 */
-	@Lob
+	@Lob @Basic(fetch=FetchType.LAZY)
 	@Column(name = "imagen")
 	private byte[] imagen;
 	/**
