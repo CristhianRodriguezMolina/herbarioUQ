@@ -51,7 +51,7 @@ public class ConfiguracionEJB {
 			Cuenta cuenta = new Cuenta();
 			cuenta.setUsuario("Admin");
 			cuenta.setContrasenia("admin321");
-
+			cuenta.setPersona(administrador);
 			administrador.setCuenta(cuenta);
 			
 			entityManager.persist(cuenta);

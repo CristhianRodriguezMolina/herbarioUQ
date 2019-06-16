@@ -49,6 +49,7 @@ public class Genero implements Serializable {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="genero")
 	private ArrayList<Planta> plantas;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Genero() {

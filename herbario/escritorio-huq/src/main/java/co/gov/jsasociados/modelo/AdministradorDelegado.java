@@ -3,6 +3,7 @@
  */
 package co.gov.jsasociados.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -92,7 +93,7 @@ public class AdministradorDelegado {
 	}
 
 	/**
-	 * metodo que permite modificar la informacion basica de un empleado
+	 * metodo que permite modificar la informacion de un empleado
 	 * 
 	 * @param nombre
 	 * @param apellido
@@ -100,31 +101,32 @@ public class AdministradorDelegado {
 	 * @param correo
 	 * @param direccion
 	 * @param cedula    - cedula del empleado a modificar sus datos
+	 * @param usuario
+	 * @param clave
 	 * @return
-	 * @throws PersonaNoRegistradaException
-	 * @throws TipoClaseException
+	 * @throws Exception 
 	 */
 	public Empleado modificarEmpleado(String nombre, String apellido, String telefono, String correo, String direccion,
-			String cedula) throws PersonaNoRegistradaException, TipoClaseException {
-		return adminEJB.modificarEmpleado(nombre, apellido, telefono, correo, direccion, cedula);
+			String cedula, String usuario, String clave) throws Exception{
+		return adminEJB.modificarEmpleado(nombre, apellido, telefono, correo, direccion, cedula, usuario, clave);
 	}
 
 	/**
-	 * metodo que permite modificar la informacion de un recolector
 	 * 
 	 * @param nombre
 	 * @param apellido
 	 * @param telefono
 	 * @param correo
 	 * @param direccion
-	 * @param cedula
+	 * @param cedula - cedula del recolector
+	 * @param usuario
+	 * @param clave
 	 * @return
-	 * @throws PersonaNoRegistradaException
-	 * @throws TipoClaseException
+	 * @throws Exception 
 	 */
 	public Recolector modificarRecolector(String nombre, String apellido, String telefono, String correo,
-			String direccion, String cedula) throws PersonaNoRegistradaException, TipoClaseException {
-		return adminEJB.modificarRecolector(nombre, apellido, telefono, correo, direccion, cedula);
+			String direccion, String cedula, String usuario, String clave) throws Exception{
+		return adminEJB.modificarRecolector(nombre, apellido, telefono, correo, direccion, cedula, usuario, clave);
 	}
 
 	/**
@@ -202,8 +204,8 @@ public class AdministradorDelegado {
 	 * @throws TipoClaseException
 	 * @throws PersonaNoRegistradaException
 	 */
-	public boolean eliminarEmpleado(Empleado empleado) throws PersonaNoRegistradaException, TipoClaseException {
-		return adminEJB.eliminarEmpleado(empleado.getCedula());
+	public boolean eliminarEmpleado(String cedula) throws PersonaNoRegistradaException, TipoClaseException {
+		return adminEJB.eliminarEmpleado(cedula);
 	}
 
 	/**
@@ -258,16 +260,15 @@ public class AdministradorDelegado {
 	public Genero buscarGenero(String genero) {
 		return adminEJB.buscarGenero(genero);
 	}
-
+	
 	/**
-	 * metodo que permite agregar un genero
-	 * 
+	 * metodo que permite registrar un genero
 	 * @param genero
 	 * @return
 	 * @throws ElementoRepetidoException
 	 * @throws GeneroYaRegistradoExcepcion 
 	 */
-	public Genero registrarGenero(Genero genero) throws ElementoRepetidoException, GeneroYaRegistradoExcepcion {
+	public Genero insertarGenero(Genero genero) throws GeneroYaRegistradoExcepcion {
 		return adminEJB.insertarGenero(genero);
 	}
 
@@ -406,5 +407,33 @@ public class AdministradorDelegado {
 			recolectoresObservables.add(new PersonaObservable(persona));
 		}
 		return recolectoresObservables;
+	}
+	
+	/**
+	 * genera una lista observable de familias
+	 * @return
+	 * @throws Exception
+	 */
+	public ObservableList<FamiliaObservable> listarFamiliasObservables() throws Exception {
+		List<Familia> familias = listarFamilias();
+		ObservableList<FamiliaObservable> familiaObservable = FXCollections.observableArrayList();
+		for (Familia familia : familias) {
+			familiaObservable.add(new FamiliaObservable(familia));
+		}
+		return familiaObservable;
+	}
+	
+	/**
+	 * genera una lista observable de generos
+	 * @return
+	 * @throws Exception
+	 */
+	public ObservableList<GeneroObservable> listarGenerosObservable() throws Exception {
+		List<Genero> generos = listarGenero();
+		ObservableList<GeneroObservable> generoObservable = FXCollections.observableArrayList();
+		for (Genero genero : generos) {
+			generoObservable.add(new GeneroObservable(genero));
+		}
+		return generoObservable;
 	}
 }

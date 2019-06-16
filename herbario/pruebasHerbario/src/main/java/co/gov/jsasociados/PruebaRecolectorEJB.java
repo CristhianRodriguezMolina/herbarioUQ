@@ -131,7 +131,12 @@ public class PruebaRecolectorEJB {
 	@UsingDataSet({ "persona.json", "registro.json", "administrador.json", "cuenta.json", "empleado.json",
 			"familia.json", "genero.json", "recolector.json", "planta.json" })
 	public void buscarPlanta() {
-		Planta aux=recolectorEJB.buscarPlanta("851");
+//		try {
+//			Planta aux=recolectorEJB.buscarPlanta("851");
+//		} catch (ElementoNoExiste e) {
+//			// TODO Auto-generated catch block
+//			Assert.fail(String.format("Error inesperado %s", e.getMessage()));
+//		}
 	}
 	
 	/**

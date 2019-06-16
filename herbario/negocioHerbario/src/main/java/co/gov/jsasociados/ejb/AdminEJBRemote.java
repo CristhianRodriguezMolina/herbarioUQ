@@ -23,7 +23,7 @@ import co.gov.jsasocioados.exeption.TipoClaseException;
 public interface AdminEJBRemote {
 
 	String JNDI = "java:global/ear-herbario/negocioHerbario/AdminEJB!co.gov.jsasociados.ejb.AdminEJBRemote";
-	
+
 	/**
 	 * metodo que permiete agregar un empleado
 	 * 
@@ -65,7 +65,7 @@ public interface AdminEJBRemote {
 	boolean eliminarRecolector(String cedula) throws PersonaNoRegistradaException, TipoClaseException;
 
 	/**
-	 * metodo que permite modificar la informacion basica de un empleado
+	 * metodo que permite modificar la informacion de un empleado
 	 * 
 	 * @param nombre
 	 * @param apellido
@@ -73,28 +73,39 @@ public interface AdminEJBRemote {
 	 * @param correo
 	 * @param direccion
 	 * @param cedula    - cedula del empleado a modificar sus datos
+	 * @param usuario
+	 * @param clave
 	 * @return
 	 * @throws PersonaNoRegistradaException
 	 * @throws TipoClaseException
+	 * @throws ElementoRepetidoException
+	 * @throws ElementoNoEncontradoException
+	 * @throws Exception
 	 */
 	Empleado modificarEmpleado(String nombre, String apellido, String telefono, String correo, String direccion,
-			String cedula) throws PersonaNoRegistradaException, TipoClaseException;
+			String cedula, String usuario, String clave) throws PersonaNoRegistradaException, TipoClaseException,
+			ElementoNoEncontradoException, ElementoRepetidoException, Exception;
 
 	/**
-	 * metodo que permite modificar la informacion de un recolector
 	 * 
 	 * @param nombre
 	 * @param apellido
 	 * @param telefono
 	 * @param correo
 	 * @param direccion
-	 * @param cedula
+	 * @param cedula    - cedula del recolector
+	 * @param usuario
+	 * @param clave
 	 * @return
 	 * @throws PersonaNoRegistradaException
 	 * @throws TipoClaseException
+	 * @throws ElementoRepetidoException
+	 * @throws ElementoNoEncontradoException
+	 * @throws Exception
 	 */
 	Recolector modificarRecolector(String nombre, String apellido, String telefono, String correo, String direccion,
-			String cedula) throws PersonaNoRegistradaException, TipoClaseException;
+			String cedula, String usuario, String clave) throws PersonaNoRegistradaException, TipoClaseException,
+			ElementoNoEncontradoException, ElementoRepetidoException, Exception;
 
 	/**
 	 * metodo que permite listar a todos los empleados
@@ -131,83 +142,96 @@ public interface AdminEJBRemote {
 	 * @throws TipoClaseException
 	 */
 	Recolector buscarRecolector(String cedula) throws PersonaNoRegistradaException, TipoClaseException;
-	
+
 	/**
 	 * metodo que permite agregar una familia desde el perfil de administrador
+	 * 
 	 * @param familia
 	 * @return
 	 * @throws FamiliaYaRegistradaExeption
 	 * @throws ElementoNoEncontradoException 
 	 */
 	Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption;
-	
+
 	/**
 	 * metodo que permite buscar una familia por su nombre
-	 * @param famila - nombre de  la familia
+	 * 
+	 * @param famila - nombre de la familia
 	 * @return
 	 */
 	Familia buscarFamilia(String famila);
-	
+
 	/**
 	 * metodo que permite eliminar una familia
+	 * 
 	 * @param idFamilia
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
 	boolean eliminarFamilia(Long idFamilia) throws ElementoNoEncontradoException;
-	
+
 	/**
 	 * metodo que permite modificar el nombre de una familia
-	 * @param nombre - nombre de la familia
+	 * 
+	 * @param nombre    - nombre de la familia
 	 * @param idFamilia
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
 	Familia modificarFamilia(String nombre, Long idFamilia) throws ElementoNoEncontradoException;
-	
+
 	/**
 	 * metodo que obtiene la lista de las familias registradas
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	List<Familia> listarFamilias() throws Exception;
-	
+
 	/**
 	 * metodo que permite buscar un genero por su nombre
+	 * 
 	 * @param genero
 	 * @return
 	 */
 	Genero buscarGenero(String genero);
-	
+
 	/**
-	 * metodo que permite agregar un genero
+	 * metodo que pemite registrar un genero
+	 * 
 	 * @param genero
 	 * @return
 	 * @throws ElementoRepetidoException
 	 * @throws GeneroYaRegistradoExcepcion 
 	 */
-	Genero insertarGenero(Genero genero) throws ElementoRepetidoException, GeneroYaRegistradoExcepcion;
-	
+	Genero insertarGenero(Genero genero) throws  GeneroYaRegistradoExcepcion;
+
 	/**
 	 * metodo que permite eliminar un genero
+	 * 
 	 * @param idGenero
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
 	boolean elimiarGenero(Long idGenero) throws ElementoNoEncontradoException;
+
 	/**
 	 * metodo que permite modificar el nombre de un genero
-	 * @param genero - nombre del genero
+	 * 
+	 * @param genero   - nombre del genero
 	 * @param idGenero
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
 	Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException;
+
 	/**
 	 * metodo que lista todos los generos
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
+
 	 List<Genero> listarGenero() throws Exception;
 	 
 	 /**
