@@ -484,6 +484,7 @@ public class AdminEJB implements AdminEJBRemote {
 		} else {
 			try {
 				entityManager.persist(planta);
+				System.out.println(buscarPlantaId(planta.getIdPlanta()));
 				return buscarPlantaId(planta.getIdPlanta());
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -698,7 +699,6 @@ public class AdminEJB implements AdminEJBRemote {
 	 */
 	private Cuenta modificarCuenta(String usuario, String clave, Persona persona)
 			throws ElementoNoEncontradoException, ElementoRepetidoException {
-		// TODO Auto-generated method stub
 		if (buscarPorUsuario(persona.getCuenta().getUsuario()) == null) {
 			throw new ElementoNoEncontradoException("No se ha encontrado el usuario");
 		} else if (buscarPorUsuario(usuario) != null) {

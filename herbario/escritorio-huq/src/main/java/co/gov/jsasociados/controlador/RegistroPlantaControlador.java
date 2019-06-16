@@ -3,6 +3,8 @@ package co.gov.jsasociados.controlador;
 import java.io.File;
 import java.io.IOException;
 
+import org.glassfish.loadbalancer.admin.cli.LbLogUtil;
+
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Planta;
@@ -44,6 +46,11 @@ public class RegistroPlantaControlador {
 	 * 
 	 */
 	@FXML
+	private Button btnEliminarPlanta;
+	/**
+	 * 
+	 */
+	@FXML
 	private Button btnRegistrarPlanta;
 	/**
 	 * 
@@ -59,7 +66,6 @@ public class RegistroPlantaControlador {
 	 * 
 	 */
     @FXML
-//    private TextField txtGeneroEspecie;
     private AutoCompleteTextField txtGeneroEspecie;
     /**
 	 * 
@@ -70,7 +76,6 @@ public class RegistroPlantaControlador {
 	 * 
 	 */
     @FXML
-//    private TextField txtBuscar;
     private AutoCompleteTextField txtBuscar;
    
     @FXML
@@ -142,21 +147,36 @@ public class RegistroPlantaControlador {
 	}
 	
 	@FXML
-	void registrarEspecie() throws Exception {
+	void registrarEspecie() {
 		
 		if(validarCamposRegistro()) {
 			
-			
-								
 			Planta p = new Planta();
 			p.setNombre(txtNombreEspecie.getText().trim());
-			p.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
+			System.out.println(p.getNombre());
+			try {
+				p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
+				System.out.println(p.getImagen());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			p.setDescripcion(txtaDescripcionEspecie.getText().trim());
-			p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
+			System.out.println(p.getDescripcion());
+			p.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
+			System.out.println(p.getGenero());
+					
+			try {				
+				p = administradorDelegado.insertarEspecie(p);
+			} catch (ElementoRepetidoException e) {
+				e.printStackTrace();
+			} 
 			
-			administradorDelegado.registrarEspecie(p);
-		}else {
-			Utilidades.mostrarMensaje("Error", "Error al registrar la especie");
+			if(p != null) {
+				Utilidades.mostrarMensaje("Registro exitoso", "La especie quedo registrada exitosamente");
+				tblTablaEspecies.refresh();
+			}else {
+				Utilidades.mostrarMensaje("Registro fallido", "La especie no se pudo registrar");
+			}
 		}
 		
 	}
@@ -189,20 +209,7 @@ public class RegistroPlantaControlador {
 	}
 	
 	public boolean validarCamposRegistro()
-	{		
-		Familia f = administradorDelegado.buscarFamilia("Axiomadas");
-		Genero g = new Genero();
-		g.setGenero("Generito");
-		g.setFamilia(f);		
-		
-		//			administradorDelegado.modificarFamilia(f.getFamilia(), f.getIdFamilia());
-		try {
-			Familia fa = administradorDelegado.modificarFamilia(f.getFamilia(), f.getIdFamilia());
-			System.out.println(fa.getFamilia());
-		} catch (ElementoNoEncontradoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	{	
 		
 		if (txtGeneroEspecie.getText().trim().equals("")) {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese el genero de la especie");
@@ -220,7 +227,7 @@ public class RegistroPlantaControlador {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor ingrese la descripcion de la especie");
 			return false;
 		}
-		if (imgImagen.getImage() != null) {
+		if (imgImagen.getImage() == null) {
 			Utilidades.mostrarMensaje("Complete el campo", "Por favor elija una imagen para la especie");
 			return false;
 		}

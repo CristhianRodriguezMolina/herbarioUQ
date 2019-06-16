@@ -73,7 +73,7 @@ public class Planta implements Serializable {
 	/**
 	 * Registro de la Planta
 	 */	
-	@OneToOne(cascade = CascadeType.REMOVE, mappedBy="planta")
+	@OneToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE}, mappedBy="planta")
 	private Registro registro;
 	
 	private static final long serialVersionUID = 1L;
