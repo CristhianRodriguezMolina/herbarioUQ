@@ -1,8 +1,6 @@
 package co.gov.jsasociados.modelo;
 
-
 import co.gov.jsasociados.Persona;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -15,25 +13,25 @@ public class PersonaObservable {
 	/**
 	 * cedula observable de un empleado
 	 */
-	private StringProperty cedula;
+	private String cedula;
 	/**
 	 * nombre observable de una persona
 	 */
-	private StringProperty nombre;
+	private String nombre;
 	/**
 	 * apellido observable de un empleado
 	 */
-	private StringProperty apellido;
+	private String apellido;
 	/**
 	 * email observable de un empleado
 	 */
-	private StringProperty correo;
+	private String correo;
 	/**
 	 * clave observable de un empleado
 	 */
-	private StringProperty telefono;
+	private String telefono;
 
-	private StringProperty direccion;
+	private String direccion;
 //	/**
 //	 * fecha de nacimiento observable de un empleado
 //	 */
@@ -51,12 +49,12 @@ public class PersonaObservable {
 	public PersonaObservable(Persona persona) {
 
 		this.persona = persona;
-		this.cedula = new SimpleStringProperty(persona.getCedula());
-		this.nombre = new SimpleStringProperty(persona.getNombre());
-		this.apellido = new SimpleStringProperty(persona.getApellidos());
-		this.correo = new SimpleStringProperty(persona.getCorreo());
-		this.direccion = new SimpleStringProperty(persona.getDireccion());
-		this.telefono = new SimpleStringProperty(persona.getTelefono());
+		this.cedula = persona.getCedula();
+		this.nombre = persona.getNombre();
+		this.apellido = (persona.getApellidos());
+		this.correo = persona.getCorreo();
+		this.direccion = persona.getDireccion();
+		this.telefono = persona.getTelefono();
 	}
 
 	/**
@@ -69,56 +67,57 @@ public class PersonaObservable {
 	 * @param clave
 	 * @param fecha
 	 */
-	public PersonaObservable(String cedula, String nombre, String apellido, String correo, String direccion, String telefono) {
+	public PersonaObservable(String cedula, String nombre, String apellido, String correo, String direccion,
+			String telefono) {
 
-		this.cedula = new SimpleStringProperty(cedula);
-		this.nombre = new SimpleStringProperty(nombre);
-		this.apellido = new SimpleStringProperty(apellido);
-		this.correo = new SimpleStringProperty(correo);
-		this.direccion= new SimpleStringProperty(direccion);
-		this.telefono = new SimpleStringProperty(telefono);
-
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = (correo);
+		this.direccion = direccion;
+		this.telefono = telefono;
+		
 	}
 
 	/**
 	 * @return the cedula
 	 */
-	public StringProperty getCedula() {
+	public String getCedula() {
 		return cedula;
 	}
 
 	/**
 	 * @param cedula the cedula to set
 	 */
-	public void setCedula(StringProperty cedula) {
+	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
 
 	/**
 	 * @return the nombre
 	 */
-	public StringProperty getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
 	/**
 	 * @param nombre the nombre to set
 	 */
-	public void setNombre(StringProperty nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	/**
 	 * @return the apellido
 	 */
-	public StringProperty getApellido() {
+	public String getApellido() {
 		return apellido;
 	}
 
 	/**
 	 * @param apellido the apellido to set
 	 */
-	public void setApellido(StringProperty apellido) {
+	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
@@ -139,44 +138,43 @@ public class PersonaObservable {
 	/**
 	 * @return the correo
 	 */
-	public StringProperty getCorreo() {
+	public String getCorreo() {
 		return correo;
 	}
 
 	/**
 	 * @param correo the correo to set
 	 */
-	public void setCorreo(StringProperty correo) {
+	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
 
 	/**
 	 * @return the telefono
 	 */
-	public StringProperty getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 	/**
 	 * @param telefono the telefono to set
 	 */
-	public void setTelefono(StringProperty telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
 	/**
 	 * @return the direccion
 	 */
-	public StringProperty getDireccion() {
+	public String getDireccion() {
 		return direccion;
 	}
 
 	/**
 	 * @param direccion the direccion to set
 	 */
-	public void setDireccion(StringProperty direccion) {
+	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	
 
 }

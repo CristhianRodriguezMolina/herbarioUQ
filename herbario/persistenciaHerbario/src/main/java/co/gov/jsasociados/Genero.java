@@ -45,9 +45,12 @@ public class Genero implements Serializable {
 	 */
 	@ManyToOne
 	private Familia familia;
-	
+	/**
+	 * platas asociadas al genero
+	 */
 	@OneToMany(mappedBy="genero")
 	private ArrayList<Planta> plantas;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Genero() {

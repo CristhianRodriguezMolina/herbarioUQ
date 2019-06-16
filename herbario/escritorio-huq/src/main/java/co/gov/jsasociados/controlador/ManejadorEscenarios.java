@@ -74,9 +74,9 @@ public class ManejadorEscenarios {
 			PrincipalControlador pc = loader.getController();
 			pc.setEscenarioInicial(this);
 			
-			cargarEscenaEmpleado();
-			cargarEscenaRegistroGenerosFamilias();			
-			cargarEscenaRegistrarPlantas();
+//			cargarEscenaEmpleado();
+//			cargarEscenaRegistroGenerosFamilias();			
+//			cargarEscenaRegistrarPlantas();
 			cargarEscenaNavegacion();
 			
 			// se carga la escena
@@ -104,8 +104,8 @@ public class ManejadorEscenarios {
 			ScrollPane panel = (ScrollPane) loader2.load();
 			((BorderPane)scrollPanel.getContent()).setCenter(panel);
 			
-			RegistroPlantaControlador controlador = loader2.getController();
-			controlador.setEscenarioInicial(this);
+//			RegistroPlantaControlador controlador = loader2.getController();
+//			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -162,13 +162,13 @@ public class ManejadorEscenarios {
 		try {
 
 			FXMLLoader loader2 = new FXMLLoader();
-			loader2.setLocation(Main.class.getResource("./vista/registro_plantas_generos_familias.fxml"));
+			loader2.setLocation(Main.class.getResource("./vista/registro_generos_familias.fxml"));
 			ScrollPane panel = (ScrollPane) loader2.load();
 			((BorderPane)scrollPanel.getContent()).setCenter(panel);
 			
-//			RegistroEmpleadoControlador controlador = loader2.getController();
-//			controlador.setEscenarioInicial(this);
-
+			GestionGFControlador gestionGPControlador= loader2.getController();
+			gestionGPControlador.setEscenarioInicial(this);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
