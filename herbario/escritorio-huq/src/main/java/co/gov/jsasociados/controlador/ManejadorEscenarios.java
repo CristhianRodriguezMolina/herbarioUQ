@@ -147,8 +147,8 @@ public class ManejadorEscenarios {
 			BorderPane panel = (BorderPane) loader.load();
 			((BorderPane)scrollPanel.getContent()).setCenter(panel);
 			
-//			RegistroEmpleadoControlador controlador = loader2.getController();
-//			controlador.setEscenarioInicial(this);
+			NavegacionBusquedaControlador controlador = loader.getController();
+			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();

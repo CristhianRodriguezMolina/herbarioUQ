@@ -324,8 +324,6 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 
 		// Esto previamente por interfaz debe de estar validado para que no este vacio
-//			familia.setFamilia(nombre == ""? familia.getFamilia():nombre);
-//			familia.setIdFamilia(idFamilia == ""? familia.getIdFamilia():idFamilia);
 		familia.setFamilia(nombre);
 		try {
 			entityManager.merge(familia);
@@ -596,6 +594,31 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarPlantasPorFiltros(co.gov.jsasociados.Familia, co.gov.jsasociados.Genero)
+	 */
+	public List<Planta> listarPlantasPorFiltros(Familia f, Genero g){
+		try {
+			TypedQuery<Planta> query = null;
+			if(f == null) {
+				query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO, Planta.class);
+				query.setParameter("genero", g.getGenero());
+			}else if(g == null) {
+				query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
+				query.setParameter("familia", f.getFamilia());
+			}else {
+				query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO_Y_FAMILIA, Planta.class);
+				query.setParameter("familia", f.getFamilia());
+				query.setParameter("genero", g.getGenero());
+			}			
+			return query.getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
+	
 	/**
 	 * metodo que permite buscar una planta por su id
 	 * 
@@ -643,5 +666,6 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 
-	}
+	}	
+	
 }

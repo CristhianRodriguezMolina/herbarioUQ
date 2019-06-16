@@ -128,6 +128,9 @@ public class Familia implements Serializable {
 	}   
 	
 	public void addGenero(Genero g) {
+		if(generos == null) {
+			generos = new ArrayList<>();
+		}
 		generos.add(g);
 	}
 }

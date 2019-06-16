@@ -53,6 +53,14 @@ public class Genero implements Serializable {
 
 	public Genero() {
 		super();
+		plantas = new ArrayList<>();
+	}
+	
+	public void addPlanta(Planta p) {
+		if(plantas == null) {
+			plantas = new ArrayList<>();
+		}
+		plantas.add(p);
 	}
 
 	/**
@@ -124,8 +132,9 @@ public class Genero implements Serializable {
 	/**
 	 * @param familia the familia to set
 	 */
-	public void setFamilia(Familia familia) {
+	public void setFamilia(Familia familia) {		
 		this.familia = familia;
+		familia.addGenero(this);
 	}
 
 	/**

@@ -273,4 +273,10 @@ public interface AdminEJBRemote {
 	  * @throws Exception
 	  */
 	 List<String> listarNombresFamilia() throws Exception;
+	 
+	 /**
+	  * Metodo l¿para listar plantas por filtros
+	  * @return
+	  */
+	 List<Planta> listarPlantasPorFiltros(Familia f, Genero g);
 }
