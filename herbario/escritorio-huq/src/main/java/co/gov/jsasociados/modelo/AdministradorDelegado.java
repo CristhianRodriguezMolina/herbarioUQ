@@ -268,7 +268,7 @@ public class AdministradorDelegado {
 	 * @throws ElementoRepetidoException
 	 * @throws GeneroYaRegistradoExcepcion 
 	 */
-	public Genero registrarGenero(Genero genero) throws GeneroYaRegistradoExcepcion {
+	public Genero insertarGenero(Genero genero) throws GeneroYaRegistradoExcepcion {
 		return adminEJB.insertarGenero(genero);
 	}
 

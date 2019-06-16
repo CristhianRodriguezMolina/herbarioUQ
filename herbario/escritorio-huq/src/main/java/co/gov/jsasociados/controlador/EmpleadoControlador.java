@@ -76,18 +76,18 @@ public class EmpleadoControlador {
 	 * permite carga la informacion en las tables y escuchar las operaciones que se
 	 * realizan con la tabla
 	 */
-	@FXML
-	private void initialize() {
-
-		cedulaColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
-		nombreColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombre()); 
- 
-		mostrarDetalleEmpleado(null);
-
-		tablaEmpleados.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> mostrarDetalleEmpleado(newValue));
-
-	}
+//	@FXML
+//	private void initialize() {
+//
+//		cedulaColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getCedula());
+//		nombreColumna.setCellValueFactory(empleadoCelda -> empleadoCelda.getValue().getNombre()); 
+// 
+//		mostrarDetalleEmpleado(null);
+//
+//		tablaEmpleados.getSelectionModel().selectedItemProperty()
+//				.addListener((observable, oldValue, newValue) -> mostrarDetalleEmpleado(newValue));
+//
+//	}
 
 	/**
 	 * permite obtener una instancia del escenario general
@@ -104,26 +104,26 @@ public class EmpleadoControlador {
 	 * 
 	 * @param empleado empleado al que se le desea mostrar el detalle
 	 */
-	public void mostrarDetalleEmpleado(PersonaObservable empleado) {
-
-		if (empleado != null) {
-			empleadoObservable = empleado;
-			txtCedula.setText(empleado.getCedula().getValue());
-			txtNombre.setText(empleado.getNombre().getValue());
-			txtApellido.setText(empleado.getApellido().getValue());
-//			txtEmail.setText(empleado.getEmail().getValue());
-//			txtClave.setText(empleado.getClave().getValue());
-//			txtFechaNacimiento.setText(empleado.getFechaNacimiento().getValue().toString());
-		} else {
-			txtCedula.setText("");
-			txtNombre.setText("");
-			txtApellido.setText("");
-			txtEmail.setText("");
-			txtClave.setText("");
-			txtFechaNacimiento.setText("");
-		}
-		
-	}
+//	public void mostrarDetalleEmpleado(PersonaObservable empleado) {
+//
+//		if (empleado != null) {
+//			empleadoObservable = empleado;
+//			txtCedula.setText(empleado.getCedula().getValue());
+//			txtNombre.setText(empleado.getNombre().getValue());
+//			txtApellido.setText(empleado.getApellido().getValue());
+////			txtEmail.setText(empleado.getEmail().getValue());
+////			txtClave.setText(empleado.getClave().getValue());
+////			txtFechaNacimiento.setText(empleado.getFechaNacimiento().getValue().toString());
+//		} else {
+//			txtCedula.setText("");
+//			txtNombre.setText("");
+//			txtApellido.setText("");
+//			txtEmail.setText("");
+//			txtClave.setText("");
+//			txtFechaNacimiento.setText("");
+//		}
+//		
+//	}
 
 	/**
 	 * permite mostrar la ventana de agregar empleado

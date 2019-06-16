@@ -15,8 +15,8 @@ import co.gov.jsasociados.modelo.FamiliaObservable;
 import co.gov.jsasociados.modelo.GeneroObservable;
 import co.gov.jsasociados.util.Utilidades;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
-import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
+import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -190,7 +190,7 @@ public class GestionGFControlador {
 					} else {
 						System.out.println("sout no");
 					}
-				} catch (ElementoRepetidoException e) {
+				} catch (GeneroYaRegistradoExcepcion e) {
 					// TODO Auto-generated catch block
 					Utilidades.mostrarMensaje(e.getMessage(), e.getMessage());
 				}
@@ -408,7 +408,7 @@ public class GestionGFControlador {
 		@Override
 		public void changed(ObservableValue rip, Object arg1, Object index) {
 			if ((int) index != -1) {
-
+				
 				if (((ReadOnlyIntegerProperty) rip).getBean() == tableFamilias.getSelectionModel()
 						.selectedIndexProperty().getBean()) {
 					textFieldNombreFamilia
@@ -421,7 +421,6 @@ public class GestionGFControlador {
 					comboBox.getSelectionModel().select(obtenerObservableFamilia(ob.getFamiliaNombre()));
 					idGenero = Long.valueOf(tableGenereros.getSelectionModel().getSelectedItem().getIdGenero());
 				}
-
 			}
 
 		}
