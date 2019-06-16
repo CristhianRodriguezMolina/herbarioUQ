@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.ejb.AdminEJB;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasociados.util.Util;
 
@@ -19,9 +20,12 @@ public class FamiliaBean {
 	 * nombre de la familia
 	 */
 	private String familia;
+	/**
+	 * familia asociada
+	 */
 	private Familia fa; 
 	/**
-	 * 
+	 * Instancia del AdminEJB
 	 */
 	@EJB
 	private AdminEJB adminEJB;

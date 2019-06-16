@@ -16,6 +16,7 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name = Planta.OBTENER_PLANTA_POR_NOMBRE, query="select planta from Planta planta where planta.nombre=:nombre"),
 	@NamedQuery(name = Planta.OBTENER_FAMILIA_PLANTA, query="select planta.genero.familia from Planta planta where planta.idPlanta=:idPlanta"),
+	@NamedQuery(name = Planta.LISTAR_NOMBRES_PLANTAS, query = "select planta.nombre from Planta planta"),
 	@NamedQuery(name = Planta.LISTAR_PLANTAS, query = "select planta from Planta planta"),
 	@NamedQuery(name = Planta.LISTAR_PLANTAS_POR_APROVACION, query = "select DISTINCT registro.planta from Registro registro where registro.aprovacion=:aprovacion"),
 	@NamedQuery(name = Planta.LISTAR_PLANTAS_POR_FAMILIA, query = "select planta from Planta planta where planta.genero.familia.familia=:familia"),
@@ -27,6 +28,7 @@ import javax.persistence.*;
 })
 public class Planta implements Serializable {
 	
+	public static final String LISTAR_NOMBRES_PLANTAS = "Listar nombres de plantas";
 	public static final String OBTENER_PLANTA_POR_NOMBRE = "Obtener planta por nombre";
 	public static final String OBTENER_FAMILIA_PLANTA="obnter familia planta";
 	public static final String LISTAR_PLANTAS = "listar Plantas";
@@ -55,7 +57,12 @@ public class Planta implements Serializable {
 	 */	
 	@ManyToOne
 	private Genero genero;
-	/*
+	/**
+	 * Descripcion de una planta
+	 */
+	@Column(nullable=false)
+	private String descripcion;	
+	/**
 	 * Imagen relacionada a la planta
 	 */
 	@Lob
@@ -64,7 +71,7 @@ public class Planta implements Serializable {
 	/**
 	 * Registro de la Planta
 	 */	
-	@OneToOne(mappedBy="planta")
+	@OneToOne(cascade = CascadeType.REMOVE, mappedBy="planta")
 	private Registro registro;
 	
 	private static final long serialVersionUID = 1L;
@@ -183,6 +190,20 @@ public class Planta implements Serializable {
 	 */
 	public void setRegistro(Registro registro) {
 		this.registro = registro;
+	}
+
+	/**
+	 * @return the descripcion
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	/**
+	 * @param descripcion the descripcion to set
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}   
 	
    

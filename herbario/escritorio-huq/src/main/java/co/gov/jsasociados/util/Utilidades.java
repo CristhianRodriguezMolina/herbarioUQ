@@ -1,11 +1,11 @@
 package co.gov.jsasociados.util;
 
-import java.awt.Image;
+import javafx.scene.image.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -13,8 +13,12 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 import com.sun.messaging.jmq.admin.apps.console.AExplorer;
 
@@ -100,4 +104,17 @@ public final class Utilidades {
 		return matcher.matches();
 	}
 
+	public static Image convertirBytesAImagen(byte[] bytes) throws IOException {
+//        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+//        Iterator readers = ImageIO.getImageReadersByFormatName("jpeg");
+//        ImageReader reader = (ImageReader) readers.next();
+//        Object source = bis; // File or InputStream
+//        ImageInputStream iis = ImageIO.createImageInputStream(source);
+//        reader.setInput(iis, true);
+//        ImageReadParam param = reader.getDefaultReadParam();
+        
+        
+        return new Image(new ByteArrayInputStream(bytes));
+    }
+	
 }

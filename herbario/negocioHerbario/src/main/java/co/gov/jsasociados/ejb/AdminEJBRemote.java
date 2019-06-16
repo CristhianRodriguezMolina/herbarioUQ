@@ -12,6 +12,7 @@ import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
+import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -148,6 +149,7 @@ public interface AdminEJBRemote {
 	 * @param familia
 	 * @return
 	 * @throws FamiliaYaRegistradaExeption
+	 * @throws ElementoNoEncontradoException 
 	 */
 	Familia insertarFamilia(Familia familia) throws FamiliaYaRegistradaExeption;
 
@@ -200,8 +202,9 @@ public interface AdminEJBRemote {
 	 * @param genero
 	 * @return
 	 * @throws ElementoRepetidoException
+	 * @throws GeneroYaRegistradoExcepcion 
 	 */
-	Genero insertarGenero(Genero genero) throws ElementoRepetidoException;
+	Genero insertarGenero(Genero genero) throws  GeneroYaRegistradoExcepcion;
 
 	/**
 	 * metodo que permite eliminar un genero
@@ -228,49 +231,70 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Genero> listarGenero() throws Exception;
 
-	/**
-	 * Metodo para registrar una especie
-	 * 
-	 * @param planta
-	 * @return
-	 * @throws ElementoRepetidoException
-	 */
-	Planta registrarEspecie(Planta planta) throws ElementoRepetidoException;
-
-	/**
-	 * metodo para eliminar una especie
-	 * 
-	 * @param idPlanta
-	 * @return
-	 * @throws ElementoNoEncontradoException
-	 */
-	boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException;
-
-	/**
-	 * Metodo para modificar una especie
-	 * 
-	 * @param planta
-	 * @param idPlanta
-	 * @return
-	 * @throws ElementoNoEncontradoException
-	 */
-	Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException;
-
-	/**
-	 * metodo para listar las plantas registradas
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	List<Planta> listarPlanta() throws Exception;
-
-	/**
-	 * Metodo para buscar una planta
-	 * 
-	 * @param nombrePlanta
-	 * @return
-	 */
-	Planta buscarPlanta(String nombrePlanta);
+	 List<Genero> listarGenero() throws Exception;
+	 
+	 /**
+	  * Metodo para registrar una especie
+	  * @param planta
+	  * @return
+	  * @throws ElementoRepetidoException
+	  */
+	 Planta insertarEspecie(Planta planta) throws ElementoRepetidoException;
+	 
+	 /**
+	  * metodo para eliminar una especie
+	  * @param idPlanta
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  */
+	 boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException;
+	 
+	 /**
+	  * Metodo para modificar una especie
+	  * @param idPlanta
+	  * @param nombrePlanta
+	  * @param genero
+	  * @param descripcion
+	  * @param imagen
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException 
+	  */
+	 Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen) throws ElementoNoEncontradoException, ElementoRepetidoException;
+	 
+	 /**
+	  * metodo para listar las plantas registradas
+	  * @return
+	  * @throws Exception
+	  */
+	 List<Planta> listarPlanta() throws Exception;
+	 
+	 /**
+	  * Metodo para buscar una planta
+	  * @param nombrePlanta
+	  * @return
+	  */
+	 Planta buscarPlanta(String nombrePlanta);
+	 
+	 /**
+	  * Metodo para listar los nombres de las plantas
+	  * @return
+	  * @throws Exception
+	  */
+	 List<String> listarNombresPlanta() throws Exception;
+	 
+	 /**
+	  * Metodo para listar los nombres de los generos
+	  * @return
+	  * @throws Exception
+	  */
+	 List<String> listarNombresGenero() throws Exception;
+	 
+	 /**
+	  * Metodo para listar los nombres de las familias
+	  * @return
+	  * @throws Exception
+	  */
+	 List<String> listarNombresFamilia() throws Exception;
 }

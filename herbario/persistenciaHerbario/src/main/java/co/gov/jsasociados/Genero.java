@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-
+@NamedQuery(name = Genero.LISTAR_NOMBRES_GENEROS, query="select genero.genero from Genero genero"),
 @NamedQuery(name = Genero.OBTENER_PLANTAS, query="select planta from Genero genero INNER JOIN genero.plantas planta where genero.idGenero=:idGenero"),
 @NamedQuery(name = Genero.OBTENER_GENERO, query="select genero from Genero genero where genero.genero=:genero"),
 @NamedQuery(name = Genero.OBTENER_GENEROS, query="select genero from Genero genero")
@@ -24,6 +24,7 @@ import javax.persistence.*;
 )
 public class Genero implements Serializable {
 	
+	public static final String LISTAR_NOMBRES_GENEROS = "Listar nombres de generos";
 	public static final String OBTENER_PLANTAS= "obtener plantas";
 	public static final String OBTENER_GENERO= "obtener un genero por su nombre";
 	public static final String OBTENER_GENEROS= "obtener el listado de generos";
@@ -45,10 +46,8 @@ public class Genero implements Serializable {
 	 */
 	@ManyToOne
 	private Familia familia;
-	/**
-	 * platas asociadas al genero
-	 */
-	@OneToMany(mappedBy="genero")
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="genero")
 	private ArrayList<Planta> plantas;
 	
 	private static final long serialVersionUID = 1L;

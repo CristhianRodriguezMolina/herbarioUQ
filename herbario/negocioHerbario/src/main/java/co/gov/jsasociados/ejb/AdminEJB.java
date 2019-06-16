@@ -20,6 +20,7 @@ import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
+import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
@@ -376,10 +377,10 @@ public class AdminEJB implements AdminEJBRemote {
 			TypedQuery<Familia> query = entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
 			query.setParameter("familia", famila);
 			return query.getSingleResult();
-		} catch (Exception e) {
-			// TODO: handle exception
+		}catch(Exception e1) {
 			return null;
 		}
+		
 
 	}
 
@@ -389,15 +390,14 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#insertarGenero(co.gov.jsasociados.
 	 * Genero)
 	 */
-	public Genero insertarGenero(Genero genero) throws ElementoRepetidoException {
+	public Genero insertarGenero(Genero genero) throws GeneroYaRegistradoExcepcion {
 		if (buscarGenero(genero.getGenero()) != null) {
-			throw new ElementoRepetidoException("El genero ya se encuentra registrado");
+			throw new GeneroYaRegistradoExcepcion("El genero ya se encuentra registrado");
 		} else {
 			try {
 				entityManager.persist(genero);
 				return buscarGenero(genero.getGenero());
 			} catch (Exception e) {
-				// TODO: handle exception
 				return null;
 			}
 		}
@@ -475,15 +475,12 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-
+	
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * co.gov.jsasociados.ejb.AdminEJBRemote#registrarEspecie(co.gov.jsasociados.
-	 * Planta)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#insertarEspecie(co.gov.jsasociados.Planta)
 	 */
-	public Planta registrarEspecie(Planta planta) throws ElementoRepetidoException {
+	public Planta insertarEspecie(Planta planta) throws ElementoRepetidoException {
 		if (buscarPlanta(planta.getNombre()) != null) {
 			throw new ElementoRepetidoException("La planta ya se encuentra registrada");
 		} else {
@@ -521,17 +518,23 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarEspecie(java.lang.String,
 	 * java.lang.Long)
 	 */
-	public Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException {
-		Planta plant = entityManager.find(Planta.class, idPlanta);
-		if (plant == null) {
+	public Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen) throws ElementoNoEncontradoException, ElementoRepetidoException {
+		Planta planta = entityManager.find(Planta.class, idPlanta);
+		if (planta == null) {
 			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");
+		}
+		if(planta.getNombre().equals(nombrePlanta)) {
+			throw new ElementoRepetidoException("El nombre de la especie a modificar le pertenece a otra planta");
 		}
 
 		// Esto previamente por interfaz debe de estar validado para que no este vacio
-		plant.setNombre(planta);
+		planta.setNombre(nombrePlanta);
+		planta.setGenero(genero);
+		planta.setDescripcion(descripcion);
+		planta.setImagen(imagen);		
 		try {
-			entityManager.merge(plant);
-			return buscarPlantaId(plant.getIdPlanta());
+			entityManager.merge(planta);
+			return buscarPlantaId(planta.getIdPlanta());
 		} catch (Exception e) {
 			return null;
 		}
@@ -553,7 +556,49 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresPlanta()
+	 */
+	public List<String> listarNombresPlanta() throws Exception {
+		try {
+			TypedQuery<String> query = entityManager.createNamedQuery(Planta.LISTAR_NOMBRES_PLANTAS, String.class);
+			List<String> plantas = query.getResultList();
+			return plantas;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresGenero()
+	 */
+	public List<String> listarNombresGenero() throws Exception {
+		try {
+			TypedQuery<String> query = entityManager.createNamedQuery(Genero.LISTAR_NOMBRES_GENEROS, String.class);
+			List<String> generos = query.getResultList();
+			return generos;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresFamilia()
+	 */
+	public List<String> listarNombresFamilia() throws Exception {
+		try {
+			TypedQuery<String> query = entityManager.createNamedQuery(Familia.LISTAR_NOMBRES_FAMILIAS, String.class);
+			List<String> familias = query.getResultList();
+			return familias;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

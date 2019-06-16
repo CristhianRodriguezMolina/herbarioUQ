@@ -55,8 +55,9 @@ public class ManejadorEscenarios {
 	 * recibe el escenario principla de la aplicacion
 	 * 
 	 * @param escenario inicial	
+	 * @throws Exception 
 	 */
-	public ManejadorEscenarios(Stage escenario) {
+	public ManejadorEscenarios(Stage escenario){
 
 //		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
@@ -94,8 +95,9 @@ public class ManejadorEscenarios {
 	
 	/**
 	 * carga una escena en el centro del escenario
+	 * @throws Exception 
 	 */
-	public void cargarEscenaRegistrarPlantas() {
+	public void cargarEscenaRegistrarPlantas(){
 
 		try {
 
@@ -103,9 +105,9 @@ public class ManejadorEscenarios {
 			loader2.setLocation(Main.class.getResource("./vista/registro_planta.fxml"));
 			ScrollPane panel = (ScrollPane) loader2.load();
 			((BorderPane)scrollPanel.getContent()).setCenter(panel);
-			
-//			RegistroPlantaControlador controlador = loader2.getController();
-//			controlador.setEscenarioInicial(this);
+						
+			RegistroPlantaControlador controlador = loader2.getController();
+			controlador.setEscenarioInicial(this);
 
 		} catch (IOException e) {
 			e.printStackTrace();
