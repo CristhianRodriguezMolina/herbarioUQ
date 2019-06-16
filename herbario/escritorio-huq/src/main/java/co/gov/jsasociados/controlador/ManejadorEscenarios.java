@@ -63,9 +63,9 @@ public class ManejadorEscenarios {
 			PrincipalControlador pc = loader.getController();
 			pc.setEscenarioInicial(this);
 			
-//			cargarEscenaEmpleado();
-//			cargarEscenaRegistroGenerosFamilias();			
-//			cargarEscenaRegistrarPlantas();
+			cargarEscenaEmpleado();
+			cargarEscenaRegistroGenerosFamilias();			
+			cargarEscenaRegistrarPlantas();
 			cargarEscenaNavegacion();
 			
 			// se carga la escena

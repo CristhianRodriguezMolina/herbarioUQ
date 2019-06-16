@@ -34,7 +34,8 @@ public class PlantaObservable {
 		this.familiaPlanta = new SimpleStringProperty(planta.getGenero().getFamilia().getFamilia());
 		this.descripcionPlanta = new SimpleStringProperty(planta.getDescripcion());
 		try {
-			this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getImagen());
+			if(planta.getImagen() != null)
+				this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getImagen());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.glassfish.loadbalancer.admin.cli.LbLogUtil;
 
+import com.sun.xml.ws.api.tx.at.Transactional;
+
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Planta;
@@ -125,7 +127,9 @@ public class RegistroPlantaControlador {
 			txtGeneroEspecie.setText(planta.getGeneroPlanta().getValue());
 			txtNombreEspecie.setText(planta.getNombrePlanta().getValue());
 			txtaDescripcionEspecie.setText(planta.getDescripcionPlanta().getValue());
-			imgImagen.setImage(planta.getImagenPlanta());
+			if(planta.getImagenPlanta() != null) {
+				imgImagen.setImage(planta.getImagenPlanta());				
+			}
 		}else {
 			txtGeneroEspecie.setText("");
 			txtNombreEspecie.setText("");
@@ -145,7 +149,7 @@ public class RegistroPlantaControlador {
 			Utilidades.mostrarMensaje("Error", "Error al modificar la especie");
 		}
 	}
-	
+
 	@FXML
 	void registrarEspecie() {
 		
@@ -193,6 +197,7 @@ public class RegistroPlantaControlador {
 		try {
 			txtBuscar.getEntries().addAll(administradorDelegado.listarNombresPlanta());
 			txtGeneroEspecie.getEntries().addAll(administradorDelegado.listarNombresGenero());
+			tblTablaEspecies.setItems(administradorDelegado.listarPlantasObservable());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

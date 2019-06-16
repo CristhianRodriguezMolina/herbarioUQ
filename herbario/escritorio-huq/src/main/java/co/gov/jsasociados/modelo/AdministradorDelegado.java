@@ -303,7 +303,8 @@ public class AdministradorDelegado {
 	 * @throws ElementoRepetidoException
 	 */
 	public Planta insertarEspecie(Planta planta) throws ElementoRepetidoException {
-		return adminEJB.insertarEspecie(planta);
+		Planta p = adminEJB.insertarEspecie(planta); 
+		return p;
 	}
 
 	/**
@@ -353,6 +354,15 @@ public class AdministradorDelegado {
 	}
 	
 	/**
+	 * metodo que lista todos las plantas
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Planta> listarPlantas() throws Exception {
+		return adminEJB.listarPlanta();
+	}
+	
+	/**
 	 * Metodo para listar los nombres de las plantas
 	 * @return
 	 * @throws Exception
@@ -377,6 +387,16 @@ public class AdministradorDelegado {
 	 */
 	public List<String> listarNombresFamilia() throws Exception{
 		return adminEJB.listarNombresFamilia();
+	}
+	
+	/**
+	 * Metodo para listar plantas por medio de filtros de genero y familia 
+	 * @param f
+	 * @param g
+	 * @return
+	 */
+	public List<Planta> listarPlantasPorFiltros(Familia f, Genero g){
+		return adminEJB.listarPlantasPorFiltros(f, g);
 	}
 	
 	/**
@@ -435,5 +455,34 @@ public class AdministradorDelegado {
 			generoObservable.add(new GeneroObservable(genero));
 		}
 		return generoObservable;
+	}
+	
+	/**
+	 * genera una lista observable de plantas
+	 * @return
+	 * @throws Exception
+	 */
+	public ObservableList<PlantaObservable> listarPlantasObservable() throws Exception{
+		List<Planta> plantas = listarPlantas();
+		ObservableList<PlantaObservable> plantasObservable = FXCollections.observableArrayList();
+		for(Planta p : plantas) {
+			plantasObservable.add(new PlantaObservable(p));
+		}
+		return plantasObservable;
+	}
+	
+	/**
+	 * genera una lista observable de plantas
+	 * @param f
+	 * @param g
+	 * @return
+	 */
+	public ObservableList<PlantaObservable> listarPlantasObservablePorFiltros(Familia f, Genero g){
+		List<Planta> plantas = listarPlantasPorFiltros(f, g);
+		ObservableList<PlantaObservable> plantasObservable = FXCollections.observableArrayList();
+		for(Planta p : plantas) {
+			plantasObservable.add(new PlantaObservable(p));
+		}
+		return plantasObservable;
 	}
 }

@@ -634,7 +634,6 @@ public class AdminEJB implements AdminEJBRemote {
 			}			
 			return query.getResultList();
 		} catch (Exception e) {
-			// TODO: handle exception
 			return null;
 		}
 	}
