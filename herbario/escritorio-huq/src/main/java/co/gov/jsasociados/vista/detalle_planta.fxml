@@ -15,13 +15,13 @@
 <?import javafx.scene.text.Font?>
 
 
-<ScrollPane fitToHeight="true" fitToWidth="true" minViewportHeight="457.0" minViewportWidth="787.0" prefHeight="457.0" prefViewportHeight="457.0" prefViewportWidth="787.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fitToHeight="true" fitToWidth="true" minViewportHeight="457.0" minViewportWidth="787.0" prefHeight="562.0" prefViewportHeight="457.0" prefViewportWidth="787.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.DetallePlantaControlador">
    <content>
       <BorderPane minHeight="594.0" minWidth="787.0" prefHeight="594.0" prefWidth="787.0">
          <top>
             <Label fx:id="lblNombre" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="495.0" text="&lt;NOMBRE PLANTA&gt;" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Arial" size="24.0" />
+                  <Font name="Arial" size="48.0" />
                </font>
             </Label>
          </top>
@@ -101,16 +101,56 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblGenero" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="lblFamilia" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="lblDescripcion" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="lblRecolector" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="lblPais" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="lblDepartamento" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label fx:id="lblMunicipio" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label fx:id="lblLugar" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label fx:id="lblFechaRecoleccion" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <Label fx:id="lblFechaRegistro" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label fx:id="lblGenero" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblFamilia" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblDescripcion" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblRecolector" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblPais" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblDepartamento" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblMunicipio" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblLugar" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblFechaRecoleccion" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblFechaRegistro" prefHeight="82.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
                </center>
@@ -131,14 +171,14 @@
                         </Label>
                      </left>
                      <right>
-                        <Button fx:id="btnRegresar" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Regresar" BorderPane.alignment="CENTER" />
+                        <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="150.0" text="Regresar" BorderPane.alignment="CENTER" />
                      </right>
                   </BorderPane>
                </bottom>
             </BorderPane>
          </center>
          <bottom>
-            <VBox prefHeight="205.0" prefWidth="787.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="vboxComentarios" prefHeight="205.0" prefWidth="787.0" BorderPane.alignment="CENTER">
                <children>
                   <Label prefHeight="43.0" prefWidth="609.0" text="Comentarios:">
                      <font>
@@ -148,7 +188,7 @@
                   <HBox prefHeight="39.0" prefWidth="787.0">
                      <children>
                         <TextField fx:id="txtComentario" prefHeight="37.0" prefWidth="547.0" />
-                        <Button fx:id="btnComentar" mnemonicParsing="false" prefHeight="36.0" prefWidth="170.0" text="Comentar">
+                        <Button fx:id="btnComentar" mnemonicParsing="false" onAction="#comentar" prefHeight="36.0" prefWidth="170.0" text="Comentar">
                            <font>
                               <Font size="15.0" />
                            </font>

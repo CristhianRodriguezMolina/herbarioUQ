@@ -138,6 +138,17 @@ public class AdministradorDelegado {
 	public List<Recolector> listarRecolectores() throws Exception {
 		return adminEJB.listarRecolectores();
 	}
+	
+	/**
+	 * Metodo para buscar una persona por su usuario
+	 * @param user
+	 * @return
+	 * @throws PersonaNoRegistradaException
+	 * @throws TipoClaseException
+	 */
+	public Persona buscarPersona(String user) throws PersonaNoRegistradaException {
+		return adminEJB.buscarPersona(user);
+	}
 
 	/**
 	 * metodo que permite buscar un empleado por su cedula

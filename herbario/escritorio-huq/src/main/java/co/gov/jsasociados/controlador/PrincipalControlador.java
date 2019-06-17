@@ -3,6 +3,7 @@ package co.gov.jsasociados.controlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class PrincipalControlador {
 
@@ -28,9 +29,18 @@ public class PrincipalControlador {
     @FXML
     private Button btnRegistrarExpecies;
     /**
+     * boton de salir
+     */
+    @FXML
+    private Button btnSalir;
+    /**
 	 * instancia del manejador de escenario
 	 */
 	private ManejadorEscenarios escenarioInicial;
+	/**
+	 * escenario
+	 */
+	private Stage escenario;
 	
 	@FXML
 	void iniatilize()
@@ -38,13 +48,19 @@ public class PrincipalControlador {
 		
 	}
     
+	@FXML
+	void salir() {
+		escenario.close();
+	}
+	
     /**
 	 * permite obtener una instancia del escenario general
 	 * 
 	 * @param escenarioInicial
 	 */
-	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial) {
+	public void setEscenarioInicial(ManejadorEscenarios escenarioInicial, Stage escenario) {
 		this.escenarioInicial = escenarioInicial;
+		this.escenario = escenario;
 	}
     
 	/**

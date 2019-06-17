@@ -1,30 +1,39 @@
 package co.gov.jsasociados.controlador;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
 import com.jfoenix.controls.JFXRadioButton;
 
+import co.gov.jsasociados.Main;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
 import co.gov.jsasociados.modelo.PlantaObservable;
+import co.gov.jsasociados.vista.AutoCompleteTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 
 public class NavegacionBusquedaControlador {
 
+	@FXML
+    private BorderPane idBorderpane;
+	
 	@FXML
 	private JFXRadioButton rbFamilia;
 
@@ -47,7 +56,7 @@ public class NavegacionBusquedaControlador {
 	private ImageView imgLupa;
 
 	@FXML
-	private TextField txtBuscar;
+	private AutoCompleteTextField txtBuscar;
 
 	@FXML
 	private TableView<PlantaObservable> tblTablaPlantas;
@@ -95,6 +104,7 @@ public class NavegacionBusquedaControlador {
 		this.escenarioInicial = escenarioInicial;
 		try {
 			tblTablaPlantas.setItems(administradorDelegado.listarPlantasObservable());
+			txtBuscar.getEntries().addAll(administradorDelegado.listarNombresPlanta());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -148,17 +158,7 @@ public class NavegacionBusquedaControlador {
 	@FXML
 	private void mostrarDetallePlanta(PlantaObservable planta) {
 
-//		if(planta != null) {
-//			txtGeneroEspecie.setText(planta.getGeneroPlanta().getValue());
-//			txtNombreEspecie.setText(planta.getNombrePlanta().getValue());
-//			txtaDescripcionEspecie.setText(planta.getDescripcionPlanta().getValue());
-//			imgImagen.setImage(planta.getImagenPlanta());
-//		}else {
-//			txtGeneroEspecie.setText("");
-//			txtNombreEspecie.setText("");
-//			txtaDescripcionEspecie.setText("");
-//			imgImagen.setImage(null);
-//		}
+		escenarioInicial.cargarEscenaDetallePlantas(escenarioInicial, tblTablaPlantas.getSelectionModel().getSelectedItem());
 
 	}
 

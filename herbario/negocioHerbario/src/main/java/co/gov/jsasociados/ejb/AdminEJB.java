@@ -283,6 +283,18 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 		return (Recolector) recolector;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarPersona(java.lang.String)
+	 */
+	public Persona buscarPersona(String user) throws PersonaNoRegistradaException {
+		Persona persona = entityManager.find(Cuenta.class, user).getPersona();
+		if (persona == null) {
+			throw new PersonaNoRegistradaException("La persona a la que quiere buscar no esta registrada");
+		} 
+		return persona;
+	}
 
 	/*
 	 * (non-Javadoc)

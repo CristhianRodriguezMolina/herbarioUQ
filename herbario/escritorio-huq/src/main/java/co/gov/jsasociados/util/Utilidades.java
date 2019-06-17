@@ -1,11 +1,19 @@
 package co.gov.jsasociados.util;
 
 import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
+import java.awt.image.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
+import javafx.scene.image.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,6 +22,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Iterator;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -88,9 +97,10 @@ public final class Utilidades {
 
 		return (data.getData());
 	}
-	
+
 	/**
 	 * metodo para validar el ingreso de un email valido
+	 * 
 	 * @param email
 	 * @return
 	 */
@@ -112,9 +122,17 @@ public final class Utilidades {
 //        ImageInputStream iis = ImageIO.createImageInputStream(source);
 //        reader.setInput(iis, true);
 //        ImageReadParam param = reader.getDefaultReadParam();
-        
-        
-        return new Image(new ByteArrayInputStream(bytes));
-    }
-	
+		File temp = null;
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			BufferedImage bim = ImageIO.read(new ByteArrayInputStream(baos.toByteArray()));
+			temp = new File("D:/result.jpg");
+			ImageIO.write(bim, "jpg", temp);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return new Image(new ByteArrayInputStream(bytes));
+	}
+
 }

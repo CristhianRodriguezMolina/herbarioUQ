@@ -3,6 +3,8 @@ package co.gov.jsasociados.controlador;
 import java.io.IOException;
 
 import co.gov.jsasociados.Main;
+import co.gov.jsasociados.Persona;
+import co.gov.jsasociados.modelo.PlantaObservable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,31 +25,59 @@ public class ManejadorEscenarios {
 	 * contenedor prinpipal de la aplicacion
 	 */
 	private Stage escenario;
-	
+
 	/**
 	 * tipo de panel inicial
 	 */
 	@FXML
 	private ScrollPane scrollPanel;
 	
-//	/**
-//	 * para almacenar empleados observables
-//	 */
-//	private ObservableList<EmpleadoObservable> empleadosObservables;
-//	/**
-//	 * conexion con capa de negocio
-//	 */
-//	private AdministradorDelegado administradorDelegado;
+	/**
+	 * tipo de panel login
+	 */
+	@FXML
+	private AnchorPane anchoPanel;
+
+	/**
+	 * Usuario actual
+	 */
+	private Persona user;
+
+	/**
+	 * Login
+	 * @param escenario
+	 */
+	public ManejadorEscenarios(Stage escenario) {
+		try {
+			// se inicializa el escenario
+			escenario.setTitle("Login");
+
+			// se carga la vista
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("./vista/login.fxml"));
+
+			anchoPanel = loader.load();
+			
+			LoginControlador controlador = loader.getController();
+			controlador.setEscenarioInicial(this, escenario);			
+			
+			// se carga la escena
+			Scene scene = new Scene(anchoPanel);
+			escenario.setScene(scene);
+			escenario.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * recibe el escenario principla de la aplicacion
 	 * 
-	 * @param escenario inicial	
-	 * @throws Exception 
+	 * @param escenario inicial
+	 * @throws Exception
 	 */
-	public ManejadorEscenarios(Stage escenario){
+	public void iniciarAplicacion(Stage escenario) {
 
-//		administradorDelegado = AdministradorDelegado.administradorDelegado;
 		this.escenario = escenario;
 
 		try {
@@ -61,39 +91,56 @@ public class ManejadorEscenarios {
 			scrollPanel = ((ScrollPane) loader.load());
 
 			PrincipalControlador pc = loader.getController();
-			pc.setEscenarioInicial(this);
-			
+			pc.setEscenarioInicial(this, escenario);
+
 			cargarEscenaEmpleado();
-			cargarEscenaRegistroGenerosFamilias();			
+			cargarEscenaRegistroGenerosFamilias();
 			cargarEscenaRegistrarPlantas();
 			cargarEscenaNavegacion();
-			
+
 			// se carga la escena
 			Scene scene = new Scene(scrollPanel);
 			escenario.setScene(scene);
 			escenario.show();
 
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
+	public void cargarEscenaDetallePlantas(ManejadorEscenarios me, PlantaObservable po) {
+
+		try {
+
+			FXMLLoader loader2 = new FXMLLoader();
+			loader2.setLocation(Main.class.getResource("./vista/detalle_planta.fxml"));
+			ScrollPane panel = (ScrollPane) loader2.load();
+			((BorderPane) scrollPanel.getContent()).setCenter(panel);
+
+			DetallePlantaControlador controlador = loader2.getController();
+			controlador.setEscenarioInicial(me, po);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	/**
 	 * carga una escena en el centro del escenario
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
-	public void cargarEscenaRegistrarPlantas(){
+	public void cargarEscenaRegistrarPlantas() {
 
 		try {
 
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("./vista/registro_planta.fxml"));
 			ScrollPane panel = (ScrollPane) loader2.load();
-			((BorderPane)scrollPanel.getContent()).setCenter(panel);
-						
+			((BorderPane) scrollPanel.getContent()).setCenter(panel);
+
 			RegistroPlantaControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
 
@@ -112,17 +159,17 @@ public class ManejadorEscenarios {
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("./vista/registro_empleado.fxml"));
 			BorderPane panel = (BorderPane) loader2.load();
-			((BorderPane)scrollPanel.getContent()).setCenter(panel);
-			
+			((BorderPane) scrollPanel.getContent()).setCenter(panel);
+
 			RegistroEmpleadoControlador controlador = loader2.getController();
 			controlador.setEscenarioInicial(this);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	/**
 	 * carga una escena en el centro del escenario
 	 */
@@ -133,8 +180,8 @@ public class ManejadorEscenarios {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("./vista/navegacion_y_busquedas.fxml"));
 			BorderPane panel = (BorderPane) loader.load();
-			((BorderPane)scrollPanel.getContent()).setCenter(panel);
-			
+			((BorderPane) scrollPanel.getContent()).setCenter(panel);
+
 			NavegacionBusquedaControlador controlador = loader.getController();
 			controlador.setEscenarioInicial(this);
 
@@ -143,7 +190,7 @@ public class ManejadorEscenarios {
 		}
 
 	}
-	
+
 	/**
 	 * carga una escena en el centro del escenario
 	 */
@@ -154,17 +201,17 @@ public class ManejadorEscenarios {
 			FXMLLoader loader2 = new FXMLLoader();
 			loader2.setLocation(Main.class.getResource("./vista/registro_generos_familias.fxml"));
 			ScrollPane panel = (ScrollPane) loader2.load();
-			((BorderPane)scrollPanel.getContent()).setCenter(panel);
-			
-			GestionGFControlador gestionGPControlador= loader2.getController();
+			((BorderPane) scrollPanel.getContent()).setCenter(panel);
+
+			GestionGFControlador gestionGPControlador = loader2.getController();
 			gestionGPControlador.setEscenarioInicial(this);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	/**
 	 * muestra el escenario para crear un empleado nuevo
 	 */
@@ -179,13 +226,13 @@ public class ManejadorEscenarios {
 
 			// se crea el escenario
 			Stage escenarioCrear = new Stage();
-			escenarioCrear.setTitle("Crear"); 
+			escenarioCrear.setTitle("Crear");
 			Scene scene = new Scene(page);
 			escenarioCrear.setScene(scene);
 
 			// se carga el controlador
 			EdicionEmpleadoControlador empleadoControlador = loader.getController();
-			empleadoControlador.setEscenarioEditar(escenarioCrear); 
+			empleadoControlador.setEscenarioEditar(escenarioCrear);
 			empleadoControlador.setManejador(this);
 
 			// se crea el escenario
@@ -196,32 +243,6 @@ public class ManejadorEscenarios {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	//METODOS DE ENTIDADES OBSERVABLES Y DELEGADOS
-
-//	/**
-//	 * 
-//	 * @return empleados observables
-//	 */
-//	public ObservableList<EmpleadoObservable> getEmpleadosObservables() {
-//		return empleadosObservables;
-//	}
-//
-//	/**
-//	 * permite agrega una liente a la lista obsevable
-//	 * 
-//	 * @param empleado
-//	 */
-//	public void agregarALista(Persona empleado) {
-//		empleadosObservables.add(new EmpleadoObservable(empleado));
-//	}
 
 	/**
 	 * deveulve una instancia del escenario
@@ -232,37 +253,18 @@ public class ManejadorEscenarios {
 		return escenario;
 	}
 
-//	/**
-//	 * permite registrar una persona en la base de datos
-//	 * 
-//	 * @param empleado a registrar
-//	 * @return true si quedo registrado
-//	 */
-//	public boolean registrarEmpleado(Empleado empleado) throws Exception{
-//		//try {
-//			return administradorDelegado.registrarEmpleado(empleado)!=null;
-//		//} catch (Exception e) {
-//			//e.printStackTrace();
-//		//}
-//	}
-//
-//	/**
-//	 * permite eliminar un empleado
-//	 * 
-//	 * @param empleado a ser eliminado
-//	 * @return true si fue eliminado false si no
-//	 */
-//	public boolean eliminarEmpleado(Empleado empleado) {
-//		return administradorDelegado.eliminarEmpleado(empleado);
-//	}
+	/**
+	 * @return the user
+	 */
+	public Persona getUser() {
+		return user;
+	}
 
-//	/**
-//	 * permite registrar una planta en la base de datos
-//	 * 
-//	 * @param planta a registrar
-//	 * @return true si quedo registrado
-//	 */
-//	public boolean registrarPlanta(Planta planta) throws Exception{
-//			return administradorDelegado.registrarEspecie(planta) != null;
-//	}
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(Persona user) {
+		this.user = user;
+	}
+
 }

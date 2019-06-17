@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
+import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
@@ -24,6 +25,15 @@ public interface AdminEJBRemote {
 
 	String JNDI = "java:global/ear-herbario/negocioHerbario/AdminEJB!co.gov.jsasociados.ejb.AdminEJBRemote";
 
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 * @throws PersonaNoRegistradaException
+	 * @throws TipoClaseException
+	 */
+	Persona buscarPersona(String user) throws PersonaNoRegistradaException;
+	
 	/**
 	 * metodo que permiete agregar un empleado
 	 * 

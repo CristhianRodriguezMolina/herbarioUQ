@@ -41,7 +41,7 @@
                   <Button fx:id="btnGestionarGenerosPlantas" mnemonicParsing="false" onAction="#cargarEscenaRegistroGenerosFamilias" prefHeight="59.0" prefWidth="280.0" text="Gestionar generos y familias" />
                   <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="443.0" text="Button" />
                   <Label prefHeight="233.0" prefWidth="223.0" />
-                  <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="152.0" text="Salir" />
+                  <Button fx:id="salir" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="36.0" prefWidth="152.0" text="Salir" />
                </children>
             </VBox>
          </left>

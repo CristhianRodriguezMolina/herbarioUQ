@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import co.gov.jsasociados.vista.AutoCompleteTextField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -18,7 +19,7 @@
 
 <BorderPane cache="true" prefHeight="457.0" prefWidth="787.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.gov.jsasociados.controlador.NavegacionBusquedaControlador">
    <center>
-      <BorderPane prefHeight="457.0" prefWidth="787.0">
+      <BorderPane fx:id="idBorderpane" prefHeight="457.0" prefWidth="787.0">
          <top>
             <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="787.0" style="-fx-background-color: lightgreen;" BorderPane.alignment="CENTER">
                <children>
@@ -55,11 +56,11 @@
                      </cursor>
                   </ImageView>
                   <Label prefHeight="39.0" prefWidth="4.0" />
-                  <TextField fx:id="txtBuscar" prefHeight="35.0" prefWidth="271.0">
+                  <AutoCompleteTextField fx:id="txtBuscar" prefHeight="35.0" prefWidth="271.0">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
-                  </TextField>
+                  </AutoCompleteTextField>
                </children>
             </HBox>
          </top>
