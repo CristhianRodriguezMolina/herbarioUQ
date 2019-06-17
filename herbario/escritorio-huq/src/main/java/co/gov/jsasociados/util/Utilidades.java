@@ -2,38 +2,31 @@ package co.gov.jsasociados.util;
 
 import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
-import java.awt.image.*;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
-import javafx.scene.image.Image;
+import java.io.ByteArrayInputStream;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Iterator;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-
-import com.sun.messaging.jmq.admin.apps.console.AExplorer;
+import java.util.Properties;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.util.Callback;
 import javafx.scene.control.ButtonType;
 
 /**
@@ -115,24 +108,39 @@ public final class Utilidades {
 	}
 
 	public static Image convertirBytesAImagen(byte[] bytes) throws IOException {
-//        ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-//        Iterator readers = ImageIO.getImageReadersByFormatName("jpeg");
-//        ImageReader reader = (ImageReader) readers.next();
-//        Object source = bis; // File or InputStream
-//        ImageInputStream iis = ImageIO.createImageInputStream(source);
-//        reader.setInput(iis, true);
-//        ImageReadParam param = reader.getDefaultReadParam();
-		File temp = null;
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			BufferedImage bim = ImageIO.read(new ByteArrayInputStream(baos.toByteArray()));
-			temp = new File("D:/result.jpg");
-			ImageIO.write(bim, "jpg", temp);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		return new Image(new ByteArrayInputStream(bytes));
 	}
+	
+	
 
+	
+	public static void enviarConGMail(String destinatario, String asunto, String cuerpo)  {
+	    // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
+	    String remitente = "herbicidaherbariouq.bot";  //Para la dirección nomcuenta@gmail.com
+
+	    Properties props = System.getProperties();
+	    props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
+	    props.put("mail.smtp.user", remitente);
+	    props.put("mail.smtp.clave", "jsasociados");    //La clave de la cuenta
+	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
+	    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
+	    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
+	    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+	    Session session = Session.getDefaultInstance(props);
+	    MimeMessage message = new MimeMessage(session);
+
+	    try {
+	        message.setFrom(new InternetAddress(remitente,"HerbarioUQ"));
+	        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+	        message.setSubject(asunto);
+	        message.setText(cuerpo);
+	        Transport transport = session.getTransport("smtp");
+	        transport.connect("smtp.gmail.com", remitente, "jsasociados");
+	        transport.sendMessage(message, message.getAllRecipients());
+	        transport.close();
+	    }
+	    catch (MessagingException | UnsupportedEncodingException me) {
+	        me.printStackTrace();   //Si se produce un error
+	    }
+	}
 }

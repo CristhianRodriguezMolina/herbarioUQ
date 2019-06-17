@@ -110,6 +110,7 @@
     <module>negocioHerbario</module>
     <module>webHerbario</module>
     <module>escritorio-huq</module>
+    <module>mailServer</module>
   </modules>
 
 </project>

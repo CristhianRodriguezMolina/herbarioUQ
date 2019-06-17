@@ -289,11 +289,17 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarPersona(java.lang.String)
 	 */
 	public Persona buscarPersona(String user) throws PersonaNoRegistradaException {
-		Persona persona = entityManager.find(Cuenta.class, user).getPersona();
-		if (persona == null) {
-			throw new PersonaNoRegistradaException("La persona a la que quiere buscar no esta registrada");
-		} 
-		return persona;
+		try {
+			Persona persona = entityManager.find(Cuenta.class, user).getPersona();
+			if (persona == null) {
+				throw new PersonaNoRegistradaException("La persona a la que quiere buscar no esta registrada");
+			}
+			return persona;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
 	}
 
 	/*
@@ -491,7 +497,6 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#registrarPlanta(co.gov.jsasociados.Planta)
 	 */
 	public Planta registrarPlanta(Planta planta) throws ElementoRepetidoException {
-		System.out.println("entre con "+planta.getNombre());
 		if (buscarPlanta(planta.getNombre())!=null) {
 			throw new ElementoRepetidoException("La planta ya se encuentra registrada.");
 		}
