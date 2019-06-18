@@ -2,6 +2,7 @@ package co.gov.jsasociados.ejb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -64,7 +65,7 @@ public class AdminEJB implements AdminEJBRemote {
 			return buscarEmpleado(empleado.getCedula());
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(String.format("Error al insertar un empleado %", empleado.toString()));
+			//(String.format("Error al insertar un empleado %", empleado.toString()));
 			return null;
 		}
 	}
@@ -283,9 +284,10 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 		return (Recolector) recolector;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#buscarPersona(java.lang.String)
 	 */
 	public Persona buscarPersona(String user) throws PersonaNoRegistradaException {
@@ -299,7 +301,7 @@ public class AdminEJB implements AdminEJBRemote {
 			// TODO: handle exception
 			return null;
 		}
-		
+
 	}
 
 	/*
@@ -393,10 +395,9 @@ public class AdminEJB implements AdminEJBRemote {
 			TypedQuery<Familia> query = entityManager.createNamedQuery(Familia.OBTENER_POR_NOMBRE, Familia.class);
 			query.setParameter("familia", famila);
 			return query.getSingleResult();
-		}catch(Exception e1) {
+		} catch (Exception e1) {
 			return null;
 		}
-		
 
 	}
 
@@ -491,13 +492,16 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#registrarPlanta(co.gov.jsasociados.Planta)
+	 * 
+	 * @see
+	 * co.gov.jsasociados.ejb.AdminEJBRemote#registrarPlanta(co.gov.jsasociados.
+	 * Planta)
 	 */
 	public Planta registrarPlanta(Planta planta) throws ElementoRepetidoException {
-		if (buscarPlanta(planta.getNombre())!=null) {
+		if (buscarPlanta(planta.getNombre()) != null) {
 			throw new ElementoRepetidoException("La planta ya se encuentra registrada.");
 		}
 		try {
@@ -533,12 +537,13 @@ public class AdminEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarEspecie(java.lang.String,
 	 * java.lang.Long)
 	 */
-	public Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen) throws ElementoNoEncontradoException, ElementoRepetidoException {
+	public Planta modificarEspecie(Long idPlanta, String nombrePlanta, Genero genero, String descripcion, byte[] imagen)
+			throws ElementoNoEncontradoException, ElementoRepetidoException {
 		Planta planta = entityManager.find(Planta.class, idPlanta);
 		if (planta == null) {
 			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");
 		}
-		if(planta.getNombre().equals(nombrePlanta)) {
+		if (planta.getNombre().equals(nombrePlanta)) {
 			throw new ElementoRepetidoException("El nombre de la especie a modificar le pertenece a otra planta");
 		}
 
@@ -546,7 +551,7 @@ public class AdminEJB implements AdminEJBRemote {
 		planta.setNombre(nombrePlanta);
 		planta.setGenero(genero);
 		planta.setDescripcion(descripcion);
-		planta.setImagen(imagen);		
+		planta.setImagen(imagen);
 		try {
 			entityManager.merge(planta);
 			return buscarPlantaId(planta.getIdPlanta());
@@ -571,9 +576,10 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresPlanta()
 	 */
 	public List<String> listarNombresPlanta() throws Exception {
@@ -585,9 +591,10 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresGenero()
 	 */
 	public List<String> listarNombresGenero() throws Exception {
@@ -599,9 +606,10 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarNombresFamilia()
 	 */
 	public List<String> listarNombresFamilia() throws Exception {
@@ -613,7 +621,7 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -629,31 +637,57 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarPlantasPorFiltros(co.gov.jsasociados.Familia, co.gov.jsasociados.Genero)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarPlantasPorFiltros(co.gov.
+	 * jsasociados.Familia, co.gov.jsasociados.Genero)
 	 */
-	public List<Planta> listarPlantasPorFiltros(Familia f, Genero g){
+	public List<Planta> listarPlantasPorFiltros(Familia f, Genero g) {
 		try {
 			TypedQuery<Planta> query = null;
-			if(f == null) {
+			if (f == null) {
 				query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO, Planta.class);
 				query.setParameter("genero", g.getGenero());
-			}else if(g == null) {
+			} else if (g == null) {
 				query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_FAMILIA, Planta.class);
 				query.setParameter("familia", f.getFamilia());
-			}else {
+			} else {
 				query = entityManager.createNamedQuery(Planta.LISTAR_PLANTAS_POR_GENERO_Y_FAMILIA, Planta.class);
 				query.setParameter("familia", f.getFamilia());
 				query.setParameter("genero", g.getGenero());
-			}			
+			}
 			return query.getResultList();
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.
+	 * jsasociados.Persona)
+	 */
+	public String reestablecerContraseña(Persona persona)
+			throws ElementoNoEncontradoException, ElementoRepetidoException {
+		Cuenta cuenta = modificarClaveCuenta(generarClave(), persona);
+		if (cuenta != null) {
+			return cuenta.getContrasenia();
+		}
+		return "";
+	}
+
+	/**
+	 * metodo que permite devolver una cadena de 10 digitos aleatoria
+	 * 
+	 * @return
+	 */
+	private String generarClave() {
+		return (UUID.randomUUID().toString()).substring(0, 10);
+	}
+
 	/**
 	 * metodo que permite buscar una planta por su id
 	 * 
@@ -704,15 +738,14 @@ public class AdminEJB implements AdminEJBRemote {
 	}
 
 	/**
-	 * metodo que permite moficar la cuenta de una persona
+	 * metodo que permite moficar el usuario de la cuenta de una persona
 	 * 
-	 * @param usuario
-	 * @param clave
+	 * @param usuario -nuevo
 	 * @param persona
 	 * @throws ElementoNoEncontradoException
 	 * @throws ElementoRepetidoException
 	 */
-	private Cuenta modificarCuenta(String usuario, String clave, Persona persona)
+	private Cuenta modificarUsuarioCuenta(String usuario, Persona persona)
 			throws ElementoNoEncontradoException, ElementoRepetidoException {
 		if (buscarPorUsuario(persona.getCuenta().getUsuario()) == null) {
 			throw new ElementoNoEncontradoException("No se ha encontrado el usuario");
@@ -720,9 +753,32 @@ public class AdminEJB implements AdminEJBRemote {
 			throw new ElementoRepetidoException("El usuario ya esta tomado");
 		}
 		try {
-			entityManager.remove(persona.getCuenta());
-			Cuenta cuenta = new Cuenta();
+			Cuenta cuenta = entityManager.find(Cuenta.class, persona.getCuenta().getUsuario());
 			cuenta.setUsuario(usuario);
+			entityManager.merge(cuenta);
+			return entityManager.find(Cuenta.class, cuenta.getUsuario());
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+
+	}
+
+	/**
+	 * metodo que permite moficar el usuario de la cuenta de una persona
+	 * 
+	 * @param clave   - nueva
+	 * @param persona
+	 * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException
+	 */
+	private Cuenta modificarClaveCuenta(String clave, Persona persona)
+			throws ElementoNoEncontradoException, ElementoRepetidoException {
+		if (buscarPorUsuario(persona.getCuenta().getUsuario()) == null) {
+			throw new ElementoNoEncontradoException("No se ha encontrado el usuario");
+		}
+		try {
+			Cuenta cuenta = entityManager.find(Cuenta.class, persona.getCuenta().getUsuario());
 			cuenta.setContrasenia(clave);
 			entityManager.merge(cuenta);
 			return entityManager.find(Cuenta.class, cuenta.getUsuario());

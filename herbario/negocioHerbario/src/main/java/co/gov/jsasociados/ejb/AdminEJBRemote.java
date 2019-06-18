@@ -313,4 +313,13 @@ public interface AdminEJBRemote {
 	  * @return
 	  */
 	 List<Planta> listarPlantasPorFiltros(Familia f, Genero g);
+	 
+	 /**
+	  * metodo que permite reestablecer la contraseña de una cuenta
+	  * @param persona
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  * @throws ElementoRepetidoException
+	  */
+	 String reestablecerContraseña(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException;
 }

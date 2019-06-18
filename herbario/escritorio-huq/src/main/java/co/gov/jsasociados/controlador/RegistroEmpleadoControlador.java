@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
@@ -97,6 +98,12 @@ public class RegistroEmpleadoControlador {
 	@FXML // fx:id="columnTelefono"
 	private TableColumn<PersonaObservable, String> columnTelefono; // Value injected by FXMLLoader
 
+	@FXML
+	private CheckBox checkBoxUs;
+
+	@FXML
+	private CheckBox checkBoxCo;
+
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
 		assert txtCedula != null : "fx:id=\"txtCedula\" was not injected: check your FXML file 'registro_empleado.fxml'.";
@@ -120,9 +127,9 @@ public class RegistroEmpleadoControlador {
 		assert columnTelefono != null : "fx:id=\"columnTelefono\" was not injected: check your FXML file 'registro_empleado.fxml'.";
 
 	}
-	
+
 	/**
-	 * estado de gestion de la aplicacion, Empleado o Recolector 
+	 * estado de gestion de la aplicacion, Empleado o Recolector
 	 */
 	private String gestionando = "Empleado";
 	/**
@@ -230,37 +237,37 @@ public class RegistroEmpleadoControlador {
 	void modificarPersona(ActionEvent event) {
 		if (gestionando.equals("Empleado")) {
 			if (validarCampos()) {
-					Empleado empleado;
-					try {
-						empleado = administradorDelegado.modificarEmpleado(txtNombre.getText().trim(),
-								txtApellidos.getText().trim(), txtTelefono.getText().trim(), txtCorreo.getText().trim(),
-								txtDireccion.getText().trim(), txtCedula.getText().trim(), txtUsuario.getText().trim(), txtContrasenia.getText().trim());
-						if (empleado != null) {
-							Utilidades.mostrarMensaje("Se ha cambiado la infarmacion correctamente",
-									"Al empleado con el número de cedula " + empleado.getCedula()
-											+ " se le ha cambiado la informacion correctamente.");
-							llenarTabla();
-							vaciarCampos();
-						}
-					} catch (PersonaNoRegistradaException | TipoClaseException | ElementoNoEncontradoException
-							| ElementoRepetidoException e) {
-						// TODO Auto-generated catch block
-						Utilidades.mostrarMensaje("Error", e.getMessage());
+				Empleado empleado;
+				try {
+					empleado = administradorDelegado.modificarEmpleado(txtNombre.getText().trim(),
+							txtApellidos.getText().trim(), txtTelefono.getText().trim(), txtCorreo.getText().trim(),
+							txtDireccion.getText().trim(), txtCedula.getText().trim(), txtUsuario.getText().trim(),
+							txtContrasenia.getText().trim());
+					if (empleado != null) {
+						Utilidades.mostrarMensaje("Se ha cambiado la infarmacion correctamente",
+								"Al empleado con el número de cedula " + empleado.getCedula()
+										+ " se le ha cambiado la informacion correctamente.");
+						llenarTabla();
+						vaciarCampos();
 					}
-					catch (Exception e) {
-						Utilidades.mostrarMensaje("Error", e.getMessage());
-					}
-					
+				} catch (PersonaNoRegistradaException | TipoClaseException | ElementoNoEncontradoException
+						| ElementoRepetidoException e) {
 					// TODO Auto-generated catch block
-						
-				
+					Utilidades.mostrarMensaje("Error", e.getMessage());
+				} catch (Exception e) {
+					Utilidades.mostrarMensaje("Error", e.getMessage());
+				}
+
+				// TODO Auto-generated catch block
+
 			}
 		} else if (gestionando.equals("Recolector")) {
 			if (validarCampos()) {
 				try {
 					Recolector recolector = administradorDelegado.modificarRecolector(txtNombre.getText().trim(),
 							txtApellidos.getText().trim(), txtTelefono.getText().trim(), txtCorreo.getText().trim(),
-							txtDireccion.getText().trim(), txtCedula.getText().trim(), txtUsuario.getText().trim(), txtContrasenia.getText().trim());
+							txtDireccion.getText().trim(), txtCedula.getText().trim(), txtUsuario.getText().trim(),
+							txtContrasenia.getText().trim());
 					if (recolector != null) {
 						Utilidades.mostrarMensaje("Se ha cambiado la infarmacion correctamente",
 								"Al empleado con el número de cedula " + recolector.getCedula()
@@ -271,9 +278,8 @@ public class RegistroEmpleadoControlador {
 				} catch (PersonaNoRegistradaException | TipoClaseException | ElementoNoEncontradoException
 						| ElementoRepetidoException e) {
 					// TODO Auto-generated catch block
-						Utilidades.mostrarMensaje("Error", e.getMessage());
-				}
-				catch (Exception e) {
+					Utilidades.mostrarMensaje("Error", e.getMessage());
+				} catch (Exception e) {
 					Utilidades.mostrarMensaje("Error", e.getMessage());
 				}
 			}
@@ -290,7 +296,7 @@ public class RegistroEmpleadoControlador {
 		if (gestionando.equals("Empleado")) {
 			if (txtCedula.getText().trim().equals("")) {
 				Utilidades.mostrarMensaje("Alerta", "Por favor ingrese la cedula del empleado a eliminar");
-			}else {
+			} else {
 				try {
 					if (administradorDelegado.eliminarEmpleado(txtCedula.getText().trim())) {
 						Utilidades.mostrarMensaje("Exito", "Se ha eliminado el empleado exitosamente");
@@ -302,11 +308,11 @@ public class RegistroEmpleadoControlador {
 					Utilidades.mostrarMensaje(e.getMessage(), e.getMessage());
 				}
 			}
-			
+
 		} else if (gestionando.equals("Recolector")) {
 			if (txtCedula.getText().trim().equals("")) {
 				Utilidades.mostrarMensaje("Alerta", "Por favor ingrese la cedula del recolector a eliminar");
-			}else {
+			} else {
 				try {
 					if (administradorDelegado.eliminarRecolector(txtCedula.getText().trim())) {
 						Utilidades.mostrarMensaje("Exito", "Se ha eliminado al recolector exitosamente");

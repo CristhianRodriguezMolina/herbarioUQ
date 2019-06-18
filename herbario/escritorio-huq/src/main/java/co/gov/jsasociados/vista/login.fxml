@@ -41,7 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="lblRecuperacionContrasenia" layoutX="286.0" layoutY="304.0" prefHeight="20.0" prefWidth="142.0" text="Olvide la contraseña" textAlignment="RIGHT" textFill="WHITE">
+      <Label fx:id="lblRecuperacionContrasenia" layoutX="286.0" layoutY="304.0" onMousePressed="#restablecerClave" prefHeight="20.0" prefWidth="142.0" text="Olvide la contraseña" textAlignment="RIGHT" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
