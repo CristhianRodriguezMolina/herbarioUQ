@@ -527,4 +527,15 @@ public class AdministradorDelegado {
 		}
 		return plantasObservable;
 	}
+	
+	/**
+	 * metodo que permte reestablecer una contraseña
+	 * @param persona
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException
+	 */
+	public String reestablecerContraseña(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException {
+		return adminEJB.reestablecerContraseña(persona);
+	}
 }

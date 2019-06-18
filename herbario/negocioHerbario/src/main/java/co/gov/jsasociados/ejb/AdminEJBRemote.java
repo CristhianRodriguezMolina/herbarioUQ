@@ -327,4 +327,12 @@ public interface AdminEJBRemote {
 	  * @param comentario
 	  */
 	 void insertarComentario(Comentario comentario);
+
+	  * metodo que permite reestablecer la contraseña de una cuenta
+	  * @param persona
+	  * @return
+	  * @throws ElementoNoEncontradoException
+	  * @throws ElementoRepetidoException
+	  */
+	 String reestablecerContraseña(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException;
 }

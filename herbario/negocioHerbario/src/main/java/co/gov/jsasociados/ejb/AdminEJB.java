@@ -2,6 +2,7 @@ package co.gov.jsasociados.ejb;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -65,7 +66,7 @@ public class AdminEJB implements AdminEJBRemote {
 			return buscarEmpleado(empleado.getCedula());
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(String.format("Error al insertar un empleado %", empleado.toString()));
+			//(String.format("Error al insertar un empleado %", empleado.toString()));
 			return null;
 		}
 	}
@@ -693,6 +694,25 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.
+	 * jsasociados.Persona)
+	 */
+	public String reestablecerContraseña(Persona persona)
+			throws ElementoNoEncontradoException, ElementoRepetidoException {
+		Cuenta cuenta = modificarClaveCuenta(generarClave(), persona);
+		if (cuenta != null) {
+			return cuenta.getContrasenia();
+		}
+		return "";
+	}
+
+	/**
+	 * metodo que permite devolver una cadena de 10 digitos aleatoria
+	 * 
+	 * @return
+	 */
+	private String generarClave() {
+		return (UUID.randomUUID().toString()).substring(0, 10);
 	}
 
 	/**
@@ -745,15 +765,14 @@ public class AdminEJB implements AdminEJBRemote {
 	}
 
 	/**
-	 * metodo que permite moficar la cuenta de una persona
+	 * metodo que permite moficar el usuario de la cuenta de una persona
 	 * 
-	 * @param usuario
-	 * @param clave
+	 * @param usuario -nuevo
 	 * @param persona
 	 * @throws ElementoNoEncontradoException
 	 * @throws ElementoRepetidoException
 	 */
-	private Cuenta modificarCuenta(String usuario, String clave, Persona persona)
+	private Cuenta modificarUsuarioCuenta(String usuario, Persona persona)
 			throws ElementoNoEncontradoException, ElementoRepetidoException {
 		if (buscarPorUsuario(persona.getCuenta().getUsuario()) == null) {
 			throw new ElementoNoEncontradoException("No se ha encontrado el usuario");
@@ -761,9 +780,32 @@ public class AdminEJB implements AdminEJBRemote {
 			throw new ElementoRepetidoException("El usuario ya esta tomado");
 		}
 		try {
-			entityManager.remove(persona.getCuenta());
-			Cuenta cuenta = new Cuenta();
+			Cuenta cuenta = entityManager.find(Cuenta.class, persona.getCuenta().getUsuario());
 			cuenta.setUsuario(usuario);
+			entityManager.merge(cuenta);
+			return entityManager.find(Cuenta.class, cuenta.getUsuario());
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+
+	}
+
+	/**
+	 * metodo que permite moficar el usuario de la cuenta de una persona
+	 * 
+	 * @param clave   - nueva
+	 * @param persona
+	 * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException
+	 */
+	private Cuenta modificarClaveCuenta(String clave, Persona persona)
+			throws ElementoNoEncontradoException, ElementoRepetidoException {
+		if (buscarPorUsuario(persona.getCuenta().getUsuario()) == null) {
+			throw new ElementoNoEncontradoException("No se ha encontrado el usuario");
+		}
+		try {
+			Cuenta cuenta = entityManager.find(Cuenta.class, persona.getCuenta().getUsuario());
 			cuenta.setContrasenia(clave);
 			entityManager.merge(cuenta);
 			return entityManager.find(Cuenta.class, cuenta.getUsuario());
