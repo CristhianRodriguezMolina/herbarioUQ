@@ -328,7 +328,7 @@ public interface AdminEJBRemote {
 	  */
 	 void insertarComentario(Comentario comentario);
 
-	  * metodo que permite reestablecer la contraseña de una cuenta
+	 /** metodo que permite reestablecer la contraseña de una cuenta
 	  * @param persona
 	  * @return
 	  * @throws ElementoNoEncontradoException

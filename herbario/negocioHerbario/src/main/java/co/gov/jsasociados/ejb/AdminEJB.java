@@ -693,9 +693,11 @@ public class AdminEJB implements AdminEJBRemote {
 		} catch (Exception e) {
 			return null;
 		}
-
-	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.
-	 * jsasociados.Persona)
+	}
+		
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.jsasociados.Persona)
 	 */
 	public String reestablecerContraseña(Persona persona)
 			throws ElementoNoEncontradoException, ElementoRepetidoException {
