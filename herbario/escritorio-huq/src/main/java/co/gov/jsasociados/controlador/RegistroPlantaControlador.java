@@ -160,32 +160,6 @@ public class RegistroPlantaControlador {
 		
 		if(validarCamposRegistro()) {
 			
-//			Planta p = new Planta();
-//			p.setNombre(txtNombreEspecie.getText().trim());
-//			System.out.println(p.getNombre());
-//			try {
-//				p.setImagen(Utilidades.convertirImagenABytes(rutaImagen));
-//				System.out.println(p.getImagen());
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//			p.setDescripcion(txtaDescripcionEspecie.getText().trim());
-//			System.out.println(p.getDescripcion());
-//			p.setGenero(administradorDelegado.buscarGenero(txtGeneroEspecie.getText().trim()));
-//			System.out.println(p.getGenero());
-//					
-//			try {				
-//				p = administradorDelegado.insertarEspecie(p);
-//			} catch (ElementoRepetidoException e) {
-//				e.printStackTrace();
-//			} 
-//			
-//			if(p != null) {
-//				Utilidades.mostrarMensaje("Registro exitoso", "La especie quedo registrada exitosamente");
-//				tblTablaEspecies.refresh();
-//			}else {
-//				Utilidades.mostrarMensaje("Registro fallido", "La especie no se pudo registrar");
-//			}
 			Planta planta= new Planta();
 			planta.setNombre(txtNombreEspecie.getText().trim());
 			planta.setDescripcion(txtaDescripcionEspecie.getText().trim());
@@ -199,6 +173,8 @@ public class RegistroPlantaControlador {
 			try {
 				planta= administradorDelegado.registrarPlanta(planta);
 				if (planta!=null) {
+					tblTablaEspecies.getItems().add(new PlantaObservable(planta));
+					tblTablaEspecies.refresh();					
 					Utilidades.mostrarMensaje("Exito", "Se registro la planta exitosamente "+planta.getIdPlanta());
 				}
 				else {
@@ -209,6 +185,7 @@ public class RegistroPlantaControlador {
 				Utilidades.mostrarMensaje("Error", e.getMessage());
 			}
 		}
+		
 		
 	}
 	

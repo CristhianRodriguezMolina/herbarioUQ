@@ -2,6 +2,8 @@ package co.gov.jsasociados;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 /**
@@ -74,11 +76,28 @@ public class Planta implements Serializable {
 	 */	
 	@OneToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE}, mappedBy="planta")
 	private Registro registro;
+	/**
+	 * comentario relacionados con una planta
+	 */
+	@OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "planta")
+	private ArrayList<Comentario> comentarios; 
 	
 	private static final long serialVersionUID = 1L;
 
 	public Planta() {
 		super();
+		comentarios = new ArrayList<>();
+	}
+	
+	/**
+	 * Metodo para añadir un comentario a una planta
+	 * @param coment
+	 */
+	public void addComentario(Comentario coment) {
+		if(comentarios == null) {
+			comentarios = new ArrayList<>();
+		}
+		comentarios.add(coment);
 	}
 
 	/**

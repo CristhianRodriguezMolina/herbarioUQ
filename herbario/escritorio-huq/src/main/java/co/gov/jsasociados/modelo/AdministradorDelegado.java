@@ -9,6 +9,7 @@ import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import co.gov.jsasociados.Comentario;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
@@ -406,6 +407,38 @@ public class AdministradorDelegado {
 	 */
 	public List<Planta> listarPlantasPorFiltros(Familia f, Genero g){
 		return adminEJB.listarPlantasPorFiltros(f, g);
+	}
+	
+	/**
+	 * metodo para insertar un comentario en la base de datos
+	 * @param coment
+	 */
+	public void insertarComentario(Comentario coment) {
+		adminEJB.insertarComentario(coment);
+	}
+	
+	/**
+	 * Metodo para listar los comentarios dada un planta
+	 * @param p
+	 * @return
+	 */
+	public List<Comentario> listarComentarios(Planta p){
+		return adminEJB.listarComentarios(p);
+	}
+	
+	/**
+	 * genera una lista de comentarios observables
+	 * @param p
+	 * @return
+	 * @throws Exception
+	 */
+	public ObservableList<ComentarioObservable> listarComentariosObservables(Planta p) throws Exception {
+		List<Comentario> comentarios = listarComentarios(p);
+		ObservableList<ComentarioObservable> comentariosObservables = FXCollections.observableArrayList();
+		for (Comentario coment : comentarios) {
+			comentariosObservables.add(new ComentarioObservable(coment));
+		}
+		return comentariosObservables;
 	}
 	
 	/**

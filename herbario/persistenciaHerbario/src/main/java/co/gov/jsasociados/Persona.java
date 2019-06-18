@@ -79,7 +79,7 @@ public class Persona implements Serializable {
 	/**
 	 * comentarios relizados por una persona
 	 */
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+	@OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "persona")
 	private ArrayList<Comentario> comentarios;
 
 	private static final long serialVersionUID = 1L;
@@ -89,6 +89,18 @@ public class Persona implements Serializable {
 	 */
 	public Persona() {
 		super();
+		comentarios = new ArrayList<>();
+	}
+	
+	/**
+	 * Metodo para añadir un comentario a una persona
+	 * @param coment
+	 */
+	public void addComentario(Comentario coment) {
+		if(comentarios == null) {
+			comentarios = new ArrayList<>();
+		}
+		comentarios.add(coment);
 	}
 
 	/**

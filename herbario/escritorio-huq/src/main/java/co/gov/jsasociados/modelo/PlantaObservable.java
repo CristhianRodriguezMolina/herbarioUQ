@@ -1,6 +1,7 @@
 package co.gov.jsasociados.modelo;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Planta;
@@ -35,8 +36,12 @@ public class PlantaObservable {
 		this.descripcionPlanta = new SimpleStringProperty(planta.getDescripcion());
 		try {
 			if(planta.getImagen() != null)
-				this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getImagen());
+				this.imagenPlanta = Utilidades.convertirBytesAImagen(this.planta.getIdPlanta());
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -49,8 +54,12 @@ public class PlantaObservable {
 		this.familiaPlanta = new SimpleStringProperty(generoPlanta.getFamilia().getFamilia());
 		this.descripcionPlanta = new SimpleStringProperty(descripcionPlanta);
 		try {
-			this.imagenPlanta = Utilidades.convertirBytesAImagen(imagen);
+			this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getIdPlanta());
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
