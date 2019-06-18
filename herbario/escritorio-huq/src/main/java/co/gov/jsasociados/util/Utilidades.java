@@ -124,38 +124,9 @@ public final class Utilidades {
 		return matcher.matches();
 	}
 
-	public static Image convertirBytesAImagen(Long id) throws IOException, SQLException, ClassNotFoundException {
+	public static Image convertirBytesAImagen(byte[] bytes) throws IOException{
 		
-		FileOutputStream image;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		Statement stmt = null;
-		ResultSet res = null;
-		StringBuffer query = null;
-		String driverName = "com.mysql.jdbc.Driver";
-		String userName = "root";
-		String password = "root";
-		byte b[] = null;
-		
-		Class.forName(driverName);
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/herbario", userName, password);
-		stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("select planta.imagen from Planta planta where planta.idPlanta='"+id+"'");
-		try {
-			if (rs.next()) {
-				Blob test = rs.getBlob("image");
-				InputStream x = test.getBinaryStream();
-				int size = x.available();
-				OutputStream out = new FileOutputStream("C:\\anu.gif");
-				b = new byte[size];
-				x.read(b);
-				out.write(b);
-			}
-		} catch (Exception e) {
-			System.out.println("Exception :" + e);
-		} 
-		
-		return new Image(new ByteArrayInputStream(b));
+		return new Image(new ByteArrayInputStream(bytes));
 	}
 		
 	public static void enviarConGMail(String destinatario, String asunto, String cuerpo)  {

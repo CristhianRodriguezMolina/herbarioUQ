@@ -36,14 +36,10 @@ public class PlantaObservable {
 		this.descripcionPlanta = new SimpleStringProperty(planta.getDescripcion());
 		try {
 			if(planta.getImagen() != null)
-				this.imagenPlanta = Utilidades.convertirBytesAImagen(this.planta.getIdPlanta());
+				this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getImagen());
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public PlantaObservable(Long idPlanta, String nombrePlanta, Genero generoPlanta, String descripcionPlanta, byte[] imagen) {
@@ -54,12 +50,8 @@ public class PlantaObservable {
 		this.familiaPlanta = new SimpleStringProperty(generoPlanta.getFamilia().getFamilia());
 		this.descripcionPlanta = new SimpleStringProperty(descripcionPlanta);
 		try {
-			this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getIdPlanta());
+			this.imagenPlanta = Utilidades.convertirBytesAImagen(imagen);
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
