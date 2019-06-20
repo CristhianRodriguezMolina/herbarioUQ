@@ -159,7 +159,7 @@ public class NavegacionBusquedaControlador {
 	private void mostrarDetallePlanta(PlantaObservable planta) {
 
 		escenarioInicial.cargarEscenaDetallePlantas(escenarioInicial, tblTablaPlantas.getSelectionModel().getSelectedItem());
-
+		
 	}
 
 	/**

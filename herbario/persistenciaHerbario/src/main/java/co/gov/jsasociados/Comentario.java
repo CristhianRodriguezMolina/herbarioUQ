@@ -17,11 +17,13 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
+		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PLANTA, query = "select comentario from Comentario comentario where comentario.planta.nombre=:nombrePlanta"),
 		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS, query = "select comentario from Comentario comentario"),
 		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_FECHAPUBLICACION, query = "select comentario from Comentario comentario where comentario.fechaPublicacion=:fechaPublicacion"),
 		@NamedQuery(name = Comentario.LISTAR_COMENTARIOS_PERSONA, query = "select comentario from Comentario comentario where comentario.persona.cedula=:cedula"),
 })
 public class Comentario implements Serializable {
+	public static final String LISTAR_COMENTARIOS_PLANTA = "Listar comentarios por planta";
 	public static final String LISTAR_COMENTARIOS= "listar comentarios";
 	public static final String LISTAR_COMENTARIOS_FECHAPUBLICACION= "listar comentarios por fecha de publicacion";
 	public static final String LISTAR_COMENTARIOS_PERSONA= "listar comentarios realizados por una persona";
@@ -30,7 +32,8 @@ public class Comentario implements Serializable {
 	 */
 	@Id
 	@Column(unique = true, nullable = false)
-	private Integer numeroRegistro;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long numeroRegistro;
 	/**
 	 * comentaria realizado
 	 */
@@ -48,6 +51,12 @@ public class Comentario implements Serializable {
 	@ManyToOne
 	private Persona persona;
 	
+	/**
+	 * planta relacionada al comentario
+	 */
+	@ManyToOne
+	private Planta planta;
+	
 	//aca hace falta mirar que esta clase debe de tener un arrayList de comentarios
 	private static final long serialVersionUID = 1L;
 
@@ -58,14 +67,14 @@ public class Comentario implements Serializable {
 	/**
 	 * @return the numeroRegistro
 	 */
-	public Integer getNumeroRegistro() {
+	public Long getNumeroRegistro() {
 		return numeroRegistro;
 	}
 
 	/**
 	 * @param numeroRegistro the numeroRegistro to set
 	 */
-	public void setNumeroRegistro(Integer numeroRegistro) {
+	public void setNumeroRegistro(Long numeroRegistro) {
 		this.numeroRegistro = numeroRegistro;
 	}
 
@@ -150,6 +159,22 @@ public class Comentario implements Serializable {
 	 */
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+		persona.addComentario(this);
+	}
+
+	/**
+	 * @return the planta
+	 */
+	public Planta getPlanta() {
+		return planta;
+	}
+
+	/**
+	 * @param planta the planta to set
+	 */
+	public void setPlanta(Planta planta) {
+		this.planta = planta;
+		planta.addComentario(this);
 	}
 
 }

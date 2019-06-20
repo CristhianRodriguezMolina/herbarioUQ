@@ -11,6 +11,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import co.gov.jsasociados.Comentario;
 import co.gov.jsasociados.Cuenta;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
@@ -640,6 +641,18 @@ public class AdminEJB implements AdminEJBRemote {
 
 	/*
 	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#insertarComentario(co.gov.jsasociados.Comentario)
+	 */
+	public void insertarComentario(Comentario comentario) {
+		try {
+			entityManager.persist(comentario);
+		} catch (Exception e) {
+			System.out.println("No se pudo registrar el comentario");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#listarPlantasPorFiltros(co.gov.
 	 * jsasociados.Familia, co.gov.jsasociados.Genero)
@@ -667,8 +680,24 @@ public class AdminEJB implements AdminEJBRemote {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.
-	 * jsasociados.Persona)
+	 * @see
+	 * co.gov.jsasociados.ejb.AdminEJBRemote#listarComentarios(co.gov.jsasociados.
+	 * Planta)
+	 */
+	public List<Comentario> listarComentarios(Planta p) {
+		try {
+			TypedQuery<Comentario> query = entityManager.createNamedQuery(Comentario.LISTAR_COMENTARIOS_PLANTA,
+					Comentario.class);
+			query.setParameter("nombrePlanta", p.getNombre());
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+		
+	/*
+	 * (non-Javadoc)
+	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.jsasociados.Persona)
 	 */
 	public String reestablecerContraseña(Persona persona)
 			throws ElementoNoEncontradoException, ElementoRepetidoException {

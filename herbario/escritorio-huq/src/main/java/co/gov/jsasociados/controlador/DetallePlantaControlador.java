@@ -1,17 +1,35 @@
 package co.gov.jsasociados.controlador;
 
+import javafx.scene.paint.Color;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import co.gov.jsasociados.Administrador;
+import co.gov.jsasociados.Comentario;
+import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Recolector;
 import co.gov.jsasociados.modelo.AdministradorDelegado;
+import co.gov.jsasociados.modelo.ComentarioObservable;
 import co.gov.jsasociados.modelo.PlantaObservable;
 import co.gov.jsasociados.util.Utilidades;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 
 public class DetallePlantaControlador {
 
@@ -62,6 +80,12 @@ public class DetallePlantaControlador {
 
     @FXML
     private Button btnComentar;
+    
+    @FXML
+    private TableView<ComentarioObservable> tblTablaComentarios;
+
+    @FXML
+    private TableColumn<ComentarioObservable, String> comentariosColumna;
     /**
 	 * instancia del manejador de escenario
 	 */
@@ -78,6 +102,8 @@ public class DetallePlantaControlador {
 	@FXML
 	void initialize() {
 		
+		comentariosColumna.setCellValueFactory(comentarioCelda -> comentarioCelda.getValue().getComentario());
+						
 	}
 	
 	public void inicializarDatos() {
@@ -86,6 +112,27 @@ public class DetallePlantaControlador {
 		lblGenero.setText(planta.getGeneroPlanta().getValue());
 		lblDescripcion.setText(planta.getDescripcionPlanta().getValue());
 		imgImagen.setImage(planta.getImagenPlanta());
+	}
+	
+	/**
+	 * Obtiene todos los comentarios relacionados a planta de muestra y los agrega a la lista de comentarios en  la interfaz 
+	 */
+	public void inicializarComentarios() {
+		try {
+			ObservableList<ComentarioObservable> comentarios = administradorDelegado.listarComentariosObservables(planta.getPlanta());
+			
+			tblTablaComentarios.setItems(comentarios);
+						
+			
+//			for (ComentarioObservable coment : comentarios) {
+//				vboxComentarios.getChildren().add(coment.getLblComentario()); //SE AGREGA AL VBOX QUE CONTIENE LOS COMENTARIOS EN LA INTERFAZ GRAFICA
+//	    		Label aux = new Label(); //SE CREA UN LABEL PARA SEPARAR LOS COMENTARIOS
+//	        	aux .setPrefHeight(10);
+//	        	vboxComentarios.getChildren().add(aux);
+//			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -98,6 +145,7 @@ public class DetallePlantaControlador {
 		this.planta = po;
 			
 		inicializarDatos();
+		inicializarComentarios();
     }
     
     /**
@@ -109,21 +157,36 @@ public class DetallePlantaControlador {
     	escenarioInicial.cargarEscenaNavegacion();
     }
 
+    /**
+     * Metodo para hacer un comentario y guardarlo en la base de datos
+     * @param event
+     */
     @FXML
     void comentar(ActionEvent event) {
     	
     	if(!txtComentario.getText().trim().equals("")) {
-    		Label comentario = new Label();
-        	comentario.setFont(new Font("Arial", 18));
-        	comentario.setText(String.format("%1$s: %2$s", escenarioInicial.getUser().getCuenta().getUsuario(), txtComentario.getText()));
-        	vboxComentarios.getChildren().add(comentario);
-        	Label aux = new Label();
-        	aux .setPrefHeight(10);
+    		
+    		//ES ESTA PARTE SE CREA EL COMENTARIO Y se añade a una persona(User) y a una planta
+    		Comentario coment = new Comentario();
+    		coment.setFechaPublicacion(new Date());
+    		coment.setPersona(escenarioInicial.getUser());
+    		coment.setComentario(String.format("(%4$s) %1$s: %2$s -%3$s", coment.getPersona().getCuenta().getUsuario(), 
+    				txtComentario.getText(), new SimpleDateFormat("dd/MM/yyyy").format(coment.getFechaPublicacion()), coment.getPersona().getClass().getSimpleName()));    		
+    		coment.setPlanta(planta.getPlanta());
+    		
+    		administradorDelegado.insertarComentario(coment);
+    		
+    		tblTablaComentarios.getItems().add(new ComentarioObservable(coment));
+    		tblTablaComentarios.refresh();
+//    		ComentarioObservable comentarioObservable = new ComentarioObservable(coment);    		
+//    		vboxComentarios.getChildren().add(comentarioObservable.getLblComentario()); //SE AGREGA AL VBOX QUE CONTIENE LOS COMENTARIOS EN LA INTERFAZ GRAFICA
+//    		Label aux = new Label(); //SE CREA UN LABEL PARA SEPARAR LOS COMENTARIOS
+//        	aux .setPrefHeight(10);
+//        	vboxComentarios.getChildren().add(aux);
     	}else {
     		Utilidades.mostrarMensaje("Error", "Escriba algo");
     	}    	
-    }
-    
+    }    
     
 }
 

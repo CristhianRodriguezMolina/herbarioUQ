@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import co.gov.jsasociados.Comentario;
 import co.gov.jsasociados.Empleado;
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
@@ -309,13 +310,25 @@ public interface AdminEJBRemote {
 	 List<String> listarNombresFamilia() throws Exception;
 	 
 	 /**
-	  * Metodo l¿para listar plantas por filtros
+	  * Metodo para listar plantas por filtros
 	  * @return
 	  */
 	 List<Planta> listarPlantasPorFiltros(Familia f, Genero g);
 	 
 	 /**
-	  * metodo que permite reestablecer la contraseña de una cuenta
+	  * Metodo para listar los comentarios dada un planta
+	  * @param p
+	  * @return
+	  */
+	 List<Comentario> listarComentarios(Planta p);
+	 
+	 /**
+	  * metodo para insertar un comentario en la base de datos
+	  * @param comentario
+	  */
+	 void insertarComentario(Comentario comentario);
+
+	 /** metodo que permite reestablecer la contraseña de una cuenta
 	  * @param persona
 	  * @return
 	  * @throws ElementoNoEncontradoException

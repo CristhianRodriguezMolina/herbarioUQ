@@ -8,6 +8,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.envEntryType;
 
 import java.io.ByteArrayInputStream;
 
@@ -15,8 +19,18 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -37,6 +51,9 @@ import javafx.scene.control.ButtonType;
  */
 public final class Utilidades {
 
+	@PersistenceContext
+	private static EntityManager entityManager;
+	 
 	/**
 	 * permite mostrar un texto informativo en pantalla
 	 * 
@@ -107,7 +124,8 @@ public final class Utilidades {
 		return matcher.matches();
 	}
 
-	public static Image convertirBytesAImagen(byte[] bytes) throws IOException {
+	public static Image convertirBytesAImagen(byte[] bytes) throws IOException{
+		
 		return new Image(new ByteArrayInputStream(bytes));
 	}
 

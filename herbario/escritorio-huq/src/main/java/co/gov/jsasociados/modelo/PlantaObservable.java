@@ -1,6 +1,7 @@
 package co.gov.jsasociados.modelo;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Planta;
@@ -38,7 +39,7 @@ public class PlantaObservable {
 				this.imagenPlanta = Utilidades.convertirBytesAImagen(planta.getImagen());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public PlantaObservable(Long idPlanta, String nombrePlanta, Genero generoPlanta, String descripcionPlanta, byte[] imagen) {
