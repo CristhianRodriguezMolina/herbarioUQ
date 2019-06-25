@@ -1,6 +1,5 @@
 package co.gov.jsasociados.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -699,7 +698,7 @@ public class AdminEJB implements AdminEJBRemote {
 	 * (non-Javadoc)
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#reestablecerContraseña(co.gov.jsasociados.Persona)
 	 */
-	public String reestablecerContraseña(Persona persona)
+	public String restablecerClave(Persona persona)
 			throws ElementoNoEncontradoException, ElementoRepetidoException {
 		Cuenta cuenta = modificarClaveCuenta(generarClave(), persona);
 		if (cuenta != null) {

@@ -535,7 +535,7 @@ public class AdministradorDelegado {
 	 * @throws ElementoNoEncontradoException
 	 * @throws ElementoRepetidoException
 	 */
-	public String reestablecerContraseña(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException {
-		return adminEJB.reestablecerContraseña(persona);
+	public String restablecerClave(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException {
+		return adminEJB.restablecerClave(persona);
 	}
 }

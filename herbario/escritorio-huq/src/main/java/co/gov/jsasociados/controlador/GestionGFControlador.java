@@ -218,6 +218,7 @@ public class GestionGFControlador {
 								idFamilia = null;
 								vaciarCampos();
 								llenarTablaFamilias();
+								llenarTablaGeneros();
 								llenarComboBox();
 							}
 						} catch (ElementoNoEncontradoException e) {

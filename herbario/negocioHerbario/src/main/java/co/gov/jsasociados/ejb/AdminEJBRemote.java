@@ -334,5 +334,5 @@ public interface AdminEJBRemote {
 	  * @throws ElementoNoEncontradoException
 	  * @throws ElementoRepetidoException
 	  */
-	 String reestablecerContraseña(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException;
+	 String restablecerClave(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException;
 }

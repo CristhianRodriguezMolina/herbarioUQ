@@ -50,7 +50,7 @@ public class Familia implements Serializable {
 	/**
 	 * generos de una familia
 	 */
-	@OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE}, mappedBy="familia")
+	@OneToMany(cascade = {CascadeType.REMOVE,CascadeType.MERGE}, mappedBy="familia")
 	private ArrayList<Genero> generos;
 	
 	private static final long serialVersionUID = 1L;
@@ -132,5 +132,13 @@ public class Familia implements Serializable {
 			generos = new ArrayList<>();
 		}
 		generos.add(g);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return familia;
 	}
 }

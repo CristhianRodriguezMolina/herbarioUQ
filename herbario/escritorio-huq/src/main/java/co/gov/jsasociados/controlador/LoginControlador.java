@@ -99,7 +99,7 @@ public class LoginControlador {
 					if (p!=null) {
 						String clave = "";
 						try {
-							clave = administradorDelegado.reestablecerContraseña(p);
+							clave = administradorDelegado.restablecerClave(p);
 							if (!clave.equals("")) {
 								if (Utilidades.restablecerClave(p.getCorreo(), clave)) {
 									Utilidades.mostrarMensaje("Exito", "Se reestablacio su contraseña");

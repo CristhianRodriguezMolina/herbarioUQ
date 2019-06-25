@@ -47,7 +47,7 @@ public class Genero implements Serializable {
 	@ManyToOne
 	private Familia familia;
 	
-	@OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.MERGE}, mappedBy="genero")
+	@OneToMany(cascade = {CascadeType.REMOVE,CascadeType.MERGE}, mappedBy="genero")
 	private ArrayList<Planta> plantas;
 	
 	private static final long serialVersionUID = 1L;

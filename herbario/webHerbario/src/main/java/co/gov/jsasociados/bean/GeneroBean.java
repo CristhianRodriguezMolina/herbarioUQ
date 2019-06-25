@@ -1,5 +1,8 @@
 package co.gov.jsasociados.bean;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
@@ -10,7 +13,6 @@ import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasociados.util.Util;
-import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 
 @FacesConfig(version=Version.JSF_2_3)
@@ -21,20 +23,41 @@ public class GeneroBean {
 	/**
 	 * nombre del genero
 	 */
-	private String genero;
+	private String generoNombre;
 	/**
 	 * familia del genero
 	 */
-	private String familia;
+	private Familia familia;
 	/**
 	 * familia asociada
 	 */
-	private Genero ge; 
+	private Genero genero; 
 	/**
 	 * Instancia del AdminEJB
 	 */
+	/**
+	 * lista de familias
+	 */
+	private List<Familia> listaFamilias;
+	
 	@EJB
 	private AdminEJB adminEJB;
+	
+	public GeneroBean() {
+		
+	}
+	
+	/**
+	 * inicializa la lista de familia
+	 */
+	@PostConstruct
+	private void init() {
+		try {
+			listaFamilias=adminEJB.listarFamilias();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * metodo que permite insertar un genero desde la parte web
 	 * @param familia
@@ -44,57 +67,69 @@ public class GeneroBean {
 		
 		Genero genero = new Genero();	
 		
-		try {			
-			Familia familiaTemp = adminEJB.buscarFamilia(familia);		
+			Familia familiaTemp = familia;	
 			genero.setFamilia(familiaTemp);
-			genero.setGenero(this.genero);
+			genero.setGenero(generoNombre);
 			familiaTemp.addGenero(genero);
 			
-			ge=adminEJB.insertarGenero(genero);
+			try {
+				genero=adminEJB.insertarGenero(genero);
+			} catch (GeneroYaRegistradoExcepcion e) {
+				// TODO Auto-generated catch block
+				Util.mostarMensaje("Elemento no encontrado", String.format("La familia con el nombre $ no se encuentra registrada", familia));
+			}
 			return "/detalle_genero";
-		} catch (GeneroYaRegistradoExcepcion e) { 
-			Util.mostarMensaje(e.getMessage(), e.getMessage());
-			return null;
-		} catch (NullPointerException e1) {
-			Util.mostarMensaje("Elemento no encontrado", String.format("La familia con el nombre $ no se encuentra registrada", familia));
-			return null;
-		}
+		
 	}
 	/**
-	 * @return the genero
+	 * @return the generoNombre
 	 */
-	public String getGenero() {
-		return genero;
+	public String getGeneroNombre() {
+		return generoNombre;
 	}
 	/**
-	 * @param genero the genero to set
+	 * @param generoNombre the generoNombre to set
 	 */
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setGeneroNombre(String generoNombre) {
+		this.generoNombre = generoNombre;
 	}
 	/**
 	 * @return the familia
 	 */
-	public String getFamilia() {
+	public Familia getFamilia() {
 		return familia;
 	}
 	/**
 	 * @param familia the familia to set
 	 */
-	public void setFamilia(String familia) {
+	public void setFamilia(Familia familia) {
 		this.familia = familia;
 	}
 	/**
-	 * @return the ge
+	 * @return the genero
 	 */
-	public Genero getGe() {
-		return ge;
+	public Genero getGenero() {
+		return genero;
 	}
 	/**
-	 * @param ge the ge to set
+	 * @param genero the genero to set
 	 */
-	public void setGe(Genero ge) {
-		this.ge = ge;
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Familia> getListaFamilias() {
+		return listaFamilias;
+	}
+	/**
+	 * 
+	 * @param listaFamilias
+	 */
+	public void setListaFamilias(List<Familia> listaFamilias) {
+		this.listaFamilias = listaFamilias;
 	}
 	
 	

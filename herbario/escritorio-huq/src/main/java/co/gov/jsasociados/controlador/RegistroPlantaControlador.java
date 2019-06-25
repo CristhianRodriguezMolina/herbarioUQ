@@ -155,6 +155,9 @@ public class RegistroPlantaControlador {
 		}
 	}
 
+	/**
+	 * Metodo para registrar una especie y guardarla en la base de datos
+	 */
 	@FXML
 	void registrarEspecie() {
 		
