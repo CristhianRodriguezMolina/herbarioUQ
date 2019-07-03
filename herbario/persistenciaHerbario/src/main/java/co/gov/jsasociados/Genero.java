@@ -150,6 +150,14 @@ public class Genero implements Serializable {
 	 */
 	public void setPlantas(ArrayList<Planta> plantas) {
 		this.plantas = plantas;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return genero;
 	}   
 	
 	

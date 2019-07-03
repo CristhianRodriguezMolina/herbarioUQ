@@ -19,10 +19,12 @@ import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
+import co.gov.jsasocioados.exeption.ElementoNoExiste;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
+import co.gov.jsasocioados.exeption.SesionException;
 import co.gov.jsasocioados.exeption.TipoClaseException;
 
 /**
@@ -706,6 +708,20 @@ public class AdminEJB implements AdminEJBRemote {
 		}
 		return "";
 	}
+	
+	/**
+	 * metodo que permite buscar una familia por su id
+	 * @param idFamilia
+	 * @return
+	 */
+	public Familia buscarFamiliaId(Long idFamilia) {
+		try {
+			return entityManager.find(Familia.class, idFamilia);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 
 	/**
 	 * metodo que permite devolver una cadena de 10 digitos aleatoria
@@ -763,6 +779,24 @@ public class AdminEJB implements AdminEJBRemote {
 			return null;
 		}
 
+	}
+	
+	/**
+	 * metedo que permite verificar la sesion de un persona
+	 * @param usuario
+	 * @param clave
+	 * @return
+	 * @throws SesionException 
+	 */
+	public Persona iniciarSesion(String usuario, String clave) throws SesionException {
+		Persona persona=buscarPorUsuario(usuario);
+		if (persona==null) {
+			throw new SesionException("El usuario no se encuentra registrado");
+		}
+		if (!persona.getCuenta().getContrasenia().equals(clave)) {
+			throw new SesionException("Clave incorrecta.");
+		}
+		return persona;
 	}
 
 	/**

@@ -17,7 +17,7 @@
 				value="#{generoBean.generoNombre}" />
 			<BR />
 			<label for="ganeroFamilia">Nombre familia:</label>
-			<h:selectOneMenu value="#{generoBean.familia}" converter="selectItemObjectConverter">
+			<h:selectOneMenu value="#{generoBean.familia}" converter="#{familiaConverter}">
 				<f:selectItem itemLabel="Seleccione una familia"
 					noSelectionOption="true" />
 				<f:selectItems value="#{generoBean.listaFamilias}" />

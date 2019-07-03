@@ -40,6 +40,7 @@ public class GeneroBean {
 	 */
 	private List<Familia> listaFamilias;
 	
+	private List<Genero> generos;
 	@EJB
 	private AdminEJB adminEJB;
 	
@@ -54,6 +55,7 @@ public class GeneroBean {
 	private void init() {
 		try {
 			listaFamilias=adminEJB.listarFamilias();
+			generos=adminEJB.listarGenero();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,14 +73,20 @@ public class GeneroBean {
 			genero.setFamilia(familiaTemp);
 			genero.setGenero(generoNombre);
 			familiaTemp.addGenero(genero);
-			
+			System.out.println(generos.size()+"++++++++");
 			try {
 				genero=adminEJB.insertarGenero(genero);
+				generos=adminEJB.listarGenero();
+				System.out.println(adminEJB.buscarFamilia(genero.getFamilia().getFamilia())+"--------");
 			} catch (GeneroYaRegistradoExcepcion e) {
 				// TODO Auto-generated catch block
 				Util.mostarMensaje("Elemento no encontrado", String.format("La familia con el nombre $ no se encuentra registrada", familia));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			return "/detalle_genero";
+			
+			return "/lista_generos";
 		
 	}
 	/**
@@ -130,6 +138,20 @@ public class GeneroBean {
 	 */
 	public void setListaFamilias(List<Familia> listaFamilias) {
 		this.listaFamilias = listaFamilias;
+	}
+
+	/**
+	 * @return the generos
+	 */
+	public List<Genero> getGeneros() {
+		return generos;
+	}
+
+	/**
+	 * @param generos the generos to set
+	 */
+	public void setGeneros(List<Genero> generos) {
+		this.generos = generos;
 	}
 	
 	
