@@ -1,0 +1,10 @@
+.idContent{
+	vertical-align: middle;
+}
+
+.imagen{
+	vertical-align: middle;
+	width: 100%;
+	height: 20%;
+	align-self: flex-end;
+}

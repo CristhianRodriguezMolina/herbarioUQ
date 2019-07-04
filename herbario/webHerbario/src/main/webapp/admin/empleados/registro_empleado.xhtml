@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
-<meta charset="ISO-8859-1"/>
-<title>Registro empleado</title>
-</head>
-<body>
-	<form jsf:id="formEmpleado">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+	<ui:define name="content">
+
+	<h:form jsf:id="formEmpleado">
 		<label for="cedulaEmpleado">Cedula:</label> 
 		<input id="cedulaEmpleado" type="text" required="required" jsf:value="#{empleadoBean.cedula}" /> 
 		<BR />
@@ -36,7 +36,11 @@
 		<input id="clave" type="password" required="required" jsf:value="#{empleadoBean.contrasenia}" /> 
 		<BR />
 		<input type="submit" jsf:action="#{empleadoBean.registrar}" value="Aceptar" />
-	</form>
-	<h:messages /><br />
-</body>
+		<p:growl id="growl1" life="2000" />
+	</h:form>
+	
+	
+	</ui:define>
+</ui:composition>
+	
 </html>

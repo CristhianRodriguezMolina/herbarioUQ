@@ -2,20 +2,48 @@ package co.gov.jsasociados.util;
 
 import java.io.IOException;
 
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/seguro/*")
+import co.gov.jsasociados.bean.SeguridadBean;
+
+
+
+@WebFilter("/admin/*")
 public class Filtro implements Filter{
 
+	@Inject
+	private BeanManager beanManager;
+	
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
+		request.getSession(false);
+		String loginURL = request.getContextPath() + "/index.xhtml";
+
+		Bean<?> bean = beanManager.getBeans("seguridadBean").iterator().next();
+		CreationalContext<?> ctx = beanManager.createCreationalContext(bean);
+		SeguridadBean seguridadBean = (SeguridadBean) beanManager.getReference(bean, bean.getBeanClass(), ctx);
+
+		boolean autenticado = seguridadBean != null && seguridadBean.isAutenticado();
+
+		if (autenticado) {
+			chain.doFilter(request, response);
+		} else {
+			response.sendRedirect(loginURL);
+		}
 		
 	}
 

@@ -1,41 +1,118 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<head>
-  <title><ui:insert name="title">Default title</ui:insert></title>
-</head>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+	<Style>
+.idContent {
+	vertical-align: middle;
+}
+</Style>
+</h:head>
 
-<body>
-<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+<h:body background="fondo.jpg">
+	<ui:debug hotkey="x"
+		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
 
-<div id="header">
-    <ui:insert name="header">
-    	Header area.  See comments below this line in the source.
-    	<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
-    	<!-- <ui:include src="header.xhtml"/> -->
-    </ui:insert>
-</div>
+	<div id="header">
+		<ui:insert name="header">
+
+			<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+
+				<ui:insert name="menu">
+					<h:form>
+						<p:menubar>
+							<f:facet name="options">
+								<p:commandButton value="Sign in" action="/index" ajax="false" />
+							</f:facet>
+
+							<p:submenu label="Opciones">
+								<p:menuitem value="Inicio" action="/index" ajax="false" />
+							</p:submenu>
+						</p:menubar>
+					</h:form>
+				</ui:insert>
+			</h:panelGroup>
+
+			<div align="center" calss="idContent">
+				<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+					<ui:insert name="login">
+						<h:form id="formLogin">
+							<p:panelGrid columns="2">
+								<f:facet name="header">Iniciar sesion</f:facet>
+								<p:outputLabel value="Usuario" />
+								<p:inputText value="#{seguridadBean.cuenta.usuario}" />
+								<p:outputLabel value="Clave" />
+								<p:password value="#{seguridadBean.cuenta.contrasenia}" />
+								<f:facet name="footer">
+									<p:commandButton value="Aceptar"
+										action="#{seguridadBean.iniciarSesion}" ajax="false" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+						<p:growl id="growl" life="2000" />
+					</ui:insert>
+				</h:panelGroup>
+			</div>
 
 
-<div id="content">
-  <ui:insert name="content">
-    	Content area.  See comments below this line in the source.
-    	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
-	  	<!-- <div> -->
-    	<!-- <ui:include src="content.xhtml"/> -->  
-    	<!-- </div> -->
-  </ui:insert>
-</div>
+			<h:panelGroup rendered="#{seguridadBean.administrador}">
 
-<div id="footer">
-  <ui:insert name="footer">
-    	Footer area.  See comments below this line in the source.
-    	<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
-		<!--<ui:include src="footer.xhtml"/>  -->
-  </ui:insert>
-</div>
+				<ui:insert name="menu">
+					<h:form>
+						<p:menubar>
 
-</body>
+							<p:submenu label="Empleado">
+								<p:menuitem value="Gestionar empleados"
+									action="/admin/empleados/registro_empleado" />
+							</p:submenu>
+							<p:submenu label="Especies">
+								<p:menuitem value="Familias"
+									action="/admin/familias/detalle_familia" ajax="false" />
+								<p:menuitem value="Registrar familia"
+									action="/admin/familias/registrar_familia" ajax="false" />
+								<p:menuitem value="Generos"
+									action="/admin/familias/detalle_genero" ajax="false" />
+								<p:menuitem value="Registrar generos"
+									action="/admin/generos/registrar_genero" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="#{seguridadBean.cuenta.usuario}">
+								<p:menuitem value="Cuenta" action="/index" ajax="false"
+									icon="pi pi-home" />
+								<p:separator />
+								<p:menuitem value="Sign out" action="/index" ajax="false"
+									icon="pi pi-times" />
+							</p:submenu>
+						</p:menubar>
+					</h:form>
+				</ui:insert>
+			</h:panelGroup>
+
+		</ui:insert>
+	</div>
+
+
+
+	<div id="content" class="idContent">
+		<ui:insert name="content">
+
+
+
+		</ui:insert>
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+
+
+
+		</ui:insert>
+	</div>
+
+</h:body>
 
 </html>
