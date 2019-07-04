@@ -10,15 +10,21 @@
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 	<ui:define name="content">
 
-		<h:form id="formularioFamilia">
-			<label for="nombreFamilia">Nombre familia:</label>
-			<h:inputText id="nombreFamilia" required="true"
-				value="#{familiaBean.familia}" />
-			<BR />
-			<h:commandButton action="#{familiaBean.registrarFamilia}"
-				value="Aceptar" />
-			<p:growl id="growl1" life="2000" />
-		</h:form>
+
+		<div align="center">
+
+			<h:form id="formularioFamilia">
+				<label for="nombreFamilia">Nombre familia:</label>
+				<h:inputText id="nombreFamilia" required="true"
+					value="#{familiaBean.familia}" />
+				<BR />
+				<h:commandButton action="#{familiaBean.registrarFamilia}"
+					value="Aceptar" />
+				<p:growl id="growl1" life="2000" />
+			</h:form>
+
+		</div>
+
 
 
 	</ui:define>

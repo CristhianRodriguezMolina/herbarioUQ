@@ -32,6 +32,8 @@ public class Filtro implements Filter{
 		HttpServletResponse response = (HttpServletResponse) res;
 		request.getSession(false);
 		String loginURL = request.getContextPath() + "/index.xhtml";
+		
+		System.out.println(loginURL);
 
 		Bean<?> bean = beanManager.getBeans("seguridadBean").iterator().next();
 		CreationalContext<?> ctx = beanManager.createCreationalContext(bean);
