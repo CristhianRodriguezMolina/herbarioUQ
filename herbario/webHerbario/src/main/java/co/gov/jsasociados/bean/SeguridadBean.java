@@ -7,7 +7,10 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.swing.JOptionPane;
 import javax.swing.text.Utilities;
 
 import co.gov.jsasociados.Administrador;
@@ -79,8 +82,10 @@ public class SeguridadBean implements Serializable {
 	 * permite iniciar la sesion de un usuario
 	 */
 	public void iniciarSesion() {
+				
+		
 		Persona persona;
-		System.out.println(cuenta.getUsuario() +""+ cuenta.getContrasenia());
+		
 		try {
 			persona = adminEJB.iniciarSesion(cuenta.getUsuario(), cuenta.getContrasenia());
 			if (persona != null) {
@@ -90,15 +95,25 @@ public class SeguridadBean implements Serializable {
 				empleado = persona.getClass().getSimpleName().equals(Empleado.class.getSimpleName())? true:false;
 				recolector = persona.getClass().getSimpleName().equals(Recolector.class.getSimpleName())? true:false;
 				System.out.println(administrador+" "+empleado+" "+recolector);
+				
+				System.out.println(cuenta.getUsuario() +""+ cuenta.getContrasenia());
+				//return "/WEB-INF/index";
 			}
 			else {
 				Util.mostarMensaje("Verifique sus datos", "verifique sus datos ingersados");
+				System.out.println(cuenta.getUsuario() +""+ cuenta.getContrasenia());
 			}
 		} catch (SesionException e) {
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
 		}
 		
+		//return null;
 	}
+	
+	public void addMessage(String summary) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 	
 	/**
 	 * permite cerrar sesion
