@@ -118,15 +118,13 @@ public class SeguridadBean implements Serializable {
 	/**
 	 * permite cerrar sesion
 	 */
-	public void cerrarSesion() {
-		if (usuario != null) {
-			usuario = null;
-			autenticado = false;
-			administrador = false;
-			empleado = false;
-			recolector = false;
-			init();
+	public String cerrarSesion() {
+		if (cuenta != null) {
+			init();		
+			return "success";
 		}
+		
+		return null;
 	}
 
 	/**

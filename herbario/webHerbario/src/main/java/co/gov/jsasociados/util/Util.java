@@ -17,4 +17,8 @@ public class Util {
 		ResourceBundle resourceBundle= facesContext.getApplication().getResourceBundle(facesContext, "msg");
 		return resourceBundle;
 	}
+	
+	public static String getPath() {
+		return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+	}
 }

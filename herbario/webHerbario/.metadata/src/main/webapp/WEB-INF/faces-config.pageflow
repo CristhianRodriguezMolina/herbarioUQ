@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15590507632540" configfile="/webHerbario/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15590507632540" configfile="/webHerbario/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" id="pf156225596534628" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf156225596534629"/>
+  <nodes xsi:type="pageflow:PFPage" name="index" id="pf156225596534630" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf156225596534629" path="/index"/>
+  <links id="pf156225596534629" target="pf156225596534630" source="pf156225596534628" outcome="success" fromaction="#{seguridadBean.cerrarSesion}"/>
+</pageflow:Pageflow>

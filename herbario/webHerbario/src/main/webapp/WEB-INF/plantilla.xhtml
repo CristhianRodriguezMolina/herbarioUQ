@@ -6,6 +6,94 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+	<Style>
+.idContent {
+	vertical-align: middle;
+}
+</Style>
+</h:head>
+
+<h:body background="fondo.jpg">
+	<ui:debug hotkey="x"
+		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
+
+	<div id="header">
+		<ui:insert name="header">
+
+			<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+
+				<ui:insert name="menu">
+					<h:form>
+						<p:menubar>
+							<f:facet name="options">
+								<p:commandButton value="Sign in" action="/index" ajax="false" />
+							</f:facet>
+
+							<p:submenu label="Opciones">
+								<p:menuitem value="Inicio" action="/index" ajax="false" />
+							</p:submenu>
+						</p:menubar>
+					</h:form>
+				</ui:insert>
+			</h:panelGroup>
+
+			<div align="center" class="idContent">
+				<h:panelGroup rendered="#{!seguridadBean.autenticado}">
+					<ui:insert name="login">
+						<h:form id="formLogin">
+							<p:panelGrid columns="2">
+								<f:facet name="header">Iniciar sesion</f:facet>
+								<p:outputLabel value="Usuario" />
+								<p:inputText value="#{seguridadBean.cuenta.usuario}" />
+								<p:outputLabel value="Clave" />
+								<p:password value="#{seguridadBean.cuenta.contrasenia}" />
+								<f:facet name="footer">
+									<p:commandButton value="Aceptar"
+										action="#{seguridadBean.iniciarSesion}" ajax="false" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+						<p:growl id="growl" life="2000" />
+					</ui:insert>
+				</h:panelGroup>
+			</div>
+
+
+			<h:panelGroup rendered="#{seguridadBean.administrador}">
+
+				<ui:insert name="menu">
+					<h:form>
+						<p:menubar>
+
+							<p:submenu label="Empleado">
+								<p:menuitem value="Gestionar empleados"
+									action="/admin/empleados/registro_empleado" />
+							</p:submenu>
+							<p:submenu label="Especies">
+								<p:menuitem value="Familias"
+									action="/admin/familias/detalle_familia" ajax="false" />
+								<p:menuitem value="Registrar familia"
+									action="/admin/familias/registrar_familia" ajax="false" />
+								<p:menuitem value="Generos"
+									action="/admin/familias/detalle_genero" ajax="false" />
+								<p:menuitem value="Registrar generos"
+									action="/admin/generos/registrar_genero" ajax="false" />
+							</p:submenu>
+
+							<p:submenu label="#{seguridadBean.cuenta.usuario}">
+								<p:menuitem value="Cuenta" action="/index" ajax="false"
+									icon="pi pi-home" />
+								<p:separator />
+								<p:menuitem value="Sign out" action="#{seguridadBean.cerrarSesion}" ajax="false"
+									icon="pi pi-times" />
+							</p:submenu>
+						</p:menubar>
+					</h:form>
+				</ui:insert>
+			</h:panelGroup>
+
 <head>
 
 	<meta charset="utf-8" />
