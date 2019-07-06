@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<title>Simple Sidebar - Start Bootstrap Template</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="template/vendor/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	
+	<!-- Custom styles for this template -->
+	<link href="template/css/simple-sidebar.css" rel="stylesheet" />
+	
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="login_css/styles.css"/>
+    
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="contenido">
+			<h:form>
+			<p:panelGrid columns="2" border="1">
+				<p:outputLabel value="Nombre" />
+				<p:inputText value="#{generoBean.generoNombre}" />
+				<p:outputLabel value="Familias" />
+				<p:selectOneMenu value="#{generoBean.familia}" converter="#{familiaConverter}" effect="fade" filter="true" filterMatchMode="startsWith">
+					<f:selectItem itemLabel="Seleccione una familia" noSelectionOption="true"/>
+					<f:selectItems value="#{generoBean.listaFamilias}"/>
+				</p:selectOneMenu>
+				<p:commandButton action="#{generoBean.registrarGenero}" value="Aceptar" ajax="false"/>		
+			</p:panelGrid>
+		</h:form>
+		<p:growl />
+	</ui:define>
+</ui:composition>
+</html>
