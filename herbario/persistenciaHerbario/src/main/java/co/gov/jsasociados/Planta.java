@@ -34,7 +34,7 @@ public class Planta implements Serializable {
 	public static final String LISTAR_PLANTAS_POR_GENERO_Y_FAMILIA = "Listar plantas por genero y familia";
 	public static final String LISTAR_NOMBRES_PLANTAS = "Listar nombres de plantas";
 	public static final String OBTENER_PLANTA_POR_NOMBRE = "Obtener planta por nombre";
-	public static final String OBTENER_FAMILIA_PLANTA="obnter familia planta";
+	public static final String OBTENER_FAMILIA_PLANTA="obtener familia planta";
 	public static final String LISTAR_PLANTAS = "listar Plantas";
 	public static final String LISTAR_PLANTAS_POR_APROVACION = "listar Plantas por aprovacion";
 	public static final String LISTAR_PLANTAS_POR_FAMILIA = "listar Plantas por familia desde administrador";

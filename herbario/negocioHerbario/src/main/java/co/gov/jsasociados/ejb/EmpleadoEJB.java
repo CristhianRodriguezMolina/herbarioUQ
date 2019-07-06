@@ -26,7 +26,7 @@ import co.gov.jsasocioados.exeption.TipoClaseException;
  */
 @Stateless
 @LocalBean
-public class EmpleadoEJB extends CumunEJB implements EmpleadoEJBRemote {
+public class EmpleadoEJB extends ComunEJB implements EmpleadoEJBRemote {
 
 	/**
 	 * permite manejar todas las transacciones manejadas por el empleado

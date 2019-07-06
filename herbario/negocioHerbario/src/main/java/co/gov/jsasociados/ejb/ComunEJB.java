@@ -31,7 +31,7 @@ import co.gov.jsasocioados.exeption.TipoClaseException;
  * @author Jhontan Hidalgo
  *
  */
-public class CumunEJB {
+public class ComunEJB {
 	/**
 	 * permite manejar todas las transacciones manejadas por el empleado
 	 */
@@ -41,7 +41,7 @@ public class CumunEJB {
 	/**
 	 * 
 	 */
-	public CumunEJB() {
+	public ComunEJB() {
 
 	}
 

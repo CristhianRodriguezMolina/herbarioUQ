@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import co.gov.jsasociados.Familia;
+import co.gov.jsasociados.Genero;
+import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Recolector;
 import co.gov.jsasociados.Registro;
@@ -19,107 +22,91 @@ import co.gov.jsasocioados.exeption.TipoClaseException;
  */
 @Remote
 public interface RecolectorEJBRemote {
-	
 	/**
-	 * Metodo que permite agregar un recolector
-	 * @param recolector- recolector a registrar
+	 * metodo que permite insetar un recolector
+	 * 
+	 * @param recolector
 	 * @return
 	 * @throws ElementoRepetidoException
-	 */
-	Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoException;
-	
-	/**
-	 * Metodo que permite modifcar los datos de un recolector
-	 * @param nombre-nombre por el cual quiere ser reemplazado
-	 * @param apellido-apellido por el cual quiere ser reemplazado
-	 * @param telefono-telefono por el cual quiere ser reemplazado
-	 * @param correo-correo por el cual quiere ser reemplazado
-	 * @param direccion-direccion por el cual quiere ser reemplazado
-	 * @param cedula-cedula del recolector, el cual se desea modificar los datos
-	 * @return
 	 * @throws PersonaNoRegistradaException
-	 * @throws TipoClaseException
+	 */
+	Recolector insertarRecolector(Recolector recolector) throws ElementoRepetidoException, PersonaNoRegistradaException;
+
+	/**
+	 * metodo que pemite modificar lo datos de un recolector
+	 * 
+	 * @param nombre
+	 * @param apellido
+	 * @param telefono
+	 * @param correo
+	 * @param direccion
+	 * @param cedula
+	 * @param usuario
+	 * @param clave
+	 * @return
+	 * @throws Exception
 	 */
 	Recolector modificarRecolector(String nombre, String apellido, String telefono, String correo, String direccion,
-				String cedula)throws PersonaNoRegistradaException, TipoClaseException;
-	
+			String cedula, String usuario, String clave) throws Exception;
+
 	/**
-	 * Metodo que permite agregar una planta
-	 * @param planta-planta a registar
+	 * metodo que permite registrar una planta
+	 * 
+	 * @param planta
 	 * @return
 	 * @throws ElementoRepetidoException
-	 * @throws ElementoNoExiste
 	 */
-	 Planta insertarPlanta(Planta planta)throws ElementoRepetidoException, ElementoNoExiste;
-	 	 
-	 /**
-	  * Metodo que lista todas las especies aceptadas
-	  * @return
-	  */
-	 List<Planta> listarEspeciesAceptadas();
-	 
-	 /**
-	  * Metodo que lista todos los registros que ha hecho un recolector
-	  * @param cedula-cedula del recolector del cual se desea listar los registros
-	  * @return
-	  * @throws PersonaNoRegistradaException
-	  */
-	 ArrayList<Registro> listarRegistros(String cedula)throws PersonaNoRegistradaException;
-	 
-	 /**
-	  * Metodo que lista las plantas aceptadas de una familia
-	  * @param idFamilia-ID de la familia para filtrar las plantas aceptadas
-	  * @return
-	  */
-	 List<Planta>listarPlantasAceptadasPorFamilia(String idFamilia)throws ElementoNoExiste;
-	 
-	 /**
-	  * Metodo que lista las plantas aceptadas de un genero
-	  * @param idGenero-ID del genero para filtrar las plantas aceptadas
-	  * @return
-	  * @throws ElementoNoExiste
-	  */
-	 List<Planta>listarPlantasAceptasPorGenero(String idGenero)throws ElementoNoExiste;
-	 
-	 /**
-	  * Metodo para registrar una especie
-	  * @param planta
-	  * @return
-	  * @throws ElementoRepetidoException
-	  */
-	 Planta registrarEspecie(Planta planta) throws ElementoRepetidoException;
-	 
-	 /**
-	  * metodo para eliminar una especie
-	  * @param idPlanta
-	  * @return
-	  * @throws ElementoNoEncontradoException
-	  */
-	 boolean elimiarEspecie(Long idPlanta) throws ElementoNoEncontradoException;
-	 
-	 /**
-	  * Metodo para modificar una especie
-	  * @param planta
-	  * @param idPlanta
-	  * @return
-	  * @throws ElementoNoEncontradoException
-	  */
-	 Planta modificarEspecie(String planta, Long idPlanta) throws ElementoNoEncontradoException;
-	 
-	 /**
-	  * metodo para listar las plantas registradas
-	  * @return
-	  * @throws Exception
-	  */
-	 List<Planta> listarPlanta() throws Exception;
-	 
-	 /**
-	  * Metodo para buscar una planta
-	  * @param nombrePlanta
-	  * @return
-	  */
-	 Planta buscarPlanta(String nombrePlanta);
-	 
-	 
-	 
+	Planta registrarPlanta(Planta planta) throws ElementoRepetidoException;
+
+	/**
+	 * metodo que permite buscar una planta pos su nombre
+	 * 
+	 * @param nombrePlanta
+	 * @return
+	 */
+	Planta buscarPlanta(String nombrePlanta);
+
+	/**
+	 * metodo que permite listar las plantas aceptadas
+	 * 
+	 * @return
+	 */
+	List<Planta> listarEspeciesAceptadas();
+
+	/**
+	 * metodo que permite listar las plantas que un recolector ha enviado y que sean
+	 * aceptadas
+	 * 
+	 * @param cedulaRecolector
+	 * @return
+	 */
+	List<Planta> listarPlantasAceptasEnviadas(String cedulaRecolector);
+
+	/**
+	 * metodo que permite listar las plantas que un recolector ha enviado y que sean
+	 * rechazada
+	 * 
+	 * @param cedulaRecolector
+	 * @return
+	 */
+	List<Planta> listarPlantasRechazadasEnviadas(String cedulaRecolector);
+
+	/**
+	 * metodo que permite listar las plantas por un filtro
+	 * 
+	 * @param f
+	 * @param g
+	 * @return
+	 */
+	List<Planta> listarPlantasPorFiltros(Familia f, Genero g);
+
+	/**
+	 * metodo que permite restablecer la clave de una cuenta
+	 * 
+	 * @param persona
+	 * @return
+	 * @throws ElementoNoEncontradoException
+	 * @throws ElementoRepetidoException
+	 */
+	String restablecerClave(Persona persona) throws ElementoNoEncontradoException, ElementoRepetidoException;
 }
