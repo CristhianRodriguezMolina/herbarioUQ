@@ -162,6 +162,14 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 		}
 		return (Empleado) empleado;
 	}
+	
+	public Persona buscarPersonaCedula(String cedula) throws PersonaNoRegistradaException, TipoClaseException {
+		Persona persona = entityManager.find(Persona.class, cedula);
+		if (persona == null) {
+			throw new PersonaNoRegistradaException("La persona a la que quiere buscar no esta registrada");
+		}
+		return persona;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -448,7 +456,30 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
+	
+	/**
+	 * devuelve una lista con los registros de una persona en particular
+	 * @param cedula
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Registro> listarRegistros(String cedula) throws Exception {
+		try {
+			TypedQuery<Registro> query = entityManager.createNamedQuery(Registro.REGISTROS_POR_PERSONA, Registro.class);
+			query.setParameter("cedula", cedula);
+			List<Registro> registros = query.getResultList();
+			return registros;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
+	/**
+	 * 
+	 * @param registro
+	 * @return
+	 * @throws GeneroYaRegistradoExcepcion
+	 */
 	public Registro insertarRegistro(Registro registro) throws GeneroYaRegistradoExcepcion {
 
 		try {

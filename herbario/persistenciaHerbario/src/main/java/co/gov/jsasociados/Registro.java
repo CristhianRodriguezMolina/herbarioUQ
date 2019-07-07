@@ -18,9 +18,11 @@ import javax.persistence.*;
 @Entity
 @NamedQueries(
 		{	@NamedQuery(name = Registro.DATOS_REGISTRO_FECHA, query = "select registro.numeroRegistro,registro.planta.nombre, registro.planta.genero.genero, registro.persona.correo, registro.persona.cedula from Registro registro where CAST(registro.fechaRegistro as DATETIME)=:fechaRegistro"),
+		@NamedQuery(name = Registro.REGISTROS_POR_PERSONA, query = "select registro from Registro registro where registro.persona.cedula=:cedula"),
 	})
 
 public class Registro implements Serializable {
+	public static final String REGISTROS_POR_PERSONA = "obtener registros por fecha";
 	public static final String DATOS_REGISTRO_FECHA = "obtener datos fecha";
 
 	/**

@@ -93,21 +93,14 @@ public class SeguridadBean implements Serializable {
 				autenticado = true;
 				administrador = persona.getClass().getSimpleName().equals(Administrador.class.getSimpleName())? true:false;
 				empleado = persona.getClass().getSimpleName().equals(Empleado.class.getSimpleName())? true:false;
-				recolector = persona.getClass().getSimpleName().equals(Recolector.class.getSimpleName())? true:false;
-				System.out.println(administrador+" "+empleado+" "+recolector);
-				
-				System.out.println(cuenta.getUsuario() +""+ cuenta.getContrasenia());
-				//return "/WEB-INF/index";
+				recolector = persona.getClass().getSimpleName().equals(Recolector.class.getSimpleName())? true:false;			
 			}
 			else {
 				Util.mostarMensaje("Verifique sus datos", "verifique sus datos ingersados");
-				System.out.println(cuenta.getUsuario() +""+ cuenta.getContrasenia());
 			}
 		} catch (SesionException e) {
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
 		}
-		
-		//return null;
 	}
 	
 	public void addMessage(String summary) {

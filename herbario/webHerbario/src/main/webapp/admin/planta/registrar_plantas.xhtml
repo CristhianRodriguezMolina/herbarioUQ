@@ -45,11 +45,11 @@
 
 	<div class="container">
 		
-		<p:growl showDetail="true"/>		
+		<!-- <p:growl showDetail="true"/> -->		
 		
 		<h:form>
 
-		<p:panel header="REGISTRO PLANTA" style="margin-bottom:20px">
+		<p:panel header="REGISTRO PLANTA" style="margin-bottom:20px; background-color: RGB(145, 255, 253);">
 		
 			<h:outputText value="Imagen de la planta"/>
 			<p:panel>	
@@ -111,10 +111,10 @@
 	
 		$("#datepicker").datepicker();
 		
-		const btnRegistrar = document.getElementById('btn-registrar');
+		var btnRegistrar = document.getElementById('btn-registrar');
 		
 		btnRegistrar.addEventListener("click", function(){			
-			//$("#{registroBean}").registrarPlanta(btnImagen.value);
+			//$("#{registroBean}").registrarPlanta($("#{seguridadBean.usuario}"));
 		});
 	
 	</script>

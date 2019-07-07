@@ -11,10 +11,13 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import javax.swing.text.SimpleAttributeSet;
 
 import co.gov.jsasociados.Genero;
+import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Registro;
 import co.gov.jsasociados.ejb.AdminEJB;
@@ -27,6 +30,16 @@ import javafx.stage.FileChooser;
 @ApplicationScoped
 public class RegistroBean {
 
+	
+	private SeguridadBean seguridadBean;
+	/**
+	 * lista de registros
+	 */
+	private List<Registro> listaRegistros;
+	/**
+	 * registro actual
+	 */
+	private Registro registro;
 	/**
 	 * Imagen de la planta
 	 */
@@ -92,6 +105,10 @@ public class RegistroBean {
 	private void init() {
 		try {
 			listaGeneros = adminEJB.listarGenero();
+						
+			listaRegistros = adminEJB.listarRegistros("1004915534");
+			
+			System.out.println(listaRegistros);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,10 +119,10 @@ public class RegistroBean {
 	 * 
 	 * @param familia
 	 * @return
+	 * @throws Exception 
 	 */
 	public String registrarPlanta() {
-
-		//this.rutaImagen = rutaImagen;			
+		
 		Planta planta = new Planta();
 		Registro registro = new Registro();
 
@@ -122,6 +139,7 @@ public class RegistroBean {
 			
 			planta.setRegistro(registro);
 			registro.setPlanta(planta);
+			registro.setPersona(adminEJB.buscarPersonaCedula("1004915534"));
 			registro.setPais(pais);
 			registro.setDepartamento(departamento);
 			registro.setMunicipio(municipio);
@@ -131,14 +149,10 @@ public class RegistroBean {
 			registro.setAprovacion(0);
 			
 			adminEJB.insertarRegistro(registro);
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			Util.mostarMensaje("Elemento no encontrado",
-					String.format("El genero con el nombre %s no se encuentra registrado", genero.getGenero()));
 		} catch (ElementoRepetidoException e) {
 			// TODO Auto-generated catch block
-			Util.mostarMensaje("Elemento repetido",
-					String.format("La planta con el nombre %s ya se encuentra registrada", nombrePlanta));
+			Util.mostarMensaje("Elemento repetido", e.getMessage());
+				//	String.format("La planta con el nombre %s ya se encuentra registrada", nombrePlanta));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -348,6 +362,48 @@ public class RegistroBean {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the listaRegistros
+	 */
+	public List<Registro> getListaRegistros() {
+		return listaRegistros;
+	}
+
+	/**
+	 * @param listaRegistros the listaRegistros to set
+	 */
+	public void setListaRegistros(List<Registro> listaRegistros) {
+		this.listaRegistros = listaRegistros;
+	}
+
+	/**
+	 * @return the seguridadBean
+	 */
+	public SeguridadBean getSeguridadBean() {
+		return seguridadBean;
+	}
+
+	/**
+	 * @param seguridadBean the seguridadBean to set
+	 */
+	public void setSeguridadBean(SeguridadBean seguridadBean) {
+		this.seguridadBean = seguridadBean;
+	}
+
+	/**
+	 * @return the registro
+	 */
+	public Registro getRegistro() {
+		return registro;
+	}
+
+	/**
+	 * @param registro the registro to set
+	 */
+	public void setRegistro(Registro registro) {
+		this.registro = registro;
 	}
 
 }
