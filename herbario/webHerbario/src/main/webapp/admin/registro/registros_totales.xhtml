@@ -28,10 +28,11 @@
 					</p:column>
 					
 					<p:column headerText="Planta">
-						<h:outputText value="#{registro.planta.nombre}" />
-						<!-- <p:commandLink update=":registroForm:display" oncomplete="PF('registroDialog').show()" icon="pi pi-search">
+						<h:outputText value="#{registro.planta.nombre} - " />
+						<p:commandButton value="Info" action="#" ajax="false"></p:commandButton>
+						<!-- <p:commandButton update=":registroForm:display" oncomplete="PF('registroDialog').show()" icon="pi pi-search">
 		                       <f:setPropertyActionListener value="#{registro}" target="#{registroBean.registro}" />
-		                 </p:commandLink> -->
+		                 </p:commandButton> -->
 					</p:column>
 										
 				</p:dataTable>
