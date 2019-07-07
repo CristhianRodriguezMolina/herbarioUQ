@@ -15,6 +15,7 @@ import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Persona;
 import co.gov.jsasociados.Planta;
+import co.gov.jsasociados.Registro;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
@@ -63,11 +64,10 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 			return buscarEmpleado(empleado.getCedula());
 		} catch (Exception e) {
 			// TODO: handle exception
-			//(String.format("Error al insertar un empleado %", empleado.toString()));
+			// (String.format("Error al insertar un empleado %", empleado.toString()));
 			return null;
 		}
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -90,7 +90,6 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 			return false;
 		}
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -132,7 +131,6 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 
 	}
 
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -164,7 +162,6 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 		}
 		return (Empleado) empleado;
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -374,7 +371,6 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 		}
 	}
 
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -453,9 +449,20 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 		}
 	}
 
-	
+	public Registro insertarRegistro(Registro registro) throws GeneroYaRegistradoExcepcion {
+
+		try {
+			entityManager.persist(registro);
+			return registro;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
 	/**
 	 * metodo que permite buscar una familia por su id
+	 * 
 	 * @param idFamilia
 	 * @return
 	 */
@@ -467,7 +474,6 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 			return null;
 		}
 	}
-
 
 	/**
 	 * metodo que permite buscar una planta por su id
@@ -490,7 +496,7 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 	 * @param idGenero
 	 * @return
 	 */
-	private Genero buscarGeneroId(Long idGenero) {
+	public Genero buscarGeneroId(Long idGenero) {
 		try {
 
 			return entityManager.find(Genero.class, idGenero);
@@ -517,17 +523,18 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 		}
 
 	}
-	
+
 	/**
 	 * metedo que permite verificar la sesion de un persona
+	 * 
 	 * @param usuario
 	 * @param clave
 	 * @return
-	 * @throws SesionException 
+	 * @throws SesionException
 	 */
 	public Persona iniciarSesion(String usuario, String clave) throws SesionException {
-		Persona persona=buscarPorUsuario(usuario);
-		if (persona==null) {
+		Persona persona = buscarPorUsuario(usuario);
+		if (persona == null) {
 			throw new SesionException("El usuario no se encuentra registrado");
 		}
 		if (!persona.getCuenta().getContrasenia().equals(clave)) {

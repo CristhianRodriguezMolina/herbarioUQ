@@ -15,12 +15,9 @@
 </Style>
 </h:head>
 
-<h:body background="fondo.jpg">
 	<ui:debug hotkey="x"
 		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
 
-	<div id="header">
-		<ui:insert name="header">
 
 			<h:panelGroup rendered="#{!seguridadBean.autenticado}">
 
@@ -166,7 +163,7 @@
 								<p:button type="button" class="btn float-right login_btn" onclick="#{seguridadBean.iniciarSesion()}"
               value="Login"/>
 							</div>
-							<p:growl id="growl" life="2000" />
+							<p:growl id="growl2" life="2000" />
 						</form>
 					</div>
 					<div class="card-footer">

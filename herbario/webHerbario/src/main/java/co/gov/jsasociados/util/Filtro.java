@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.gov.jsasociados.bean.SeguridadBean;
 
-
-
 @WebFilter("/admin/*")
 public class Filtro implements Filter{
 

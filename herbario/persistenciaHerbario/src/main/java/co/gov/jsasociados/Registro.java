@@ -36,11 +36,6 @@ public class Registro implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaRecoleccion;
 	/**
-	 * fehca de envio de una planta
-	 */
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaEnvio;
-	/**
 	 * fecha de registro de un aplanta
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
@@ -117,20 +112,6 @@ public class Registro implements Serializable {
 	 */
 	public void setFechaRecoleccion(Date fechaRecoleccion) {
 		this.fechaRecoleccion = fechaRecoleccion;
-	}
-
-	/**
-	 * @return the fechaEnvio
-	 */
-	public Date getFechaEnvio() {
-		return fechaEnvio;
-	}
-
-	/**
-	 * @param fechaEnvio the fechaEnvio to set
-	 */
-	public void setFechaEnvio(Date fechaEnvio) {
-		this.fechaEnvio = fechaEnvio;
 	}
 
 	/**
