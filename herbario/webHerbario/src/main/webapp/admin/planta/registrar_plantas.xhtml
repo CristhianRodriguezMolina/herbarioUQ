@@ -1,0 +1,125 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+
+<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<!--<link rel="stylesheet" href="css/reset.css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,900"
+	rel="stylesheet" />
+<link rel="stylesheet" href="css/main.css" />-->
+
+<!-- Bootstrap core CSS -->
+	<link href="template/vendor/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	
+	<!-- Custom styles for this template -->
+	<link href="template/css/simple-sidebar.css" rel="stylesheet" />
+	
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
+
+	<!--Custom styles-->
+	<link rel="stylesheet" type="text/css" href="login_css/styles.css"/>
+    
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
+    <script rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css"></script>
+
+<ui:define name="title">Registro planta</ui:define>
+</head>
+
+<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="contenido">
+
+	<div class="container">
+		
+		<p:growl showDetail="true"/>		
+		
+		<h:form>
+
+		<p:panel header="REGISTRO PLANTA" style="margin-bottom:20px">
+		
+			<h:outputText value="Imagen de la planta"/>
+			<p:panel>	
+				<h:panelGrid columns="1" border="1">
+					<!--<p:graphicImage id="img" value="#{resource['#{registroBean.rutaImagen}']}"
+				stream="false" /> -->
+					<input id="select-img" type="file" value="#{registroBean.imagen}"/>				
+				</h:panelGrid>
+			</p:panel>
+		
+			<h:outputText value="Datos de la planta"/>
+			<p:panel>	
+					<h:panelGrid columns="2" border="1">
+						<p:outputLabel value="Nombre especie" />
+						<p:inputText value="#{registroBean.nombrePlanta}" />
+						<p:outputLabel value="Generos" />
+						<p:selectOneMenu value="#{registroBean.genero}"
+							converter="#{generoConverter}" effect="fade" filter="true"
+							filterMatchMode="startsWith">
+							<f:selectItem itemLabel="Seleccione un genero"
+								noSelectionOption="true" />
+							<f:selectItems value="#{registroBean.listaGeneros}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Descripcion" />
+						<p:inputTextarea value="#{registroBean.descripcion}" />
+					</h:panelGrid>
+			</p:panel>
+			
+			<h:outputText value="Datos del registro"/>
+			<p:panel>		
+				<h:panelGrid columns="2" border="1">
+						<p:outputLabel value="Fecha de recoleccion" />
+						<input type="text" id="datepicker" value="#{registroBean.fechaRecoleccion}" />
+						<p:outputLabel value="Pais" />
+						<p:inputText value="#{registroBean.pais}" />
+						<p:outputLabel value="Departamento" />
+						<p:inputText value="#{registroBean.departamento}" />
+						<p:outputLabel value="Municipio" />
+						<p:inputText value="#{registroBean.municipio}" />
+						<p:outputLabel value="Lugar" />			
+						<p:inputText value="#{registroBean.lugar}" />							
+					</h:panelGrid>
+			</p:panel>
+			
+			<p:panel>
+				<p:commandButton id="btn-registrar" action="#{registroBean.registrarPlanta}" 
+							value="Registrar" ajax="false" />
+			</p:panel>			
+		</p:panel>
+
+		</h:form>
+		<p:growl id="growl2" life="2000" />
+		
+	</div>
+	
+	<script type="text/javascript" src="jquery/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+	
+		$("#datepicker").datepicker();
+		
+		const btnRegistrar = document.getElementById('btn-registrar');
+		
+		btnRegistrar.addEventListener("click", function(){			
+			//$("#{registroBean}").registrarPlanta(btnImagen.value);
+		});
+	
+	</script>
+
+	</ui:define>
+</ui:composition>
+
+</html>
