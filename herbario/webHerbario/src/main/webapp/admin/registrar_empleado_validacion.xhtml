@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Registro de nuevo empleado</title>
 </head>
 <body>
 	<h:form>
@@ -17,9 +17,9 @@
 			<label for="nombreFamilia">Nombre:</label>
 			<h:inputText for="nombreFamilia" value="#{empleadoBean.nombre}"/>
 			<label for="apellidoFamilia">Apellido:</label>
-			<h:inputText for="apellidoFamilia" value="#{empleadoBean.apellido}"/>
+			<h:inputText for="apellidoFamilia" value="#{empleadoBean.apellidos}"/>
 			<label for="emailFamilia">Email:</label>
-			<h:inputText for="emailFamilia" value="#{empleadoBean.email}" required="true"/>
+			<h:inputText for="emailFamilia" value="#{empleadoBean.correo}" required="true"/>
 			<label for="claveFamilia">Clave:</label>
 			<h:inputText for="claveFamilia" value="#{empleadoBean.clave}" required="true" requiredMessage="true" validatorMessage="Debe tener mas caracteres">
 				<f:validateLength minimum="6" maximum="50" />		

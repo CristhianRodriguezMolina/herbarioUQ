@@ -57,7 +57,13 @@
 			<ui:insert name="menu">
 				<h:form>
 					<p:menubar>						
-						<p:submenu label="Empleado">
+						<p:submenu label="Gestión personal">
+						<p:menuitem value="Registrar Recolector" action="/admin/empleado/registrar_recolector"
+								ajax="false" />
+						<p:menuitem value="Eliminar Recolector" action="/admin/empleado/eliminar_recolector"
+								ajax="false" />
+						<p:menuitem value="modificar Recolector" action="/admin/empleado/modificar_recolector"
+								ajax="false" />		
 						</p:submenu>
 						<p:submenu label="Cliente">
 						</p:submenu>
