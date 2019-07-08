@@ -17,19 +17,19 @@
 	<ui:define name="contenido">
 		
 		<div class="container">		
-			<h:form>			
+			<h:form id="registroForm">			
 				<p:panel header="REGISTRO PLANTA" style="margin-bottom:20px; background-color: RGB(145, 255, 253);">
 				
 					<p:tabMenu activeIndex="#{param.i}">					
 					    <p:menuitem value="Tus registros" outcome="registros_totales" icon="pi pi-star">
 					        <f:param name="i" value="0" />
 					    </p:menuitem>
-					   <!-- <p:menuitem value="Registros aceptados" outcome="#" icon="pi pi-search">
+					    <p:menuitem value="Registros aceptados" outcome="registros_aceptados" icon="pi pi-search">
 					        <f:param name="i" value="1" />
 					    </p:menuitem>
-					    <p:menuitem value="Registros rechazados" outcome="#" icon="pi pi-file">
+					    <p:menuitem value="Registros rechazados" outcome="registros_rechazados" icon="pi pi-file">
 					        <f:param name="i" value="2" />
-					    </p:menuitem> -->
+					    </p:menuitem>
 					</p:tabMenu>
 				
 				</p:panel>

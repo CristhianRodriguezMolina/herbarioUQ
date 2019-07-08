@@ -457,6 +457,39 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 		}
 	}
 	
+	public Registro modificarRegistro(int aprovacion, Integer idRegistro) throws ElementoNoEncontradoException {
+		Registro registro = entityManager.find(Registro.class, idRegistro);
+		if (registro == null) {
+			throw new ElementoNoEncontradoException("El registro al que quiere modificar los datos no esta registrado");
+		}
+
+		// Esto previamente por interfaz debe de estar validado para que no este vacio
+		registro.setAprovacion(aprovacion);
+		try {
+			entityManager.merge(registro);
+			return registro;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+	
+	/**
+	 * devuelve una lista con los registros
+	 * @param cedula
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Registro> listarRegistrosTotales() throws Exception {
+		try {
+			TypedQuery<Registro> query = entityManager.createNamedQuery(Registro.LISTAR_REGISTROS, Registro.class);
+			List<Registro> registros = query.getResultList();
+			return registros;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	/**
 	 * devuelve una lista con los registros de una persona en particular
 	 * @param cedula
@@ -466,6 +499,40 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 	public List<Registro> listarRegistros(String cedula) throws Exception {
 		try {
 			TypedQuery<Registro> query = entityManager.createNamedQuery(Registro.REGISTROS_POR_PERSONA, Registro.class);
+			query.setParameter("cedula", cedula);
+			List<Registro> registros = query.getResultList();
+			return registros;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * devuelve una lista con los registros aceptados de una persona en particular 
+	 * @param cedula
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Registro> listarRegistrosAceptados(String cedula) throws Exception {
+		try {
+			TypedQuery<Registro> query = entityManager.createNamedQuery(Registro.REGISTROS_POR_PERSONA_ACPETADOS, Registro.class);
+			query.setParameter("cedula", cedula);
+			List<Registro> registros = query.getResultList();
+			return registros;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * devuelve una lista con los registros rechazados de una persona en particular
+	 * @param cedula
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Registro> listarRegistrosRechazados(String cedula) throws Exception {
+		try {
+			TypedQuery<Registro> query = entityManager.createNamedQuery(Registro.REGISTROS_POR_PERSONA_RECHAZADOS, Registro.class);
 			query.setParameter("cedula", cedula);
 			List<Registro> registros = query.getResultList();
 			return registros;

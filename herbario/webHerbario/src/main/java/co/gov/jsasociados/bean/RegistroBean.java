@@ -12,11 +12,15 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
 import javax.faces.annotation.ManagedProperty;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.SimpleAttributeSet;
+
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Persona;
@@ -24,6 +28,7 @@ import co.gov.jsasociados.Planta;
 import co.gov.jsasociados.Registro;
 import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasociados.util.Util;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import javafx.stage.FileChooser;
 
@@ -37,9 +42,21 @@ public class RegistroBean {
 	 */
 	private Persona usuario;
 	/**
+	 * lista de registros totales
+	 */
+	private List<Registro> listaRegistrosTotales;
+	/**
 	 * lista de registros
 	 */
 	private List<Registro> listaRegistros;
+	/**
+	 * lista de registros aceptados
+	 */
+	private List<Registro> listaRegistrosAceptados;
+	/**
+	 * lista de registros rechazados
+	 */
+	private List<Registro> listaRegistrosRechazados;
 	/**
 	 * registro actual
 	 */
@@ -109,8 +126,10 @@ public class RegistroBean {
 	private void init() {
 		try {
 			listaGeneros = adminEJB.listarGenero();		
-			
-			System.out.println(listaRegistros);
+			listaRegistrosTotales = adminEJB.listarRegistrosTotales();
+			listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
+			listaRegistrosAceptados = adminEJB.listarRegistrosAceptados(usuario.getCedula());
+			listaRegistrosRechazados = adminEJB.listarRegistrosRechazados(usuario.getCedula());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -137,7 +156,6 @@ public class RegistroBean {
 			generoTemp.addPlanta(planta);
 			
 			planta = adminEJB.registrarPlanta(planta);
-			listaGeneros = adminEJB.listarGenero();			
 			
 			planta.setRegistro(registro);
 			registro.setPlanta(planta);
@@ -152,7 +170,7 @@ public class RegistroBean {
 			
 			adminEJB.insertarRegistro(registro);
 			
-			listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
+			init();
 		} catch (ElementoRepetidoException e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje("Elemento repetido", e.getMessage());
@@ -166,32 +184,54 @@ public class RegistroBean {
 
 	}
 	
-	public void buscarImagen() {
-    	FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Buscar Imagen");
-
-        // Agregar filtros para facilitar la busqueda
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
-
-        // Obtener la imagen seleccionada
-        File imgFile = fileChooser.showOpenDialog(null);
-
-        // Mostar la imagen
-        if (imgFile != null) {
-        	rutaImagen = imgFile.getAbsolutePath();          
-        }
-    }
-	
 	/**
 	 * metodo para reiniciar el bean de registro
 	 */
 	public void reiniciar() {
 		init();
 	}
+	
+	/**
+	 * metodo para aceptar un registro
+	 * @return
+	 */
+	public String aceptarRegistro() {
+		try {
+			adminEJB.modificarRegistro(1, registro.getNumeroRegistro());
+			init();
+		} catch (ElementoNoEncontradoException e) {
+			e.printStackTrace();
+		}
+		
+		return "/admin/registro/gestionar_registros";
+	}
+	
+	/**
+	 * metodo para rechazar un registro
+	 * @return
+	 */
+	public String rechazarRegistro() {
+		try {
+			adminEJB.modificarRegistro(-1, registro.getNumeroRegistro());
+			init();
+		} catch (ElementoNoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "/admin/registro/gestionar_registros";
+	}
+	
+	public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+ 
+    public void click() {
+        PrimeFaces.current().ajax().update("form:display");
+        PrimeFaces.current().executeScript("PF('dlg').show()");
+    }
 	
 	/**
 	 * @return the usuario
@@ -205,8 +245,7 @@ public class RegistroBean {
 	 * @throws Exception 
 	 */
 	public void setUsuario(Persona usuario) throws Exception {
-		this.usuario = usuario;
-		listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
+		this.usuario = usuario;		
 	}
 
 	/**
@@ -418,5 +457,49 @@ public class RegistroBean {
 	public void setRegistro(Registro registro) {
 		this.registro = registro;
 	}
+
+	/**
+	 * @return the listaRegistrosAceptados
+	 */
+	public List<Registro> getListaRegistrosAceptados() {
+		return listaRegistrosAceptados;
+	}
+
+	/**
+	 * @param listaRegistrosAceptados the listaRegistrosAceptados to set
+	 */
+	public void setListaRegistrosAceptados(List<Registro> listaRegistrosAceptados) {
+		this.listaRegistrosAceptados = listaRegistrosAceptados;
+	}
+
+	/**
+	 * @return the listaRegistrosRechazados
+	 */
+	public List<Registro> getListaRegistrosRechazados() {
+		return listaRegistrosRechazados;
+	}
+
+	/**
+	 * @param listaRegistrosRechazados the listaRegistrosRechazados to set
+	 */
+	public void setListaRegistrosRechazados(List<Registro> listaRegistrosRechazados) {
+		this.listaRegistrosRechazados = listaRegistrosRechazados;
+	}
+
+	/**
+	 * @return the listaRegistrosTotales
+	 */
+	public List<Registro> getListaRegistrosTotales() {
+		return listaRegistrosTotales;
+	}
+
+	/**
+	 * @param listaRegistrosTotales the listaRegistrosTotales to set
+	 */
+	public void setListaRegistrosTotales(List<Registro> listaRegistrosTotales) {
+		this.listaRegistrosTotales = listaRegistrosTotales;
+	}
+	
+	
 
 }

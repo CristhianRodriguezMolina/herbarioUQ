@@ -18,11 +18,17 @@ import javax.persistence.*;
 @Entity
 @NamedQueries(
 		{	@NamedQuery(name = Registro.DATOS_REGISTRO_FECHA, query = "select registro.numeroRegistro,registro.planta.nombre, registro.planta.genero.genero, registro.persona.correo, registro.persona.cedula from Registro registro where CAST(registro.fechaRegistro as DATETIME)=:fechaRegistro"),
+			@NamedQuery(name = Registro.LISTAR_REGISTROS, query = "select registro from Registro registro"),
 		@NamedQuery(name = Registro.REGISTROS_POR_PERSONA, query = "select registro from Registro registro where registro.persona.cedula=:cedula"),
+		@NamedQuery(name = Registro.REGISTROS_POR_PERSONA_ACPETADOS, query = "select registro from Registro registro where registro.persona.cedula=:cedula and registro.aprovacion=1"),
+		@NamedQuery(name = Registro.REGISTROS_POR_PERSONA_RECHAZADOS, query = "select registro from Registro registro where registro.persona.cedula=:cedula and registro.aprovacion=-1"),
 	})
 
 public class Registro implements Serializable {
-	public static final String REGISTROS_POR_PERSONA = "obtener registros por fecha";
+	public static final String LISTAR_REGISTROS = "listar registros";
+	public static final String REGISTROS_POR_PERSONA = "obtener registros por persona";
+	public static final String REGISTROS_POR_PERSONA_ACPETADOS = "obtener registros por persona aceptados";
+	public static final String REGISTROS_POR_PERSONA_RECHAZADOS = "obtener registros por persona rechazados";
 	public static final String DATOS_REGISTRO_FECHA = "obtener datos fecha";
 
 	/**
@@ -189,8 +195,14 @@ public class Registro implements Serializable {
 	/**
 	 * @return the aprovacion
 	 */
-	public Integer getAprovacion() {
-		return aprovacion;
+	public String getAprovacion() {
+		if(aprovacion.equals(1)) {
+			return "Aceptado";
+		}else if(aprovacion.equals(-1)) {
+			return "Rechazado";
+		}else {
+			return "Pendiente";
+		}
 	}
 
 	/**
@@ -276,5 +288,6 @@ public class Registro implements Serializable {
 	public void setPlanta(Planta planta) {
 		this.planta = planta;
 	}
+
 
 }

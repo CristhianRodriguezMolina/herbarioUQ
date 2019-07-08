@@ -1,5 +1,8 @@
 package co.gov.jsasociados.bean;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
@@ -25,10 +28,27 @@ public class FamiliaBean {
 	 */
 	private Familia fa; 
 	/**
+	 * listado total de familias de plantas
+	 */
+	private List<Familia> familias;
+	/**
 	 * Instancia del AdminEJB
 	 */
 	@EJB
 	private AdminEJB adminEJB;
+	
+	
+	/**
+	 * carga la lista de familias
+	 */
+	@PostConstruct
+	private void init() {
+		try {
+			familias = adminEJB.listarFamilias();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * metodo que permite insertar una familia desde la parte web
 	 * @param familia
@@ -44,6 +64,21 @@ public class FamiliaBean {
 		} catch (FamiliaYaRegistradaExeption e) {
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
 			return null;
+		}
+	}
+	
+	/**
+	 * permite obtener la familia que se desea eliminar
+	 */
+	public void eliminarFamilia() {
+		try {
+			adminEJB.eliminarFamilia(fa.getIdFamilia());
+			familias = adminEJB.listarFamilias();
+			Util.mostarMensaje("Eliminación exitosa!!!", "Eliminación exitosa!!!");
+		} catch (ElementoNoEncontradoException e) {
+			Util.mostarMensaje(e.getMessage(), e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

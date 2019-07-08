@@ -104,8 +104,8 @@ public class SeguridadBean implements Serializable {
 				administrador = persona.getClass().getSimpleName().equals(Administrador.class.getSimpleName())? true:false;
 				empleado = persona.getClass().getSimpleName().equals(Empleado.class.getSimpleName())? true:false;
 				recolector = persona.getClass().getSimpleName().equals(Recolector.class.getSimpleName())? true:false;		
-				registroBean.reiniciar();
 				registroBean.setUsuario(usuario);
+				registroBean.reiniciar();				
 			}
 			else {
 				Util.mostarMensaje("Verifique sus datos", "verifique sus datos ingersados");

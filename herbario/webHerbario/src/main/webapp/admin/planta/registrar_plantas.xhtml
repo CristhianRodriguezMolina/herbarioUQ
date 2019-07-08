@@ -35,8 +35,8 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css"></script>
-
 <ui:define name="title">Registro planta</ui:define>
 </head>
 
@@ -56,7 +56,8 @@
 				<h:panelGrid columns="1" border="1">
 					<!--<p:graphicImage id="img" value="#{resource['#{registroBean.rutaImagen}']}"
 				stream="false" /> -->
-					<input id="select-img" type="file" value="#{registroBean.imagen}"/>				
+					<img width="200" alt="Imagen" id="img"/><br /><br />				
+					<input id="select-img" type="file" name="upload" value="#{registroBean.imagen}"/>				
 				</h:panelGrid>
 			</p:panel>
 		
@@ -81,8 +82,8 @@
 			<h:outputText value="Datos del registro"/>
 			<p:panel>		
 				<h:panelGrid columns="2" border="1">
-						<p:outputLabel value="Fecha de recoleccion" />
-						<input type="text" id="datepicker" value="#{registroBean.fechaRecoleccion}" />
+						<p:outputLabel for="effect" value="Fecha de recoleccion" />
+        				<p:calendar id="effect" value="#{registroBean.fechaRecoleccion}" effect="fold" />
 						<p:outputLabel value="Pais" />
 						<p:inputText value="#{registroBean.pais}" />
 						<p:outputLabel value="Departamento" />
@@ -91,7 +92,7 @@
 						<p:inputText value="#{registroBean.municipio}" />
 						<p:outputLabel value="Lugar" />			
 						<p:inputText value="#{registroBean.lugar}" />							
-					</h:panelGrid>
+				</h:panelGrid>
 			</p:panel>
 			
 			<p:panel>
@@ -99,6 +100,17 @@
 							value="Registrar" ajax="false" />
 			</p:panel>			
 		</p:panel>
+		
+		<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+        	<p:panelGrid id="display" columns="2" columnClasses="label,value">
+        
+        		<h:outputText value="Effect:" />
+            	<h:outputText value="#{calendarView.date8}">
+                	<f:convertDateTime pattern="MM/dd/yyyy" />
+           		</h:outputText>
+        
+	        </p:panelGrid>
+	    </p:dialog>
 
 		</h:form>
 		<p:growl id="growl2" life="2000" />
@@ -111,11 +123,29 @@
 	
 		$("#datepicker").datepicker();
 		
-		var btnRegistrar = document.getElementById('btn-registrar');
+		/**var btnRegistrar = document.getElementById('select-img');
 		
 		btnRegistrar.addEventListener("click", function(){			
 			//$("#{registroBean}").registrarPlanta($("#{seguridadBean.usuario}"));
-		});
+		});*/
+		
+		$(document).ready(function() {
+
+			  // Escuchamos el evento 'change' del input donde cargamos el archivo
+			  $(document).on('change', 'input[type=file]', function(e) {
+			    // Obtenemos la ruta temporal mediante el evento
+			    var TmpPath = URL.createObjectURL(e.target.files[0]);
+			    // Mostramos la ruta temporal
+			    
+			    console.log($('select-img').val());
+			    $('#img').attr('src', TmpPath);
+			    
+			    if(this === $("#datepicker")){
+			    	console.log($("#datepicker").val());
+			    }
+			  });
+
+			});
 	
 	</script>
 
