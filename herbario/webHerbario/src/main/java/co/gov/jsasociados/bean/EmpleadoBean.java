@@ -1,6 +1,5 @@
 package co.gov.jsasociados.bean;
 
-
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
@@ -8,17 +7,18 @@ import javax.faces.annotation.FacesConfig.Version;
 import javax.inject.Named;
 
 import co.gov.jsasociados.Cuenta;
-import co.gov.jsasociados.Empleado;
+import co.gov.jsasociados.Recolector;
 import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
 import co.gov.jsasocioados.exeption.PersonaNoRegistradaException;
+import co.gov.jsasocioados.exeption.TipoClaseException;
 import co.gov.jsasociados.util.Util;
 
 /**
  * 
  *
  */
-@FacesConfig(version=Version.JSF_2_3)
+@FacesConfig(version = Version.JSF_2_3)
 @Named("empleadoBean")
 @ApplicationScoped
 public class EmpleadoBean {
@@ -46,57 +46,87 @@ public class EmpleadoBean {
 	 * direccion de la persona
 	 */
 	private String direccion;
-	/** 
+	/**
 	 * cuenta de una persona
 	 */
 	/**
-	 * usuario unico de una cuenta   
+	 * usuario unico de una cuenta
 	 */
 	private String usuario;
 	/**
 	 * contraseña de una cuenta
 	 */
 	private String contrasenia;
-	
+
 	/**
 	 * 
 	 */
 	@EJB
 	private AdminEJB adminEJB;
 	
-
 	/**
-	 * permite realizar el registro de un empleado en base de datos
+	 * permite realizar el registro de un recolector en base de datos
+	 * 
 	 * @return
 	 */
-	public String registrar() {
-		Empleado empleado= new Empleado();
-		empleado.setCedula(cedula);
-		empleado.setNombre(nombre);
-		empleado.setApellidos(apellidos);
-		empleado.setCorreo(correo);
-		empleado.setDireccion(direccion);
-		empleado.setTelefono(telefono);
-	
-		Cuenta cuenta= new Cuenta();
+	public String registrarRecolector() {
+		Recolector recolector = new Recolector();
+		recolector.setCedula(cedula);
+		recolector.setNombre(nombre);
+		recolector.setApellidos(apellidos);
+		recolector.setCorreo(correo);
+		recolector.setDireccion(direccion);
+		recolector.setTelefono(telefono);
+
+		Cuenta cuenta = new Cuenta();
 		cuenta.setUsuario(usuario);
 		cuenta.setContrasenia(contrasenia);
-		cuenta.setPersona(empleado);
-		empleado.setCuenta(cuenta);
-		
-//		empleado.setComentarios(comentarios);
-//		empleado.setRegistro(registro);
-		
+		cuenta.setPersona(recolector);
+		recolector.setCuenta(cuenta);
+
+//		recolector.setComentarios(comentarios);
+//		recolector.setRegistro(registro);
+
 		try {
-			adminEJB.insertarEmpleado(empleado);
+			adminEJB.insertarRecolector(recolector);
 			Util.mostarMensaje("Registrado con exito", "Se ha registrado la persona con exito.");
-			return "lista";
+			return "";
 		} catch (ElementoRepetidoException | PersonaNoRegistradaException e) {
+			// TODO Auto-generated catch block
+			Util.mostarMensaje(e.getMessage(), e.getMessage());
+			return null;
+		}
+
+	}
+
+	/**
+	 * metodo que permite modificar los datos de un recolector
+	 * 
+	 * @return
+	 */
+	public Recolector modificarRecolector() {
+		try {
+			adminEJB.modificarRecolector(nombre, apellidos, telefono, correo, direccion, cedula, usuario, contrasenia);
+			return adminEJB.buscarRecolector(cedula);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
 			return null;
 		}
+	}
 	
+	/**
+	 * metodo que permite eliminar un recolector
+	 * @return
+	 */
+	public boolean eliminarRecolector() {
+		try {
+			return adminEJB.eliminarRecolector(cedula);
+		} catch (PersonaNoRegistradaException | TipoClaseException e) {
+			// TODO Auto-generated catch block
+			Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
+			return false;
+		}
 	}
 	
 	/**
@@ -198,9 +228,5 @@ public class EmpleadoBean {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-
-	
-	
-	
 
 }

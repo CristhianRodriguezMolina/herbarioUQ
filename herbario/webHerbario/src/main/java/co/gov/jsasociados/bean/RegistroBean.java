@@ -110,7 +110,6 @@ public class RegistroBean {
 		try {
 			listaGeneros = adminEJB.listarGenero();		
 			
-			System.out.println(listaRegistros);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

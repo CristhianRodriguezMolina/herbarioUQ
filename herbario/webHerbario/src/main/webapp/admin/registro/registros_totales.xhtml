@@ -30,9 +30,9 @@
 					<p:column headerText="Planta">
 						<h:outputText value="#{registro.planta.nombre} - " />
 						<p:commandButton value="Info" action="#" ajax="false"></p:commandButton>
-						<!-- <p:commandButton update=":registroForm:display" oncomplete="PF('registroDialog').show()" icon="pi pi-search">
+						<p:commandButton update=":registroForm:display" oncomplete="PF('registroDialog').show()" icon="pi pi-search">
 		                       <f:setPropertyActionListener value="#{registro}" target="#{registroBean.registro}" />
-		                 </p:commandButton> -->
+		                 </p:commandButton>
 					</p:column>
 										
 				</p:dataTable>

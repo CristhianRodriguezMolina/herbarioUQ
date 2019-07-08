@@ -8,7 +8,6 @@ import javax.inject.Named;
 
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.ejb.AdminEJB;
-import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasociados.util.Util;
 
@@ -35,12 +34,12 @@ public class FamiliaBean {
 	 * @return
 	 */
 	public String registrarFamilia() {
-		
+		System.out.println("asdad");
 		Familia familia = new Familia();
 		familia.setFamilia(this.familia);
 		try {
 			fa=adminEJB.insertarFamilia(familia);
-			return "/detalle_familia";
+			return "/index";
 		} catch (FamiliaYaRegistradaExeption e) {
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
 			return null;
