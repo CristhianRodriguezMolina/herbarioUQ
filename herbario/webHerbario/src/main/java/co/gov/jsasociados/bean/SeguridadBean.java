@@ -7,8 +7,10 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.swing.JOptionPane;
 import javax.swing.text.Utilities;
@@ -35,6 +37,7 @@ public class SeguridadBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+		
 	/**
 	 * el ejb
 	 */
@@ -65,6 +68,14 @@ public class SeguridadBean implements Serializable {
 	 */
 	private boolean recolector;
 
+	//BEANS EXTERNOS
+	/**
+	 * Bean de registros
+	 */
+	@Inject
+	@ManagedProperty(value = "#{registroBean}")
+	private RegistroBean registroBean;
+	
 	/**
 	 * inicializar la informacion base de la sesion
 	 */
@@ -83,7 +94,6 @@ public class SeguridadBean implements Serializable {
 	 */
 	public void iniciarSesion() {
 				
-		
 		Persona persona;
 		
 		try {
@@ -93,13 +103,18 @@ public class SeguridadBean implements Serializable {
 				autenticado = true;
 				administrador = persona.getClass().getSimpleName().equals(Administrador.class.getSimpleName())? true:false;
 				empleado = persona.getClass().getSimpleName().equals(Empleado.class.getSimpleName())? true:false;
-				recolector = persona.getClass().getSimpleName().equals(Recolector.class.getSimpleName())? true:false;			
+				recolector = persona.getClass().getSimpleName().equals(Recolector.class.getSimpleName())? true:false;		
+				registroBean.reiniciar();
+				registroBean.setUsuario(usuario);
 			}
 			else {
 				Util.mostarMensaje("Verifique sus datos", "verifique sus datos ingersados");
 			}
 		} catch (SesionException e) {
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

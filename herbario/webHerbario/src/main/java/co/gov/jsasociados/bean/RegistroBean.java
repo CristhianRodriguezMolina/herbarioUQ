@@ -11,7 +11,9 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.SimpleAttributeSet;
@@ -30,8 +32,10 @@ import javafx.stage.FileChooser;
 @ApplicationScoped
 public class RegistroBean {
 
-	
-	private SeguridadBean seguridadBean;
+	/**
+	 * usuario actual
+	 */
+	private Persona usuario;
 	/**
 	 * lista de registros
 	 */
@@ -104,9 +108,7 @@ public class RegistroBean {
 	@PostConstruct
 	private void init() {
 		try {
-			listaGeneros = adminEJB.listarGenero();
-						
-			listaRegistros = adminEJB.listarRegistros("1004915534");
+			listaGeneros = adminEJB.listarGenero();		
 			
 			System.out.println(listaRegistros);
 		} catch (Exception e) {
@@ -139,7 +141,7 @@ public class RegistroBean {
 			
 			planta.setRegistro(registro);
 			registro.setPlanta(planta);
-			registro.setPersona(adminEJB.buscarPersonaCedula("1004915534"));
+			registro.setPersona(usuario);
 			registro.setPais(pais);
 			registro.setDepartamento(departamento);
 			registro.setMunicipio(municipio);
@@ -149,6 +151,8 @@ public class RegistroBean {
 			registro.setAprovacion(0);
 			
 			adminEJB.insertarRegistro(registro);
+			
+			listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
 		} catch (ElementoRepetidoException e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje("Elemento repetido", e.getMessage());
@@ -181,6 +185,29 @@ public class RegistroBean {
         	rutaImagen = imgFile.getAbsolutePath();          
         }
     }
+	
+	/**
+	 * metodo para reiniciar el bean de registro
+	 */
+	public void reiniciar() {
+		init();
+	}
+	
+	/**
+	 * @return the usuario
+	 */
+	public Persona getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 * @throws Exception 
+	 */
+	public void setUsuario(Persona usuario) throws Exception {
+		this.usuario = usuario;
+		listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
+	}
 
 	/**
 	 * @return the nombrePlanta
@@ -376,20 +403,6 @@ public class RegistroBean {
 	 */
 	public void setListaRegistros(List<Registro> listaRegistros) {
 		this.listaRegistros = listaRegistros;
-	}
-
-	/**
-	 * @return the seguridadBean
-	 */
-	public SeguridadBean getSeguridadBean() {
-		return seguridadBean;
-	}
-
-	/**
-	 * @param seguridadBean the seguridadBean to set
-	 */
-	public void setSeguridadBean(SeguridadBean seguridadBean) {
-		this.seguridadBean = seguridadBean;
 	}
 
 	/**
