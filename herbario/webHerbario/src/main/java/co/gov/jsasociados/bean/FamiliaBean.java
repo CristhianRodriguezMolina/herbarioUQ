@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.ejb.AdminEJB;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasociados.util.Util;
 
