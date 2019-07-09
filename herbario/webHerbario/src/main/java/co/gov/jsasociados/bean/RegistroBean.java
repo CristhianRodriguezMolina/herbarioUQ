@@ -1,7 +1,7 @@
 package co.gov.jsasociados.bean;
 
-import java.awt.Image;
-import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -11,16 +11,16 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
-import javax.swing.text.SimpleAttributeSet;
 
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.Persona;
@@ -30,7 +30,7 @@ import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasociados.util.Util;
 import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.ElementoRepetidoException;
-import javafx.stage.FileChooser;
+
 
 @FacesConfig(version = Version.JSF_2_3)
 @Named("registroBean")
@@ -58,17 +58,21 @@ public class RegistroBean {
 	 */
 	private List<Registro> listaRegistrosRechazados;
 	/**
+	 * lista de plantas
+	 */
+	private	List<Planta> listaPlantas;
+	/**
 	 * registro actual
 	 */
 	private Registro registro;
 	/**
 	 * Imagen de la planta
 	 */
-	private String imagen;
+	private UploadedFile imagen;
 	/**
-	 * ruta de la imagen
+	 * para la carga de la imagen
 	 */
-	private String rutaImagen;
+	private StreamedContent chart;
 	/**
 	 * nombre del genero
 	 */
@@ -125,6 +129,7 @@ public class RegistroBean {
 	@PostConstruct
 	private void init() {
 		try {
+			listaPlantas = adminEJB.listarPlanta();
 			listaGeneros = adminEJB.listarGenero();		
 			listaRegistrosTotales = adminEJB.listarRegistrosTotales();
 			listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
@@ -152,7 +157,11 @@ public class RegistroBean {
 			planta.setGenero(generoTemp);
 			planta.setNombre(nombrePlanta);
 			planta.setDescripcion(descripcion);
-			//planta.setImagen(Util.convertirImagenABytes(rutaImagen));
+			
+			byte[] imagenBytes = new byte[(int) imagen.getSize()];
+			imagenBytes = imagen.getContents();
+			planta.setImagen(imagenBytes);
+			
 			generoTemp.addPlanta(planta);
 			
 			planta = adminEJB.registrarPlanta(planta);
@@ -232,6 +241,63 @@ public class RegistroBean {
         PrimeFaces.current().ajax().update("form:display");
         PrimeFaces.current().executeScript("PF('dlg').show()");
     }
+
+    /**
+     * Metodo para conseguir la imagen que se seleccione
+     * @param event
+     * @throws IOException
+     */
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+    	        
+        imagen = event.getFile();
+        
+        byte[] imagenBytes = new byte[(int) imagen.getSize()];
+		imagenBytes = imagen.getContents();
+		
+		if(planta == null) {
+			planta = new Planta();
+		}
+		
+		planta.setImagen(imagenBytes);
+        
+//      byte[] foto = IOUtils.toByteArray(file.getInputstream());
+    }
+    
+    /**
+	 * permite obtener la planta que se desea eliminar
+	 */
+	public void eliminarPlanta() {
+		try {
+			adminEJB.elimiarEspecie(planta.getIdPlanta());
+			listaPlantas = adminEJB.listarPlanta();
+			Util.mostarMensaje("Eliminación exitosa!!!", "Eliminación exitosa!!!");
+		} catch (ElementoNoEncontradoException e) {
+			Util.mostarMensaje(e.getMessage(), e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * metodo para modificar una planta
+	 * 
+	 * @return
+	 */
+	public String modificarPlanta() {
+
+		try {
+			adminEJB.modificarEspecie(planta.getIdPlanta(), planta.getNombre(), planta.getGenero(), planta.getDescripcion(), planta.getImagen());
+			return "/admin/planta/plantas";
+		} catch (ElementoNoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ElementoRepetidoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 	
 	/**
 	 * @return the usuario
@@ -302,20 +368,6 @@ public class RegistroBean {
 	 */
 	public void setListaGeneros(List<Genero> listaGeneros) {
 		this.listaGeneros = listaGeneros;
-	}
-
-	/**
-	 * @return the imagen
-	 */
-	public String getImagen() {
-		return imagen;
-	}
-
-	/**
-	 * @param imagen the imagen to set
-	 */
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
 	}
 
 	/**
@@ -403,20 +455,6 @@ public class RegistroBean {
 	}
 
 	/**
-	 * @return the rutaImagen
-	 */
-	public String getRutaImagen() {
-		return rutaImagen;
-	}
-
-	/**
-	 * @param rutaImagen the rutaImagen to set
-	 */
-	public void setRutaImagen(String rutaImagen) {
-		this.rutaImagen = rutaImagen;
-	}
-
-	/**
 	 * @return the descripcion
 	 */
 	public String getDescripcion() {
@@ -498,6 +536,51 @@ public class RegistroBean {
 	 */
 	public void setListaRegistrosTotales(List<Registro> listaRegistrosTotales) {
 		this.listaRegistrosTotales = listaRegistrosTotales;
+	}
+
+	/**
+	 * @return the imagen
+	 */
+	public UploadedFile getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(UploadedFile imagen) {
+		this.imagen = imagen;
+	}
+
+	/**
+	 * @return the chart
+	 */
+	public StreamedContent getChart() {
+		if(planta != null) {
+			chart = new DefaultStreamedContent(new ByteArrayInputStream(planta.getImagen()), "image/png");
+		}		
+		return chart;
+	}
+
+	/**
+	 * @param chart the chart to set
+	 */
+	public void setChart(StreamedContent chart) {
+		this.chart = chart;
+	}
+
+	/**
+	 * @return the listaPlantas
+	 */
+	public List<Planta> getListaPlantas() {
+		return listaPlantas;
+	}
+
+	/**
+	 * @param listaPlantas the listaPlantas to set
+	 */
+	public void setListaPlantas(List<Planta> listaPlantas) {
+		this.listaPlantas = listaPlantas;
 	}
 	
 	

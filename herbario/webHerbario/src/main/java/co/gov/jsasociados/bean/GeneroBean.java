@@ -13,6 +13,7 @@ import co.gov.jsasociados.Familia;
 import co.gov.jsasociados.Genero;
 import co.gov.jsasociados.ejb.AdminEJB;
 import co.gov.jsasociados.util.Util;
+import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.GeneroYaRegistradoExcepcion;
 
 @FacesConfig(version=Version.JSF_2_3)
@@ -89,6 +90,40 @@ public class GeneroBean {
 			return "/lista_generos";
 		
 	}
+	
+	/**
+	 * permite eliminar un genero
+	 */
+	public void eliminarGenero() {
+		try {
+			adminEJB.eliminarGenero(genero.getIdGenero());
+			generos = adminEJB.listarGenero();
+			Util.mostarMensaje("Eliminación exitosa!!!", "Eliminación exitosa!!!");
+		} catch (ElementoNoEncontradoException e) {
+			Util.mostarMensaje(e.getMessage(), e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * metodo para modificar un genero
+	 * 
+	 * @return
+	 */
+	public String modificarGenero() {
+
+		try {
+			adminEJB.modificarGenero(genero.getGenero(), genero.getFamilia(), genero.getIdGenero()); 
+			return "/admin/genero/generos";
+		} catch (ElementoNoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
 	/**
 	 * @return the generoNombre
 	 */

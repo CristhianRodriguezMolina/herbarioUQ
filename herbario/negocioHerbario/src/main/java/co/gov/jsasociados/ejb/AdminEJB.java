@@ -311,7 +311,7 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 	 * 
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#elimiarGenero(java.lang.String)
 	 */
-	public boolean elimiarGenero(Long idGenero) throws ElementoNoEncontradoException {
+	public boolean eliminarGenero(Long idGenero) throws ElementoNoEncontradoException {
 		Genero genero = entityManager.find(Genero.class, idGenero);
 		if (genero == null) {
 			throw new ElementoNoEncontradoException("El genero a eliminar no se encuentra registrado");
@@ -330,7 +330,7 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 	 * @see co.gov.jsasociados.ejb.AdminEJBRemote#modificarGenero(java.lang.String,
 	 * java.lang.String)
 	 */
-	public Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException {
+	public Genero modificarGenero(String genero, Familia familia, Long idGenero) throws ElementoNoEncontradoException {
 		Genero gen = entityManager.find(Genero.class, idGenero);
 		if (gen == null) {
 			throw new ElementoNoEncontradoException("El genero al que quiere modificar los datos no esta registrado");
@@ -338,6 +338,7 @@ public class AdminEJB extends ComunEJB implements AdminEJBRemote {
 
 		// Esto previamente por interfaz debe de estar validado para que no este vacio
 		gen.setGenero(genero);
+		gen.setFamilia(familia);
 		try {
 			entityManager.merge(gen);
 			return buscarGeneroId(gen.getIdGenero());

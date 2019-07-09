@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Insert title here</title>
+</head>
+
+<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="contenido">
+		
+		<p:panel header="Modificar genero">
+			<h:form>
+			<p:panelGrid columns="2" border="1">
+				<p:outputLabel value="Nombre" />
+				<p:inputText value="#{generoBean.genero.genero}" />
+				<p:outputLabel value="Familias" />
+				<p:selectOneMenu value="#{generoBean.genero.familia}" converter="#{familiaConverter}" effect="fade" filter="true" filterMatchMode="startsWith">
+					<f:selectItem itemLabel="Seleccione una familia" noSelectionOption="true"/>
+					<f:selectItems value="#{generoBean.listaFamilias}"/>
+				</p:selectOneMenu>
+				<p:commandButton action="#{generoBean.modificarGenero}" value="Aceptar" ajax="false"/>		
+			</p:panelGrid>
+			</h:form>
+			<p:growl />
+		</p:panel>
+		
+	</ui:define>
+</ui:composition>
+
+</html>

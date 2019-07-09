@@ -15,10 +15,15 @@ import co.gov.jsasocioados.exeption.ElementoNoEncontradoException;
 import co.gov.jsasocioados.exeption.FamiliaYaRegistradaExeption;
 import co.gov.jsasociados.util.Util;
 
-@FacesConfig(version=Version.JSF_2_3)
+@FacesConfig(version = Version.JSF_2_3)
 @Named("familiaBean")
 @ApplicationScoped
 public class FamiliaBean {
+
+	/**
+	 * id temporal para modificar una
+	 */
+	private Long idTemp;
 	/**
 	 * nombre de la familia
 	 */
@@ -26,7 +31,7 @@ public class FamiliaBean {
 	/**
 	 * familia asociada
 	 */
-	private Familia fa; 
+	private Familia fa;
 	/**
 	 * listado total de familias de plantas
 	 */
@@ -36,8 +41,7 @@ public class FamiliaBean {
 	 */
 	@EJB
 	private AdminEJB adminEJB;
-	
-	
+
 	/**
 	 * carga la lista de familias
 	 */
@@ -49,8 +53,10 @@ public class FamiliaBean {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * metodo que permite insertar una familia desde la parte web
+	 * 
 	 * @param familia
 	 * @return
 	 */
@@ -59,14 +65,19 @@ public class FamiliaBean {
 		Familia familia = new Familia();
 		familia.setFamilia(this.familia);
 		try {
-			fa=adminEJB.insertarFamilia(familia);
+			fa = adminEJB.insertarFamilia(familia);
+			familias = adminEJB.listarFamilias();
 			return "/index";
 		} catch (FamiliaYaRegistradaExeption e) {
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
 			return null;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
-	
+
 	/**
 	 * permite obtener la familia que se desea eliminar
 	 */
@@ -81,13 +92,32 @@ public class FamiliaBean {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * metodo para modificar una familia
+	 * 
+	 * @return
+	 */
+	public String modificarFamilia() {
+
+		try {
+			adminEJB.modificarFamilia(fa.getFamilia(), fa.getIdFamilia());
+			return "/admin/familia/familias";
+		} catch (ElementoNoEncontradoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	/**
 	 * @return the familia
 	 */
 	public String getFamilia() {
 		return familia;
 	}
+
 	/**
 	 * @param familia the familia to set
 	 */
@@ -108,5 +138,19 @@ public class FamiliaBean {
 	public void setFa(Familia fa) {
 		this.fa = fa;
 	}
-	
+
+	/**
+	 * @return the familias
+	 */
+	public List<Familia> getFamilias() {
+		return familias;
+	}
+
+	/**
+	 * @param familias the familias to set
+	 */
+	public void setFamilias(List<Familia> familias) {
+		this.familias = familias;
+	}
+
 }

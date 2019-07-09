@@ -15,16 +15,16 @@
 				<p:dataTable id="listafamilias" var="familia" value="#{familiaBean.familias}">
 				
 					<p:column headerText="Id">
-						<h:outputText value="#{familia.id}" />
+						<h:outputText value="#{familia.idFamilia}" />
 					</p:column>
 				
 					<p:column headerText="Nombre">
-						<h:outputText value="#{familia.nombre}" />
+						<h:outputText value="#{familia.familia}" />
 					</p:column>
 					
 					<p:column style="width:32px">
 	                    <p:commandButton update=":familiaForm:display" oncomplete="PF('familiaDialog').show()" icon="pi pi-search">
-	                        <f:setPropertyActionListener value="#{familia}" target="#{familiaBean.familia}" />
+	                        <f:setPropertyActionListener value="#{familia}" target="#{familiaBean.fa}" />
 	                    </p:commandButton>
                 	</p:column>
 					
@@ -35,17 +35,17 @@
 			<p:dialog header="Detalle de familia" widgetVar="familiaDialog" resizable="false" draggable="false"
               showEffect="fade" hideEffect="fade" modal="true">
 		        <p:outputPanel id="display">
-		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty familiaBean.familia}">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty familiaBean.fa}">
 		                
 		                <h:outputText value="Id" />
-		                <h:outputText value="#{familiaBean.familia.id}" style="font-weight:bold"/>
+		                <h:outputText value="#{familiaBean.fa.idFamilia}" style="font-weight:bold"/>
 		 
 		                <h:outputText value="Nombre:" />
-		                <h:outputText value="#{familiaBean.familia.nombre}" style="font-weight:bold"/>
+		                <h:outputText value="#{familiaBean.fa.familia}" style="font-weight:bold"/>
 		 		                
 		                <f:facet name="footer">
 							<p:commandButton value="Eliminar" ajax="false" action="#{familiaBean.eliminarFamilia}" />
-							<p:commandButton value="Actualizar" ajax="false" action="#" />							
+							<p:commandButton value="Actualizar" ajax="false" action="/admin/familia/modificar_familia" />							
 						</f:facet>
 		                
 		            </h:panelGrid>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Insert title here</title>
+</head>
+
+<ui:composition template="/WEB-INF/template.xhtml">
+		<ui:define name="contenido">
+	    <h:form id="generoForm">
+			
+			<p:fieldset id="plantas" legend="Plantas registrados">
+				<p:dataTable id="listaplantas" var="planta" value="#{registroBean.listaPlantas}">
+				
+					<p:column headerText="Id">
+						<h:outputText value="#{planta.idPlanta}" />
+					</p:column>
+				
+					<p:column headerText="Nombre">
+						<h:outputText value="#{planta.nombre}" />
+					</p:column>
+					
+					<p:column headerText="Genero">
+						<h:outputText value="#{planta.genero.genero}" />
+					</p:column>
+					
+					<p:column headerText="Familia">
+						<h:outputText value="#{planta.genero.familia.familia}" />
+					</p:column>
+					
+					<p:column style="width:32px">
+	                    <p:commandButton update=":generoForm:display" oncomplete="PF('generoDialog').show()" icon="pi pi-search">
+	                        <f:setPropertyActionListener value="#{planta}" target="#{registroBean.registro.planta}" />
+	                    </p:commandButton>
+                	</p:column>
+					
+				</p:dataTable>
+			</p:fieldset>
+			
+			
+			<p:dialog header="Detalle de genero" widgetVar="generoDialog" resizable="false" draggable="false"
+              showEffect="fade" hideEffect="fade" modal="true">
+		        <p:outputPanel id="display">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty registroBean.registro.planta}">
+		                
+		                <h:outputText value="Id" />
+		                <h:outputText value="#{registroBean.registro.planta.idPlanta}" style="font-weight:bold"/>
+		 
+		 				<h:outputText value="Nombre:" />
+		                <h:outputText value="#{registroBean.registro.planta.nombre}" style="font-weight:bold"/>
+		 	
+		                <h:outputText value="Genero:" />
+		                <h:outputText value="#{registroBean.registro.planta.genero.genero}" style="font-weight:bold"/>
+
+		                <h:outputText value="Familia" />
+		                <h:outputText value="#{registroBean.registro.planta.genero.familia.familia}" style="font-weight:bold"/>
+		 		         		                
+		            </h:panelGrid>
+		        </p:outputPanel>
+    		</p:dialog>
+			
+			
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

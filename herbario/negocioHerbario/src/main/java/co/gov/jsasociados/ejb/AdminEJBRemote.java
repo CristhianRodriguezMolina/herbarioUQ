@@ -224,7 +224,7 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	boolean elimiarGenero(Long idGenero) throws ElementoNoEncontradoException;
+	boolean eliminarGenero(Long idGenero) throws ElementoNoEncontradoException;
 
 	/**
 	 * metodo que permite modificar el nombre de un genero
@@ -234,7 +234,7 @@ public interface AdminEJBRemote {
 	 * @return
 	 * @throws ElementoNoEncontradoException
 	 */
-	Genero modificarGenero(String genero, Long idGenero) throws ElementoNoEncontradoException;
+	Genero modificarGenero(String genero, Familia familia, Long idGenero) throws ElementoNoEncontradoException;
 
 	/**
 	 * metodo que lista todos los generos

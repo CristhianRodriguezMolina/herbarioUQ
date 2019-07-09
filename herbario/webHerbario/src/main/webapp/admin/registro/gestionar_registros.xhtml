@@ -36,6 +36,12 @@
 		                       <f:setPropertyActionListener value="#{registro}" target="#{registroBean.registro}" />
 		                 </p:commandButton>
 					</p:column>
+					
+					<p:column headerText="Info registro">
+						<p:commandButton value="Registro" update=":registroForm:display2" oncomplete="PF('registroDialog2').show()" icon="pi pi-search">
+		                       <f:setPropertyActionListener value="#{registro}" target="#{registroBean.registro}" />
+		                 </p:commandButton>
+					</p:column>
 										
 				</p:dataTable>
 		</p:fieldset>
@@ -43,7 +49,7 @@
 		<p:dialog header="Detalle de la planta registrada" widgetVar="registroDialog" resizable="false" draggable="false"
               showEffect="fade" hideEffect="fade" modal="true">
 		        <p:outputPanel id="display">
-		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty registroBean.registro}">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty registroBean.registro.planta}">
 		                
 		                <h:outputText value="Id" />
 		                <h:outputText value="#{registroBean.registro.planta.idPlanta}" style="font-weight:bold"/>
@@ -56,6 +62,37 @@
 
 		                <h:outputText value="Familia" />
 		                <h:outputText value="#{registroBean.registro.planta.genero.familia.familia}" style="font-weight:bold"/>
+		 		                
+		                <f:facet name="footer">
+							<p:commandButton value="Ver lista de plantas" ajax="false" action="/admin/planta/plantas" />							
+						</f:facet>					
+		                
+		            </h:panelGrid>
+		        </p:outputPanel>
+    		</p:dialog>
+    		
+    		<p:dialog header="Detalle del registro" widgetVar="registroDialog2" resizable="false" draggable="false"
+              showEffect="fade" hideEffect="fade" modal="true">
+		        <p:outputPanel id="display2">
+		            <h:panelGrid columns="2" cellpadding="4" rendered="#{not empty registroBean.registro}">
+		                
+		                <h:outputText value="Id" />
+		                <h:outputText value="#{registroBean.registro.numeroRegistro}" style="font-weight:bold"/>
+		 
+		                <h:outputText value="Fecha de registro:" />
+		                <h:outputText value="#{registroBean.registro.fechaRegistro}" style="font-weight:bold"/>
+		                
+		                 <h:outputText value="Pais:" />
+		                <h:outputText value="#{registroBean.registro.pais}" style="font-weight:bold"/>
+		                
+		                <h:outputText value="Departamento:" />
+		                <h:outputText value="#{registroBean.registro.departamento}" style="font-weight:bold"/>
+		                
+		                <h:outputText value="Municipio:" />
+		                <h:outputText value="#{registroBean.registro.municipio}" style="font-weight:bold"/>
+		                
+		                <h:outputText value="Lugar:" />
+		                <h:outputText value="#{registroBean.registro.lugar}" style="font-weight:bold"/>
 		 		                
 		                <f:facet name="footer">
 							<p:commandButton value="Aceptar" ajax="false" action="#{registroBean.aceptarRegistro}" />

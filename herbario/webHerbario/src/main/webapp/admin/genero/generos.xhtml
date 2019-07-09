@@ -51,8 +51,8 @@
 		                <h:outputText value="#{generoBean.genero.familia.familia}" style="font-weight:bold"/>
 		 		                
 		                <f:facet name="footer">
-							<p:commandButton value="Eliminar" ajax="false" action="#" />
-							<p:commandButton value="Actualizar" ajax="false" action="#" />							
+							<p:commandButton value="Eliminar" ajax="false" action="#{generoBean.eliminarGenero}" />
+							<p:commandButton value="Actualizar" ajax="false" action="/admin/genero/modificar_genero" />							
 						</f:facet>
 		                
 		            </h:panelGrid>

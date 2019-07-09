@@ -52,20 +52,23 @@
 		<p:panel header="REGISTRO PLANTA" style="margin-bottom:20px; background-color: RGB(145, 255, 253);">
 		
 			<h:outputText value="Imagen de la planta"/>
-			<p:panel>	
+			<p:panel>					
 				<h:panelGrid columns="1" border="1">
-					<!--<p:graphicImage id="img" value="#{resource['#{registroBean.rutaImagen}']}"
-				stream="false" /> -->
-					<img width="200" alt="Imagen" id="img"/><br /><br />				
-					<input id="select-img" type="file" name="upload" value="#{registroBean.imagen}"/>				
-				</h:panelGrid>
+					<h:form enctype="multipart/form-data">
+						<!--<p:graphicImage id="img" value="#{resource['#{registroBean.rutaImagen}']}"
+					stream="false" /> 
+						<p:graphicImage value="#{registroBean.chart}" stream="false" height="120px" width="120px"/>		-->					
+							<p:growl id="messages" showDetail="true" />     
+		    				<p:fileUpload fileUploadListener="#{registroBean.handleFileUpload}" mode="simple" skinSimple="true"/>
+					</h:form>
+				</h:panelGrid>				
 			</p:panel>
 		
 			<h:outputText value="Datos de la planta"/>
 			<p:panel>	
 					<h:panelGrid columns="2" border="1">
 						<p:outputLabel value="Nombre especie" />
-						<p:inputText value="#{registroBean.nombrePlanta}" />
+						<p:inputText value="#{registroBean.nombrePlanta}"/>
 						<p:outputLabel value="Generos" />
 						<p:selectOneMenu value="#{registroBean.genero}"
 							converter="#{generoConverter}" effect="fade" filter="true"
@@ -97,7 +100,7 @@
 			
 			<p:panel>
 				<p:commandButton id="btn-registrar" action="#{registroBean.registrarPlanta}" 
-							value="Registrar" ajax="false" />
+							value="Registrar" ajax="false"/>
 			</p:panel>			
 		</p:panel>
 		
@@ -129,23 +132,23 @@
 			//$("#{registroBean}").registrarPlanta($("#{seguridadBean.usuario}"));
 		});*/
 		
-		$(document).ready(function() {
+// 		$(document).ready(function() {
 
-			  // Escuchamos el evento 'change' del input donde cargamos el archivo
-			  $(document).on('change', 'input[type=file]', function(e) {
-			    // Obtenemos la ruta temporal mediante el evento
-			    var TmpPath = URL.createObjectURL(e.target.files[0]);
-			    // Mostramos la ruta temporal
+// 			  // Escuchamos el evento 'change' del input donde cargamos el archivo
+// 			  $(document).on('change', 'input[type=file]', function(e) {
+// 			    // Obtenemos la ruta temporal mediante el evento
+// 			    var TmpPath = URL.createObjectURL(e.target.files[0]);
+// 			    // Mostramos la ruta temporal
 			    
-			    console.log($('select-img').val());
-			    $('#img').attr('src', TmpPath);
+// 			    console.log($('select-img').val());
+// 			    $('#img').attr('src', TmpPath);
 			    
-			    if(this === $("#datepicker")){
-			    	console.log($("#datepicker").val());
-			    }
-			  });
+// 			    if(this === $("#datepicker")){
+// 			    	console.log($("#datepicker").val());
+// 			    }
+// 			  });
 
-			});
+// 			});
 	
 	</script>
 
