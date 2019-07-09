@@ -56,6 +56,47 @@
 		<h:panelGroup rendered="#{seguridadBean.autenticado}">
 			<ui:insert name="menu">
 				<h:form>
+					<p:menubar rendered="#{seguridadBean.isAdministrador()}">
+						<p:submenu label="Gestión personal">
+							<p:menuitem value="Registrar Recolector"
+								action="/admin/empleado/registrar_recolector" ajax="false" />
+							<p:menuitem value="Eliminar Recolector"
+								action="/admin/empleado/eliminar_recolector" ajax="false" />
+							<p:menuitem value="modificar Recolector"
+								action="/admin/empleado/modificar_recolector" ajax="false" />
+							<p:menuitem value="Listar recolectores"
+								action="/admin/empleado/lista_recolectores" ajax="false" />
+						</p:submenu>
+
+						<p:submenu label="Especies">
+							<p:menuitem value="Registrar plantas"
+								action="/admin/planta/registrar_plantas" ajax="false" />
+							<p:menuitem value="Familias" action="/admin/familia/familias"
+								ajax="false" />
+							<p:menuitem value="Registrar familia"
+								action="/admin/familia/registrar_familia" ajax="false" />
+							<p:menuitem value="Generos" action="/admin/genero/generos"
+								ajax="false" />
+							<p:menuitem value="Registrar generos"
+								action="/admin/genero/registrar_genero" ajax="false" />
+						</p:submenu>
+						<p:menuitem value="Gestionar registros"
+							action="/admin/registro/gestionar_registros" ajax="false" />
+
+						<f:facet name="options">
+							<p:menuButton value="#{seguridadBean.usuario.nombre}"
+								icon="pi pi-home">
+								<p:menuitem value="Plantas registradas"
+									action="/admin/registro/registros" ajax="false" />
+								<p:menuitem value="Cuenta" action="#" ajax="false" />
+								<p:separator />
+								<p:menuitem value="Cerrar sesión" ajax="false"
+									action="#{seguridadBean.cerrarSesion}" />
+							</p:menuButton>
+							<p:menuitem value="Inicio" action="/index" ajax="false" />
+						</f:facet>
+					</p:menubar>
+				
 					<p:menubar rendered="#{seguridadBean.isEmpleado()}">
 						<p:submenu label="Gestión personal">
 							<p:menuitem value="Registrar Recolector"

@@ -158,9 +158,9 @@ public class RegistroBean {
 			planta.setNombre(nombrePlanta);
 			planta.setDescripcion(descripcion);
 			
-			byte[] imagenBytes = new byte[(int) imagen.getSize()];
-			imagenBytes = imagen.getContents();
-			planta.setImagen(imagenBytes);
+//			byte[] imagenBytes = new byte[(int) imagen.getSize()];
+//			imagenBytes = imagen.getContents();
+//			planta.setImagen(imagenBytes);
 			
 			generoTemp.addPlanta(planta);
 			
