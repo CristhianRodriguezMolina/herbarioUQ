@@ -1,6 +1,10 @@
 package co.gov.jsasociados.bean;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.Init;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
@@ -57,13 +61,26 @@ public class EmpleadoBean {
 	 * contraseña de una cuenta
 	 */
 	private String contrasenia;
-
+	
+	private List<Recolector> recolectores;
 	/**
 	 * 
 	 */
 	@EJB
 	private AdminEJB adminEJB;
 	
+	/**
+	 * carga la lista de familias
+	 */
+	@PostConstruct
+	private void init() {
+		try {
+			recolectores=adminEJB.listarRecolectores();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * permite realizar el registro de un recolector en base de datos
 	 * 
@@ -274,6 +291,20 @@ public class EmpleadoBean {
 
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
+	}
+
+	/**
+	 * @return the recolectores
+	 */
+	public List<Recolector> getRecolectores() {
+		return recolectores;
+	}
+
+	/**
+	 * @param recolectores the recolectores to set
+	 */
+	public void setRecolectores(List<Recolector> recolectores) {
+		this.recolectores = recolectores;
 	}
 
 }
