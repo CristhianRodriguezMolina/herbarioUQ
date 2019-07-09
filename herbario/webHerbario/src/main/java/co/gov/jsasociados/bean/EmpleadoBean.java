@@ -90,7 +90,8 @@ public class EmpleadoBean {
 		try {
 			adminEJB.insertarRecolector(recolector);
 			Util.mostarMensaje("Registrado con exito", "Se ha registrado la persona con exito.");
-			return "";
+			limpiarCampos();
+			return "/registra_recolector";
 		} catch (ElementoRepetidoException | PersonaNoRegistradaException e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
@@ -99,15 +100,56 @@ public class EmpleadoBean {
 
 	}
 
+	private void limpiarCampos() {
+		// TODO Auto-generated method stub
+		cedula="";
+		nombre="";
+		apellidos="";
+		correo="";
+		direccion="";
+		telefono="";
+		usuario="";
+		contrasenia="";
+	}
+	
+	/**
+	 * metodo que pemite llenar los campos de un recolector 
+	 * @return
+	 */
+	public String llenarCamposRecolector() {
+		if (cedula!=null) {
+			try {
+				Recolector recolector= adminEJB.buscarRecolector(cedula);
+				if (recolector!=null) {
+					nombre=recolector.getNombre();
+					apellidos=recolector.getApellidos();
+					telefono=recolector.getTelefono();
+					correo=recolector.getCorreo();
+					direccion= recolector.getDireccion();
+					cedula=recolector.getCedula();
+					return "";
+				}
+			} catch (PersonaNoRegistradaException | TipoClaseException e) {
+				// TODO Auto-generated catch block
+				Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
+				return "";
+			}
+			
+		}
+		return "";
+	}
 	/**
 	 * metodo que permite modificar los datos de un recolector
 	 * 
 	 * @return
 	 */
-	public Recolector modificarRecolector() {
+	public String modificarRecolector() {
 		try {
 			adminEJB.modificarRecolector(nombre, apellidos, telefono, correo, direccion, cedula, usuario, contrasenia);
-			return adminEJB.buscarRecolector(cedula);
+			limpiarCampos();
+			cedula=adminEJB.buscarRecolector(cedula).getCedula();
+			llenarCamposRecolector();
+			return "";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
@@ -119,13 +161,18 @@ public class EmpleadoBean {
 	 * metodo que permite eliminar un recolector
 	 * @return
 	 */
-	public boolean eliminarRecolector() {
+	public String eliminarRecolector() {
 		try {
-			return adminEJB.eliminarRecolector(cedula);
+			if (adminEJB.eliminarRecolector(cedula)) {
+				limpiarCampos();
+				return "/eliminar_recolector";
+			}else {
+				return "";
+			}
 		} catch (PersonaNoRegistradaException | TipoClaseException e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
-			return false;
+			return "";
 		}
 	}
 	

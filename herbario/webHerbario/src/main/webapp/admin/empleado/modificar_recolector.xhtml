@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="contenido">
+		<h:form>
+		<label for="cedula">Cedula:</label>
+					<p:inputText for="cedula" value="#{empleadoBean.cedula}"
+						required="true" requiredMessage="Complete el campo de cedula" />
+				
+					<p:commandButton action="#{empleadoBean.llenarCamposRecolector}"
+						value="buscar" ajax="false" />
+		</h:form>
+		<h:form>
+			<p:panelGrid columns="2" border="1">
+				<label for="nombre">Nombre:</label>
+				<p:inputText for="nombre" value="#{empleadoBean.nombre}"
+					required="true" requiredMessage="Complete el campo nombre" />
+				<label for="apellido">Apellido:</label>
+				<p:inputText for="apellido" value="#{empleadoBean.apellidos}"
+					required="true" requiredMessage="Complete el campo de apellido" />
+				<label for="telefono">Teléfono:</label>
+				<p:inputText for="telefono" value="#{empleadoBean.telefono}"
+					required="true" requiredMessage="Complete el campo telefono" />
+				<label for="email">Email:</label>
+				<p:inputText for="email" value="#{empleadoBean.correo}"
+					required="true" requiredMessage="Complete el campo de correo" />
+				<label for="direccion">Dirección:</label>
+				<p:inputText for="direccion" value="#{empleadoBean.direccion}"
+					required="true" />
+				<f:facet name="footer">
+					<p:commandButton action="#{empleadoBean.modificarRecolector}"
+						value="Modificar" ajax="false" />
+				</f:facet>
+			</p:panelGrid>
+		</h:form>
+		<p:growl />
+	</ui:define>
+</ui:composition>
+</html>

@@ -13,26 +13,26 @@
 			<p:panelGrid columns="2" border="1">
 				<label for="cedula">Cedula:</label>
 				<p:inputText for="cedula" value="#{empleadoBean.cedula}"
-					required="true" />
+					required="true" requiredMessage="Complete el campo de cedula" />
 				<label for="nombre">Nombre:</label>
-				<p:inputText for="nombre" value="#{empleadoBean.nombre}" />
+				<p:inputText for="nombre" value="#{empleadoBean.nombre}" required="true" requiredMessage="Complete el campo nombre"/>
 				<label for="apellido">Apellido:</label>
-				<p:inputText for="apellido" value="#{empleadoBean.apellidos}" />
+				<p:inputText for="apellido" value="#{empleadoBean.apellidos}" required="true" requiredMessage="Complete el campo de apellido"/>
 				<label for="telefono">Teléfono:</label>
 				<p:inputText for="telefono" value="#{empleadoBean.telefono}"
-					required="true" />
+					required="true" requiredMessage="Complete el campo telefono"/>
 				<label for="email">Email:</label>
 				<p:inputText for="email" value="#{empleadoBean.correo}"
-					required="true" />
+					required="true" requiredMessage="Complete el campo de correo"/>
 				<label for="direccion">Dirección:</label>
 				<p:inputText for="direccion" value="#{empleadoBean.direccion}"
 					required="true" />	
 				<label for="usuario">Nombre de usuario:</label>
 				<p:inputText for="usuario" value="#{empleadoBean.usuario}"
-					required="true" />
+					required="true" requiredMessage="Complete el campo nombre de usuario"/>
 				<label for="clave">Clave:</label>
 				<p:inputText for="clave" value="#{empleadoBean.contrasenia}"
-					required="true">
+					required="true" requiredMessage="Complete el campo de clave">
 					
 				</p:inputText>
 				<f:facet name="footer">
@@ -40,6 +40,7 @@
 				</f:facet>
 			</p:panelGrid>
 		</h:form>
+		<p:growl />
 	</ui:define>
 </ui:composition>
 </html>

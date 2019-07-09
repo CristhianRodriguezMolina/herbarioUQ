@@ -124,15 +124,15 @@ public class RegistroBean {
 	 */
 	@PostConstruct
 	private void init() {
-		try {
-			listaGeneros = adminEJB.listarGenero();		
-			listaRegistrosTotales = adminEJB.listarRegistrosTotales();
-			listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
-			listaRegistrosAceptados = adminEJB.listarRegistrosAceptados(usuario.getCedula());
-			listaRegistrosRechazados = adminEJB.listarRegistrosRechazados(usuario.getCedula());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			listaGeneros = adminEJB.listarGenero();		
+//			listaRegistrosTotales = adminEJB.listarRegistrosTotales();
+//			listaRegistros = adminEJB.listarRegistros(usuario.getCedula());
+//			listaRegistrosAceptados = adminEJB.listarRegistrosAceptados(usuario.getCedula());
+//			listaRegistrosRechazados = adminEJB.listarRegistrosRechazados(usuario.getCedula());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
