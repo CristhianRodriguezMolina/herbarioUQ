@@ -5,18 +5,18 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-	
-	
+
+
 <h:head>
 	<title><ui:insert name="title">HerbarioUQ</ui:insert></title>
-	
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0" />
-	
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 	<!--<link rel="stylesheet" href="css/reset.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet"/>
 	<link type="text/css" href="../css/styles.css" rel="stylesheet"/>-->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet"
+		href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
 </h:head>
 <body style="background-color: rgb(142, 255, 210);">
@@ -26,50 +26,51 @@
 				stream="false" />
 		</div>
 		<h:panelGroup rendered="#{!seguridadBean.autenticado}">
-				
+
 			<div class="container">
-			<div class="abs-center">	
-			
-			<ui:insert name="login">
-			
-				<h:form>
-					<p:panelGrid columns="2">
-						<f:facet name="header">Iniciar sesion</f:facet>
-						<p:outputLabel value="Login" />
-						<p:inputText value="#{seguridadBean.cuenta.usuario}" />
-						<p:outputLabel value="Clave" />
-						<p:password value="#{seguridadBean.cuenta.contrasenia}" />
-						<f:facet name="footer">
-							<p:commandButton value="Aceptar"
-								action="#{seguridadBean.iniciarSesion}" ajax="false" />
-						</f:facet>
-					</p:panelGrid>
-				</h:form>
-				<p:growl id="growl" life="2000" />
-						
-			</ui:insert>	
-			
+				<div class="abs-center">
+
+					<ui:insert name="login">
+
+						<h:form>
+							<p:panelGrid columns="2">
+								<f:facet name="header">Iniciar sesion</f:facet>
+								<p:outputLabel value="Login" />
+								<p:inputText value="#{seguridadBean.cuenta.usuario}" />
+								<p:outputLabel value="Clave" />
+								<p:password value="#{seguridadBean.cuenta.contrasenia}" />
+								<f:facet name="footer">
+									<p:commandButton value="Aceptar"
+										action="#{seguridadBean.iniciarSesion}" ajax="false" />
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+						<p:growl id="growl" life="2000" />
+
+					</ui:insert>
+
+				</div>
 			</div>
-			</div>		
-			
+
 		</h:panelGroup>
 		<h:panelGroup rendered="#{seguridadBean.autenticado}">
 			<ui:insert name="menu">
 				<h:form>
-					<p:menubar>						
+					<p:menubar rendered="#{seguridadBean.isEmpleado()}">
 						<p:submenu label="Gestión personal">
-						<p:menuitem value="Registrar Recolector" action="/admin/empleado/registrar_recolector"
-								ajax="false" />
-						<p:menuitem value="Eliminar Recolector" action="/admin/empleado/eliminar_recolector"
-								ajax="false" />
-						<p:menuitem value="modificar Recolector" action="/admin/empleado/modificar_recolector"
-								ajax="false" />		
+							<p:menuitem value="Registrar Recolector"
+								action="/admin/empleado/registrar_recolector" ajax="false" />
+							<p:menuitem value="Eliminar Recolector"
+								action="/admin/empleado/eliminar_recolector" ajax="false" />
+							<p:menuitem value="modificar Recolector"
+								action="/admin/empleado/modificar_recolector" ajax="false" />
+							<p:menuitem value="Listar recolectores"
+								action="/admin/empleado/lista_recolectores" ajax="false" />
 						</p:submenu>
-						<p:submenu label="Cliente">
-						</p:submenu>
+
 						<p:submenu label="Especies">
-							<p:menuitem value="Registrar plantas" action="/admin/planta/registrar_plantas"
-								ajax="false" />
+							<p:menuitem value="Registrar plantas"
+								action="/admin/planta/registrar_plantas" ajax="false" />
 							<p:menuitem value="Familias" action="/admin/familia/familias"
 								ajax="false" />
 							<p:menuitem value="Registrar familia"
@@ -77,30 +78,63 @@
 							<p:menuitem value="Generos" action="/admin/genero/generos"
 								ajax="false" />
 							<p:menuitem value="Registrar generos"
-								action="/admin/genero/registrar_genero" ajax="false" />							
+								action="/admin/genero/registrar_genero" ajax="false" />
 						</p:submenu>
 						<p:menuitem value="Gestionar registros"
-								action="/admin/registro/gestionar_registros" ajax="false" />
-						
-						<f:facet name="options">							
-							<p:menuButton value="#{seguridadBean.usuario.nombre}" icon="pi pi-home">
-								<p:menuitem value="Plantas registradas" action="/admin/registro/registros"
-									ajax="false" />
-								<p:menuitem value="Cuenta" action="#"
-									ajax="false" />
-								<p:separator/>
+							action="/admin/registro/gestionar_registros" ajax="false" />
+
+						<f:facet name="options">
+							<p:menuButton value="#{seguridadBean.usuario.nombre}"
+								icon="pi pi-home">
+								<p:menuitem value="Plantas registradas"
+									action="/admin/registro/registros" ajax="false" />
+								<p:menuitem value="Cuenta" action="#" ajax="false" />
+								<p:separator />
 								<p:menuitem value="Cerrar sesión" ajax="false"
 									action="#{seguridadBean.cerrarSesion}" />
 							</p:menuButton>
-							<p:menuitem value="Inicio" action="/index" ajax="false" />												
-						</f:facet>						
+							<p:menuitem value="Inicio" action="/index" ajax="false" />
+						</f:facet>
 					</p:menubar>
+
+					<p:menubar rendered="#{seguridadBean.isRecolector()}">
+
+						<p:submenu label="Especies">
+							<p:menuitem value="Registrar plantas"
+								action="/admin/planta/registrar_plantas" ajax="false" />
+							<p:menuitem value="Familias" action="/admin/familia/familias"
+								ajax="false" />
+							<p:menuitem value="Registrar familia"
+								action="/admin/familia/registrar_familia" ajax="false" />
+							<p:menuitem value="Generos" action="/admin/genero/generos"
+								ajax="false" />
+							<p:menuitem value="Registrar generos"
+								action="/admin/genero/registrar_genero" ajax="false" />
+						</p:submenu>
+						<p:menuitem value="Gestionar registros"
+							action="/admin/registro/gestionar_registros" ajax="false" />
+
+						<f:facet name="options">
+							<p:menuButton value="#{seguridadBean.usuario.nombre}"
+								icon="pi pi-home">
+								<p:menuitem value="Plantas registradas"
+									action="/admin/registro/registros" ajax="false" />
+								<p:menuitem value="Cuenta" action="#" ajax="false" />
+								<p:separator />
+								<p:menuitem value="Cerrar sesión" ajax="false"
+									action="#{seguridadBean.cerrarSesion}" />
+							</p:menuButton>
+							<p:menuitem value="Inicio" action="/index" ajax="false" />
+						</f:facet>
+					</p:menubar>
+
 				</h:form>
 			</ui:insert>
 			<ui:insert name="contenido" />
 		</h:panelGroup>
 	</div>
-	<f:event type="preRenderView" listener="#{facesContext.externalContext.response.setHeader('Cache-Control', 'no-cache, no-store')}" />
-	
+	<f:event type="preRenderView"
+		listener="#{facesContext.externalContext.response.setHeader('Cache-Control', 'no-cache, no-store')}" />
+
 </body>
 </html>

@@ -1,6 +1,10 @@
 package co.gov.jsasociados.bean;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.Init;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
@@ -57,13 +61,26 @@ public class EmpleadoBean {
 	 * contraseña de una cuenta
 	 */
 	private String contrasenia;
-
+	
+	private List<Recolector> recolectores;
 	/**
 	 * 
 	 */
 	@EJB
 	private AdminEJB adminEJB;
 	
+	/**
+	 * carga la lista de familias
+	 */
+	@PostConstruct
+	private void init() {
+		try {
+			recolectores=adminEJB.listarRecolectores();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * permite realizar el registro de un recolector en base de datos
 	 * 
@@ -90,7 +107,8 @@ public class EmpleadoBean {
 		try {
 			adminEJB.insertarRecolector(recolector);
 			Util.mostarMensaje("Registrado con exito", "Se ha registrado la persona con exito.");
-			return "";
+			limpiarCampos();
+			return "/registra_recolector";
 		} catch (ElementoRepetidoException | PersonaNoRegistradaException e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(e.getMessage(), e.getMessage());
@@ -99,15 +117,56 @@ public class EmpleadoBean {
 
 	}
 
+	private void limpiarCampos() {
+		// TODO Auto-generated method stub
+		cedula="";
+		nombre="";
+		apellidos="";
+		correo="";
+		direccion="";
+		telefono="";
+		usuario="";
+		contrasenia="";
+	}
+	
+	/**
+	 * metodo que pemite llenar los campos de un recolector 
+	 * @return
+	 */
+	public String llenarCamposRecolector() {
+		if (cedula!=null) {
+			try {
+				Recolector recolector= adminEJB.buscarRecolector(cedula);
+				if (recolector!=null) {
+					nombre=recolector.getNombre();
+					apellidos=recolector.getApellidos();
+					telefono=recolector.getTelefono();
+					correo=recolector.getCorreo();
+					direccion= recolector.getDireccion();
+					cedula=recolector.getCedula();
+					return "";
+				}
+			} catch (PersonaNoRegistradaException | TipoClaseException e) {
+				// TODO Auto-generated catch block
+				Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
+				return "";
+			}
+			
+		}
+		return "";
+	}
 	/**
 	 * metodo que permite modificar los datos de un recolector
 	 * 
 	 * @return
 	 */
-	public Recolector modificarRecolector() {
+	public String modificarRecolector() {
 		try {
 			adminEJB.modificarRecolector(nombre, apellidos, telefono, correo, direccion, cedula, usuario, contrasenia);
-			return adminEJB.buscarRecolector(cedula);
+			limpiarCampos();
+			cedula=adminEJB.buscarRecolector(cedula).getCedula();
+			llenarCamposRecolector();
+			return "";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
@@ -119,13 +178,18 @@ public class EmpleadoBean {
 	 * metodo que permite eliminar un recolector
 	 * @return
 	 */
-	public boolean eliminarRecolector() {
+	public String eliminarRecolector() {
 		try {
-			return adminEJB.eliminarRecolector(cedula);
+			if (adminEJB.eliminarRecolector(cedula)) {
+				limpiarCampos();
+				return "/eliminar_recolector";
+			}else {
+				return "";
+			}
 		} catch (PersonaNoRegistradaException | TipoClaseException e) {
 			// TODO Auto-generated catch block
 			Util.mostarMensaje(String.format("Error inesperado %s", e.getMessage()), e.getMessage());
-			return false;
+			return "";
 		}
 	}
 	
@@ -227,6 +291,20 @@ public class EmpleadoBean {
 
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
+	}
+
+	/**
+	 * @return the recolectores
+	 */
+	public List<Recolector> getRecolectores() {
+		return recolectores;
+	}
+
+	/**
+	 * @param recolectores the recolectores to set
+	 */
+	public void setRecolectores(List<Recolector> recolectores) {
+		this.recolectores = recolectores;
 	}
 
 }
